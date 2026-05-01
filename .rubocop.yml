@@ -1,11 +1,41 @@
-require:
-  - rubocop-rake
+plugins: rubocop-rake
 
 AllCops:
   TargetRubyVersion: 3.2
   NewCops: enable
 
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/LineLength:
+  Max: 160
+
 Metrics:
+  Enabled: false
+
+Naming/PredicateMethod:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/FetchEnvVar:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/OneClassPerFile:
+  Exclude:
+    - rakelib/lib/utils/shell.rb
+
+Style/SpecialGlobalVars:
+  Enabled: false
+
+Style/StringConcatenation:
   Enabled: false
 
 Style/TrailingCommaInArrayLiteral:

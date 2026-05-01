@@ -1,0 +1,144 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      project:
+        description: 'Package name (e.g. openvox-agent, openbolt)'
+        required: true
+        type: string
+      version:
+        description: 'Package version (e.g. 8.28.0)'
+        required: true
+        type: string
+      component:
+        description: 'Repo component'
+        required: false
+        default: 'openvox8'
+        type: string
+      platforms:
+        description: 'Platform filter (e.g. el-9-x86_64,debian-13-amd64). Leave empty for all.'
+        required: false
+        type: string
+      production:
+        description: 'Deploy to production (commits state/ and pushes to main)'
+        required: false
+        default: false
+        type: boolean
+
+concurrency:
+  group: release-${{ inputs.production && 'production' || 'test' }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  id-token: write
+
+env:
+  PROJECT: ${{ inputs.project }}
+  VERSION: ${{ inputs.version }}
+  COMPONENT: ${{ inputs.component }}
+  PLATFORMS: ${{ inputs.platforms }}
+  PRODUCTION: ${{ inputs.production && 'true' || '' }}
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  GIT_AUTHOR_NAME: OpenVoxProjectBot
+  GIT_AUTHOR_EMAIL: 215568489+OpenVoxProjectBot@users.noreply.github.com
+  GIT_COMMITTER_NAME: OpenVoxProjectBot
+  GIT_COMMITTER_EMAIL: 215568489+OpenVoxProjectBot@users.noreply.github.com
+  SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+
+jobs:
+  linux:
+    name: Sign and release (RPM/DEB/MSI)
+    # If we only specify mac platforms in the platforms filter, it's going
+    # to start with macos-. Any other way it starts means we'll have something
+    # to release in this job.
+    if: inputs.platforms == '' || !startsWith(inputs.platforms, 'macos')
+    runs-on: ubuntu-latest
+    env:
+      GPG_PRIVATE_KEY_B64: ${{ secrets.GPG_PRIVATE_KEY_B64 }}
+      SM_API_KEY: ${{ secrets.SM_API_KEY }}
+      SM_HOST: ${{ secrets.SM_HOST }}
+      SM_CLIENT_CERT_B64: ${{ secrets.SM_CLIENT_CERT_B64 }}
+      SM_CLIENT_CERT_PASSWORD: ${{ secrets.SM_CLIENT_CERT_PASSWORD }}
+      CERT_ALIAS: ${{ secrets.CERT_ALIAS }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.OPENVOXBOT_COMMIT_AND_PRS }}
+
+      - name: Add SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.OPENVOXBOT_SSH_PRIVATE_KEY }}" > ~/.ssh/github_actions
+          chmod 600 ~/.ssh/github_actions
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-add ~/.ssh/github_actions
+
+      - name: Setup git
+        run: |
+          git config --global user.email "$GIT_AUTHOR_EMAIL"
+          git config --global user.name "$GIT_AUTHOR_NAME"
+          git config --global gpg.format ssh
+          git config --global user.signingkey ~/.ssh/github_actions
+          git config --global commit.gpgsign true
+          git config --global tag.gpgsign true
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/353991846409/locations/global/workloadIdentityPools/github-actions/providers/github
+          service_account: openvox-backup@openvox.iam.gserviceaccount.com
+
+      - name: Backup
+        run: bundle exec rake backup
+
+      - name: Release
+        run: bundle exec rake release
+
+      - name: Deploy
+        run: bundle exec rake deploy
+
+      - name: Push state
+        if: inputs.production
+        run: git push
+
+      - name: Verify
+        run: bundle exec rake verify
+
+  macos:
+    name: Sign and release (DMG)
+    if: inputs.platforms == '' || contains(inputs.platforms, 'macos')
+    runs-on: macos-latest
+    env:
+      PLATFORMS: ${{ inputs.platforms == '' && 'macos-all-arm64,macos-all-x86_64' || inputs.platforms }}
+      MACOS_APP_CERT_B64: ${{ secrets.MACOS_APP_CERT_B64 }}
+      MACOS_INSTALLER_CERT_B64: ${{ secrets.MACOS_INSTALLER_CERT_B64 }}
+      MACOS_CERT_PASSWORD: ${{ secrets.MACOS_CERT_PASSWORD }}
+      APPLICATION_SIGNING_CERT: ${{ secrets.APPLICATION_SIGNING_CERT }}
+      INSTALLER_SIGNING_CERT: ${{ secrets.INSTALLER_SIGNING_CERT }}
+      NOTARY_APPLE_ID: ${{ secrets.NOTARY_APPLE_ID }}
+      NOTARY_TEAM_ID: ${{ secrets.NOTARY_TEAM_ID }}
+      NOTARY_APP_TOKEN: ${{ secrets.NOTARY_APP_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Release
+        run: bundle exec rake release
+
+      - name: Deploy
+        run: bundle exec rake deploy
+
+      - name: Verify
+        run: bundle exec rake verify

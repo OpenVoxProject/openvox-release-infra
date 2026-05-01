@@ -1,0 +1,185 @@
+# frozen_string_literal: true
+
+require 'base64'
+require 'tempfile'
+require_relative 'shell'
+require_relative 'container'
+
+module Infra
+  GPG_KEY_ID = 'openvox@voxpupuli.org'
+  S3_ENDPOINT = 'https://s3.osuosl.org'
+  ARTIFACTS_BUCKET = ENV.fetch('ARTIFACTS_BUCKET', 'openvox-artifacts')
+
+  REPO_ROOT = File.expand_path('../../..', __dir__)
+  PACKAGES_DIR = File.join(REPO_ROOT, 'packages')
+  STAGING_DIR = File.join(REPO_ROOT, 'staging')
+  STATE_DIR = File.join(REPO_ROOT, 'state')
+  CONTAINER_WORK = '/work'
+
+  FILES_MACOS = File.join(REPO_ROOT, 'files', 'macos')
+  MACOS_KEYCHAIN_PATH = '/tmp/openvox-signing.keychain-db'
+  MACOS_KEYCHAIN_PASSWORD = 'signing-temp'
+  MACOS_NOTARY_PROFILE = 'openvox-notary'
+
+  CONTAINER_TAG = 'release:latest'
+  CONTAINER_BASE = 'debian:13'
+  CONTAINER_INSTALL = <<~'BASH'
+    apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+      createrepo-c rpm debsigs gnupg dpkg-dev gzip apt-utils \
+      osslsigncode default-jre-headless curl && \
+    curl -sL https://github.com/ebourg/jsign/releases/download/7.4/jsign-7.4.jar -o /usr/local/lib/jsign.jar && \
+    printf '#!/bin/sh\nexec java -jar /usr/local/lib/jsign.jar "$@"\n' > /usr/local/bin/jsign && \
+    chmod +x /usr/local/bin/jsign
+  BASH
+
+  SAFE_INPUT = /\A[a-zA-Z0-9._+-]+\z/
+
+  module_function
+
+  def validate_input(name, value)
+    abort "#{name} contains invalid characters: #{value.inspect}. Only alphanumeric, '.', '_', '+', '-' are allowed.".red unless value.match?(SAFE_INPUT)
+    value
+  end
+
+  # These are functions instead of constants so they can be lazy loaded so that,
+  # for example, PROJECT isn't required for actions that don't require it.
+  def project = validate_input('PROJECT', require_env('PROJECT'))
+  def version = validate_input('VERSION', require_env('VERSION'))
+  def component = validate_input('COMPONENT', require_env('COMPONENT', default: 'openvox8'))
+  def production? = ENV['PRODUCTION'] == 'true'
+  def app_signing_cert = require_env('APPLICATION_SIGNING_CERT')
+  def installer_signing_cert = require_env('INSTALLER_SIGNING_CERT')
+
+  def apt_bucket = ENV.fetch('APT_BUCKET', production? ? 's3://openvox-apt' : "s3://#{ARTIFACTS_BUCKET}/repo_test/apt")
+  def yum_bucket = ENV.fetch('YUM_BUCKET', production? ? 's3://openvox-yum' : "s3://#{ARTIFACTS_BUCKET}/repo_test/yum")
+  def downloads_bucket = ENV.fetch('DOWNLOADS_BUCKET', production? ? "s3://#{ARTIFACTS_BUCKET}/downloads" : "s3://#{ARTIFACTS_BUCKET}/repo_test/downloads")
+  def gcs_bucket = ENV.fetch('GCS_BUCKET', production? ? 'gs://openvox-backup' : 'gs://openvox-backup-test')
+
+  def container_path(host_path) = host_path.sub(REPO_ROOT, CONTAINER_WORK)
+  def s3_cmd = "aws s3 --endpoint-url=#{S3_ENDPOINT}"
+
+  def start_container
+    Container.prepare_image(target_tag: CONTAINER_TAG, base_image: CONTAINER_BASE, setup_name: 'release-setup') do |runner|
+      runner.run(CONTAINER_INSTALL)
+    end
+
+    name = CONTAINER_TAG.split(':').first
+    env = {}
+    %w[GPG_PRIVATE_KEY_B64 SM_API_KEY SM_HOST SM_CLIENT_CERT_B64 SM_CLIENT_CERT_PASSWORD CERT_ALIAS].each do |var|
+      env[var] = ENV[var] if ENV[var]
+    end
+
+    container = Container.new(name: name, image: CONTAINER_TAG)
+    container.start(command: 'sleep infinity', volumes: { REPO_ROOT => CONTAINER_WORK }, env: env)
+    container
+  end
+
+  def require_env(names, default: nil)
+    Array(names).each do |name|
+      next if ENV[name] && !ENV[name].empty?
+
+      unless default.nil?
+        ENV[name] = default
+        next
+      end
+
+      if $stdin.tty?
+        print "#{name}: "
+        value = $stdin.gets&.chomp
+        abort "#{name} is required.".red if value.nil? || value.empty?
+        ENV[name] = value
+      else
+        abort "#{name} must be set.".red
+      end
+    end
+
+    names.is_a?(Array) ? names.map { |name| ENV[name] } : ENV[names]
+  end
+
+  def require_command(*names)
+    names.each do |name|
+      result = Shell.capture(['which', name], allowed_exit_codes: [0, 1], print_command: false)
+      abort "#{name} is required but not found in PATH.".red unless result.exitcode.zero?
+    end
+  end
+
+  def import_gpg_key(container)
+    container.exec('set -euo pipefail; echo "$GPG_PRIVATE_KEY_B64" | base64 -d | gpg --batch --import')
+    container.exec("gpg --list-secret-keys '#{GPG_KEY_ID}' >/dev/null")
+    container.exec("set -o pipefail; gpg --export --armor '#{GPG_KEY_ID}' | rpm --import /dev/stdin")
+  end
+
+  def setup_aws
+    require_command('aws')
+    require_env(%w[AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY])
+    ENV['AWS_REQUEST_CHECKSUM_CALCULATION'] ||= 'WHEN_REQUIRED'
+    ENV['AWS_RESPONSE_CHECKSUM_VALIDATION'] ||= 'WHEN_REQUIRED'
+  end
+
+  def setup_macos_signing
+    require_env(%w[MACOS_APP_CERT_B64 MACOS_INSTALLER_CERT_B64 MACOS_CERT_PASSWORD
+                   APPLICATION_SIGNING_CERT INSTALLER_SIGNING_CERT
+                   NOTARY_APPLE_ID NOTARY_TEAM_ID NOTARY_APP_TOKEN])
+
+    Shell.run(['security', 'create-keychain', '-p', MACOS_KEYCHAIN_PASSWORD, MACOS_KEYCHAIN_PATH])
+    Shell.run(['security', 'set-keychain-settings', '-lut', '21600', MACOS_KEYCHAIN_PATH])
+    Shell.run(['security', 'unlock-keychain', '-p', MACOS_KEYCHAIN_PASSWORD, MACOS_KEYCHAIN_PATH])
+
+    # Add to search list so codesign can find it
+    existing = Shell.capture(['security', 'list-keychains', '-d', 'user']).output
+    keychains = existing.scan(/"([^"]+)"/).flatten
+    keychains.unshift(MACOS_KEYCHAIN_PATH)
+    Shell.run(['security', 'list-keychains', '-d', 'user', '-s', *keychains])
+
+    # Import certificates
+    import_macos_cert(ENV.fetch('MACOS_APP_CERT_B64'), ENV.fetch('MACOS_CERT_PASSWORD'))
+    import_macos_cert(ENV.fetch('MACOS_INSTALLER_CERT_B64'), ENV.fetch('MACOS_CERT_PASSWORD'))
+
+    # Store notarytool credentials
+    Shell.run([
+      'xcrun', 'notarytool', 'store-credentials', MACOS_NOTARY_PROFILE,
+      '--apple-id', ENV.fetch('NOTARY_APPLE_ID'),
+      '--team-id', ENV.fetch('NOTARY_TEAM_ID'),
+      '--password', ENV.fetch('NOTARY_APP_TOKEN'),
+      '--keychain', MACOS_KEYCHAIN_PATH
+    ])
+  end
+
+  def teardown_macos_signing
+    Shell.run(['security', 'delete-keychain', MACOS_KEYCHAIN_PATH], allowed_exit_codes: [0, 1])
+  end
+
+  def import_macos_cert(cert_b64, password)
+    certfile = Tempfile.new(['cert', '.p12'])
+    certfile.binmode
+    certfile.write(Base64.decode64(cert_b64))
+    certfile.close
+    Shell.run([
+      'security', 'import', certfile.path,
+      '-k', MACOS_KEYCHAIN_PATH,
+      '-P', password,
+      '-T', '/usr/bin/codesign',
+      '-T', '/usr/bin/productsign'
+    ])
+  ensure
+    certfile&.unlink
+  end
+
+  def setup_gcloud
+    require_command('gcloud')
+    Shell.run(['gcloud', 'config', 'set', 'storage/s3_endpoint_url', S3_ENDPOINT, '--quiet'])
+  end
+
+  def commit_state(message)
+    Dir.chdir(REPO_ROOT) do
+      Shell.run(['git', 'add', 'state/'])
+      status = Shell.capture(['git', 'diff', '--cached', '--quiet', '--', 'state/'], allowed_exit_codes: [0, 1])
+      if status.exitcode.zero?
+        puts 'No state/ changes to commit.'.yellow
+      else
+        Shell.run(['git', 'commit', '-s', '-m', message, '--', 'state/'])
+      end
+    end
+  end
+end

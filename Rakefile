@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-Dir.glob('rakelib/**/*.rake').each { |rake_file| import rake_file }
+def pluralize(count, word) = "#{count} #{word}#{'s' if count > 1}"

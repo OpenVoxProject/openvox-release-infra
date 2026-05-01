@@ -1,0 +1,68 @@
+name: Disaster Recovery (Restore from GCS)
+
+on:
+  workflow_dispatch:
+    inputs:
+      timestamp:
+        description: 'Point-in-time to restore GCS bucket to (RFC 3339, e.g. 2026-04-15T00:00:00Z). Leave empty to restore current GCS state as-is.'
+        required: false
+        type: string
+      target:
+        description: 'What to restore'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - apt
+          - yum
+          - downloads
+      production:
+        description: 'Restore to PRODUCTION S3 buckets'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  id-token: write
+
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  PRODUCTION: ${{ inputs.production && 'true' || '' }}
+  TARGET: ${{ inputs.target }}
+  CONFIRM_RESTORE: 'true'
+
+jobs:
+  restore:
+    name: Restore S3 from GCS backup
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.production && 'production-disaster-recovery' || 'test-disaster-recovery' }}
+    env:
+      RESTORE_TIMESTAMP: ${{ inputs.timestamp }}
+      BUCKET: ${{ inputs.production && 'gs://openvox-backup' || 'gs://openvox-backup-test' }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/353991846409/locations/global/workloadIdentityPools/github-actions/providers/github
+          service_account: openvox-backup@openvox.iam.gserviceaccount.com
+
+      - name: Restore GCS bucket to point in time
+        if: inputs.timestamp != ''
+        run: |
+          echo "::warning::Restoring GCS bucket to ${RESTORE_TIMESTAMP}. This is a destructive operation."
+          gcloud storage restore "${BUCKET}/**" \
+            --allow-overwrite \
+            --created-before-time="${RESTORE_TIMESTAMP}" \
+            --deleted-after-time="${RESTORE_TIMESTAMP}"
+          echo "::notice::GCS restore complete."
+
+      - name: Restore S3 from GCS
+        run: bundle exec rake restore
