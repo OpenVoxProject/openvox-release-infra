@@ -73,6 +73,10 @@ def bootstrap_yum_metadata(container, tmp_download)
   yum_download = File.join(tmp_download, 'yum')
   FileUtils.mkdir_p(yum_download)
 
+  staging_yum = File.join(Infra::STAGING_DIR, 'yum')
+  FileUtils.rm_rf(staging_yum)
+  FileUtils.mkdir_p(staging_yum)
+
   puts 'Downloading yum repodata from S3...'.magenta
   Shell.run("#{Infra.s3_sync} s3://openvox-yum/ #{yum_download}/ --exclude '*' --include '*/repodata/*'")
 
@@ -81,22 +85,21 @@ def bootstrap_yum_metadata(container, tmp_download)
     rel_path = arch_dir.sub("#{yum_download}/", '')
     puts "Reformatting yum metadata: #{rel_path}".cyan
 
-    state_arch = File.join(Infra::STATE_DIR, 'yum', rel_path)
-    FileUtils.mkdir_p(state_arch)
+    staging_arch = File.join(staging_yum, rel_path)
+    FileUtils.mkdir_p(staging_arch)
 
-    # Use mergerepo_c with the old repo as sole input to reformat to
-    # simple filenames and no database
     container_old = Infra.container_path(arch_dir)
-    container_out = Infra.container_path(state_arch)
+    container_out = Infra.container_path(staging_arch)
     container.exec(
       'mergerepo_c --omit-baseurl --all --simple-md-filenames --no-database ' \
       "--compress-type gz --repo #{container_old} -o #{container_out}"
     )
 
-    repomd = File.join(state_arch, 'repodata', 'repomd.xml')
+    repomd = File.join(staging_arch, 'repodata', 'repomd.xml')
     Infra.gpg_detach_sign(container, repomd)
   end
 
+  Yum.update_state
   puts "yum bootstrap complete: #{Dir.glob(File.join(Infra::STATE_DIR, 'yum', '**', 'repomd.xml')).size} repos.".green
 end
 
