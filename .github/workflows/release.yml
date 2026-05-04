@@ -58,11 +58,11 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GPG_PRIVATE_KEY_B64: ${{ secrets.GPG_PRIVATE_KEY_B64 }}
-      SM_API_KEY: ${{ secrets.SM_API_KEY }}
-      SM_HOST: ${{ secrets.SM_HOST }}
-      SM_CLIENT_CERT_B64: ${{ secrets.SM_CLIENT_CERT_B64 }}
-      SM_CLIENT_CERT_PASSWORD: ${{ secrets.SM_CLIENT_CERT_PASSWORD }}
-      CERT_ALIAS: ${{ secrets.CERT_ALIAS }}
+      WINDOWS_SM_API_KEY: ${{ secrets.WINDOWS_SM_API_KEY }}
+      WINDOWS_SM_HOST: ${{ secrets.WINDOWS_SM_HOST }}
+      WINDOWS_SM_CLIENT_CERT_B64: ${{ secrets.WINDOWS_SM_CLIENT_CERT_B64 }}
+      WINDOWS_SM_CLIENT_CERT_PASSWORD: ${{ secrets.WINDOWS_SM_CLIENT_CERT_PASSWORD }}
+      WINDOWS_CERT_ALIAS: ${{ secrets.WINDOWS_CERT_ALIAS }}
 
     steps:
       - uses: actions/checkout@v4
@@ -121,11 +121,11 @@ jobs:
       MACOS_APP_CERT_B64: ${{ secrets.MACOS_APP_CERT_B64 }}
       MACOS_INSTALLER_CERT_B64: ${{ secrets.MACOS_INSTALLER_CERT_B64 }}
       MACOS_CERT_PASSWORD: ${{ secrets.MACOS_CERT_PASSWORD }}
-      APPLICATION_SIGNING_CERT: ${{ secrets.APPLICATION_SIGNING_CERT }}
-      INSTALLER_SIGNING_CERT: ${{ secrets.INSTALLER_SIGNING_CERT }}
-      NOTARY_APPLE_ID: ${{ secrets.NOTARY_APPLE_ID }}
-      NOTARY_TEAM_ID: ${{ secrets.NOTARY_TEAM_ID }}
-      NOTARY_APP_TOKEN: ${{ secrets.NOTARY_APP_TOKEN }}
+      MACOS_APP_SIGNING_IDENTITY: ${{ secrets.MACOS_APP_SIGNING_IDENTITY }}
+      MACOS_INSTALLER_SIGNING_IDENTITY: ${{ secrets.MACOS_INSTALLER_SIGNING_IDENTITY }}
+      MACOS_NOTARY_APPLE_ID: ${{ secrets.MACOS_NOTARY_APPLE_ID }}
+      MACOS_NOTARY_TEAM_ID: ${{ secrets.MACOS_NOTARY_TEAM_ID }}
+      MACOS_NOTARY_APP_TOKEN: ${{ secrets.MACOS_NOTARY_APP_TOKEN }}
 
     steps:
       - uses: actions/checkout@v4

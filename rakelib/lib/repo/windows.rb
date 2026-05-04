@@ -13,15 +13,15 @@ class Windows
     return if msis.empty?
 
     puts "Signing #{pluralize(msis.size, 'MSI')}...".magenta
-    @container.exec('echo "$SM_CLIENT_CERT_B64" | base64 -d > /tmp/client_cert.p12')
+    @container.exec('echo "$WINDOWS_SM_CLIENT_CERT_B64" | base64 -d > /tmp/client_cert.p12')
 
     msis.each do |msi|
       basename = File.basename(msi)
       @container.exec(
         'jsign --storetype DIGICERTONE ' \
-        '--keystore "$SM_HOST" ' \
-        '--storepass "${SM_API_KEY}|/tmp/client_cert.p12|${SM_CLIENT_CERT_PASSWORD}" ' \
-        '--alias "$CERT_ALIAS" ' \
+        '--keystore "$WINDOWS_SM_HOST" ' \
+        '--storepass "${WINDOWS_SM_API_KEY}|/tmp/client_cert.p12|${WINDOWS_SM_CLIENT_CERT_PASSWORD}" ' \
+        '--alias "$WINDOWS_CERT_ALIAS" ' \
         "#{Infra::CONTAINER_WORK}/packages/msi/#{basename}"
       )
       @container.exec("osslsigncode verify -in #{Infra::CONTAINER_WORK}/packages/msi/#{basename}")

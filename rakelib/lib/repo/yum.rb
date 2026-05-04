@@ -14,14 +14,7 @@ class Yum
     return if rpms.empty?
 
     puts "Signing #{pluralize(rpms.size, 'RPM')}...".magenta
-    rpms.each do |rpm|
-      basename = File.basename(rpm)
-      @container.exec("rpmsign --addsign --define \"_gpg_name #{Infra::GPG_KEY_ID}\" #{Infra::CONTAINER_WORK}/packages/rpm/#{basename}")
-      result = @container.capture("rpm --checksig #{Infra::CONTAINER_WORK}/packages/rpm/#{basename}", silent: false)
-      if result.output.match?(/NOT OK|NOKEY|MISSING KEYS|NOT INSTALLED/i)
-        abort "RPM signature verification failed for #{basename}: #{result.output}".red
-      end
-    end
+    rpms.each { |rpm| Infra.sign_rpm(@container, rpm) }
     puts 'RPM signing complete.'.green
   end
 
@@ -80,11 +73,9 @@ class Yum
         FileUtils.rm_rf(merge_tmp)
       end
 
-      # Sign and verify repomd.xml
-      repomd = File.join(container_staging, 'repodata', 'repomd.xml')
-      @container.exec("rm -f #{repomd}.asc")
-      @container.exec("gpg --batch --yes --default-key #{Infra::GPG_KEY_ID} --detach-sign --armor #{repomd}")
-      @container.exec("gpg --verify #{repomd}.asc #{repomd}")
+      repomd = File.join(staging_path, 'repodata', 'repomd.xml')
+      @container.exec("rm -f #{Infra.container_path(repomd)}.asc")
+      Infra.gpg_detach_sign(@container, repomd)
     end
 
     puts "yum metadata updated for #{affected.size} arch dirs.".green

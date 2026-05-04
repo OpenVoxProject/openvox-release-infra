@@ -1,0 +1,77 @@
+name: Add Release Platform
+
+on:
+  workflow_dispatch:
+    inputs:
+      component:
+        description: 'Repo component (e.g. openvox7, openvox8)'
+        required: true
+        type: string
+      platform:
+        description: 'Comma-separated platform(s) (e.g. el-9, debian13, sles-15). Arch suffix is stripped if provided.'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  GIT_AUTHOR_NAME: OpenVoxProjectBot
+  GIT_AUTHOR_EMAIL: 215568489+OpenVoxProjectBot@users.noreply.github.com
+  GIT_COMMITTER_NAME: OpenVoxProjectBot
+  GIT_COMMITTER_EMAIL: 215568489+OpenVoxProjectBot@users.noreply.github.com
+  SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+
+jobs:
+  add-platform:
+    name: Add platform and open PR
+    if: github.repository_owner == 'OpenVoxProject'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.OPENVOXBOT_COMMIT_AND_PRS }}
+
+      - name: Add SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.OPENVOXBOT_SSH_PRIVATE_KEY }}" > ~/.ssh/github_actions
+          chmod 600 ~/.ssh/github_actions
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-add ~/.ssh/github_actions
+
+      - name: Setup git
+        run: |
+          git config --global user.email "$GIT_AUTHOR_EMAIL"
+          git config --global user.name "$GIT_AUTHOR_NAME"
+          git config --global gpg.format ssh
+          git config --global user.signingkey ~/.ssh/github_actions
+          git config --global commit.gpgsign true
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Add platform
+        id: add
+        env:
+          COMPONENT: ${{ inputs.component }}
+          PLATFORM: ${{ inputs.platform }}
+        run: |
+          bundle exec rake release_packages:add_platform
+          SAFE_BRANCH=$(echo "$PLATFORM" | tr ', ' '-' | sed 's/--*/-/g; s/-$//')
+          echo "branch_suffix=$SAFE_BRANCH" >> "$GITHUB_OUTPUT"
+
+      - uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.OPENVOXBOT_COMMIT_AND_PRS }}
+          branch: "release-packages/add-${{ inputs.component }}-${{ steps.add.outputs.branch_suffix }}"
+          delete-branch: true
+          title: "Add ${{ inputs.platform }} to ${{ inputs.component }}"
+          assignees: ${{ github.triggering_actor }}
+          body: |
+            Adds `${{ inputs.platform }}` to `${{ inputs.component }}.json`.
+
+            After merging, run the **Release Packages** workflow to build and upload the updated packages.

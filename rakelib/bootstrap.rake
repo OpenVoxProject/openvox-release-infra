@@ -93,10 +93,8 @@ def bootstrap_yum_metadata(container, tmp_download)
       "--compress-type gz --repo #{container_old} -o #{container_out}"
     )
 
-    # Sign repomd.xml
-    repomd = Infra.container_path(File.join(state_arch, 'repodata', 'repomd.xml'))
-    container.exec("gpg --batch --yes --default-key #{Infra::GPG_KEY_ID} --detach-sign --armor #{repomd}")
-    container.exec("gpg --verify #{repomd}.asc #{repomd}")
+    repomd = File.join(state_arch, 'repodata', 'repomd.xml')
+    Infra.gpg_detach_sign(container, repomd)
   end
 
   puts "yum bootstrap complete: #{Dir.glob(File.join(Infra::STATE_DIR, 'yum', '**', 'repomd.xml')).size} repos.".green

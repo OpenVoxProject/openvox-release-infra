@@ -51,7 +51,7 @@ module Shell
                 cmd
               end
     puts "Running #{display}".cyan if print_command
-    output = ''
+    output = +''
     exitcode = nil
     begin
       Open3.popen2e(*[cmd].flatten) do |_stdin, stdout_stderr, thread|

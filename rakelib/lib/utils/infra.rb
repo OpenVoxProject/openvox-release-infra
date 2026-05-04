@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 require 'base64'
+require 'shellwords'
 require 'tempfile'
-require_relative 'shell'
 require_relative 'container'
+require_relative 'shell'
 
 module Infra
   GPG_KEY_ID = 'openvox@voxpupuli.org'
@@ -27,7 +28,9 @@ module Infra
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
       createrepo-c rpm debsigs gnupg dpkg-dev gzip apt-utils \
-      osslsigncode default-jre-headless curl && \
+      osslsigncode default-jre-headless curl \
+      ruby ruby-dev gcc make jq && \
+    gem install --no-document fpm && \
     curl -sL https://github.com/ebourg/jsign/releases/download/7.4/jsign-7.4.jar -o /usr/local/lib/jsign.jar && \
     printf '#!/bin/sh\nexec java -jar /usr/local/lib/jsign.jar "$@"\n' > /usr/local/bin/jsign && \
     chmod +x /usr/local/bin/jsign
@@ -48,13 +51,18 @@ module Infra
   def version = validate_input('VERSION', require_env('VERSION'))
   def component = validate_input('COMPONENT', require_env('COMPONENT', default: 'openvox8'))
   def production? = ENV['PRODUCTION'] == 'true'
-  def app_signing_cert = require_env('APPLICATION_SIGNING_CERT')
-  def installer_signing_cert = require_env('INSTALLER_SIGNING_CERT')
+  def app_signing_identity = require_env('MACOS_APP_SIGNING_IDENTITY')
+  def installer_signing_identity = require_env('MACOS_INSTALLER_SIGNING_IDENTITY')
 
   def apt_bucket = ENV.fetch('APT_BUCKET', production? ? 's3://openvox-apt' : "s3://#{ARTIFACTS_BUCKET}/repo_test/apt")
   def yum_bucket = ENV.fetch('YUM_BUCKET', production? ? 's3://openvox-yum' : "s3://#{ARTIFACTS_BUCKET}/repo_test/yum")
   def downloads_bucket = ENV.fetch('DOWNLOADS_BUCKET', production? ? "s3://#{ARTIFACTS_BUCKET}/downloads" : "s3://#{ARTIFACTS_BUCKET}/repo_test/downloads")
   def gcs_bucket = ENV.fetch('GCS_BUCKET', production? ? 'gs://openvox-backup' : 'gs://openvox-backup-test')
+
+  # Base URLs baked into release package .repo/.list files so end-user
+  # package managers know where to find the OpenVox apt/yum repos.
+  def yum_release_package_base = production? ? 'https://yum.voxpupuli.org' : "#{S3_ENDPOINT}/#{ARTIFACTS_BUCKET}/repo_test/yum"
+  def apt_release_package_base = production? ? 'https://apt.voxpupuli.org' : "#{S3_ENDPOINT}/#{ARTIFACTS_BUCKET}/repo_test/apt"
 
   def container_path(host_path) = host_path.sub(REPO_ROOT, CONTAINER_WORK)
   def s3_cmd = "aws s3 --endpoint-url=#{S3_ENDPOINT}"
@@ -66,7 +74,7 @@ module Infra
 
     name = CONTAINER_TAG.split(':').first
     env = {}
-    %w[GPG_PRIVATE_KEY_B64 SM_API_KEY SM_HOST SM_CLIENT_CERT_B64 SM_CLIENT_CERT_PASSWORD CERT_ALIAS].each do |var|
+    %w[GPG_PRIVATE_KEY_B64 WINDOWS_SM_API_KEY WINDOWS_SM_HOST WINDOWS_SM_CLIENT_CERT_B64 WINDOWS_SM_CLIENT_CERT_PASSWORD WINDOWS_CERT_ALIAS].each do |var|
       env[var] = ENV[var] if ENV[var]
     end
 
@@ -107,7 +115,32 @@ module Infra
   def import_gpg_key(container)
     container.exec('set -euo pipefail; echo "$GPG_PRIVATE_KEY_B64" | base64 -d | gpg --batch --import')
     container.exec("gpg --list-secret-keys '#{GPG_KEY_ID}' >/dev/null")
-    container.exec("set -o pipefail; gpg --export --armor '#{GPG_KEY_ID}' | rpm --import /dev/stdin")
+    container.exec("printf 'trust\\n5\\ny\\n' | gpg --batch --command-fd 0 --edit-key '#{GPG_KEY_ID}'")
+    container.exec("gpg --export --armor '#{GPG_KEY_ID}' > /tmp/gpg-pub.key && rpm --import /tmp/gpg-pub.key && rm /tmp/gpg-pub.key")
+  end
+
+  def sign_rpm(container, host_path)
+    escaped = Shellwords.shellescape(container_path(host_path))
+    container.exec("GPG_TTY= rpmsign --addsign --define '%_gpg_name #{GPG_KEY_ID}' #{escaped}")
+    result = container.capture("rpm --checksig #{escaped}", silent: false)
+    return unless result.output.match?(/NOT OK|NOKEY|MISSING KEYS|NOT INSTALLED/i)
+
+    abort "RPM signature verification failed for #{File.basename(host_path)}: #{result.output}".red
+  end
+
+  def sign_deb(container, host_path)
+    escaped = Shellwords.shellescape(container_path(host_path))
+    container.exec("debsigs --sign=origin -k #{GPG_KEY_ID} #{escaped}")
+    container.exec("debsigs --verify #{escaped}")
+  end
+
+  def gpg_detach_sign(container, host_path)
+    escaped = Shellwords.shellescape(container_path(host_path))
+    container.exec(
+      "gpg --batch --yes --default-key '#{GPG_KEY_ID}' --digest-algo SHA512 " \
+      "--detach-sign --armor --output #{escaped}.asc #{escaped}"
+    )
+    container.exec("gpg --verify #{escaped}.asc #{escaped}")
   end
 
   def setup_aws
@@ -119,8 +152,8 @@ module Infra
 
   def setup_macos_signing
     require_env(%w[MACOS_APP_CERT_B64 MACOS_INSTALLER_CERT_B64 MACOS_CERT_PASSWORD
-                   APPLICATION_SIGNING_CERT INSTALLER_SIGNING_CERT
-                   NOTARY_APPLE_ID NOTARY_TEAM_ID NOTARY_APP_TOKEN])
+                   MACOS_APP_SIGNING_IDENTITY MACOS_INSTALLER_SIGNING_IDENTITY
+                   MACOS_NOTARY_APPLE_ID MACOS_NOTARY_TEAM_ID MACOS_NOTARY_APP_TOKEN])
 
     Shell.run(['security', 'create-keychain', '-p', MACOS_KEYCHAIN_PASSWORD, MACOS_KEYCHAIN_PATH])
     Shell.run(['security', 'set-keychain-settings', '-lut', '21600', MACOS_KEYCHAIN_PATH])
@@ -139,9 +172,9 @@ module Infra
     # Store notarytool credentials
     Shell.run([
       'xcrun', 'notarytool', 'store-credentials', MACOS_NOTARY_PROFILE,
-      '--apple-id', ENV.fetch('NOTARY_APPLE_ID'),
-      '--team-id', ENV.fetch('NOTARY_TEAM_ID'),
-      '--password', ENV.fetch('NOTARY_APP_TOKEN'),
+      '--apple-id', ENV.fetch('MACOS_NOTARY_APPLE_ID'),
+      '--team-id', ENV.fetch('MACOS_NOTARY_TEAM_ID'),
+      '--password', ENV.fetch('MACOS_NOTARY_APP_TOKEN'),
       '--keychain', MACOS_KEYCHAIN_PATH
     ])
   end

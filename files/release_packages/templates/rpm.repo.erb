@@ -1,0 +1,6 @@
+[<%= target_repo %>]
+name=OpenVox <%= major %> Repository <%= os_name %> <%= os_version %> - $basearch
+baseurl=<%= yum_base %>/<%= target_repo %>/<%= os_name %>/<%= os_version %>/$basearch
+gpgkey=file:///etc/pki/rpm-gpg/GPG-KEY-openvox-<%= target_repo %>-release
+enabled=1
+gpgcheck=1

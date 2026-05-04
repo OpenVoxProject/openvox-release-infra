@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 require 'json'
-require_relative 'lib/utils/infra'
 require_relative 'lib/repo/apt'
 require_relative 'lib/repo/yum'
+require_relative 'lib/utils/infra'
 
 # Examples:
 #   bucket_path = "s3://openvox-apt"
@@ -62,7 +62,8 @@ task :cleanup do
 
   if yum_state_files.any?
     referenced_yum = Yum.referenced_packages
-    list_s3_objects(Infra.yum_bucket, '').select { |obj| obj.end_with?('.rpm') }.each do |obj|
+    # Skip RPMs at the bucket root (release packages live there, not in repo metadata)
+    list_s3_objects(Infra.yum_bucket, '').select { |obj| obj.end_with?('.rpm') && obj.include?('/') }.each do |obj|
       orphaned << { bucket: Infra.yum_bucket, key: obj } unless referenced_yum.include?(obj)
     end
   else

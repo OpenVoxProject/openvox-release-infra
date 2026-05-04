@@ -103,6 +103,44 @@ PRODUCTION=true TARGET=all bundle exec rake restore
 
 Timestamps are RFC 3339 format. You can use timezone offsets (e.g., `2026-04-15T00:00:00-07:00` for Pacific time). This only works within the 90-day soft-delete retention window.
 
+## Release Packages
+
+Build, sign, and upload the small noarch RPM/DEB packages that register the OpenVox yum/apt repos on end-user systems (like `puppetlabs-release` packages). These packages drop `.repo` files, `.list` files, GPG public keys, and APT pin preferences into the correct locations.
+
+**GitHub Actions:**
+
+Go to Actions > "Release Packages" workflow > Run workflow. Leave "production" unchecked to build packages pointing at the test repos and upload to the test buckets. Re-run with "production" checked for production.
+
+**Local:**
+
+```bash
+source ~/.openvox-release-secrets
+
+# Build, sign, and upload to test
+bundle exec rake release_packages:build
+bundle exec rake release_packages:upload
+
+# Build, sign, and upload to production
+PRODUCTION=true bundle exec rake release_packages:build
+PRODUCTION=true bundle exec rake release_packages:upload
+```
+
+**Add a new platform:**
+
+```bash
+bundle exec rake release_packages:add_platform \
+    COMPONENT=openvox8 PLATFORM=el-11,debian14,sles-16
+# Commits locally; push manually when ready
+```
+
+Platform definitions live in `files/release_packages/openvox7.json` and `openvox8.json`. The `add_platform` task infers the package kind (rpm or deb) from the OS name, normalizes the format, and commits the change. Arch suffixes (e.g. `-x86_64`, `-amd64`) are stripped automatically. SLES is treated as an RPM variant (the only difference is the repo file installs to `etc/zypp/repos.d` instead of `etc/yum.repos.d`).
+
+| Variable | Purpose |
+|----------|---------|
+| `COMPONENT` | Repo component (e.g. `openvox7`, `openvox8`). Defaults to `openvox8`. |
+| `PLATFORM` | Comma-separated platform(s) (e.g. `el-9`, `debian13`, `sles-15`) |
+| `FORCE_OVERWRITE` | Set to `true` to overwrite existing S3 artifacts during upload |
+
 ---
 
 ## Reference
@@ -129,6 +167,9 @@ macOS signing additionally requires a macOS host with Xcode command line tools.
 | `rake bootstrap:metadata` | Reformat production metadata into state/ and deploy to test buckets |
 | `rake bootstrap:packages` | Copy packages from production to test S3 buckets |
 | `rake reset` | Remove cached Docker container image |
+| `rake release_packages:build` | Build and sign release RPM/DEB packages and repo/list files |
+| `rake release_packages:upload` | Upload release package artifacts to S3 |
+| `rake release_packages:add_platform` | Add a platform to a release package definition |
 
 ### How it works
 
@@ -166,11 +207,11 @@ macOS signing additionally requires a macOS host with Xcode command line tools.
 
 | Variable | Purpose |
 |----------|---------|
-| `SM_API_KEY` | DigiCert KeyLocker API key |
-| `SM_HOST` | DigiCert KeyLocker host |
-| `SM_CLIENT_CERT_B64` | Base64-encoded .p12 client certificate |
-| `SM_CLIENT_CERT_PASSWORD` | Client certificate password |
-| `CERT_ALIAS` | Certificate alias |
+| `WINDOWS_SM_API_KEY` | DigiCert KeyLocker API key |
+| `WINDOWS_SM_HOST` | DigiCert KeyLocker host |
+| `WINDOWS_SM_CLIENT_CERT_B64` | Base64-encoded .p12 client certificate |
+| `WINDOWS_SM_CLIENT_CERT_PASSWORD` | Client certificate password |
+| `WINDOWS_CERT_ALIAS` | Certificate alias |
 
 #### DMG signing (macOS)
 
@@ -179,11 +220,11 @@ macOS signing additionally requires a macOS host with Xcode command line tools.
 | `MACOS_APP_CERT_B64` | Base64-encoded Developer ID Application .p12 |
 | `MACOS_INSTALLER_CERT_B64` | Base64-encoded Developer ID Installer .p12 |
 | `MACOS_CERT_PASSWORD` | Password for the .p12 files |
-| `APPLICATION_SIGNING_CERT` | Code signing identity name |
-| `INSTALLER_SIGNING_CERT` | Installer signing identity name |
-| `NOTARY_APPLE_ID` | Apple ID email for notarization |
-| `NOTARY_TEAM_ID` | Apple Developer team ID |
-| `NOTARY_APP_TOKEN` | App-specific password for notarization |
+| `MACOS_APP_SIGNING_IDENTITY` | Code signing identity name |
+| `MACOS_INSTALLER_SIGNING_IDENTITY` | Installer signing identity name |
+| `MACOS_NOTARY_APPLE_ID` | Apple ID email for notarization |
+| `MACOS_NOTARY_TEAM_ID` | Apple Developer team ID |
+| `MACOS_NOTARY_APP_TOKEN` | App-specific password for notarization |
 
 #### Operations
 
@@ -211,7 +252,7 @@ Each entry must be a full triple. When set, only matching platforms are processe
 
 ### Container
 
-A single Docker image (Debian 13) is built on first run and cached. It includes: createrepo-c, rpm, debsigs, dpkg-dev, apt-utils, gnupg, jsign, and osslsigncode.
+A single Docker image (Debian 13) is built on first run and cached. It includes: createrepo-c, rpm, debsigs, dpkg-dev, apt-utils, gnupg, jsign, osslsigncode, ruby, fpm, and jq.
 
 The image contains no secrets. GPG keys are imported fresh each run. Run `rake reset` to remove the cached image and force a rebuild.
 
@@ -318,11 +359,11 @@ No secrets needed. Locally, authenticate with `gcloud auth login`. In CI, Worklo
 
 **MSI signing (DigiCert ONE / KeyLocker):**
 
-1. `SM_API_KEY`: Create an API token in DigiCert ONE > API Tokens.
-2. `SM_HOST`: Your DigiCert ONE auth endpoint (e.g., `https://clientauth.one.digicert.com`).
-3. `SM_CLIENT_CERT_B64`: `base64 -w0 < client_cert.p12`
-4. `SM_CLIENT_CERT_PASSWORD`: The password set when the .p12 was created.
-5. `CERT_ALIAS`: The key pair alias from DigiCert ONE > Certificates.
+1. `WINDOWS_SM_API_KEY`: Create an API token in DigiCert ONE > API Tokens.
+2. `WINDOWS_SM_HOST`: Your DigiCert ONE auth endpoint (e.g., `https://clientauth.one.digicert.com`).
+3. `WINDOWS_SM_CLIENT_CERT_B64`: `base64 -w0 < client_cert.p12`
+4. `WINDOWS_SM_CLIENT_CERT_PASSWORD`: The password set when the .p12 was created.
+5. `WINDOWS_CERT_ALIAS`: The key pair alias from DigiCert ONE > Certificates.
 
 **macOS signing:**
 
@@ -334,11 +375,11 @@ base64 -w0 < developer_id_application.p12   # -> MACOS_APP_CERT_B64
 base64 -w0 < developer_id_installer.p12     # -> MACOS_INSTALLER_CERT_B64
 
 # MACOS_CERT_PASSWORD = password set when exporting the .p12 files
-# APPLICATION_SIGNING_CERT = identity name (e.g., "Developer ID Application: Vox Pupuli (XXXXXXXXXX)")
-# INSTALLER_SIGNING_CERT = installer identity name
-# NOTARY_APPLE_ID = Apple ID email
-# NOTARY_TEAM_ID = team ID from Apple Developer portal
-# NOTARY_APP_TOKEN = app-specific password from appleid.apple.com
+# MACOS_APP_SIGNING_IDENTITY = identity name (e.g., "Developer ID Application: Vox Pupuli (XXXXXXXXXX)")
+# MACOS_INSTALLER_SIGNING_IDENTITY = installer identity name
+# MACOS_NOTARY_APPLE_ID = Apple ID email
+# MACOS_NOTARY_TEAM_ID = team ID from Apple Developer portal
+# MACOS_NOTARY_APP_TOKEN = app-specific password from appleid.apple.com
 ```
 
 #### GitHub Actions secrets
@@ -353,16 +394,16 @@ Add these in Settings > Secrets and variables > Actions:
 | `MACOS_APP_CERT_B64` | DMG signing | `base64 -w0 < developer_id_application.p12` |
 | `MACOS_INSTALLER_CERT_B64` | DMG signing | `base64 -w0 < developer_id_installer.p12` |
 | `MACOS_CERT_PASSWORD` | DMG signing | Password set when exporting .p12 files |
-| `APPLICATION_SIGNING_CERT` | DMG signing | Identity name from the cert |
-| `INSTALLER_SIGNING_CERT` | DMG signing | Identity name from the cert |
-| `NOTARY_APPLE_ID` | DMG signing | Apple ID email |
-| `NOTARY_TEAM_ID` | DMG signing | Team ID from Apple Developer portal |
-| `NOTARY_APP_TOKEN` | DMG signing | App-specific password from appleid.apple.com |
-| `SM_API_KEY` | MSI signing | DigiCert ONE > API tokens |
-| `SM_HOST` | MSI signing | DigiCert ONE account host URL |
-| `SM_CLIENT_CERT_B64` | MSI signing | `base64 -w0 < client_cert.p12` |
-| `SM_CLIENT_CERT_PASSWORD` | MSI signing | Set when creating the .p12 in DigiCert |
-| `CERT_ALIAS` | MSI signing | Certificate alias from DigiCert ONE |
+| `MACOS_APP_SIGNING_IDENTITY` | DMG signing | Identity name from the cert |
+| `MACOS_INSTALLER_SIGNING_IDENTITY` | DMG signing | Identity name from the cert |
+| `MACOS_NOTARY_APPLE_ID` | DMG signing | Apple ID email |
+| `MACOS_NOTARY_TEAM_ID` | DMG signing | Team ID from Apple Developer portal |
+| `MACOS_NOTARY_APP_TOKEN` | DMG signing | App-specific password from appleid.apple.com |
+| `WINDOWS_SM_API_KEY` | MSI signing | DigiCert ONE > API tokens |
+| `WINDOWS_SM_HOST` | MSI signing | DigiCert ONE account host URL |
+| `WINDOWS_SM_CLIENT_CERT_B64` | MSI signing | `base64 -w0 < client_cert.p12` |
+| `WINDOWS_SM_CLIENT_CERT_PASSWORD` | MSI signing | Set when creating the .p12 in DigiCert |
+| `WINDOWS_CERT_ALIAS` | MSI signing | Certificate alias from DigiCert ONE |
 
 MSI and macOS secrets are only needed if signing those package types. If omitted, signing is skipped.
 
@@ -376,21 +417,21 @@ export AWS_ACCESS_KEY_ID="your-access-key"
 export AWS_SECRET_ACCESS_KEY="your-secret-key"
 
 # Only needed for MSI signing:
-export SM_API_KEY="your-digicert-api-key"
-export SM_HOST="https://clientauth.one.digicert.com"
-export SM_CLIENT_CERT_B64="$(base64 -w0 < /path/to/client_cert.p12)"
-export SM_CLIENT_CERT_PASSWORD="your-cert-password"
-export CERT_ALIAS="your-cert-alias"
+export WINDOWS_SM_API_KEY="your-digicert-api-key"
+export WINDOWS_SM_HOST="https://clientauth.one.digicert.com"
+export WINDOWS_SM_CLIENT_CERT_B64="$(base64 -w0 < /path/to/client_cert.p12)"
+export WINDOWS_SM_CLIENT_CERT_PASSWORD="your-cert-password"
+export WINDOWS_CERT_ALIAS="your-cert-alias"
 
 # Only needed for DMG signing (macOS only):
 export MACOS_APP_CERT_B64="$(base64 -w0 < /path/to/developer_id_application.p12)"
 export MACOS_INSTALLER_CERT_B64="$(base64 -w0 < /path/to/developer_id_installer.p12)"
 export MACOS_CERT_PASSWORD="your-p12-password"
-export APPLICATION_SIGNING_CERT="Developer ID Application: Your Org (XXXXXXXXXX)"
-export INSTALLER_SIGNING_CERT="Developer ID Installer: Your Org (XXXXXXXXXX)"
-export NOTARY_APPLE_ID="your@email.com"
-export NOTARY_TEAM_ID="XXXXXXXXXX"
-export NOTARY_APP_TOKEN="your-app-specific-password"
+export MACOS_APP_SIGNING_IDENTITY="Developer ID Application: Your Org (XXXXXXXXXX)"
+export MACOS_INSTALLER_SIGNING_IDENTITY="Developer ID Installer: Your Org (XXXXXXXXXX)"
+export MACOS_NOTARY_APPLE_ID="your@email.com"
+export MACOS_NOTARY_TEAM_ID="XXXXXXXXXX"
+export MACOS_NOTARY_APP_TOKEN="your-app-specific-password"
 ```
 
 Source it before running: `source ~/.openvox-release-secrets`

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 require 'fileutils'
-require_relative 'lib/utils/infra'
 require_relative 'lib/repo/apt'
 require_relative 'lib/repo/yum'
+require_relative 'lib/utils/infra'
 
 desc 'Rollback repo state to a prior commit'
 task :rollback do

@@ -1,0 +1,38 @@
+{
+  "package": "openvox8-release",
+  "description": "Release packages for the OpenVox 8 repository",
+  "version": "1",
+  "release": "1",
+
+  "license": "ASL 2.0",
+  "vendor": "Vox Pupuli <openvox@voxpupuli.org>",
+  "homepage": "https://voxpupuli.org",
+  "target_repo": "openvox8",
+
+  "platforms": [
+    "debian10",
+    "debian11",
+    "debian12",
+    "debian13",
+    "ubuntu18.04",
+    "ubuntu20.04",
+    "ubuntu22.04",
+    "ubuntu24.04",
+    "ubuntu25.04",
+    "ubuntu26.04",
+    "el-7",
+    "el-8",
+    "el-9",
+    "el-10",
+    "fedora-36",
+    "fedora-40",
+    "fedora-41",
+    "fedora-42",
+    "fedora-43",
+    "amazon-2023",
+    "amazon-2",
+    "redhatfips-8",
+    "redhatfips-9",
+    "sles-15"
+  ]
+}

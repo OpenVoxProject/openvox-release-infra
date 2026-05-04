@@ -1,0 +1,47 @@
+name: Release Packages
+
+on:
+  workflow_dispatch:
+    inputs:
+      production:
+        description: 'Build packages pointing to production repos and upload to production buckets'
+        required: false
+        default: false
+        type: boolean
+      force_overwrite:
+        description: 'Overwrite existing artifacts in S3'
+        required: false
+        default: false
+        type: boolean
+
+concurrency:
+  group: release-packages-${{ inputs.production && 'production' || 'test' }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  PRODUCTION: ${{ inputs.production && 'true' || '' }}
+  FORCE_OVERWRITE: ${{ inputs.force_overwrite && 'true' || '' }}
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  GPG_PRIVATE_KEY_B64: ${{ secrets.GPG_PRIVATE_KEY_B64 }}
+
+jobs:
+  release-packages:
+    name: Build, sign, and upload release packages
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Build and sign
+        run: bundle exec rake release_packages:build
+
+      - name: Upload
+        run: bundle exec rake release_packages:upload

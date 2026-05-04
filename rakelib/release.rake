@@ -2,9 +2,9 @@
 
 require 'fileutils'
 require_relative 'lib/repo/apt'
-require_relative 'lib/repo/yum'
 require_relative 'lib/repo/macos'
 require_relative 'lib/repo/windows'
+require_relative 'lib/repo/yum'
 require_relative 'lib/utils/infra'
 
 def s3_includes(filters)
@@ -84,7 +84,7 @@ task :release do
     puts 'MacOS packages must be signed on a MacOS host. Signing of these packages will be skipped.'.yellow
     sign_dmg = false
   end
-  Infra.require_env(%w[SM_API_KEY SM_HOST SM_CLIENT_CERT_B64 SM_CLIENT_CERT_PASSWORD CERT_ALIAS]) if sign_msi
+  Infra.require_env(%w[WINDOWS_SM_API_KEY WINDOWS_SM_HOST WINDOWS_SM_CLIENT_CERT_B64 WINDOWS_SM_CLIENT_CERT_PASSWORD WINDOWS_CERT_ALIAS]) if sign_msi
   Infra.require_env('GPG_PRIVATE_KEY_B64') if sign_rpm || sign_deb
 
   # Sign packages, prepare packages and repo metadata in staging/, then

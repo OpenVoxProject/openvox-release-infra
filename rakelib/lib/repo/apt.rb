@@ -13,11 +13,7 @@ class Apt
     return if debs.empty?
 
     puts "Signing #{pluralize(debs.size, 'DEB')}...".magenta
-    debs.each do |deb|
-      basename = File.basename(deb)
-      @container.exec("debsigs --sign=origin -k #{Infra::GPG_KEY_ID} #{Infra::CONTAINER_WORK}/packages/deb/#{basename}")
-      @container.exec("debsigs --verify #{Infra::CONTAINER_WORK}/packages/deb/#{basename}")
-    end
+    debs.each { |deb| Infra.sign_deb(@container, deb) }
     puts 'DEB signing complete.'.green
   end
 

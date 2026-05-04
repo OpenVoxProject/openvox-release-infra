@@ -177,7 +177,7 @@ module MacOS
 
       signed_pkg_path = File.join(output, File.basename(installer_pkg))
       Shell.run(['productsign', '--keychain', Infra::MACOS_KEYCHAIN_PATH,
-                 '--sign', Infra.installer_signing_cert,
+                 '--sign', Infra.installer_signing_identity,
                  unsigned_pkg_path, signed_pkg_path])
 
       build_uninstaller_app(output)
@@ -286,7 +286,7 @@ module MacOS
 
   def codesign_and_verify(file, entitlements: [], runtime: true)
     sign_cmd = ['codesign', '--timestamp', '--keychain', Infra::MACOS_KEYCHAIN_PATH,
-                '-vfs', Infra.app_signing_cert]
+                '-vfs', Infra.app_signing_identity]
     sign_cmd.push('--options', 'runtime') if runtime
     sign_cmd.concat(entitlements)
     sign_cmd << file
