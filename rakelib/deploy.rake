@@ -24,21 +24,21 @@ task :deploy do
 
   deploy_phase('Uploading packages') do
     pool_dir = File.join(Infra::STAGING_DIR, 'apt', 'pool')
-    Shell.run("#{Infra.s3_cmd} sync --exact-timestamps #{pool_dir}/ #{Infra.apt_bucket}/pool/") if Dir.exist?(pool_dir)
+    Shell.run("#{Infra.s3_sync} --exact-timestamps #{pool_dir}/ #{Infra.apt_bucket}/pool/") if Dir.exist?(pool_dir)
 
     yum_dir = File.join(Infra::STAGING_DIR, 'yum')
-    Shell.run("#{Infra.s3_cmd} sync --exact-timestamps #{yum_dir}/ #{Infra.yum_bucket}/ --exclude '*' --include '*.rpm'") if Dir.exist?(yum_dir)
+    Shell.run("#{Infra.s3_sync} --exact-timestamps #{yum_dir}/ #{Infra.yum_bucket}/ --exclude '*' --include '*.rpm'") if Dir.exist?(yum_dir)
 
     downloads_dir = File.join(Infra::STAGING_DIR, 'downloads')
-    Shell.run("#{Infra.s3_cmd} sync --exact-timestamps #{downloads_dir}/ #{Infra.downloads_bucket}/") if Dir.exist?(downloads_dir)
+    Shell.run("#{Infra.s3_sync} --exact-timestamps #{downloads_dir}/ #{Infra.downloads_bucket}/") if Dir.exist?(downloads_dir)
   end
 
   deploy_phase('Uploading metadata') do
     yum_dir = File.join(Infra::STAGING_DIR, 'yum')
-    Shell.run("#{Infra.s3_cmd} sync --exact-timestamps #{yum_dir}/ #{Infra.yum_bucket}/ --exclude '*.rpm'") if Dir.exist?(yum_dir)
+    Shell.run("#{Infra.s3_sync} --exact-timestamps #{yum_dir}/ #{Infra.yum_bucket}/ --exclude '*.rpm'") if Dir.exist?(yum_dir)
 
     staging_dists = File.join(Infra::STAGING_DIR, 'apt', 'dists')
-    Shell.run("#{Infra.s3_cmd} sync --exact-timestamps #{staging_dists}/ #{Infra.apt_bucket}/dists/") if Dir.exist?(staging_dists)
+    Shell.run("#{Infra.s3_sync} --exact-timestamps #{staging_dists}/ #{Infra.apt_bucket}/dists/") if Dir.exist?(staging_dists)
   end
 
   puts 'Deploy complete.'.green

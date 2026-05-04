@@ -47,7 +47,7 @@ def fetch_packages
   types = %w[rpm deb dmg msi]
   types.each { |dir| FileUtils.mkdir_p(File.join(Infra::PACKAGES_DIR, dir)) }
 
-  Shell.run("#{Infra.s3_cmd} sync #{source} #{Infra::PACKAGES_DIR}/ --exclude '*' #{s3_includes(filters)}")
+  Shell.run("#{Infra.s3_sync} #{source} #{Infra::PACKAGES_DIR}/ --exclude '*' #{s3_includes(filters)}")
 
   types.each do |type|
     Dir.glob(File.join(Infra::PACKAGES_DIR, "*.#{type}")).each do |pkg|

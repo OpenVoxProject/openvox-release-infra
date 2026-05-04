@@ -66,6 +66,7 @@ module Infra
 
   def container_path(host_path) = host_path.sub(REPO_ROOT, CONTAINER_WORK)
   def s3_cmd = "aws s3 --endpoint-url=#{S3_ENDPOINT}"
+  def s3_sync = "#{s3_cmd} sync --no-progress"
 
   def start_container
     Container.prepare_image(target_tag: CONTAINER_TAG, base_image: CONTAINER_BASE, setup_name: 'release-setup') do |runner|
