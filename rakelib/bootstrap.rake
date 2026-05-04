@@ -57,10 +57,12 @@ namespace :bootstrap do
     puts 'Syncing packages from production to test buckets...'.magenta
 
     puts 'Syncing yum packages...'.cyan
-    Shell.run("#{Infra.s3_sync} s3://openvox-yum/ #{Infra.yum_bucket}/ --exclude '*/repodata/*'")
+    Shell.run("#{Infra.s3_sync} s3://openvox-yum/ #{Infra.yum_bucket}/ " \
+              "--exclude '*/repodata/*' --exclude 'openvox*-release-*' --exclude 'repo_files/*' --exclude 'index.html'")
 
-    puts 'Syncing apt pool...'.cyan
-    Shell.run("#{Infra.s3_sync} s3://openvox-apt/pool/ #{Infra.apt_bucket}/pool/")
+    puts 'Syncing apt packages and GPG key...'.cyan
+    Shell.run("#{Infra.s3_sync} s3://openvox-apt/ #{Infra.apt_bucket}/ " \
+              "--exclude 'dists/*' --exclude 'openvox*-release-*' --exclude 'list_files/*' --exclude 'index.html'")
 
     puts 'Syncing downloads...'.cyan
     Shell.run("#{Infra.s3_sync} s3://openvox-artifacts/downloads/ #{Infra.downloads_bucket}/")
