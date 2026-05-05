@@ -197,7 +197,7 @@ class Apt
       architecture: stanza[/^Architecture: (.+)$/, 1],
     }
     missing = identity.select { |_key, val| val.nil? }.keys
-    abort "Malformed APT stanza: missing #{missing.join(', ')} field(s).\nStanza:\n#{stanza}".red unless missing.empty?
+    abort "Malformed stanza: missing #{missing.join(', ')} field(s).\nStanza:\n#{stanza}".red unless missing.empty?
     identity
   end
 
