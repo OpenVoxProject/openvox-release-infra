@@ -207,14 +207,14 @@ module MacOS
   end
 
   def sign_plugin_binary(plugins, entitlements)
-    puts 'Signing plugin binary...'.cyan
+    puts 'Signing plugin binary...'.magenta
     plugin = Dir.glob(File.join(plugins, '**', 'puppet-agent-installer-plugin')).first
     abort 'Plugin binary puppet-agent-installer-plugin not found.'.red unless plugin
     codesign_and_verify(plugin, entitlements: entitlements)
   end
 
   def sign_component_binaries(root, entitlements)
-    puts 'Signing component binaries...'.cyan
+    puts 'Signing component binaries...'.magenta
     projdir = Infra.project == 'openbolt' ? 'bolt' : 'puppet'
 
     paths_with_binaries = {
@@ -248,7 +248,7 @@ module MacOS
   # This is only written for OpenVox Agent and OpenBolt right now. Might be good to make this more
   # generic in the future.
   def build_uninstaller_app(output)
-    puts 'Building uninstaller app...'.cyan
+    puts 'Building uninstaller app...'.magenta
     project = Infra.project
     uninstaller_name = project == 'openbolt' ? 'Uninstall OpenBolt' : 'Uninstall OpenVox Agent'
     app_path = File.join(output, "#{uninstaller_name}.app")
@@ -297,7 +297,7 @@ module MacOS
   end
 
   def notarize(dmg)
-    puts 'Notarizing...'.cyan
+    puts 'Notarizing...'.magenta
     result = Shell.capture([
       'xcrun', 'notarytool', 'submit', dmg,
       '--keychain-profile', Infra::MACOS_NOTARY_PROFILE,
