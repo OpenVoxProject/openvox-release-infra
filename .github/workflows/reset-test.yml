@@ -1,0 +1,28 @@
+name: Reset Test Repos
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  CONFIRM_RESET: 'true'
+
+jobs:
+  reset-test:
+    name: Sync test buckets from production
+    if: github.repository_owner == 'OpenVoxProject'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Reset test repos
+        run: bundle exec rake reset_test
