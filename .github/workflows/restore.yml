@@ -28,15 +28,16 @@ on:
         type: boolean
 
 permissions:
+  contents: read
   id-token: write
 
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  PRODUCTION: ${{ inputs.production == 'I want to restore to production' && 'true' || '' }}
-  TARGET: ${{ inputs.target }}
   CONFIRM_RESTORE: ${{ inputs.production == 'I want to restore to production' || inputs.production == '' && 'true' || '' }}
   GCS_SOURCE: ${{ inputs.source_production_backup && 'gs://openvox-backup' || '' }}
+  PRODUCTION: ${{ inputs.production == 'I want to restore to production' && 'true' || '' }}
+  TARGET: ${{ inputs.target }}
 
 jobs:
   restore:

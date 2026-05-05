@@ -26,11 +26,11 @@ permissions:
   contents: read
 
 env:
-  PRODUCTION: ${{ inputs.production && 'true' || '' }}
-  FORCE_OVERWRITE: ${{ inputs.force_overwrite && 'true' || '' }}
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  FORCE_OVERWRITE: ${{ inputs.force_overwrite && 'true' || '' }}
   GPG_PRIVATE_KEY_B64: ${{ secrets.GPG_PRIVATE_KEY_B64 }}
+  PRODUCTION: ${{ inputs.production && 'true' || '' }}
 
 jobs:
   repo-packages:
