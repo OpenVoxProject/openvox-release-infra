@@ -19,7 +19,7 @@ task :restore do
   }
 
   puts '*** WARNING: This is a destructive operation. ***'.red
-  puts "This will overwrite the #{Infra.production? ? 'PRODUCTION' : 'test'} #{target} repo(s) with the GCS backup.".red
+  puts "This will overwrite the selected #{Infra.production? ? 'production' : 'test'} repo(s) (#{target}) with the GCS backup.".red
   puts "Source: #{source_bucket}".yellow
   puts 'Destination:'.yellow
   targets.each { |name| puts "  #{destination_buckets[name]}".yellow }
@@ -50,4 +50,59 @@ task :restore do
   end
 
   puts 'Restore complete.'.green
+end
+
+namespace :restore do
+  desc 'Roll back GCS backup bucket to a point in time using soft-delete recovery'
+  task :gcs do
+    Infra.setup_gcloud
+    timestamp = Infra.require_env('TIMESTAMP')
+    bucket = ENV.fetch('GCS_SOURCE', Infra.gcs_bucket)
+
+    puts '*** WARNING: This is a destructive operation. ***'.red
+    puts "This will roll back #{bucket} to #{timestamp} by restoring soft-deleted objects.".red
+
+    unless ENV['CONFIRM_RESTORE']
+      if $stdin.tty?
+        print 'Type "restore" to confirm: '.red
+        answer = $stdin.gets&.chomp
+        abort 'Aborted.'.yellow unless answer == 'restore'
+      else
+        abort 'CONFIRM_RESTORE must be set in non-interactive mode.'.red
+      end
+    end
+
+    puts "Rolling back #{bucket} to #{timestamp}...".magenta
+    result = Shell.capture(
+      "gcloud storage restore '#{bucket}/**' --async --allow-overwrite " \
+      "--created-before-time='#{timestamp}' --deleted-after-time='#{timestamp}'",
+      silent: false
+    )
+
+    operation = result.output[%r{projects/\S+}]
+    abort 'Could not parse operation name from gcloud output.'.red unless operation
+
+    puts "Waiting for operation to complete: #{operation}".cyan
+    loop do
+      status = Shell.capture(
+        "gcloud storage operations describe '#{operation}' --format='value(done)'",
+        print_command: false
+      )
+      if status.output.strip.casecmp('true').zero?
+        puts 'GCS restore complete.'.green
+        break
+      end
+      sleep 10
+    end
+
+    puts <<~MSG.green
+      GCS restore complete. Next steps:
+        1. bundle exec rake restore                - sync recovered GCS state to S3
+        2. COMMIT=<sha> bundle exec rake rollback  - roll back state/ to the matching commit
+        3. bundle exec rake cleanup                - remove orphaned packages from S3
+
+        This assumes the rollback commit matches the state of the GCS backup at that time. If you're unsure,
+        run `bundle exec rake deploy` before cleanup.
+    MSG
+  end
 end

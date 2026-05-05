@@ -42,10 +42,6 @@ jobs:
   restore:
     name: Restore S3 from GCS backup
     runs-on: ubuntu-latest
-    env:
-      RESTORE_TIMESTAMP: ${{ inputs.timestamp }}
-      BUCKET: ${{ (inputs.source_production_backup || inputs.production == 'I want to restore to production') && 'gs://openvox-backup' || 'gs://openvox-backup-test' }}
-
     steps:
       - uses: actions/checkout@v4
 
@@ -60,25 +56,9 @@ jobs:
 
       - name: Restore GCS bucket to point in time
         if: inputs.timestamp != ''
-        run: |
-          echo "::warning::Restoring GCS bucket to ${RESTORE_TIMESTAMP}. This is a destructive operation."
-          gcloud storage restore "${BUCKET}/**" --async \
-            --allow-overwrite \
-            --created-before-time="${RESTORE_TIMESTAMP}" \
-            --deleted-after-time="${RESTORE_TIMESTAMP}" | tee /tmp/restore-op.txt
-
-          OPERATION=$(grep -oP 'operations/\S+' /tmp/restore-op.txt)
-          if [ -n "$OPERATION" ]; then
-            echo "Waiting for restore operation to complete..."
-            while true; do
-              STATUS=$(gcloud storage operations describe "projects/_/buckets/${BUCKET#gs://}/$OPERATION" --format="value(done)" 2>/dev/null)
-              if [ "$STATUS" = "True" ]; then
-                echo "::notice::GCS restore complete."
-                break
-              fi
-              sleep 10
-            done
-          fi
+        env:
+          TIMESTAMP: ${{ inputs.timestamp }}
+        run: bundle exec rake restore:gcs
 
       - name: Restore S3 from GCS
         run: bundle exec rake restore
