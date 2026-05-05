@@ -70,6 +70,26 @@ bundle exec rake bootstrap
 
 This downloads production metadata, reformats it into state/, deploys it to the test buckets, and syncs all packages from production to test. Run `bootstrap:metadata` alone if you only need to refresh metadata without re-syncing all packages.
 
+## One-Time Migration to Production
+
+**WARNING: These commands are for the initial migration ONLY. Once production is being deployed to from this repo, they should never be used again. They will overwrite production repos with whatever is in the test repos.**
+
+After running `bootstrap` and verifying the test repos are correct (install packages, check metadata, test with real package managers), sync the test repos to production with `--delete` to replace old-format metadata and clean up orphan files:
+
+```bash
+# Sync yum test -> production (excludes release packages, repo config files, index)
+aws s3 sync --endpoint-url=https://s3.osuosl.org --delete \
+  s3://openvox-artifacts/repo_test/yum/ s3://openvox-yum/ \
+  --exclude 'openvox*-release-*' --exclude 'repo_files/*' --exclude 'index.html'
+
+# Sync apt test -> production (excludes release packages, list config files, index)
+aws s3 sync --endpoint-url=https://s3.osuosl.org --delete \
+  s3://openvox-artifacts/repo_test/apt/ s3://openvox-apt/ \
+  --exclude 'openvox*-release-*' --exclude 'list_files/*' --exclude 'index.html'
+```
+
+After this, production repos use the new metadata format and this repo manages all future changes via `rake release` and `rake deploy`.
+
 ## Disaster Recovery
 
 If the S3 repos are corrupted or accidentally deleted, restore from the GCS backup. This is a destructive operation that overwrites the current S3 repos with the backup contents.
