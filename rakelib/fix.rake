@@ -6,6 +6,9 @@ require 'fileutils'
 require_relative 'lib/repo/yum'
 require_relative 'lib/utils/infra'
 
+desc 'Run all one-time migration fixes (runs fix:src_dirs then fix:agent_8_12_1)'
+task fix: %w[fix:src_dirs fix:agent_8_12_1]
+
 namespace :fix do
   desc 'Remove non-src RPMs from yum src/ directories and regenerate their metadata'
   task :src_dirs do
