@@ -2,6 +2,23 @@
 
 Release pipeline for OpenVox packages. Downloads artifacts from S3, signs them (RPM, DEB, MSI, DMG), builds APT/YUM repo metadata, and deploys to S3. Repo metadata lives in git for audit and rollback.
 
+### Tasks
+
+| Task | Purpose |
+|------|---------|
+| `bundle exec rake release` | Download, sign, and build repo metadata |
+| `bundle exec rake deploy` | Push staged packages and metadata to S3 |
+| `bundle exec rake verify` | Verify released packages are accessible in the deployed repos |
+| `bundle exec rake rollback` | Restore repo state from a prior git commit |
+| `bundle exec rake cleanup` | Remove orphaned packages from S3 |
+| `bundle exec rake backup` | Sync S3 repos to GCS backup bucket |
+| `bundle exec rake restore` | Restore S3 repos from GCS backup |
+| `bundle exec rake reset_test` | Sync test buckets from production (with --delete) |
+| `bundle exec rake reset` | Remove cached Docker container image |
+| `bundle exec rake repo_packages:build` | Build and sign repo RPM/DEB packages and repo/list files |
+| `bundle exec rake repo_packages:upload` | Upload repo package artifacts to S3 |
+| `bundle exec rake repo_packages:add_platform` | Add a platform to a repo package definition |
+
 ## Release
 
 Release a new version of a package to the repos.
@@ -54,41 +71,19 @@ git push
 
 Rollback creates a new commit (not a force-push) so history is preserved. Cleanup removes packages from S3 that are no longer referenced by the current metadata.
 
+## Reset Test Repos
+
+Sync the test repos from the current production repos. Use this to get a clean test environment that mirrors production.
+
+```bash
+bundle exec rake reset_test
+```
+
+This syncs packages and metadata from production to test using `--delete`, preserving repo setup packages and config files that are specific to the test repo. Local state/ and staging/ are cleared.
+
 ## Bootstrap
 
-Get the test repos in sync with the current production repos. Run this when setting up for the first time, or to reset test repos after they've drifted.
-
-**GitHub Actions:**
-
-Go to Actions > "Bootstrap Test Repos" workflow > Run workflow.
-
-**Local:**
-
-```bash
-bundle exec rake bootstrap
-```
-
-This downloads production metadata, reformats it into state/, deploys it to the test buckets, and syncs all packages from production to test. Run `bootstrap:metadata` alone if you only need to refresh metadata without re-syncing all packages.
-
-## One-Time Migration to Production
-
-**WARNING: These commands are for the initial migration ONLY. Once production is being deployed to from this repo, they should never be used again. They will overwrite production repos with whatever is in the test repos.**
-
-After running `bootstrap` and verifying the test repos are correct (install packages, check metadata, test with real package managers), sync the test repos to production with `--delete` to replace old-format metadata and clean up orphan files:
-
-```bash
-# Sync yum test -> production (excludes release packages, repo config files, index)
-aws s3 sync --endpoint-url=https://s3.osuosl.org --delete \
-  s3://openvox-artifacts/repo_test/yum/ s3://openvox-yum/ \
-  --exclude 'openvox*-release-*' --exclude 'repo_files/*' --exclude 'index.html'
-
-# Sync apt test -> production (excludes release packages, list config files, index)
-aws s3 sync --endpoint-url=https://s3.osuosl.org --delete \
-  s3://openvox-artifacts/repo_test/apt/ s3://openvox-apt/ \
-  --exclude 'openvox*-release-*' --exclude 'list_files/*' --exclude 'index.html'
-```
-
-After this, production repos use the new metadata format and this repo manages all future changes via `rake release` and `rake deploy`.
+The bootstrap tasks were used during the initial migration from the previous repo management tooling. See [docs/bootstrap.md](docs/bootstrap.md) for details. They are kept in the repo for historical reference.
 
 ## Disaster Recovery
 
@@ -189,24 +184,6 @@ Platform definitions live in `files/repo_packages/openvox7.json` and `openvox8.j
 - `bundle install`
 
 macOS signing additionally requires a macOS host with Xcode command line tools.
-
-### Tasks
-
-| Task | Purpose |
-|------|---------|
-| `rake release` | Download, sign, and build repo metadata |
-| `rake deploy` | Push staged packages and metadata to S3 |
-| `rake rollback` | Restore repo state from a prior git commit |
-| `rake cleanup` | Remove orphaned packages from S3 |
-| `rake backup` | Sync S3 repos to GCS backup bucket |
-| `rake restore` | Restore S3 repos from GCS backup |
-| `rake bootstrap` | Run both bootstrap steps below |
-| `rake bootstrap:metadata` | Reformat production metadata into state/ and deploy to test buckets |
-| `rake bootstrap:packages` | Copy packages from production to test S3 buckets |
-| `rake reset` | Remove cached Docker container image |
-| `rake repo_packages:build` | Build and sign repo RPM/DEB packages and repo/list files |
-| `rake repo_packages:upload` | Upload repo package artifacts to S3 |
-| `rake repo_packages:add_platform` | Add a platform to a repo package definition |
 
 ### How it works
 
