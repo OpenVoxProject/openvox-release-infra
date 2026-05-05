@@ -66,7 +66,7 @@ module RepoPackages
   end
 
   def upload
-    abort 'No build output found. Run `rake repo_packages:build` first.'.red unless Dir.exist?(Infra::STAGING_DIR)
+    abort 'No build output found. Run `bundle exec rake repo_packages:build` first.'.red unless Dir.exist?(Infra::STAGING_DIR)
 
     Infra.setup_aws
     uploaded = 0

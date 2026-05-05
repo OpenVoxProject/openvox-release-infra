@@ -30,5 +30,5 @@ task :rollback do
   Apt.stage_metadata
   Yum.stage_metadata
 
-  puts 'Rollback complete. Run `rake deploy` to push to S3, then `rake cleanup` to remove orphaned packages.'.green
+  puts 'Rollback complete. Run `bundle exec rake deploy` to push to S3, then `bundle exec rake cleanup` to remove orphaned packages.'.green
 end

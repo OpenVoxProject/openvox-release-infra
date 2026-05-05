@@ -52,7 +52,7 @@ namespace :fix do
     end
 
     Infra.commit_state('Fix: remove non-src RPMs from src/ directories')
-    puts 'Done. Run `rake deploy` to push changes to S3.'.green
+    puts 'Done. Run `bundle exec rake deploy` to push changes to S3.'.green
   end
 
   desc 'Add missing openvox-agent 8.12.1 packages to metadata'

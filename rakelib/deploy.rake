@@ -7,18 +7,18 @@ def deploy_phase(name)
   yield
 rescue SystemExit => e
   warn "PARTIAL DEPLOY: #{name} failed. Repos may be inconsistent. " \
-       'Re-run `rake deploy` to complete.'.red
+       'Re-run `bundle exec rake deploy` to complete.'.red
   raise e
 rescue StandardError => e
   abort "PARTIAL DEPLOY: #{name} failed. Repos may be inconsistent. " \
-        "Re-run `rake deploy` to complete.\n" \
+        "Re-run `bundle exec rake deploy` to complete.\n" \
         "Error: #{e.class}: #{e.message}".red
 end
 
 desc 'Deploy staged packages and metadata to S3'
 task :deploy do
   Infra.setup_aws
-  abort 'staging/ directory not found. Run `rake release` first.'.red unless Dir.exist?(Infra::STAGING_DIR)
+  abort 'staging/ directory not found. Run `bundle exec rake release` first.'.red unless Dir.exist?(Infra::STAGING_DIR)
 
   puts "Deploying to #{Infra.production? ? 'production' : 'test'} repos...".magenta
 
