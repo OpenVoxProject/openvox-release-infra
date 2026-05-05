@@ -26,8 +26,10 @@ class Apt
     # which looks like pool/<component>/<packages first letter>/<package name>/,
     # e.g. pool/openvox8/o/openvox-agent/.
     debs.each do |deb|
-      pkg_name = File.basename(deb).split('_').first
-      pool_dir = File.join(Infra::STAGING_DIR, 'apt', 'pool', Infra.component, pkg_name[0], pkg_name)
+      container_deb = Infra.container_path(deb)
+      source_name = @container.capture("dpkg-deb --field #{container_deb} Source", silent: true).output.strip
+      source_name = File.basename(deb).split('_').first if source_name.empty?
+      pool_dir = File.join(Infra::STAGING_DIR, 'apt', 'pool', Infra.component, source_name[0], source_name)
       FileUtils.mkdir_p(pool_dir)
       FileUtils.cp(deb, pool_dir)
     end
