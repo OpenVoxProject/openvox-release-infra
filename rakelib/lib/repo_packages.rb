@@ -118,7 +118,11 @@ module RepoPackages
       end
     end
 
-    abort 'All platforms already present. Nothing to add.'.red if added.empty?
+    if added.empty?
+      puts 'All platforms already present. Nothing to add.'.yellow
+      return
+    end
+
     platforms.sort_by! { |plat| [plat[/\D+/], Gem::Version.new(plat[/[\d.]+/])] }
     File.write(package_json_path, JSON.pretty_generate(data) + "\n")
 

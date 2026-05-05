@@ -181,7 +181,7 @@ class Apt
                 .reject { |arch_name| arch_name == 'all' }
 
     if arches.empty?
-      abort "No binary-* directories found for #{codename}/#{Infra.component}. " \
+      abort "No binary-<arch> directories found for #{codename}/#{Infra.component}. " \
             'Cannot determine target architectures for arch:all DEB.'.red
     end
 
