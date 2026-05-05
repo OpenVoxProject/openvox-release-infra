@@ -15,7 +15,7 @@ task :restore do
   destination_buckets = {
     'apt' => Infra.apt_bucket,
     'yum' => Infra.yum_bucket,
-    'downloads' => Infra.downloads_bucket
+    'downloads' => Infra.downloads_bucket,
   }
 
   puts '*** WARNING: This is a destructive operation. ***'.red

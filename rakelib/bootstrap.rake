@@ -69,7 +69,6 @@ namespace :bootstrap do
 
     puts 'Package sync complete.'.green
   end
-
 end
 
 def bootstrap_yum_metadata(container, tmp_download)

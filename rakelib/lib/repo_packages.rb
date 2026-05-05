@@ -39,12 +39,13 @@ module RepoPackages
     package_defs = package_json_files.map { |path| JSON.parse(File.read(path)) }
 
     platform_filter = ENV['PLATFORM']&.split(',')&.map(&:strip)&.reject(&:empty?)
-    platform_filter.map! { |entry| normalize_platform(infer_kind(entry), entry) } if platform_filter
+    platform_filter&.map! { |entry| normalize_platform(infer_kind(entry), entry) }
 
     package_defs.each do |package_def|
       puts "Building repo packages for #{package_def['package']}...".magenta
       package_def.fetch('platforms').each do |platform|
         next if platform_filter && !platform_filter.include?(platform)
+
         build_platform(container, package_def, infer_kind(platform), platform)
       end
     end

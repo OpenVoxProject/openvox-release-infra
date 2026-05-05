@@ -16,11 +16,11 @@ task :verify do
   end
 
   first_pkg = File.basename(staged_packages.first)
-  if first_pkg.end_with?('.rpm')
-    match = first_pkg.match(/\A(.+)-([^-]+)-[^-]+\.\w+\.\w+\.rpm\z/)
-  else
-    match = first_pkg.match(/\A(.+)_([^_]+)-[^+]+\+/)
-  end
+  match = if first_pkg.end_with?('.rpm')
+            first_pkg.match(/\A(.+)-([^-]+)-[^-]+\.\w+\.\w+\.rpm\z/)
+          else
+            first_pkg.match(/\A(.+)_([^_]+)-[^+]+\+/)
+          end
   abort "Cannot parse package name/version from #{first_pkg}".red unless match
 
   project = match[1]

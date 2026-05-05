@@ -79,7 +79,7 @@ class Container
     cmd.push('--hostname', hostname) if hostname
     tmpfs.each { |mount| cmd.push('--tmpfs', mount) }
     volumes.each { |host, guest| cmd.push('-v', "#{host}:#{guest}") }
-    env.each { |key, _| cmd.push('-e', key) }
+    env.each_key { |key| cmd.push('-e', key) }
     cmd << image
     cmd.push('bash', '-c', command) if command
     Shell.run(cmd)

@@ -1,7 +1,7 @@
 plugins: rubocop-rake
 
 AllCops:
-  TargetRubyVersion: 3.2
+  TargetRubyVersion: 4.0
   NewCops: enable
 
 Layout/ArgumentAlignment:
@@ -10,6 +10,9 @@ Layout/ArgumentAlignment:
 Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
 
+Layout/LineContinuationLeadingSpace:
+  Enabled: false
+
 Layout/LineLength:
   Max: 160
 
@@ -17,6 +20,9 @@ Metrics:
   Enabled: false
 
 Naming/PredicateMethod:
+  Enabled: false
+
+Naming/VariableNumber:
   Enabled: false
 
 Style/Documentation:
@@ -31,6 +37,9 @@ Style/IfUnlessModifier:
 Style/OneClassPerFile:
   Exclude:
     - rakelib/lib/utils/shell.rb
+
+Style/SafeNavigationChainLength:
+  Enabled: false
 
 Style/SpecialGlobalVars:
   Enabled: false
