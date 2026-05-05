@@ -1,4 +1,4 @@
-name: Add Release Platform
+name: Add New Repo Package Platform
 
 on:
   workflow_dispatch:
@@ -11,10 +11,19 @@ on:
         description: 'Comma-separated platform(s) (e.g. el-9, debian13, sles-15). Arch suffix is stripped if provided.'
         required: true
         type: string
+      build_test:
+        description: 'Build and upload repo packages to test buckets'
+        required: false
+        default: false
+        type: boolean
+      build_production:
+        description: 'Build and upload repo packages to production buckets'
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
-  pull-requests: write
 
 env:
   GIT_AUTHOR_NAME: OpenVoxProjectBot
@@ -25,7 +34,7 @@ env:
 
 jobs:
   add-platform:
-    name: Add platform and open PR
+    name: Add platform and push to main
     if: github.repository_owner == 'OpenVoxProject'
     runs-on: ubuntu-latest
 
@@ -55,23 +64,51 @@ jobs:
           bundler-cache: true
 
       - name: Add platform
-        id: add
         env:
           COMPONENT: ${{ inputs.component }}
           PLATFORM: ${{ inputs.platform }}
-        run: |
-          bundle exec rake repo_packages:add_platform
-          SAFE_BRANCH=$(echo "$PLATFORM" | tr ', ' '-' | sed 's/--*/-/g; s/-$//')
-          echo "branch_suffix=$SAFE_BRANCH" >> "$GITHUB_OUTPUT"
+        run: bundle exec rake repo_packages:add_platform
 
-      - uses: peter-evans/create-pull-request@v8
+      - name: Push to main
+        run: git push
+
+  build-test:
+    name: Build and upload to test
+    needs: add-platform
+    if: inputs.build_test
+    runs-on: ubuntu-latest
+    env:
+      GPG_PRIVATE_KEY_B64: ${{ secrets.GPG_PRIVATE_KEY_B64 }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      PLATFORM: ${{ inputs.platform }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
         with:
-          token: ${{ secrets.OPENVOXBOT_COMMIT_AND_PRS }}
-          branch: "repo-packages/add-${{ inputs.component }}-${{ steps.add.outputs.branch_suffix }}"
-          delete-branch: true
-          title: "Add ${{ inputs.platform }} to ${{ inputs.component }}"
-          assignees: ${{ github.triggering_actor }}
-          body: |
-            Adds `${{ inputs.platform }}` to `${{ inputs.component }}.json`.
+          bundler-cache: true
+      - name: Build and sign
+        run: bundle exec rake repo_packages:build
+      - name: Upload
+        run: bundle exec rake repo_packages:upload
 
-            After merging, run the **Release Packages** workflow to build and upload the updated packages.
+  build-production:
+    name: Build and upload to production
+    needs: add-platform
+    if: inputs.build_production
+    runs-on: ubuntu-latest
+    env:
+      PRODUCTION: 'true'
+      GPG_PRIVATE_KEY_B64: ${{ secrets.GPG_PRIVATE_KEY_B64 }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      PLATFORM: ${{ inputs.platform }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Build and sign
+        run: bundle exec rake repo_packages:build
+      - name: Upload
+        run: bundle exec rake repo_packages:upload
