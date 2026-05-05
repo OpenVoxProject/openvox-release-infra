@@ -94,34 +94,51 @@ After this, production repos use the new metadata format and this repo manages a
 
 If the S3 repos are corrupted or accidentally deleted, restore from the GCS backup. This is a destructive operation that overwrites the current S3 repos with the backup contents.
 
-**Test the restore process first:**
-
-1. Go to Actions > "Disaster Recovery" workflow > Run workflow.
-2. Leave "production" unchecked.
-3. Optionally enter a timestamp to restore GCS to a point in time (within the 90-day soft-delete window).
-4. Set target to "all" or a specific repo (apt, yum, downloads).
-5. Verify the test repos are correct.
-
-**Restore production:**
-
-1. Re-run the workflow with "production" checked and the same timestamp.
-2. The workflow uses a protected GitHub environment requiring approval before it runs.
-
-**Local:**
+**Test the restore process first** by restoring from the production backup to the test buckets:
 
 ```bash
-# Optionally restore GCS bucket to a point in time first
-gcloud storage restore "gs://openvox-backup/**" --async \
-    --allow-overwrite \
-    --created-before-time="2026-04-15T00:00:00Z" \
-    --deleted-after-time="2026-04-15T00:00:00Z"
-# Wait for the async operation to complete (check: gcloud storage operations list)
+GCS_SOURCE=gs://openvox-backup TARGET=all bundle exec rake restore
+```
 
-# Then restore from GCS to S3
+This reads from the production GCS backup but writes to the test S3 buckets (since PRODUCTION is not set). Verify the test repos look correct, then restore production:
+
+```bash
 PRODUCTION=true TARGET=all bundle exec rake restore
 ```
 
-Timestamps are RFC 3339 format. You can use timezone offsets (e.g., `2026-04-15T00:00:00-07:00` for Pacific time). This only works within the 90-day soft-delete retention window.
+**Point-in-time recovery:**
+
+If a bad backup has overwritten the GCS state, you can recover to a previous backup's state using soft-delete. Pick a timestamp **between** the good backup and the bad backup:
+
+```bash
+# Example: good backup ran at 13:00, bad backup ran at 14:00.
+# Use any timestamp between them (e.g., 13:30).
+gcloud storage restore "gs://openvox-backup/**" --async \
+    --allow-overwrite \
+    --created-before-time="2026-04-15T13:30:00-07:00" \
+    --deleted-after-time="2026-04-15T13:30:00-07:00"
+
+# Check progress (--async is required with --allow-overwrite).
+# Use the operation name from the output above:
+gcloud storage operations describe projects/_/buckets/openvox-backup/operations/OPERATION_ID
+
+# Once complete, restore from GCS to S3
+PRODUCTION=true TARGET=all bundle exec rake restore
+```
+
+How the timestamps work:
+- `--created-before-time=T`: only restore objects created before T (excludes objects written by the bad backup)
+- `--deleted-after-time=T`: only restore objects deleted after T (includes objects overwritten by the bad backup, excludes objects overwritten by earlier legitimate backups)
+- Together: "restore exactly the objects that were live at time T and were subsequently overwritten"
+
+Timestamps are RFC 3339 format with timezone offsets (e.g., `2026-04-15T13:30:00-07:00`). This only works within the 90-day soft-delete retention window.
+
+**Test the restore first** by writing to test buckets:
+
+```bash
+# Recover GCS state (same command as above), then restore to test
+GCS_SOURCE=gs://openvox-backup TARGET=all bundle exec rake restore
+```
 
 ## Repo Packages
 

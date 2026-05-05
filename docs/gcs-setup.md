@@ -18,10 +18,11 @@ You may see a warning about Application Default Credentials quota project. This 
 ```bash
 for bucket in openvox-backup openvox-backup-test; do
   gcloud storage buckets create "gs://${bucket}" --location=us-west1
-  gcloud storage buckets update "gs://${bucket}" --versioning
   gcloud storage buckets update "gs://${bucket}" --soft-delete-duration=90d
 done
 ```
+
+Soft-delete retains overwritten and deleted objects for 90 days, allowing point-in-time recovery via `gcloud storage restore`. Object versioning is intentionally not enabled — with soft-delete alone, overwrites go directly to soft-deleted state where `gcloud storage restore` can recover them in bulk with timestamp filters.
 
 ## Workload Identity Federation (GitHub Actions auth)
 

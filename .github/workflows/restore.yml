@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       timestamp:
-        description: 'Point-in-time to restore GCS bucket to (RFC 3339, e.g. 2026-04-15T00:00:00Z). Leave empty to restore current GCS state as-is.'
+        description: 'Point-in-time to restore GCS bucket to (RFC 3339, e.g. 2026-04-15T13:30:00-07:00). Leave empty to restore current GCS state as-is.'
         required: false
         type: string
       target:
@@ -18,7 +18,11 @@ on:
           - yum
           - downloads
       production:
-        description: 'Restore to PRODUCTION S3 buckets'
+        description: 'Type "I want to restore to production" to restore to production S3 buckets. Otherwise, leave blank to restore to the test repo.'
+        required: false
+        type: string
+      source_production_backup:
+        description: 'Use the production GCS backup as source (for testing restore to test buckets). When left unchecked, will use the default (production backup when restoring to production, test backup when restoring to test).'
         required: false
         default: false
         type: boolean
@@ -29,18 +33,18 @@ permissions:
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  PRODUCTION: ${{ inputs.production && 'true' || '' }}
+  PRODUCTION: ${{ inputs.production == 'I want to restore to production' && 'true' || '' }}
   TARGET: ${{ inputs.target }}
-  CONFIRM_RESTORE: 'true'
+  CONFIRM_RESTORE: ${{ inputs.production == 'I want to restore to production' || inputs.production == '' && 'true' || '' }}
+  GCS_SOURCE: ${{ inputs.source_production_backup && 'gs://openvox-backup' || '' }}
 
 jobs:
   restore:
     name: Restore S3 from GCS backup
     runs-on: ubuntu-latest
-    environment: ${{ inputs.production && 'production-disaster-recovery' || 'test-disaster-recovery' }}
     env:
       RESTORE_TIMESTAMP: ${{ inputs.timestamp }}
-      BUCKET: ${{ inputs.production && 'gs://openvox-backup' || 'gs://openvox-backup-test' }}
+      BUCKET: ${{ (inputs.source_production_backup || inputs.production == 'I want to restore to production') && 'gs://openvox-backup' || 'gs://openvox-backup-test' }}
 
     steps:
       - uses: actions/checkout@v4
@@ -58,11 +62,23 @@ jobs:
         if: inputs.timestamp != ''
         run: |
           echo "::warning::Restoring GCS bucket to ${RESTORE_TIMESTAMP}. This is a destructive operation."
-          gcloud storage restore "${BUCKET}/**" \
+          gcloud storage restore "${BUCKET}/**" --async \
             --allow-overwrite \
             --created-before-time="${RESTORE_TIMESTAMP}" \
-            --deleted-after-time="${RESTORE_TIMESTAMP}"
-          echo "::notice::GCS restore complete."
+            --deleted-after-time="${RESTORE_TIMESTAMP}" | tee /tmp/restore-op.txt
+
+          OPERATION=$(grep -oP 'operations/\S+' /tmp/restore-op.txt)
+          if [ -n "$OPERATION" ]; then
+            echo "Waiting for restore operation to complete..."
+            while true; do
+              STATUS=$(gcloud storage operations describe "projects/_/buckets/${BUCKET#gs://}/$OPERATION" --format="value(done)" 2>/dev/null)
+              if [ "$STATUS" = "True" ]; then
+                echo "::notice::GCS restore complete."
+                break
+              fi
+              sleep 10
+            done
+          fi
 
       - name: Restore S3 from GCS
         run: bundle exec rake restore

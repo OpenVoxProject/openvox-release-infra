@@ -9,10 +9,20 @@ task :restore do
   target = Infra.require_env('TARGET')
   abort "TARGET must be apt, yum, downloads, or all (got: #{target})".red unless %w[apt yum downloads all].include?(target)
 
+  source_bucket = ENV.fetch('GCS_SOURCE', Infra.gcs_bucket)
+  targets = target == 'all' ? %w[apt yum downloads] : [target]
+
+  destination_buckets = {
+    'apt' => Infra.apt_bucket,
+    'yum' => Infra.yum_bucket,
+    'downloads' => Infra.downloads_bucket
+  }
+
   puts '*** WARNING: This is a destructive operation. ***'.red
   puts "This will overwrite the #{Infra.production? ? 'PRODUCTION' : 'test'} #{target} repo(s) with the GCS backup.".red
-  puts "Source: #{Infra.gcs_bucket}".yellow
-  puts "Destination: #{target == 'all' ? 'all S3 buckets' : target}".yellow
+  puts "Source: #{source_bucket}".yellow
+  puts 'Destination:'.yellow
+  targets.each { |name| puts "  #{destination_buckets[name]}".yellow }
 
   unless ENV['CONFIRM_RESTORE']
     if $stdin.tty?
@@ -24,19 +34,19 @@ task :restore do
     end
   end
 
-  if %w[apt all].include?(target)
+  if targets.include?('apt')
     puts 'Restoring apt repo from GCS...'.magenta
-    Shell.run("gcloud storage rsync --recursive --delete-unmatched-destination-objects #{Infra.gcs_bucket}/apt/ #{Infra.apt_bucket}/")
+    Shell.run("gcloud storage rsync --recursive --delete-unmatched-destination-objects #{source_bucket}/apt/ #{Infra.apt_bucket}/")
   end
 
-  if %w[yum all].include?(target)
+  if targets.include?('yum')
     puts 'Restoring yum repo from GCS...'.magenta
-    Shell.run("gcloud storage rsync --recursive --delete-unmatched-destination-objects #{Infra.gcs_bucket}/yum/ #{Infra.yum_bucket}/")
+    Shell.run("gcloud storage rsync --recursive --delete-unmatched-destination-objects #{source_bucket}/yum/ #{Infra.yum_bucket}/")
   end
 
-  if %w[downloads all].include?(target)
+  if targets.include?('downloads')
     puts 'Restoring downloads from GCS...'.magenta
-    Shell.run("gcloud storage rsync --recursive --delete-unmatched-destination-objects #{Infra.gcs_bucket}/downloads/ #{Infra.downloads_bucket}/")
+    Shell.run("gcloud storage rsync --recursive --delete-unmatched-destination-objects #{source_bucket}/downloads/ #{Infra.downloads_bucket}/")
   end
 
   puts 'Restore complete.'.green
