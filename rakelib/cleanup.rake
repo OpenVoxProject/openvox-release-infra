@@ -72,7 +72,7 @@ task :cleanup do
 
   if orphaned.empty?
     puts 'No orphaned packages found.'.green
-    return
+    next
   end
 
   puts "Found #{orphaned.size} orphaned packages:".yellow
