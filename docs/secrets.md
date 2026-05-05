@@ -69,6 +69,8 @@ Add these in Settings > Secrets and variables > Actions:
 | `WINDOWS_SM_CLIENT_CERT_B64` | MSI signing | `base64 -w0 < client_cert.p12` |
 | `WINDOWS_SM_CLIENT_CERT_PASSWORD` | MSI signing | Set when creating the .p12 in DigiCert |
 | `WINDOWS_CERT_ALIAS` | MSI signing | Certificate alias from DigiCert ONE |
+| `OPENVOXBOT_COMMIT_AND_PRS` | Release, Rollback, Add Platform | GitHub PAT with `contents: write` for pushing commits |
+| `OPENVOXBOT_SSH_PRIVATE_KEY` | Release, Rollback, Add Platform | SSH private key for signed commits (used as git signing key) |
 
 MSI and macOS secrets are only needed if signing those package types. If omitted, signing is skipped.
 
