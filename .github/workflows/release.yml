@@ -135,7 +135,7 @@ jobs:
   macos:
     name: Sign and release (DMG)
     if: inputs.platforms == '' || contains(inputs.platforms, 'macos')
-    runs-on: macos-latest
+    runs-on: macos-26
     env:
       MACOS_APP_CERT_B64: ${{ secrets.MACOS_APP_CERT_B64 }}
       MACOS_APP_SIGNING_IDENTITY: ${{ secrets.MACOS_APP_SIGNING_IDENTITY }}
