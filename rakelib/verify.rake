@@ -31,108 +31,98 @@ task :verify do
 
   apt_url = Infra.apt_bucket.sub('s3://', "#{Infra::S3_ENDPOINT}/")
   yum_url = Infra.yum_bucket.sub('s3://', "#{Infra::S3_ENDPOINT}/")
-  gpg_key_file = File.join(Infra::REPO_ROOT, 'openvox-gpg.key')
 
   verified = 0
   failed = 0
 
-  staging_dists = File.join(Infra::STAGING_DIR, 'apt', 'dists')
+  staging_pool = File.join(Infra::STAGING_DIR, 'apt', 'pool')
   yum_staging = File.join(Infra::STAGING_DIR, 'yum')
-  needs_gpg = Dir.exist?(staging_dists) || Dir.exist?(yum_staging)
 
-  if needs_gpg
-    Infra.require_env('GPG_PRIVATE_KEY_B64')
-
-    container = Infra.start_container
-    begin
-      Infra.import_gpg_key(container)
-      container.exec("gpg --export --armor '#{Infra::GPG_KEY_ID}' > #{Infra::CONTAINER_WORK}/openvox-gpg.key")
-
-      staging_pool = File.join(Infra::STAGING_DIR, 'apt', 'pool')
-      if Dir.exist?(staging_pool)
-        codenames = Dir.glob(File.join(staging_pool, '**', '*.deb'))
-                       .map { |deb| File.basename(deb)[/\+([a-z][\w.]+)_/, 1] }
-                       .compact.uniq
-        if codenames.any?
-          puts 'Verifying apt repos...'.magenta
-          container.exec('rm -f /etc/apt/sources.list && rm -rf /etc/apt/sources.list.d/*')
-          container.exec("gpg --export '#{Infra::GPG_KEY_ID}' > /usr/share/keyrings/openvox.gpg")
-
-          codenames.each do |codename|
-            if verify_apt_codename(container, project, version, component, apt_url, codename)
-              verified += 1
-            else
-              failed += 1
-            end
-          end
-        end
-      end
-    ensure
+  if Dir.exist?(staging_pool)
+    codenames = Dir.glob(File.join(staging_pool, '**', '*.deb'))
+                   .map { |deb| File.basename(deb)[/\+([a-z][\w.]+)_/, 1] }
+                   .compact.uniq
+    if codenames.any?
+      puts 'Verifying apt repos...'.magenta
+      container = Container.new(name: 'verify-apt', image: Infra::CONTAINER_TAG)
       begin
-        container.teardown
-      rescue StandardError => e
-        warn "WARNING: teardown also failed: #{e.message}".yellow
-      end
-    end
+        container.start(command: 'sleep infinity', volumes: { Infra::REPO_ROOT => Infra::CONTAINER_WORK })
+        container.exec('rm -f /etc/apt/sources.list && rm -rf /etc/apt/sources.list.d/*')
+        container.exec("cp #{Infra::CONTAINER_WORK}/files/repo_packages/keys/openvox-keyring.gpg /usr/share/keyrings/openvox.gpg")
 
-    if Dir.exist?(yum_staging)
-      all_repo_dirs = Dir.glob(File.join(yum_staging, '**', '*.rpm'))
-                         .map { |rpm| File.dirname(rpm) }.uniq
-      sles_repo_dirs, yum_repo_dirs = all_repo_dirs.partition { |dir| dir.include?('/sles/') }
-
-      if yum_repo_dirs.any?
-        puts 'Verifying yum repos...'.magenta
-        yum_container = Container.new(name: 'verify-yum', image: 'almalinux:9')
-        begin
-          yum_container.start(command: 'sleep infinity', volumes: { Infra::REPO_ROOT => Infra::CONTAINER_WORK })
-          yum_container.exec("rpm --import #{Infra::CONTAINER_WORK}/openvox-gpg.key")
-
-          yum_repo_dirs.each do |repo_dir|
-            rel_path = repo_dir.sub("#{yum_staging}/", '')
-            repo_url = "#{yum_url}/#{rel_path}"
-            if verify_yum_repo(yum_container, project, version, repo_url, rel_path)
-              verified += 1
-            else
-              failed += 1
-            end
-          end
-        ensure
-          begin
-            yum_container.teardown
-          rescue StandardError => e
-            warn "WARNING: teardown also failed: #{e.message}".yellow
+        codenames.each do |codename|
+          if verify_apt_codename(container, project, version, component, apt_url, codename)
+            verified += 1
+          else
+            failed += 1
           end
         end
-      end
-
-      if sles_repo_dirs.any?
-        puts 'Verifying zypper repos...'.magenta
-        sles_container = Container.new(name: 'verify-sles', image: 'registry.suse.com/suse/sle15:15.5')
+      ensure
         begin
-          sles_container.start(command: 'sleep infinity', volumes: { Infra::REPO_ROOT => Infra::CONTAINER_WORK })
-          sles_container.exec('rm -f /etc/zypp/repos.d/*.repo /etc/zypp/services.d/*.service')
-          sles_container.exec("rpm --import #{Infra::CONTAINER_WORK}/openvox-gpg.key")
+          container.teardown
+        rescue StandardError => e
+          warn "WARNING: teardown also failed: #{e.message}".yellow
+        end
+      end
+    end
+  end
 
-          sles_repo_dirs.each do |repo_dir|
-            rel_path = repo_dir.sub("#{yum_staging}/", '')
-            repo_url = "#{yum_url}/#{rel_path}"
-            if verify_zypper_repo(sles_container, project, version, repo_url, rel_path)
-              verified += 1
-            else
-              failed += 1
-            end
+  if Dir.exist?(yum_staging)
+    gpg_key_container_path = "#{Infra::CONTAINER_WORK}/files/repo_packages/keys/GPG-KEY-openvox.pub"
+    all_repo_dirs = Dir.glob(File.join(yum_staging, '**', '*.rpm'))
+                       .map { |rpm| File.dirname(rpm) }.uniq
+    sles_repo_dirs, yum_repo_dirs = all_repo_dirs.partition { |dir| dir.include?('/sles/') }
+
+    if yum_repo_dirs.any?
+      puts 'Verifying yum repos...'.magenta
+      yum_container = Container.new(name: 'verify-yum', image: 'almalinux:9')
+      begin
+        yum_container.start(command: 'sleep infinity', volumes: { Infra::REPO_ROOT => Infra::CONTAINER_WORK })
+        yum_container.exec("rpm --import #{gpg_key_container_path}")
+
+        yum_repo_dirs.each do |repo_dir|
+          rel_path = repo_dir.sub("#{yum_staging}/", '')
+          repo_url = "#{yum_url}/#{rel_path}"
+          if verify_yum_repo(yum_container, project, version, repo_url, rel_path)
+            verified += 1
+          else
+            failed += 1
           end
-        ensure
-          begin
-            sles_container.teardown
-          rescue StandardError => e
-            warn "WARNING: teardown also failed: #{e.message}".yellow
-          end
+        end
+      ensure
+        begin
+          yum_container.teardown
+        rescue StandardError => e
+          warn "WARNING: teardown also failed: #{e.message}".yellow
         end
       end
     end
 
-    FileUtils.rm_f(gpg_key_file)
+    if sles_repo_dirs.any?
+      puts 'Verifying zypper repos...'.magenta
+      sles_container = Container.new(name: 'verify-sles', image: 'registry.suse.com/suse/sle15:15.5')
+      begin
+        sles_container.start(command: 'sleep infinity', volumes: { Infra::REPO_ROOT => Infra::CONTAINER_WORK })
+        sles_container.exec('rm -f /etc/zypp/repos.d/*.repo /etc/zypp/services.d/*.service')
+        sles_container.exec("rpm --import #{gpg_key_container_path}")
+
+        sles_repo_dirs.each do |repo_dir|
+          rel_path = repo_dir.sub("#{yum_staging}/", '')
+          repo_url = "#{yum_url}/#{rel_path}"
+          if verify_zypper_repo(sles_container, project, version, repo_url, rel_path)
+            verified += 1
+          else
+            failed += 1
+          end
+        end
+      ensure
+        begin
+          sles_container.teardown
+        rescue StandardError => e
+          warn "WARNING: teardown also failed: #{e.message}".yellow
+        end
+      end
+    end
   end
 
   downloads = Dir.glob(File.join(Infra::STAGING_DIR, 'downloads', '**', '*.{dmg,msi}'))
@@ -188,7 +178,7 @@ def verify_yum_repo(container, project, version, repo_url, rel_path)
     'name=OpenVox Verify',
     "baseurl=#{repo_url}",
     'gpgcheck=1',
-    "gpgkey=file://#{Infra::CONTAINER_WORK}/openvox-gpg.key",
+    "gpgkey=file://#{Infra::CONTAINER_WORK}/files/repo_packages/keys/GPG-KEY-openvox.pub",
     'enabled=1',
   ].join("\n")
 
@@ -220,7 +210,7 @@ def verify_zypper_repo(container, project, version, repo_url, rel_path)
     'name=OpenVox Verify',
     "baseurl=#{repo_url}",
     'gpgcheck=1',
-    "gpgkey=file://#{Infra::CONTAINER_WORK}/openvox-gpg.key",
+    "gpgkey=file://#{Infra::CONTAINER_WORK}/files/repo_packages/keys/GPG-KEY-openvox.pub",
     'enabled=1',
   ].join("\n")
   container.exec("printf '%s\\n' '#{repo_content}' > /etc/zypp/repos.d/openvox-verify.repo")
