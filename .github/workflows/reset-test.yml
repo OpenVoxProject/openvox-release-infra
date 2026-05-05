@@ -14,7 +14,6 @@ env:
 jobs:
   reset-test:
     name: Sync test buckets from production
-    if: github.repository_owner == 'OpenVoxProject'
     runs-on: ubuntu-latest
 
     steps:

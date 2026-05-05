@@ -35,7 +35,6 @@ env:
 jobs:
   add-platform:
     name: Add platform and push to main
-    if: github.repository_owner == 'OpenVoxProject'
     runs-on: ubuntu-latest
 
     steps:
