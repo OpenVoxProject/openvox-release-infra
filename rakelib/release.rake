@@ -126,6 +126,6 @@ task :release do
     end
   end
 
-  Infra.commit_state("Release: #{Infra.project} #{Infra.version} (#{Infra.component})")
+  Infra.commit_state("Release: #{Infra.project} #{Infra.version} (#{Infra.component})") if Infra.production?
   puts 'Release complete. Run `rake deploy` to push to S3.'.green
 end
