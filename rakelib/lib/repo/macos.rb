@@ -194,11 +194,8 @@ module MacOS
       Shell.run(['hdiutil', 'attach', dmg, '-mountpoint', mount, '-nobrowse', '-noverify', '-noautoopen'])
       begin
         Dir.glob(File.join(mount, '*')).each do |file|
-          if File.extname(file) == '.pkg'
-            FileUtils.cp(file, staging)
-          else
-            FileUtils.cp(file, output)
-          end
+          target = File.extname(file) == '.pkg' ? staging : output
+          FileUtils.cp(file, target)
         end
       ensure
         Shell.run(['hdiutil', 'detach', mount, '-force'], allowed_exit_codes: [0, 1])
