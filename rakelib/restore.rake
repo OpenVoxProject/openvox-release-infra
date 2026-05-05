@@ -8,6 +8,7 @@ desc 'Restore S3 repos from GCS backup'
 task :restore do
   Infra.setup_aws
   Infra.setup_gcloud
+  Infra.print_target(:apt_bucket, :yum_bucket, :downloads_bucket, :gcs_bucket)
   target = Infra.env('TARGET', required: true)
   abort "TARGET must be apt, yum, downloads, or all (got: #{target})".red unless %w[apt yum downloads all].include?(target)
 
@@ -58,6 +59,7 @@ namespace :restore do
   desc 'Roll back GCS backup bucket to a point in time using soft-delete recovery'
   task :gcs do
     Infra.setup_gcloud
+    Infra.print_target(:gcs_bucket)
     timestamp = Shellwords.shellescape(Infra.env('TIMESTAMP', required: true))
     bucket = Infra.env('GCS_SOURCE', default: Infra.gcs_bucket)
 

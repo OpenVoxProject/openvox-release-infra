@@ -7,6 +7,7 @@ desc 'Backup current S3 repos to GCS'
 task :backup do
   Infra.setup_aws
   Infra.setup_gcloud
+  Infra.print_target(:apt_bucket, :yum_bucket, :downloads_bucket, :gcs_bucket)
 
   puts 'Backing up apt repo to GCS...'.magenta
   Shell.run("gcloud storage rsync --recursive #{Infra.apt_bucket}/ #{Infra.gcs_bucket}/apt/")

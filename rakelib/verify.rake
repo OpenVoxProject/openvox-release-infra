@@ -7,6 +7,7 @@ require_relative 'lib/utils/shell'
 desc 'Verify packages are accessible and GPG-signed in the deployed repos'
 task :verify do
   Infra.setup_aws
+  Infra.print_target(:apt_bucket, :yum_bucket)
 
   staged_rpms = Dir.glob(File.join(Infra::STAGING_DIR, 'yum', '**', '*.rpm'))
   staged_debs = Dir.glob(File.join(Infra::STAGING_DIR, 'apt', 'pool', '**', '*.deb'))

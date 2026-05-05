@@ -19,9 +19,8 @@ end
 desc 'Deploy staged packages and metadata to S3'
 task :deploy do
   Infra.setup_aws
+  Infra.print_target(:apt_bucket, :yum_bucket, :downloads_bucket)
   abort 'staging/ directory not found. Run `bundle exec rake release` first.'.red unless Dir.exist?(Infra::STAGING_DIR)
-
-  puts "Deploying to #{Infra.production? ? 'production' : 'test'} repos...".magenta
 
   deploy_phase('Uploading packages') do
     pool_dir = File.join(Infra::STAGING_DIR, 'apt', 'pool')

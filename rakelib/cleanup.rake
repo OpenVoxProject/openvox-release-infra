@@ -41,6 +41,7 @@ end
 desc 'Remove packages from S3 not referenced in current metadata'
 task :cleanup do
   Infra.setup_aws
+  Infra.print_target(:apt_bucket, :yum_bucket)
 
   apt_state_files = Dir.glob(File.join(Infra::STATE_DIR, 'apt', '**', 'Packages'))
   yum_state_files = Dir.glob(File.join(Infra::STATE_DIR, 'yum', '**', 'primary.xml.gz'))

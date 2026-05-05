@@ -7,6 +7,7 @@ require_relative 'lib/utils/infra'
 namespace :repo_packages do
   desc 'Build and sign repo RPM/DEB packages and repo/list files'
   task :build do
+    Infra.print_target(:apt_bucket, :yum_bucket)
     Infra.env('GPG_PRIVATE_KEY_B64', required: true)
 
     puts 'Building and signing repo packages...'.magenta
@@ -21,6 +22,7 @@ namespace :repo_packages do
 
   desc 'Upload repo package artifacts to S3'
   task :upload do
+    Infra.print_target(:apt_bucket, :yum_bucket)
     RepoPackages.upload
   end
 

@@ -13,6 +13,7 @@ namespace :fix do
   desc 'Remove non-src RPMs from yum src/ directories and regenerate their metadata'
   task :src_dirs do
     Infra.setup_aws
+    Infra.print_target(:yum_bucket)
     Infra.env('GPG_PRIVATE_KEY_B64', required: true)
 
     container = Infra.start_container

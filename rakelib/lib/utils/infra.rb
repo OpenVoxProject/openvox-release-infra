@@ -88,6 +88,11 @@ module Infra
   def yum_release_package_base = production? ? 'https://yum.voxpupuli.org' : "#{S3_ENDPOINT}/#{ARTIFACTS_BUCKET}/repo_test/yum"
   def apt_release_package_base = production? ? 'https://apt.voxpupuli.org' : "#{S3_ENDPOINT}/#{ARTIFACTS_BUCKET}/repo_test/apt"
 
+  def print_target(*bucket_methods)
+    puts "Target: #{production? ? 'PRODUCTION' : 'test'}".orange
+    bucket_methods.each { |name| puts "  #{name}: #{send(name)}".orange }
+  end
+
   def container_path(host_path) = host_path.sub(REPO_ROOT, CONTAINER_WORK)
   def s3_cmd = "aws s3 --endpoint-url=#{S3_ENDPOINT}"
   def s3_sync = "#{s3_cmd} sync --no-progress"

@@ -66,6 +66,7 @@ end
 desc 'Download, sign, and prepare repo metadata'
 task :release do
   Infra.setup_aws
+  Infra.print_target(:apt_bucket, :yum_bucket, :downloads_bucket)
 
   FileUtils.rm_rf(Infra::PACKAGES_DIR)
   FileUtils.rm_rf(Infra::STAGING_DIR)

@@ -8,6 +8,7 @@ require_relative 'lib/utils/shell'
 
 desc 'Rollback repo state to a prior commit'
 task :rollback do
+  Infra.print_target
   commit = Infra.env('COMMIT', required: true)
 
   Dir.chdir(Infra::REPO_ROOT) do

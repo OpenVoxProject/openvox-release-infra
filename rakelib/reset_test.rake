@@ -7,6 +7,7 @@ require_relative 'lib/utils/shell'
 desc 'Sync test buckets from production (with --delete) and clear local state'
 task :reset_test do
   Infra.setup_aws
+  Infra.print_target(:apt_bucket, :yum_bucket, :downloads_bucket)
   abort 'This task targets test buckets. Do not run with PRODUCTION=true.'.red if Infra.production?
 
   unless Infra.env('CONFIRM_RESET') == 'true'

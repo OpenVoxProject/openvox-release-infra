@@ -15,6 +15,7 @@ class String
   def yellow = "\033[33m#{self}\033[0m"
   def magenta = "\033[35m#{self}\033[0m"
   def cyan = "\033[36m#{self}\033[0m"
+  def orange = "\033[38;5;208m#{self}\033[0m"
 end
 
 module Shell

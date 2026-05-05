@@ -13,6 +13,7 @@ namespace :bootstrap do
   desc 'Download production metadata, reformat, store in state/, and deploy to test buckets'
   task :metadata do
     Infra.setup_aws
+    Infra.print_target(:apt_bucket, :yum_bucket)
     Infra.env('GPG_PRIVATE_KEY_B64', required: true)
     abort 'Bootstrap targets test buckets. Do not run with PRODUCTION=true.'.red if Infra.production?
 
