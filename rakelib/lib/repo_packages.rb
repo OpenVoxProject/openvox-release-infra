@@ -38,9 +38,13 @@ module RepoPackages
     abort 'No package JSON files found in files/repo_packages/'.red if package_json_files.empty?
     package_defs = package_json_files.map { |path| JSON.parse(File.read(path)) }
 
+    platform_filter = ENV['PLATFORM']&.split(',')&.map(&:strip)&.reject(&:empty?)
+    platform_filter.map! { |entry| normalize_platform(infer_kind(entry), entry) } if platform_filter
+
     package_defs.each do |package_def|
-      puts "Building release packages for #{package_def['package']}...".magenta
+      puts "Building repo packages for #{package_def['package']}...".magenta
       package_def.fetch('platforms').each do |platform|
+        next if platform_filter && !platform_filter.include?(platform)
         build_platform(container, package_def, infer_kind(platform), platform)
       end
     end
@@ -125,14 +129,17 @@ module RepoPackages
     puts 'Committed locally. Push manually when ready.'.green
   end
 
-  # Strips arch if present, normalizes to the format stored in JSON:
+  # Normalizes to the format stored in JSON regardless of input format:
   #   rpm: <os>-<ver> (e.g. el-9, sles-15)
   #   deb: <os><ver>  (e.g. debian13, ubuntu24.04)
+  # Accepts: el-9, el9, el-9-x86_64, debian14, debian-14, debian-14-amd64, etc.
   def normalize_platform(kind, platform)
     parts = platform.split('-')
     parts = parts[0..-2] if parts.size >= 3
+    match = parts.join.match(/\A([a-z]+)([\d.]+)\z/)
+    abort "Cannot parse platform: #{platform}".red unless match
 
-    kind == 'deb' ? parts.join : parts.join('-')
+    kind == 'deb' ? "#{match[1]}#{match[2]}" : "#{match[1]}-#{match[2]}"
   end
 
   def build_platform(container, package_def, kind, platform)
