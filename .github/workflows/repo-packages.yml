@@ -1,4 +1,4 @@
-name: Release Packages
+name: Repo Packages
 
 on:
   workflow_dispatch:
@@ -15,7 +15,7 @@ on:
         type: boolean
 
 concurrency:
-  group: release-packages-${{ inputs.production && 'production' || 'test' }}
+  group: repo-packages-${{ inputs.production && 'production' || 'test' }}
   cancel-in-progress: false
 
 permissions:
@@ -29,8 +29,8 @@ env:
   GPG_PRIVATE_KEY_B64: ${{ secrets.GPG_PRIVATE_KEY_B64 }}
 
 jobs:
-  release-packages:
-    name: Build, sign, and upload release packages
+  repo-packages:
+    name: Build, sign, and upload repo packages
     runs-on: ubuntu-latest
 
     steps:
@@ -41,7 +41,7 @@ jobs:
           bundler-cache: true
 
       - name: Build and sign
-        run: bundle exec rake release_packages:build
+        run: bundle exec rake repo_packages:build
 
       - name: Upload
-        run: bundle exec rake release_packages:upload
+        run: bundle exec rake repo_packages:upload

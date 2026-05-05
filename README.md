@@ -123,13 +123,13 @@ PRODUCTION=true TARGET=all bundle exec rake restore
 
 Timestamps are RFC 3339 format. You can use timezone offsets (e.g., `2026-04-15T00:00:00-07:00` for Pacific time). This only works within the 90-day soft-delete retention window.
 
-## Release Packages
+## Repo Packages
 
 Build, sign, and upload the small noarch RPM/DEB packages that register the OpenVox yum/apt repos on end-user systems (like `puppetlabs-release` packages). These packages drop `.repo` files, `.list` files, GPG public keys, and APT pin preferences into the correct locations.
 
 **GitHub Actions:**
 
-Go to Actions > "Release Packages" workflow > Run workflow. Leave "production" unchecked to build packages pointing at the test repos and upload to the test buckets. Re-run with "production" checked for production.
+Go to Actions > "Repo Packages" workflow > Run workflow. Leave "production" unchecked to build packages pointing at the test repos and upload to the test buckets. Re-run with "production" checked for production.
 
 **Local:**
 
@@ -137,23 +137,23 @@ Go to Actions > "Release Packages" workflow > Run workflow. Leave "production" u
 source ~/.openvox-release-secrets
 
 # Build, sign, and upload to test
-bundle exec rake release_packages:build
-bundle exec rake release_packages:upload
+bundle exec rake repo_packages:build
+bundle exec rake repo_packages:upload
 
 # Build, sign, and upload to production
-PRODUCTION=true bundle exec rake release_packages:build
-PRODUCTION=true bundle exec rake release_packages:upload
+PRODUCTION=true bundle exec rake repo_packages:build
+PRODUCTION=true bundle exec rake repo_packages:upload
 ```
 
 **Add a new platform:**
 
 ```bash
-bundle exec rake release_packages:add_platform \
+bundle exec rake repo_packages:add_platform \
     COMPONENT=openvox8 PLATFORM=el-11,debian14,sles-16
 # Commits locally; push manually when ready
 ```
 
-Platform definitions live in `files/release_packages/openvox7.json` and `openvox8.json`. The `add_platform` task infers the package kind (rpm or deb) from the OS name, normalizes the format, and commits the change. Arch suffixes (e.g. `-x86_64`, `-amd64`) are stripped automatically. SLES is treated as an RPM variant (the only difference is the repo file installs to `etc/zypp/repos.d` instead of `etc/yum.repos.d`).
+Platform definitions live in `files/repo_packages/openvox7.json` and `openvox8.json`. The `add_platform` task infers the package kind (rpm or deb) from the OS name, normalizes the format, and commits the change. Arch suffixes (e.g. `-x86_64`, `-amd64`) are stripped automatically. SLES is treated as an RPM variant (the only difference is the repo file installs to `etc/zypp/repos.d` instead of `etc/yum.repos.d`).
 
 | Variable | Purpose |
 |----------|---------|
@@ -187,9 +187,9 @@ macOS signing additionally requires a macOS host with Xcode command line tools.
 | `rake bootstrap:metadata` | Reformat production metadata into state/ and deploy to test buckets |
 | `rake bootstrap:packages` | Copy packages from production to test S3 buckets |
 | `rake reset` | Remove cached Docker container image |
-| `rake release_packages:build` | Build and sign release RPM/DEB packages and repo/list files |
-| `rake release_packages:upload` | Upload release package artifacts to S3 |
-| `rake release_packages:add_platform` | Add a platform to a release package definition |
+| `rake repo_packages:build` | Build and sign repo RPM/DEB packages and repo/list files |
+| `rake repo_packages:upload` | Upload repo package artifacts to S3 |
+| `rake repo_packages:add_platform` | Add a platform to a repo package definition |
 
 ### How it works
 

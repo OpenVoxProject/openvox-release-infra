@@ -98,8 +98,8 @@ namespace :bootstrap do
     puts <<~MSG.green
       Reset complete. Next steps:
         1. rake bootstrap                 - repopulate from production
-        2. rake release_packages:build    - regenerate openvox-release packages
-        3. rake release_packages:upload   - upload to test buckets
+        2. rake repo_packages:build    - regenerate openvox-release packages
+        3. rake repo_packages:upload   - upload to test buckets
     MSG
   end
 end

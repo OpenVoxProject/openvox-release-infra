@@ -6,8 +6,8 @@ require 'json'
 require 'shellwords'
 require_relative 'utils/infra'
 
-module ReleasePackages
-  FILES_DIR     = File.join(Infra::REPO_ROOT, 'files', 'release_packages')
+module RepoPackages
+  FILES_DIR     = File.join(Infra::REPO_ROOT, 'files', 'repo_packages')
   TEMPLATES_DIR = File.join(FILES_DIR, 'templates')
   KEYS_DIR      = File.join(FILES_DIR, 'keys')
 
@@ -15,7 +15,7 @@ module ReleasePackages
   DEB_OUT        = File.join(Infra::STAGING_DIR, 'apt')
   REPO_FILES_OUT = File.join(Infra::STAGING_DIR, 'yum', 'repo_files')
   LIST_FILES_OUT = File.join(Infra::STAGING_DIR, 'apt', 'list_files')
-  BUILD_DIR      = File.join(Infra::STAGING_DIR, 'release_packages_build')
+  BUILD_DIR      = File.join(Infra::STAGING_DIR, 'repo_packages_build')
 
   module_function
 
@@ -35,7 +35,7 @@ module ReleasePackages
 
     # Load package definitions
     package_json_files = Dir.glob(File.join(FILES_DIR, '*.json'))
-    abort 'No package JSON files found in files/release_packages/'.red if package_json_files.empty?
+    abort 'No package JSON files found in files/repo_packages/'.red if package_json_files.empty?
     package_defs = package_json_files.map { |path| JSON.parse(File.read(path)) }
 
     package_defs.each do |package_def|
@@ -66,7 +66,7 @@ module ReleasePackages
   end
 
   def upload
-    abort 'No build output found. Run `rake release_packages:build` first.'.red unless Dir.exist?(Infra::STAGING_DIR)
+    abort 'No build output found. Run `rake repo_packages:build` first.'.red unless Dir.exist?(Infra::STAGING_DIR)
 
     Infra.setup_aws
     uploaded = 0
