@@ -3,20 +3,16 @@
   "description": "Release packages for the OpenVox 7 repository",
   "version": "1",
   "release": "1",
-
   "license": "ASL 2.0",
   "vendor": "Vox Pupuli <openvox@voxpupuli.org>",
   "homepage": "https://voxpupuli.org",
   "target_repo": "openvox7",
-
   "platforms": [
+    "amazon-2",
+    "amazon-2023",
     "debian10",
     "debian11",
     "debian12",
-    "ubuntu18.04",
-    "ubuntu20.04",
-    "ubuntu22.04",
-    "ubuntu24.04",
     "el-7",
     "el-8",
     "el-9",
@@ -24,8 +20,10 @@
     "fedora-36",
     "fedora-40",
     "fedora-41",
-    "amazon-2023",
-    "amazon-2",
-    "sles-15"
+    "sles-15",
+    "ubuntu18.04",
+    "ubuntu20.04",
+    "ubuntu22.04",
+    "ubuntu24.04"
   ]
 }

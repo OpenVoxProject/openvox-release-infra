@@ -99,11 +99,10 @@ module RepoPackages
     data = JSON.parse(File.read(package_json_path))
     platforms = data.fetch('platforms')
 
-    added = []
-    raw_list.each do |entry|
-      kind = infer_kind(entry)
-      normalized = normalize_platform(kind, entry)
+    normalized_list = raw_list.map { |entry| normalize_platform(infer_kind(entry), entry) }.uniq
 
+    added = []
+    normalized_list.each do |normalized|
       if platforms.include?(normalized)
         puts "  #{normalized} already present, skipping".yellow
       else
@@ -114,6 +113,7 @@ module RepoPackages
     end
 
     abort 'All platforms already present. Nothing to add.'.red if added.empty?
+    platforms.sort_by! { |plat| [plat[/\D+/], Gem::Version.new(plat[/[\d.]+/])] }
     File.write(package_json_path, JSON.pretty_generate(data) + "\n")
 
     label = added.size == 1 ? added.first : "#{added.size} platforms"
