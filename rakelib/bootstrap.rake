@@ -70,38 +70,6 @@ namespace :bootstrap do
     puts 'Package sync complete.'.green
   end
 
-  desc 'Delete all objects from test buckets and clear local state'
-  task :reset do
-    Infra.setup_aws
-    abort 'This task targets test buckets. Do not run with PRODUCTION=true.'.red if Infra.production?
-
-    unless ENV['CONFIRM_RESET']
-      puts "This will DELETE ALL OBJECTS from:\n  #{Infra.yum_bucket}\n  #{Infra.apt_bucket}\n  #{Infra.downloads_bucket}".red
-      puts 'And clear local state/ and staging/ directories.'.red
-      print 'Type "yes" to confirm: '
-      abort 'Aborted.'.yellow unless $stdin.gets&.chomp == 'yes'
-    end
-
-    puts 'Removing test yum bucket contents...'.magenta
-    Shell.run("#{Infra.s3_cmd} rm --recursive #{Infra.yum_bucket}/")
-
-    puts 'Removing test apt bucket contents...'.magenta
-    Shell.run("#{Infra.s3_cmd} rm --recursive #{Infra.apt_bucket}/")
-
-    puts 'Removing test downloads bucket contents...'.magenta
-    Shell.run("#{Infra.s3_cmd} rm --recursive #{Infra.downloads_bucket}/")
-
-    FileUtils.rm_rf(Infra::STATE_DIR)
-    FileUtils.rm_rf(Infra::STAGING_DIR)
-    FileUtils.mkdir_p(Infra::STATE_DIR)
-
-    puts <<~MSG.green
-      Reset complete. Next steps:
-        1. rake bootstrap                 - repopulate from production
-        2. rake repo_packages:build    - regenerate openvox-release packages
-        3. rake repo_packages:upload   - upload to test buckets
-    MSG
-  end
 end
 
 def bootstrap_yum_metadata(container, tmp_download)
