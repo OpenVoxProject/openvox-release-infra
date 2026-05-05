@@ -45,13 +45,13 @@ source ~/.openvox-release-secrets
 bundle exec rake backup
 PROJECT=openvox-agent VERSION=8.28.0 bundle exec rake release
 bundle exec rake deploy
-bundle exec rake verify
+PROJECT=openvox-agent VERSION=8.28.0 bundle exec rake verify
 
 # After verifying test repos, then deploy to production
 PRODUCTION=true bundle exec rake backup
 PRODUCTION=true PROJECT=openvox-agent VERSION=8.28.0 bundle exec rake release
 PRODUCTION=true bundle exec rake deploy
-PRODUCTION=true bundle exec rake verify
+PRODUCTION=true PROJECT=openvox-agent VERSION=8.28.0 bundle exec rake verify
 git push
 ```
 
@@ -218,7 +218,7 @@ macOS signing additionally requires a macOS host with Xcode command line tools.
 
 ### Environment variables
 
-#### Required for `rake release`
+#### Required for `rake release` and `rake verify`
 
 | Variable | Purpose |
 |----------|---------|
