@@ -7,7 +7,7 @@ require_relative 'lib/utils/infra'
 namespace :repo_packages do
   desc 'Build and sign repo RPM/DEB packages and repo/list files'
   task :build do
-    Infra.require_env('GPG_PRIVATE_KEY_B64')
+    Infra.env('GPG_PRIVATE_KEY_B64', required: true)
 
     puts 'Building and signing repo packages...'.magenta
     container = Infra.start_container

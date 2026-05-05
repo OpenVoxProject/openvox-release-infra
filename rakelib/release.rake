@@ -6,6 +6,7 @@ require_relative 'lib/repo/macos'
 require_relative 'lib/repo/windows'
 require_relative 'lib/repo/yum'
 require_relative 'lib/utils/infra'
+require_relative 'lib/utils/shell'
 
 def s3_includes(filters)
   patterns = %w[*.rpm *.deb *.dmg *.msi]
@@ -42,7 +43,7 @@ end
 
 def fetch_packages
   source = "s3://#{Infra::ARTIFACTS_BUCKET}/#{Infra.project}/#{Infra.version}/"
-  filters = ENV['PLATFORMS']&.split(',')&.map(&:strip)
+  filters = Infra.env('PLATFORMS')&.split(',')&.map(&:strip)&.reject(&:empty?)
 
   types = %w[rpm deb dmg msi]
   types.each { |dir| FileUtils.mkdir_p(File.join(Infra::PACKAGES_DIR, dir)) }
@@ -84,8 +85,8 @@ task :release do
     puts 'MacOS packages must be signed on a MacOS host. Signing of these packages will be skipped.'.yellow
     sign_dmg = false
   end
-  Infra.require_env(%w[WINDOWS_SM_API_KEY WINDOWS_SM_HOST WINDOWS_SM_CLIENT_CERT_B64 WINDOWS_SM_CLIENT_CERT_PASSWORD WINDOWS_CERT_ALIAS]) if sign_msi
-  Infra.require_env('GPG_PRIVATE_KEY_B64') if sign_rpm || sign_deb
+  %w[WINDOWS_SM_API_KEY WINDOWS_SM_HOST WINDOWS_SM_CLIENT_CERT_B64 WINDOWS_SM_CLIENT_CERT_PASSWORD WINDOWS_CERT_ALIAS].each { |name| Infra.env(name, required: true) } if sign_msi
+  Infra.env('GPG_PRIVATE_KEY_B64', required: true) if sign_rpm || sign_deb
 
   # Sign packages, prepare packages and repo metadata in staging/, then
   # move updated metadata to state/ for commit.

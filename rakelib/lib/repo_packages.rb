@@ -5,6 +5,7 @@ require 'fileutils'
 require 'json'
 require 'shellwords'
 require_relative 'utils/infra'
+require_relative 'utils/shell'
 
 module RepoPackages
   FILES_DIR     = File.join(Infra::REPO_ROOT, 'files', 'repo_packages')
@@ -38,7 +39,7 @@ module RepoPackages
     abort 'No package JSON files found in files/repo_packages/'.red if package_json_files.empty?
     package_defs = package_json_files.map { |path| JSON.parse(File.read(path)) }
 
-    platform_filter = ENV['PLATFORM']&.split(',')&.map(&:strip)&.reject(&:empty?)
+    platform_filter = Infra.env('PLATFORM')&.split(',')&.map(&:strip)&.reject(&:empty?)
     platform_filter&.map! { |entry| normalize_platform(infer_kind(entry), entry) }
 
     package_defs.each do |package_def|
@@ -95,7 +96,7 @@ module RepoPackages
 
   def add_platform
     component = Infra.component
-    raw_list = Infra.require_env('PLATFORM').split(',').map(&:strip).reject(&:empty?)
+    raw_list = Infra.env('PLATFORM', required: true).split(',').map(&:strip).reject(&:empty?)
     abort 'PLATFORM must not be empty.'.red if raw_list.empty?
     raw_list.each { |entry| Infra.validate_input('PLATFORM', entry) }
 
@@ -240,7 +241,7 @@ module RepoPackages
   end
 
   def upload_artifact(local, remote)
-    unless ENV['FORCE_OVERWRITE'] == 'true'
+    unless Infra.env('FORCE_OVERWRITE') == 'true'
       result = Shell.capture(
         ['aws', 's3', '--endpoint-url', Infra::S3_ENDPOINT, 'ls', remote],
         allowed_exit_codes: [0, 1, 255], print_command: false

@@ -2,6 +2,7 @@
 
 require 'fileutils'
 require_relative 'lib/utils/infra'
+require_relative 'lib/utils/shell'
 
 desc 'Verify packages are accessible and GPG-signed in the deployed repos'
 task :verify do

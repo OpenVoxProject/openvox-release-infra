@@ -4,6 +4,7 @@ require 'fileutils'
 require_relative 'lib/repo/apt'
 require_relative 'lib/repo/yum'
 require_relative 'lib/utils/infra'
+require_relative 'lib/utils/shell'
 
 desc 'Bootstrap state/ and test buckets from production (runs metadata then packages)'
 task bootstrap: %w[bootstrap:metadata bootstrap:packages]
@@ -12,7 +13,7 @@ namespace :bootstrap do
   desc 'Download production metadata, reformat, store in state/, and deploy to test buckets'
   task :metadata do
     Infra.setup_aws
-    Infra.require_env('GPG_PRIVATE_KEY_B64')
+    Infra.env('GPG_PRIVATE_KEY_B64', required: true)
     abort 'Bootstrap targets test buckets. Do not run with PRODUCTION=true.'.red if Infra.production?
 
     FileUtils.rm_rf(Infra::STAGING_DIR)

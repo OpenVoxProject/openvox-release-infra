@@ -1,15 +1,17 @@
 # frozen_string_literal: true
 
+require 'shellwords'
 require_relative 'lib/utils/infra'
+require_relative 'lib/utils/shell'
 
 desc 'Restore S3 repos from GCS backup'
 task :restore do
   Infra.setup_aws
   Infra.setup_gcloud
-  target = Infra.require_env('TARGET')
+  target = Infra.env('TARGET', required: true)
   abort "TARGET must be apt, yum, downloads, or all (got: #{target})".red unless %w[apt yum downloads all].include?(target)
 
-  source_bucket = ENV.fetch('GCS_SOURCE', Infra.gcs_bucket)
+  source_bucket = Infra.env('GCS_SOURCE', default: Infra.gcs_bucket)
   targets = target == 'all' ? %w[apt yum downloads] : [target]
 
   destination_buckets = {
@@ -24,7 +26,7 @@ task :restore do
   puts 'Destination:'.yellow
   targets.each { |name| puts "  #{destination_buckets[name]}".yellow }
 
-  unless ENV['CONFIRM_RESTORE']
+  unless Infra.env('CONFIRM_RESTORE') == 'true'
     if $stdin.tty?
       print 'Type "restore" to confirm: '.red
       answer = $stdin.gets&.chomp
@@ -56,13 +58,13 @@ namespace :restore do
   desc 'Roll back GCS backup bucket to a point in time using soft-delete recovery'
   task :gcs do
     Infra.setup_gcloud
-    timestamp = Infra.require_env('TIMESTAMP')
-    bucket = ENV.fetch('GCS_SOURCE', Infra.gcs_bucket)
+    timestamp = Shellwords.shellescape(Infra.env('TIMESTAMP', required: true))
+    bucket = Infra.env('GCS_SOURCE', default: Infra.gcs_bucket)
 
     puts '*** WARNING: This is a destructive operation. ***'.red
     puts "This will roll back #{bucket} to #{timestamp} by restoring soft-deleted objects.".red
 
-    unless ENV['CONFIRM_RESTORE']
+    unless Infra.env('CONFIRM_RESTORE') == 'true'
       if $stdin.tty?
         print 'Type "restore" to confirm: '.red
         answer = $stdin.gets&.chomp
@@ -75,7 +77,7 @@ namespace :restore do
     puts "Rolling back #{bucket} to #{timestamp}...".magenta
     result = Shell.capture(
       "gcloud storage restore '#{bucket}/**' --async --allow-overwrite " \
-      "--created-before-time='#{timestamp}' --deleted-after-time='#{timestamp}'",
+      "--created-before-time=#{timestamp} --deleted-after-time=#{timestamp}",
       silent: false
     )
 

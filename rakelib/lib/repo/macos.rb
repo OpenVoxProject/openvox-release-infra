@@ -4,6 +4,7 @@ require 'fileutils'
 require 'rexml/document'
 require 'tmpdir'
 require_relative '../utils/infra'
+require_relative '../utils/shell'
 
 module MacOS
   module_function

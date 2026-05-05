@@ -4,10 +4,11 @@ require 'fileutils'
 require_relative 'lib/repo/apt'
 require_relative 'lib/repo/yum'
 require_relative 'lib/utils/infra'
+require_relative 'lib/utils/shell'
 
 desc 'Rollback repo state to a prior commit'
 task :rollback do
-  commit = Infra.require_env('COMMIT')
+  commit = Infra.env('COMMIT', required: true)
 
   Dir.chdir(Infra::REPO_ROOT) do
     result = Shell.capture(['git', 'cat-file', '-t', commit], allowed_exit_codes: [0, 1])

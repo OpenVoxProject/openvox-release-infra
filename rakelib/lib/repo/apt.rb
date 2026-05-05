@@ -69,7 +69,7 @@ class Apt
         # Look to see if we already have a matching package-version-architecture stanza
         existing = packages_cache[packages_file].find { |entry| parse_stanza_identity(entry) == identity }
         if existing
-          if ENV['FORCE_OVERWRITE']
+          if Infra.env('FORCE_OVERWRITE') == 'true'
             puts "Overwriting existing entry for #{basename} in binary-#{target_arch}".yellow
             packages_cache[packages_file].delete(existing)
           elsif existing[/^SHA256: (.+)$/, 1] == stanza[/^SHA256: (.+)$/, 1]

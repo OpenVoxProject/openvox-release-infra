@@ -4,6 +4,7 @@ require 'json'
 require_relative 'lib/repo/apt'
 require_relative 'lib/repo/yum'
 require_relative 'lib/utils/infra'
+require_relative 'lib/utils/shell'
 
 # Examples:
 #   bucket_path = "s3://openvox-apt"
@@ -78,7 +79,7 @@ task :cleanup do
   puts "Found #{orphaned.size} orphaned packages:".yellow
   orphaned.each { |obj| puts "  #{obj[:bucket]}/#{obj[:key]}".yellow }
 
-  unless ENV['CONFIRM_CLEANUP']
+  unless Infra.env('CONFIRM_CLEANUP') == 'true'
     print 'Delete these packages? [y/N] > '
     answer = $stdin.gets&.chomp
     unless %w[y Y yes].include?(answer)

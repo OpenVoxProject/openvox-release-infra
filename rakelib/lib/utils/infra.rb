@@ -41,23 +41,47 @@ module Infra
   module_function
 
   def validate_input(name, value)
+    return nil if value.nil? || value.empty?
     abort "#{name} contains invalid characters: #{value.inspect}. Only alphanumeric, '.', '_', '+', '-' are allowed.".red unless value.match?(SAFE_INPUT)
+    value
+  end
+
+  def env(name, required: false, default: nil)
+    value = ENV[name]
+    value = nil if value&.strip&.empty?
+
+    if value.nil? && !default.nil?
+      value = default
+      ENV[name] = default
+    end
+
+    if value.nil? && required
+      if $stdin.tty?
+        print "#{name}: "
+        value = $stdin.gets&.chomp
+        abort "#{name} is required.".red if value.nil? || value.empty?
+        ENV[name] = value
+      else
+        abort "#{name} must be set.".red
+      end
+    end
+
     value
   end
 
   # These are functions instead of constants so they can be lazy loaded so that,
   # for example, PROJECT isn't required for actions that don't require it.
-  def project = validate_input('PROJECT', require_env('PROJECT'))
-  def version = validate_input('VERSION', require_env('VERSION'))
-  def component = validate_input('COMPONENT', require_env('COMPONENT', default: 'openvox8'))
-  def production? = ENV['PRODUCTION'] == 'true'
-  def app_signing_identity = require_env('MACOS_APP_SIGNING_IDENTITY')
-  def installer_signing_identity = require_env('MACOS_INSTALLER_SIGNING_IDENTITY')
+  def project = validate_input('PROJECT', env('PROJECT', required: true))
+  def version = validate_input('VERSION', env('VERSION', required: true))
+  def component = validate_input('COMPONENT', env('COMPONENT', required: true, default: 'openvox8'))
+  def production? = env('PRODUCTION') == 'true'
+  def app_signing_identity = env('MACOS_APP_SIGNING_IDENTITY', required: true)
+  def installer_signing_identity = env('MACOS_INSTALLER_SIGNING_IDENTITY', required: true)
 
-  def apt_bucket = ENV.fetch('APT_BUCKET', production? ? 's3://openvox-apt' : "s3://#{ARTIFACTS_BUCKET}/repo_test/apt")
-  def yum_bucket = ENV.fetch('YUM_BUCKET', production? ? 's3://openvox-yum' : "s3://#{ARTIFACTS_BUCKET}/repo_test/yum")
-  def downloads_bucket = ENV.fetch('DOWNLOADS_BUCKET', production? ? "s3://#{ARTIFACTS_BUCKET}/downloads" : "s3://#{ARTIFACTS_BUCKET}/repo_test/downloads")
-  def gcs_bucket = ENV.fetch('GCS_BUCKET', production? ? 'gs://openvox-backup' : 'gs://openvox-backup-test')
+  def apt_bucket = env('APT_BUCKET', default: production? ? 's3://openvox-apt' : "s3://#{ARTIFACTS_BUCKET}/repo_test/apt")
+  def yum_bucket = env('YUM_BUCKET', default: production? ? 's3://openvox-yum' : "s3://#{ARTIFACTS_BUCKET}/repo_test/yum")
+  def downloads_bucket = env('DOWNLOADS_BUCKET', default: production? ? "s3://#{ARTIFACTS_BUCKET}/downloads" : "s3://#{ARTIFACTS_BUCKET}/repo_test/downloads")
+  def gcs_bucket = env('GCS_BUCKET', default: production? ? 'gs://openvox-backup' : 'gs://openvox-backup-test')
 
   # Base URLs baked into release package .repo/.list files so end-user
   # package managers know where to find the OpenVox apt/yum repos.
@@ -74,36 +98,15 @@ module Infra
     end
 
     name = CONTAINER_TAG.split(':').first
-    env = {}
+    container_env = {}
     %w[GPG_PRIVATE_KEY_B64 WINDOWS_SM_API_KEY WINDOWS_SM_HOST WINDOWS_SM_CLIENT_CERT_B64 WINDOWS_SM_CLIENT_CERT_PASSWORD WINDOWS_CERT_ALIAS].each do |var|
-      env[var] = ENV[var] if ENV[var]
+      value = env(var)
+      container_env[var] = value if value
     end
 
     container = Container.new(name: name, image: CONTAINER_TAG)
-    container.start(command: 'sleep infinity', volumes: { REPO_ROOT => CONTAINER_WORK }, env: env)
+    container.start(command: 'sleep infinity', volumes: { REPO_ROOT => CONTAINER_WORK }, env: container_env)
     container
-  end
-
-  def require_env(names, default: nil)
-    Array(names).each do |name|
-      next if ENV[name] && !ENV[name].empty?
-
-      unless default.nil?
-        ENV[name] = default
-        next
-      end
-
-      if $stdin.tty?
-        print "#{name}: "
-        value = $stdin.gets&.chomp
-        abort "#{name} is required.".red if value.nil? || value.empty?
-        ENV[name] = value
-      else
-        abort "#{name} must be set.".red
-      end
-    end
-
-    names.is_a?(Array) ? names.map { |name| ENV[name] } : ENV[names]
   end
 
   def require_command(*names)
@@ -146,15 +149,15 @@ module Infra
 
   def setup_aws
     require_command('aws')
-    require_env(%w[AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY])
+    %w[AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY].each { |name| env(name, required: true) }
     ENV['AWS_REQUEST_CHECKSUM_CALCULATION'] ||= 'WHEN_REQUIRED'
     ENV['AWS_RESPONSE_CHECKSUM_VALIDATION'] ||= 'WHEN_REQUIRED'
   end
 
   def setup_macos_signing
-    require_env(%w[MACOS_APP_CERT_B64 MACOS_INSTALLER_CERT_B64 MACOS_CERT_PASSWORD
-                   MACOS_APP_SIGNING_IDENTITY MACOS_INSTALLER_SIGNING_IDENTITY
-                   MACOS_NOTARY_APPLE_ID MACOS_NOTARY_TEAM_ID MACOS_NOTARY_APP_TOKEN])
+    %w[MACOS_APP_CERT_B64 MACOS_INSTALLER_CERT_B64 MACOS_CERT_PASSWORD
+       MACOS_APP_SIGNING_IDENTITY MACOS_INSTALLER_SIGNING_IDENTITY
+       MACOS_NOTARY_APPLE_ID MACOS_NOTARY_TEAM_ID MACOS_NOTARY_APP_TOKEN].each { |name| env(name, required: true) }
 
     Shell.run(['security', 'create-keychain', '-p', MACOS_KEYCHAIN_PASSWORD, MACOS_KEYCHAIN_PATH])
     Shell.run(['security', 'set-keychain-settings', '-lut', '21600', MACOS_KEYCHAIN_PATH])

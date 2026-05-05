@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'lib/utils/infra'
+require_relative 'lib/utils/shell'
 
 desc 'Backup current S3 repos to GCS'
 task :backup do

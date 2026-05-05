@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'lib/utils/infra'
+require_relative 'lib/utils/shell'
 
 def deploy_phase(name)
   puts "--- #{name} ---".magenta

@@ -2,13 +2,14 @@
 
 require 'fileutils'
 require_relative 'lib/utils/infra'
+require_relative 'lib/utils/shell'
 
 desc 'Sync test buckets from production (with --delete) and clear local state'
 task :reset_test do
   Infra.setup_aws
   abort 'This task targets test buckets. Do not run with PRODUCTION=true.'.red if Infra.production?
 
-  unless ENV['CONFIRM_RESET']
+  unless Infra.env('CONFIRM_RESET') == 'true'
     puts "This will overwrite test buckets with production contents (using --delete):\n" \
          "  #{Infra.yum_bucket}\n  #{Infra.apt_bucket}\n  #{Infra.downloads_bucket}".red
     puts 'Repo setup packages and config files in the test buckets will be preserved.'.yellow
