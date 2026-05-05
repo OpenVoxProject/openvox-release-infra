@@ -12,7 +12,7 @@ task :reset_test do
     puts "This will overwrite test buckets with production contents (using --delete):\n" \
          "  #{Infra.yum_bucket}\n  #{Infra.apt_bucket}\n  #{Infra.downloads_bucket}".red
     puts 'Repo setup packages and config files in the test buckets will be preserved.'.yellow
-    puts 'Local state/ and staging/ directories will be cleared.'.red
+    puts 'Local staging/ directory will be cleared.'.yellow
     print 'Type "yes" to confirm: '
     abort 'Aborted.'.yellow unless $stdin.gets&.chomp == 'yes'
   end
@@ -28,9 +28,7 @@ task :reset_test do
   puts 'Syncing downloads from production...'.magenta
   Shell.run("#{Infra.s3_sync} --delete s3://openvox-artifacts/downloads/ #{Infra.downloads_bucket}/")
 
-  FileUtils.rm_rf(Infra::STATE_DIR)
   FileUtils.rm_rf(Infra::STAGING_DIR)
-  FileUtils.mkdir_p(Infra::STATE_DIR)
 
   puts 'Reset complete.'.green
 end
