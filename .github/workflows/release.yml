@@ -89,6 +89,7 @@ jobs:
 
       - uses: ruby/setup-ruby@v1
         with:
+          ruby-version: '4'
           bundler-cache: true
 
       - uses: google-github-actions/auth@v2
@@ -132,6 +133,7 @@ jobs:
 
       - uses: ruby/setup-ruby@v1
         with:
+          ruby-version: '4'
           bundler-cache: true
 
       - name: Release
