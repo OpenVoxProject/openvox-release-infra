@@ -25,6 +25,11 @@ on:
         required: false
         default: false
         type: boolean
+      force_overwrite:
+        description: 'Overwrite existing packages on S3 (use when re-signing)'
+        required: false
+        default: false
+        type: boolean
 
 concurrency:
   group: release-${{ inputs.production && 'production' || 'test' }}
@@ -42,6 +47,7 @@ env:
   GIT_COMMITTER_EMAIL: 215568489+OpenVoxProjectBot@users.noreply.github.com
   GIT_COMMITTER_NAME: OpenVoxProjectBot
   PLATFORMS: ${{ inputs.platforms }}
+  FORCE_OVERWRITE: ${{ inputs.force_overwrite && 'true' || '' }}
   PRODUCTION: ${{ inputs.production && 'true' || '' }}
   PROJECT: ${{ inputs.project }}
   SSH_AUTH_SOCK: /tmp/ssh_agent.sock
