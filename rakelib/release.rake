@@ -6,6 +6,7 @@ require_relative 'lib/repo/macos'
 require_relative 'lib/repo/windows'
 require_relative 'lib/repo/yum'
 require_relative 'lib/utils/infra'
+require_relative 'lib/utils/platform'
 require_relative 'lib/utils/shell'
 
 def s3_includes(filters)
@@ -14,26 +15,14 @@ def s3_includes(filters)
   if filters
     patterns = []
     filters.each do |filter|
-      os, ver, arch = filter.split('-', 3)
-      unless os && ver && arch
+      platform = Platform.from_filter(filter)
+      unless platform
         puts "Skipping malformed platform filter '#{filter}' (expected os-ver-arch, e.g. el-9-x86_64)".yellow
         next
       end
 
-      [os, ver, arch].each { |part| Infra.validate_input("PLATFORMS component '#{part}'", part) }
-
-      case os
-      when 'macos'
-        patterns << "*#{arch}*.dmg"
-      when 'windows'
-        patterns << '*.msi'
-      else
-        dist_tag = os == 'fedora' ? 'fc' : os
-        patterns << "*.#{dist_tag}#{ver}.#{arch}.rpm"
-        patterns << "*.#{dist_tag}#{ver}.noarch.rpm"
-        patterns << "*+#{os}#{ver}_#{arch}.deb"
-        patterns << "*+#{os}#{ver}_all.deb"
-      end
+      [platform.os, platform.version, platform.arch].each { |part| Infra.validate_input("PLATFORMS component '#{part}'", part) }
+      patterns.concat(platform.s3_globs)
     end
     abort "No valid platform filters in PLATFORMS: #{filters.join(', ')}".red if patterns.empty?
   end

@@ -4,6 +4,7 @@ require 'fileutils'
 require 'shellwords'
 require 'zlib'
 require_relative '../utils/infra'
+require_relative '../utils/platform'
 
 class Yum
   def initialize(container)
@@ -41,10 +42,10 @@ class Yum
 
     rpms.each do |rpm|
       basename = File.basename(rpm)
-      parsed = parse_filename(basename)
-      abort "Cannot parse RPM filename: #{basename}. Expected format: <name>-<ver>.<dist><platver>.<arch>.rpm".red unless parsed
+      platform = Platform.from_rpm(basename)
+      abort "Cannot parse RPM filename: #{basename}. Expected format: <name>-<ver>.<dist><platver>.<arch>.rpm".red unless platform
 
-      target_arch_dirs(parsed[:plat], parsed[:platver], parsed[:arch]).each do |arch_dir|
+      target_arch_dirs(platform.os, platform.version, platform.arch).each do |arch_dir|
         staging_path = File.join(Infra::STAGING_DIR, 'yum', arch_dir)
         FileUtils.mkdir_p(staging_path)
         FileUtils.cp(rpm, staging_path)
@@ -135,17 +136,6 @@ class Yum
 
   private
 
-  def parse_filename(filename)
-    match = filename.match(/\.(\D+?)(\d[\d.]*)\.(\w+)\.rpm$/)
-    return nil unless match
-
-    dist_tag = match[1]
-    platver = match[2]
-    arch = match[3]
-    plat = dist_tag == 'fc' ? 'fedora' : dist_tag
-
-    { plat: plat, platver: platver, arch: arch }
-  end
 
   # For noarch RPMs, find all existing arch directories so we can put the
   # package into all of them (yum has no shared noarch directory).

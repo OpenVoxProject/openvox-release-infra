@@ -3,6 +3,7 @@
 require 'fileutils'
 require 'shellwords'
 require_relative '../utils/infra'
+require_relative '../utils/platform'
 
 class Apt
   def initialize(container)
@@ -54,17 +55,16 @@ class Apt
     # are created before arch:all replication looks for them
     sorted_stanzas = new_stanzas.sort_by { |basename, _| basename.end_with?('_all.deb') ? 1 : 0 }
     sorted_stanzas.each do |basename, stanza|
-      parsed = parse_filename(basename)
-      abort "Cannot parse DEB filename: #{basename}. Expected format: <name>_<ver>+<codename>_<arch>.deb".red unless parsed
+      platform = Platform.from_deb(basename)
+      abort "Cannot parse DEB filename: #{basename}. Expected format: <name>_<ver>+<codename>_<arch>.deb".red unless platform
 
-      codename = parsed[:codename]
-      affected_codenames << codename
+      affected_codenames << platform.codename
       identity = parse_stanza_identity(stanza)
 
       # Add the new stanza for the package to every relevant binary-<arch> Packages file.
       # For arch-specific packages, this is one file. For "all" packages, it gets added
       # to the Packages file in all existing binary-<arch> dir.
-      target_binary_arches(codename, parsed[:arch]).each do |target_arch|
+      target_binary_arches(platform.codename, platform.arch).each do |target_arch|
         packages_dir = File.join(Infra::STAGING_DIR, 'apt', 'dists', codename, Infra.component, "binary-#{target_arch}")
         FileUtils.mkdir_p(packages_dir)
         packages_file = File.join(packages_dir, 'Packages')
@@ -138,14 +138,6 @@ class Apt
 
   private
 
-  def parse_filename(filename)
-    match = filename.match(/\+([a-z]+)([\d.]+)_(\w+)\.deb$/)
-    return nil unless match
-
-    # NOTE: Not the actual codename. We chose to use "debian13" instead of "trixie" deliberately in our repo
-    # after much back and forth in the community. Apt still treats it like a codename, though.
-    { codename: "#{match[1]}#{match[2]}", os: match[1], osver: match[2], arch: match[3] }
-  end
 
   # Use the apt-ftparchive packages pool command to generate stanzas for the Packages file
   # for all of the packages we have in the staging directory.

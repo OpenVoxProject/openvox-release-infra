@@ -2,6 +2,7 @@
 
 require 'fileutils'
 require_relative 'lib/utils/infra'
+require_relative 'lib/utils/platform'
 require_relative 'lib/utils/shell'
 
 desc 'Verify packages are accessible and GPG-signed in the deployed repos'
@@ -26,8 +27,8 @@ task :verify do
   yum_staging = File.join(Infra::STAGING_DIR, 'yum')
 
   apt_repos = Dir.glob(File.join(Infra::STAGING_DIR, 'apt', 'pool', '**', '*.deb'))
-                 .map { |deb| File.basename(deb)[/\+([a-z][\w.]+)_/, 1] }
-                 .compact.uniq
+                 .filter_map { |deb| Platform.from_deb(deb)&.codename }
+                 .uniq
   all_rpm_repos = Dir.glob(File.join(yum_staging, '**', '*.rpm'))
                      .map { |rpm| File.dirname(rpm) }.uniq
   sles_repos, yum_repos = all_rpm_repos.partition { |dir| dir.include?('/sles/') }
