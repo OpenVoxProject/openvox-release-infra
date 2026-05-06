@@ -7,9 +7,27 @@ desc 'Verify packages are accessible and GPG-signed in the deployed repos'
 task :verify do
   Infra.setup_aws
 
-  project = Infra.project
-  version = Infra.version
+  staged_rpms = Dir.glob(File.join(Infra::STAGING_DIR, 'yum', '**', '*.rpm'))
+  staged_debs = Dir.glob(File.join(Infra::STAGING_DIR, 'apt', 'pool', '**', '*.deb'))
+  staged_packages = staged_rpms + staged_debs
+
+  if staged_packages.empty?
+    abort 'Nothing to verify (no packages in staging/).'.red
+  end
+
+  first_pkg = File.basename(staged_packages.first)
+  if first_pkg.end_with?('.rpm')
+    match = first_pkg.match(/\A(.+)-([^-]+)-[^-]+\.\w+\.\w+\.rpm\z/)
+  else
+    match = first_pkg.match(/\A(.+)_([^_]+)-[^+]+\+/)
+  end
+  abort "Cannot parse package name/version from #{first_pkg}".red unless match
+
+  project = match[1]
+  version = match[2]
   component = Infra.component
+
+  puts "Verifying #{project} #{version} (#{component})...".magenta
 
   apt_url = Infra.apt_bucket.sub('s3://', "#{Infra::S3_ENDPOINT}/")
   yum_url = Infra.yum_bucket.sub('s3://', "#{Infra::S3_ENDPOINT}/")
@@ -30,8 +48,11 @@ task :verify do
       Infra.import_gpg_key(container)
       container.exec("gpg --export --armor '#{Infra::GPG_KEY_ID}' > #{Infra::CONTAINER_WORK}/openvox-gpg.key")
 
-      if Dir.exist?(staging_dists)
-        codenames = Dir.children(staging_dists).select { |child| File.directory?(File.join(staging_dists, child)) }
+      staging_pool = File.join(Infra::STAGING_DIR, 'apt', 'pool')
+      if Dir.exist?(staging_pool)
+        codenames = Dir.glob(File.join(staging_pool, '**', '*.deb'))
+                       .map { |deb| File.basename(deb)[/\+([a-z][\w.]+)_/, 1] }
+                       .compact.uniq
         if codenames.any?
           puts 'Verifying apt repos...'.magenta
           container.exec('rm -f /etc/apt/sources.list && rm -rf /etc/apt/sources.list.d/*')
@@ -55,7 +76,8 @@ task :verify do
     end
 
     if Dir.exist?(yum_staging)
-      all_repo_dirs = Dir.glob(File.join(yum_staging, '**', 'repodata')).map { |path| File.dirname(path) }
+      all_repo_dirs = Dir.glob(File.join(yum_staging, '**', '*.rpm'))
+                         .map { |rpm| File.dirname(rpm) }.uniq
       sles_repo_dirs, yum_repo_dirs = all_repo_dirs.partition { |dir| dir.include?('/sles/') }
 
       if yum_repo_dirs.any?
