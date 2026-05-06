@@ -43,10 +43,10 @@ namespace :bootstrap do
     # Deploy reformatted metadata to test buckets
     puts 'Deploying metadata to test buckets...'.magenta
     state_yum = File.join(Infra::STATE_DIR, 'yum')
-    Shell.run([*Infra.s3_sync, "#{state_yum}/", "#{Infra.yum_bucket}/", '--exclude', '*.rpm']) if Dir.exist?(state_yum)
+    Shell.run([*Infra.s3_sync, '--delete', "#{state_yum}/", "#{Infra.yum_bucket}/", '--exclude', '*.rpm']) if Dir.exist?(state_yum)
 
     state_dists = File.join(Infra::STATE_DIR, 'apt', 'dists')
-    Shell.run([*Infra.s3_sync, "#{state_dists}/", "#{Infra.apt_bucket}/dists/"]) if Dir.exist?(state_dists)
+    Shell.run([*Infra.s3_sync, '--delete', "#{state_dists}/", "#{Infra.apt_bucket}/dists/"]) if Dir.exist?(state_dists)
 
     puts 'Metadata bootstrap complete.'.green
   end
@@ -59,17 +59,17 @@ namespace :bootstrap do
     puts 'Syncing packages from production to test buckets...'.magenta
 
     puts 'Syncing yum packages...'.magenta
-    Shell.run([*Infra.s3_sync, "#{Infra::YUM_PRODUCTION_BUCKET}/", "#{Infra.yum_bucket}/",
+    Shell.run([*Infra.s3_sync, '--delete', "#{Infra::YUM_PRODUCTION_BUCKET}/", "#{Infra.yum_bucket}/",
                '--exclude', '*/repodata/*', '--exclude', 'openvox*-release-*',
                '--exclude', 'repo_files/*', '--exclude', 'index.html'])
 
     puts 'Syncing apt packages and GPG key...'.magenta
-    Shell.run([*Infra.s3_sync, "#{Infra::APT_PRODUCTION_BUCKET}/", "#{Infra.apt_bucket}/",
+    Shell.run([*Infra.s3_sync, '--delete', "#{Infra::APT_PRODUCTION_BUCKET}/", "#{Infra.apt_bucket}/",
                '--exclude', 'dists/*', '--exclude', 'openvox*-release-*',
                '--exclude', 'list_files/*', '--exclude', 'index.html'])
 
     puts 'Syncing downloads...'.magenta
-    Shell.run([*Infra.s3_sync, "#{Infra::DOWNLOADS_PRODUCTION_BUCKET}/", "#{Infra.downloads_bucket}/"])
+    Shell.run([*Infra.s3_sync, '--delete', "#{Infra::DOWNLOADS_PRODUCTION_BUCKET}/", "#{Infra.downloads_bucket}/"])
 
     puts 'Package sync complete.'.green
   end
