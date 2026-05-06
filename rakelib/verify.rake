@@ -28,7 +28,10 @@ task :verify do
   yum_staging = File.join(Infra::STAGING_DIR, 'yum')
 
   apt_repos = Dir.glob(File.join(Infra::STAGING_DIR, 'apt', 'pool', '**', '*.deb'))
-                 .filter_map { |deb| Platform.from_deb(deb)&.dist }
+                 .filter_map do |deb|
+                   platform = Platform.from_deb(deb)
+                   platform && [platform.dist, platform.arch]
+                 end
                  .uniq
   all_rpm_repos = Dir.glob(File.join(yum_staging, '**', '*.rpm'))
                      .map { |rpm| File.dirname(rpm) }.uniq
@@ -42,7 +45,7 @@ task :verify do
       container.exec('rm -f /etc/apt/sources.list && rm -rf /etc/apt/sources.list.d/*')
       container.exec("cp #{Infra::CONTAINER_WORK}/files/repo_packages/keys/openvox-keyring.gpg /usr/share/keyrings/openvox.gpg")
 
-      apt_repos.each { |repo| verify_apt_repo(container, repo) ? verified += 1 : failed += 1 }
+      apt_repos.each { |dist, arch| verify_apt_repo(container, dist, arch) ? verified += 1 : failed += 1 }
     ensure
       container.teardown
     end
@@ -107,25 +110,26 @@ task :verify do
   end
 end
 
-def verify_apt_repo(container, dist)
+def verify_apt_repo(container, dist, arch)
   apt_url = Infra.apt_bucket.sub('s3://', "#{Infra::S3_ENDPOINT}/")
-  sources_line = "deb [signed-by=/usr/share/keyrings/openvox.gpg] #{apt_url} #{dist} #{Infra.component}"
+  sources_line = "deb [signed-by=/usr/share/keyrings/openvox.gpg arch=#{arch}] #{apt_url} #{dist} #{Infra.component}"
   container.exec("printf '%s\\n' #{Shellwords.shellescape(sources_line)} > /etc/apt/sources.list.d/openvox.list")
   container.exec('apt-get clean && rm -rf /var/lib/apt/lists/*')
   container.exec('apt-get update')
   result = container.capture("apt-cache show #{Infra.project}", allowed_exit_codes: [0, 1])
   container.exec('rm -f /etc/apt/sources.list.d/openvox.list')
 
+  label = "#{dist}/#{arch}"
   if result.output.include?(Infra.version)
-    puts "  apt: #{Infra.project} #{Infra.version} found in #{dist}".green
+    puts "  apt: #{Infra.project} #{Infra.version} found in #{label}".green
     true
   else
-    puts "  apt: #{Infra.project} #{Infra.version} NOT found in #{dist}".red
+    puts "  apt: #{Infra.project} #{Infra.version} NOT found in #{label}".red
     false
   end
 rescue SystemExit
   container.exec('rm -f /etc/apt/sources.list.d/openvox.list', allowed_exit_codes: [0, 1])
-  puts "  apt: verification failed for #{dist}".red
+  puts "  apt: verification failed for #{label}".red
   false
 end
 
@@ -161,7 +165,10 @@ rescue SystemExit
 end
 
 def verify_zypper_repo(container, rel_path)
-  container.exec('zypper removerepo openvox-verify', allowed_exit_codes: [0, 6])
+  arch = rel_path.split('/').last
+  zypp_env = "ZYPP_CONF=/tmp/zypp-#{arch}.conf"
+  container.exec("printf '[main]\\narch = #{arch}\\n' > /tmp/zypp-#{arch}.conf")
+  container.exec("#{zypp_env} zypper removerepo openvox-verify", allowed_exit_codes: [0, 6])
 
   yum_url = Infra.yum_bucket.sub('s3://', "#{Infra::S3_ENDPOINT}/")
   repo_content = [
@@ -174,9 +181,9 @@ def verify_zypper_repo(container, rel_path)
   ].join("\n")
   container.exec("printf '%s\\n' #{Shellwords.shellescape(repo_content)} > /etc/zypp/repos.d/openvox-verify.repo")
 
-  container.exec('zypper refresh openvox-verify')
+  container.exec("#{zypp_env} zypper refresh openvox-verify")
   result = container.capture(
-    "zypper search --match-exact --details #{Infra.project}",
+    "#{zypp_env} zypper search --match-exact --details #{Infra.project}",
     allowed_exit_codes: [0, 104]
   )
 
@@ -188,7 +195,7 @@ def verify_zypper_repo(container, rel_path)
     true
   end
 rescue SystemExit
-  container.exec('zypper removerepo openvox-verify', allowed_exit_codes: [0, 6])
+  container.exec("#{zypp_env} zypper removerepo openvox-verify", allowed_exit_codes: [0, 6])
   puts "  zypper: verification failed for #{rel_path}".red
   false
 end
