@@ -118,7 +118,7 @@ task :release do
       windows.prepare
     end
   ensure
-    container&.teardown
+    Infra.teardown_with_chown(container)
   end
 
   if sign_dmg

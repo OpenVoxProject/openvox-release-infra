@@ -31,7 +31,7 @@ namespace :bootstrap do
       bootstrap_apt_metadata(container, tmp_download)
     ensure
       begin
-        container&.teardown
+        Infra.teardown_with_chown(container)
       rescue StandardError => e
         warn "WARNING: teardown also failed: #{e.message}".yellow
       end

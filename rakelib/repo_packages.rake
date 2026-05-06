@@ -16,7 +16,7 @@ namespace :repo_packages do
       Infra.import_gpg_key(container)
       RepoPackages.build_and_sign(container)
     ensure
-      container&.teardown
+      Infra.teardown_with_chown(container)
     end
   end
 

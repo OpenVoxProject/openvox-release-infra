@@ -52,7 +52,7 @@ namespace :fix do
         Infra.gpg_detach_sign(container, repomd)
       end
     ensure
-      container&.teardown
+      Infra.teardown_with_chown(container)
     end
 
     Infra.commit_state('Fix: remove non-src RPMs from src/ directories')

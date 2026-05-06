@@ -109,6 +109,14 @@ module Infra
     end
   end
 
+  def teardown_with_chown(container)
+    container&.exec(
+      "chown -R #{Process.uid}:#{Process.gid} #{CONTAINER_WORK}/staging #{CONTAINER_WORK}/packages 2>/dev/null || true"
+    )
+  ensure
+    container&.teardown
+  end
+
   def import_gpg_key(container)
     container.exec('set -euo pipefail; echo "$GPG_PRIVATE_KEY_B64" | base64 -d | gpg --batch --import')
     container.exec("gpg --list-secret-keys '#{GPG_KEY_ID}' >/dev/null")
