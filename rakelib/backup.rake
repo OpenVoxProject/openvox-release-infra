@@ -10,13 +10,13 @@ task :backup do
   Infra.print_target(:apt_bucket, :yum_bucket, :downloads_bucket, :gcs_bucket)
 
   puts 'Backing up apt repo to GCS...'.magenta
-  Shell.run("gcloud storage rsync --recursive #{Infra.apt_bucket}/ #{Infra.gcs_bucket}/apt/")
+  Shell.run(['gcloud', 'storage', 'rsync', '--recursive', "#{Infra.apt_bucket}/", "#{Infra.gcs_bucket}/apt/"])
 
   puts 'Backing up yum repo to GCS...'.magenta
-  Shell.run("gcloud storage rsync --recursive #{Infra.yum_bucket}/ #{Infra.gcs_bucket}/yum/")
+  Shell.run(['gcloud', 'storage', 'rsync', '--recursive', "#{Infra.yum_bucket}/", "#{Infra.gcs_bucket}/yum/"])
 
   puts 'Backing up downloads to GCS...'.magenta
-  Shell.run("gcloud storage rsync --recursive #{Infra.downloads_bucket}/ #{Infra.gcs_bucket}/downloads/")
+  Shell.run(['gcloud', 'storage', 'rsync', '--recursive', "#{Infra.downloads_bucket}/", "#{Infra.gcs_bucket}/downloads/"])
 
   puts 'Backup complete.'.green
 end

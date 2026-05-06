@@ -16,15 +16,11 @@ def s3_includes(filters)
     patterns = []
     filters.each do |filter|
       platform = Platform.from_filter(filter)
-      unless platform
-        puts "Skipping malformed platform filter '#{filter}' (expected os-ver-arch, e.g. el-9-x86_64)".yellow
-        next
-      end
+      abort "Malformed platform filter '#{filter}' (expected os-ver-arch, e.g. el-9-x86_64)".red unless platform
 
       [platform.os, platform.version, platform.arch].each { |part| Infra.validate_input("PLATFORMS component '#{part}'", part) }
       patterns.concat(platform.s3_globs)
     end
-    abort "No valid platform filters in PLATFORMS: #{filters.join(', ')}".red if patterns.empty?
   end
 
   patterns.flat_map { |pattern| ['--include', pattern] }

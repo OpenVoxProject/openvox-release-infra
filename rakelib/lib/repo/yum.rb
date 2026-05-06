@@ -123,10 +123,9 @@ class Yum
     referenced = Set.new
     Dir.glob(File.join(Infra::STATE_DIR, 'yum', '**', 'primary.xml.gz')).each do |primary_gz|
       rel_prefix = File.dirname(primary_gz, 2).sub("#{Infra::STATE_DIR}/yum/", '')
-      Zlib::GzipReader.open(primary_gz) do |gz|
-        gz.read.scan(/<location href="([^"]+)"/) do |match|
-          referenced << "#{rel_prefix}/#{match[0]}"
-        end
+      xml = Zlib::GzipReader.open(primary_gz, &:read)
+      xml.scan(/<location href="([^"]+)"/) do |(href)|
+        referenced << "#{rel_prefix}/#{href}"
       end
     end
     referenced

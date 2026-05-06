@@ -8,6 +8,8 @@ RUN apt-get update && \
     gem install --no-document fpm && \
     curl -sL https://github.com/ebourg/jsign/releases/download/7.4/jsign-7.4.jar \
       -o /usr/local/lib/jsign.jar && \
+    echo '2abf2ade9ea322acc2d60c24794eadc465ff9380938fca4c932d09e0b25f1c28  /usr/local/lib/jsign.jar' \
+      | sha256sum -c - && \
     printf '#!/bin/sh\nexec java -jar /usr/local/lib/jsign.jar "$@"\n' \
       > /usr/local/bin/jsign && \
     chmod +x /usr/local/bin/jsign && \

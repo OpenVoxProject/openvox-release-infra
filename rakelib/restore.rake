@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'shellwords'
 require_relative 'lib/utils/infra'
 require_relative 'lib/utils/shell'
 
@@ -39,17 +38,20 @@ task :restore do
 
   if targets.include?('apt')
     puts 'Restoring apt repo from GCS...'.magenta
-    Shell.run("gcloud storage rsync --recursive --delete-unmatched-destination-objects #{source_bucket}/apt/ #{Infra.apt_bucket}/")
+    Shell.run(['gcloud', 'storage', 'rsync', '--recursive', '--delete-unmatched-destination-objects',
+               "#{source_bucket}/apt/", "#{Infra.apt_bucket}/"])
   end
 
   if targets.include?('yum')
     puts 'Restoring yum repo from GCS...'.magenta
-    Shell.run("gcloud storage rsync --recursive --delete-unmatched-destination-objects #{source_bucket}/yum/ #{Infra.yum_bucket}/")
+    Shell.run(['gcloud', 'storage', 'rsync', '--recursive', '--delete-unmatched-destination-objects',
+               "#{source_bucket}/yum/", "#{Infra.yum_bucket}/"])
   end
 
   if targets.include?('downloads')
     puts 'Restoring downloads from GCS...'.magenta
-    Shell.run("gcloud storage rsync --recursive --delete-unmatched-destination-objects #{source_bucket}/downloads/ #{Infra.downloads_bucket}/")
+    Shell.run(['gcloud', 'storage', 'rsync', '--recursive', '--delete-unmatched-destination-objects',
+               "#{source_bucket}/downloads/", "#{Infra.downloads_bucket}/"])
   end
 
   puts 'Restore complete.'.green
@@ -60,7 +62,7 @@ namespace :restore do
   task :gcs do
     Infra.setup_gcloud
     Infra.print_target(:gcs_bucket)
-    timestamp = Shellwords.shellescape(Infra.env('TIMESTAMP', required: true))
+    timestamp = Infra.env('TIMESTAMP', required: true)
     bucket = Infra.env('GCS_SOURCE', default: Infra.gcs_bucket)
 
     puts '*** WARNING: This is a destructive operation. ***'.red
@@ -70,8 +72,8 @@ namespace :restore do
 
     puts "Rolling back #{bucket} to #{timestamp}...".magenta
     result = Shell.capture(
-      "gcloud storage restore '#{bucket}/**' --async --allow-overwrite " \
-      "--created-before-time=#{timestamp} --deleted-after-time=#{timestamp}",
+      ['gcloud', 'storage', 'restore', "#{bucket}/**", '--async', '--allow-overwrite',
+       "--created-before-time=#{timestamp}", "--deleted-after-time=#{timestamp}"],
       silent: false
     )
 
@@ -81,14 +83,20 @@ namespace :restore do
     puts "Waiting for operation to complete: #{operation}".cyan
     loop do
       status = Shell.capture(
-        "gcloud storage operations describe '#{operation}' --format='value(done)'",
+        ['gcloud', 'storage', 'operations', 'describe', operation, '--format=value(done,error.code,error.message)'],
         print_command: false
       )
-      if status.output.strip.casecmp('true').zero?
-        puts 'GCS restore complete.'.green
-        break
+      fields = status.output.strip.split("\t")
+      done = fields[0]
+      error_code = fields[1]
+      next sleep 10 unless done&.casecmp('true')&.zero?
+
+      if error_code && !error_code.empty?
+        abort "GCS restore operation failed: code=#{error_code} message=#{fields[2]}".red
       end
-      sleep 10
+
+      puts 'GCS restore complete.'.green
+      break
     end
 
     puts <<~MSG.green

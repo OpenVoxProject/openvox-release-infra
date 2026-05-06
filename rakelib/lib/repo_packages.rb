@@ -224,30 +224,30 @@ module RepoPackages
       'fpm',
       '--input-type', 'dir',
       '--output-type', output_type,
-      '--name', Shellwords.shellescape(package_def['package']),
-      '--version', Shellwords.shellescape(package_def['version']),
+      '--name', package_def['package'],
+      '--version', package_def['version'],
       '--iteration', iteration,
       '--architecture', 'noarch',
-      '--license', Shellwords.shellescape(package_def['license']),
-      '--vendor', Shellwords.shellescape(package_def['vendor']),
-      '--maintainer', Shellwords.shellescape(package_def['vendor']),
-      '--url', Shellwords.shellescape(package_def['homepage']),
-      '--description', Shellwords.shellescape(package_def['description']),
-      '--category', Shellwords.shellescape('System Environment/Base'),
+      '--license', package_def['license'],
+      '--vendor', package_def['vendor'],
+      '--maintainer', package_def['vendor'],
+      '--url', package_def['homepage'],
+      '--description', package_def['description'],
+      '--category', 'System Environment/Base',
       '--chdir', Infra.container_path(build_dir),
-      '--package', Infra.container_path(output_file)
+      '--package', Infra.container_path(output_file),
     ]
     output_type == 'rpm' ? args.push('--rpm-digest', 'sha256') : args.push('--config-files', '/etc', '--deb-no-default-config-files')
     args << '.'
 
-    container.exec(args.join(' '))
+    container.exec(Shellwords.shelljoin(args))
   end
 
   def upload_artifact(local, remote)
     unless Infra.env('FORCE_OVERWRITE') == 'true'
       result = Shell.capture(
         [*Infra.s3_cmd, 'ls', remote],
-        allowed_exit_codes: [0, 1, 255], print_command: false
+        allowed_exit_codes: [0, 1], print_command: false
       )
       if result.exitcode.zero? && !result.output.strip.empty?
         puts "  Skipping #{File.basename(local)} (already exists)".yellow

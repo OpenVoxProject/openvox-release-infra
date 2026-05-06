@@ -78,7 +78,7 @@ class Apt
             puts "Overwriting existing entry for #{basename} in binary-#{target_arch}".yellow
             packages_cache[packages_file].delete(identity)
           elsif (sha = stanza[/^SHA256: (.+)$/, 1]) && sha == existing[/^SHA256: (.+)$/, 1]
-            # If the hash is identical, we're not really updating anything
+            puts "Skipping #{basename} in binary-#{target_arch} (identical hash, already present)".cyan
             next
           else
             abort "Version collision: #{basename} has same Package/Version/Architecture " \

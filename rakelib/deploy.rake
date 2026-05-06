@@ -13,7 +13,7 @@ rescue SystemExit => e
 rescue StandardError => e
   abort "PARTIAL DEPLOY: #{name} failed. Repos may be inconsistent. " \
         "Re-run `bundle exec rake deploy` to complete.\n" \
-        "Error: #{e.class}: #{e.message}".red
+        "Error: #{e.class}: #{e.message}\n#{e.backtrace.join("\n")}".red
 end
 
 desc 'Deploy staged packages and metadata to S3'
