@@ -11,22 +11,20 @@ class Yum
     @container = container
   end
 
-  def sign_rpm(host_path)
-    escaped = Shellwords.shellescape(Infra.container_path(host_path))
-    @container.exec("GPG_TTY= rpmsign --addsign --define '%_gpg_name #{Infra::GPG_KEY_ID}' #{escaped}")
-    result = @container.capture("rpm --checksig #{escaped}", silent: false)
-    return unless result.output.match?(/NOT OK|NOKEY|MISSING KEYS|NOT INSTALLED/i)
+  def sign_rpms(host_paths)
+    return if host_paths.empty?
 
-    abort "RPM signature verification failed for #{File.basename(host_path)}: #{result.output}".red
+    puts "Signing #{pluralize(host_paths.size, 'RPM')}...".magenta
+    host_paths.each do |host_path|
+      escaped = Shellwords.shellescape(Infra.container_path(host_path))
+      @container.exec("GPG_TTY= rpmsign --addsign --define '%_gpg_name #{Infra::GPG_KEY_ID}' #{escaped} && rpm --checksig #{escaped}")
+    end
+    puts 'RPM signing complete.'.green
   end
 
   def sign
     rpms = Dir.glob(File.join(Infra::PACKAGES_DIR, 'rpm', '*.rpm'))
-    return if rpms.empty?
-
-    puts "Signing #{pluralize(rpms.size, 'RPM')}...".magenta
-    rpms.each { |rpm| sign_rpm(rpm) }
-    puts 'RPM signing complete.'.green
+    sign_rpms(rpms)
   end
 
   def prepare

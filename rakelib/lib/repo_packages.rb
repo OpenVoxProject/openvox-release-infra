@@ -60,17 +60,8 @@ module RepoPackages
          "#{pluralize(config_files.size, 'repo/list file')}".magenta
     abort 'No packages were built. Check the package JSON files.'.red if rpms.empty? && debs.empty?
 
-    unless rpms.empty?
-      puts 'Signing RPMs...'.magenta
-      yum = Yum.new(container)
-      rpms.each { |rpm| yum.sign_rpm(rpm) }
-    end
-
-    unless debs.empty?
-      puts 'Signing DEBs...'.magenta
-      apt = Apt.new(container)
-      debs.each { |deb| apt.sign_deb(deb) }
-    end
+    Yum.new(container).sign_rpms(rpms) unless rpms.empty?
+    Apt.new(container).sign_debs(debs) unless debs.empty?
 
     puts 'Signing config files...'.magenta unless config_files.empty?
     config_files.each { |file| Infra.gpg_detach_sign(container, file) }

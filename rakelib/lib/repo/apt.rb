@@ -10,19 +10,20 @@ class Apt
     @container = container
   end
 
-  def sign_deb(host_path)
-    escaped = Shellwords.shellescape(Infra.container_path(host_path))
-    @container.exec("debsigs --sign=origin -k #{Infra::GPG_KEY_ID} #{escaped}")
-    @container.exec("debsigs --verify #{escaped}")
+  def sign_debs(host_paths)
+    return if host_paths.empty?
+
+    puts "Signing #{pluralize(host_paths.size, 'DEB')}...".magenta
+    host_paths.each do |host_path|
+      escaped = Shellwords.shellescape(Infra.container_path(host_path))
+      @container.exec("debsigs --sign=origin -k #{Infra::GPG_KEY_ID} #{escaped} && debsigs --verify #{escaped}")
+    end
+    puts 'DEB signing complete.'.green
   end
 
   def sign
     debs = Dir.glob(File.join(Infra::PACKAGES_DIR, 'deb', '*.deb'))
-    return if debs.empty?
-
-    puts "Signing #{pluralize(debs.size, 'DEB')}...".magenta
-    debs.each { |deb| sign_deb(deb) }
-    puts 'DEB signing complete.'.green
+    sign_debs(debs)
   end
 
   def prepare
