@@ -3,6 +3,7 @@
 require 'base64'
 require 'fileutils'
 require 'rexml/document'
+require 'securerandom'
 require 'tempfile'
 require 'tmpdir'
 require_relative '../utils/infra'
@@ -11,7 +12,9 @@ require_relative '../utils/shell'
 module MacOS
   FILES_DIR = File.join(Infra::REPO_ROOT, 'files', 'macos')
   KEYCHAIN_PATH = '/tmp/openvox-signing.keychain-db'
-  KEYCHAIN_PASSWORD = 'signing-temp'
+  # Random per-run so a stranded keychain (local crash, killed CI job) can't
+  # be unlocked by anyone who knows the source.
+  KEYCHAIN_PASSWORD = SecureRandom.hex(32)
   NOTARY_PROFILE = 'openvox-notary'
 
   module_function
@@ -24,9 +27,9 @@ module MacOS
        MACOS_APP_SIGNING_IDENTITY MACOS_INSTALLER_SIGNING_IDENTITY
        MACOS_NOTARY_APPLE_ID MACOS_NOTARY_TEAM_ID MACOS_NOTARY_APP_TOKEN].each { |name| Infra.env(name, required: true) }
 
-    Shell.run(['security', 'create-keychain', '-p', KEYCHAIN_PASSWORD, KEYCHAIN_PATH])
+    Shell.run(['security', 'create-keychain', '-p', KEYCHAIN_PASSWORD, KEYCHAIN_PATH], print_command: false)
     Shell.run(['security', 'set-keychain-settings', '-lut', '21600', KEYCHAIN_PATH])
-    Shell.run(['security', 'unlock-keychain', '-p', KEYCHAIN_PASSWORD, KEYCHAIN_PATH])
+    Shell.run(['security', 'unlock-keychain', '-p', KEYCHAIN_PASSWORD, KEYCHAIN_PATH], print_command: false)
 
     # Add to search list so codesign can find it
     existing = Shell.capture(['security', 'list-keychains', '-d', 'user']).output
@@ -45,7 +48,7 @@ module MacOS
       '--team-id', ENV.fetch('MACOS_NOTARY_TEAM_ID'),
       '--password', ENV.fetch('MACOS_NOTARY_APP_TOKEN'),
       '--keychain', KEYCHAIN_PATH
-    ])
+    ], print_command: false)
   end
 
   def teardown_signing
@@ -63,7 +66,7 @@ module MacOS
       '-P', password,
       '-T', '/usr/bin/codesign',
       '-T', '/usr/bin/productsign'
-    ])
+    ], print_command: false)
   ensure
     certfile&.unlink
   end
@@ -217,7 +220,7 @@ module MacOS
 
       # MacOS will re-lock keychains after some time, and notarization takes a while,
       # so we unlock every time through the loop.
-      Shell.run(['security', 'unlock-keychain', '-p', KEYCHAIN_PASSWORD, KEYCHAIN_PATH])
+      Shell.run(['security', 'unlock-keychain', '-p', KEYCHAIN_PASSWORD, KEYCHAIN_PATH], print_command: false)
       entitlements = is_x86 ? ['--entitlements', File.join(FILES_DIR, 'ruby_entitlements.plist')] : []
 
       sign_plugin_binary(plugins, entitlements)
