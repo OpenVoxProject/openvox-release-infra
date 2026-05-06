@@ -111,7 +111,8 @@ module Infra
 
   def teardown_with_chown(container)
     container&.exec(
-      "chown -R #{Process.uid}:#{Process.gid} #{CONTAINER_WORK}/staging #{CONTAINER_WORK}/packages 2>/dev/null || true"
+      "chown -R #{Process.uid}:#{Process.gid} #{CONTAINER_WORK}/staging #{CONTAINER_WORK}/packages",
+      allowed_exit_codes: [0, 1]
     )
   ensure
     container&.teardown

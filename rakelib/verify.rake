@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'fileutils'
+require 'shellwords'
 require_relative 'lib/utils/infra'
 require_relative 'lib/utils/platform'
 require_relative 'lib/utils/shell'
@@ -109,7 +110,7 @@ end
 def verify_apt_repo(container, dist)
   apt_url = Infra.apt_bucket.sub('s3://', "#{Infra::S3_ENDPOINT}/")
   sources_line = "deb [signed-by=/usr/share/keyrings/openvox.gpg] #{apt_url} #{dist} #{Infra.component}"
-  container.exec("echo '#{sources_line}' > /etc/apt/sources.list.d/openvox.list")
+  container.exec("printf '%s\\n' #{Shellwords.shellescape(sources_line)} > /etc/apt/sources.list.d/openvox.list")
   container.exec('apt-get clean && rm -rf /var/lib/apt/lists/*')
   container.exec('apt-get update')
   result = container.capture("apt-cache show #{Infra.project}", allowed_exit_codes: [0, 1])
@@ -139,7 +140,7 @@ def verify_yum_repo(container, rel_path)
     'enabled=1',
   ].join("\n")
 
-  container.exec("printf '%s\\n' '#{repo_content}' > /etc/yum.repos.d/openvox-verify.repo")
+  container.exec("printf '%s\\n' #{Shellwords.shellescape(repo_content)} > /etc/yum.repos.d/openvox-verify.repo")
   container.exec("dnf clean all --disablerepo='*' --enablerepo=openvox-verify")
   container.exec("dnf makecache --disablerepo='*' --enablerepo=openvox-verify")
   result = container.capture(
@@ -171,7 +172,7 @@ def verify_zypper_repo(container, rel_path)
     "gpgkey=file://#{Infra::CONTAINER_WORK}/files/repo_packages/keys/GPG-KEY-openvox.pub",
     'enabled=1',
   ].join("\n")
-  container.exec("printf '%s\\n' '#{repo_content}' > /etc/zypp/repos.d/openvox-verify.repo")
+  container.exec("printf '%s\\n' #{Shellwords.shellescape(repo_content)} > /etc/zypp/repos.d/openvox-verify.repo")
 
   container.exec('zypper refresh openvox-verify')
   result = container.capture(

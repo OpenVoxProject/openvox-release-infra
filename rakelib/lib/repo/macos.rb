@@ -53,6 +53,11 @@ module MacOS
 
   def teardown_signing
     Shell.run(['security', 'delete-keychain', KEYCHAIN_PATH], allowed_exit_codes: [0, 1])
+
+    # delete-keychain removes the file but doesn't always clean the search list
+    existing = Shell.capture(['security', 'list-keychains', '-d', 'user']).output
+    keychains = existing.scan(/"([^"]+)"/).flatten.reject { |path| path == KEYCHAIN_PATH }
+    Shell.run(['security', 'list-keychains', '-d', 'user', '-s', *keychains])
   end
 
   def import_cert(cert_b64, password)

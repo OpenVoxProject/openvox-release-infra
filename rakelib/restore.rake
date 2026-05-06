@@ -36,6 +36,16 @@ task :restore do
 
   confirm_restore
 
+  targets.each do |name|
+    result = Shell.capture(
+      ['gcloud', 'storage', 'ls', "#{source_bucket}/#{name}/"],
+      allowed_exit_codes: [0, 1], silent: true
+    )
+    if result.exitcode != 0 || result.output.strip.empty?
+      abort "GCS source #{source_bucket}/#{name}/ appears empty or inaccessible. Refusing to restore.".red
+    end
+  end
+
   if targets.include?('apt')
     puts 'Restoring apt repo from GCS...'.magenta
     Shell.run(['gcloud', 'storage', 'rsync', '--recursive', '--delete-unmatched-destination-objects',
