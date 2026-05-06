@@ -29,8 +29,8 @@ def list_s3_objects(bucket_path, prefix)
   key_prefix = subpath.empty? ? '' : subpath.chomp('/') + '/'
 
   result = Shell.capture(
-    "aws s3api list-objects-v2 --endpoint-url=#{Infra::S3_ENDPOINT} " \
-    "--bucket #{bucket_name} --prefix '#{full_prefix}' --query 'Contents[].Key'"
+    ['aws', 's3api', 'list-objects-v2', '--endpoint-url', Infra::S3_ENDPOINT,
+     '--bucket', bucket_name, '--prefix', full_prefix, '--query', 'Contents[].Key']
   )
 
   return [] if result.output.strip == 'null' || result.output.strip.empty?
@@ -90,7 +90,7 @@ task :cleanup do
   end
 
   orphaned.each do |obj|
-    Shell.run(['aws', 's3', '--endpoint-url', Infra::S3_ENDPOINT, 'rm', "#{obj[:bucket]}/#{obj[:key]}"])
+    Shell.run([*Infra.s3_cmd, 'rm', "#{obj[:bucket]}/#{obj[:key]}"])
   end
   puts "Deleted #{orphaned.size} orphaned packages. You will need to clean up 'downloads' manually if any packages should be removed.".green
 end

@@ -93,8 +93,8 @@ module Infra
   end
 
   def container_path(host_path) = host_path.sub(REPO_ROOT, CONTAINER_WORK)
-  def s3_cmd = "aws s3 --endpoint-url=#{S3_ENDPOINT}"
-  def s3_sync = "#{s3_cmd} sync --no-progress"
+  def s3_cmd = ['aws', 's3', '--endpoint-url', S3_ENDPOINT]
+  def s3_sync = [*s3_cmd, 'sync', '--no-progress']
 
   def start_container
     Container.build_image(dockerfile: DOCKERFILE, tag: CONTAINER_TAG) unless Container.image_exists?(CONTAINER_TAG)

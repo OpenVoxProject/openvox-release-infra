@@ -38,7 +38,7 @@ def s3_includes(filters)
     abort "No valid platform filters in PLATFORMS: #{filters.join(', ')}".red if patterns.empty?
   end
 
-  patterns.map { |p| "--include '#{p}'" }.join(' ')
+  patterns.flat_map { |pattern| ['--include', pattern] }
 end
 
 def fetch_packages
@@ -48,7 +48,7 @@ def fetch_packages
   types = %w[rpm deb dmg msi]
   types.each { |dir| FileUtils.mkdir_p(File.join(Infra::PACKAGES_DIR, dir)) }
 
-  Shell.run("#{Infra.s3_sync} #{source} #{Infra::PACKAGES_DIR}/ --exclude '*' #{s3_includes(filters)}")
+  Shell.run([*Infra.s3_sync, source, "#{Infra::PACKAGES_DIR}/", '--exclude', '*', *s3_includes(filters)])
 
   types.each do |type|
     Dir.glob(File.join(Infra::PACKAGES_DIR, "*.#{type}")).each do |pkg|

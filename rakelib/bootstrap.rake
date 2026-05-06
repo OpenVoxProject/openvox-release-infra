@@ -43,10 +43,10 @@ namespace :bootstrap do
     # Deploy reformatted metadata to test buckets
     puts 'Deploying metadata to test buckets...'.magenta
     state_yum = File.join(Infra::STATE_DIR, 'yum')
-    Shell.run("#{Infra.s3_sync} #{state_yum}/ #{Infra.yum_bucket}/ --exclude '*.rpm'") if Dir.exist?(state_yum)
+    Shell.run([*Infra.s3_sync, "#{state_yum}/", "#{Infra.yum_bucket}/", '--exclude', '*.rpm']) if Dir.exist?(state_yum)
 
     state_dists = File.join(Infra::STATE_DIR, 'apt', 'dists')
-    Shell.run("#{Infra.s3_sync} #{state_dists}/ #{Infra.apt_bucket}/dists/") if Dir.exist?(state_dists)
+    Shell.run([*Infra.s3_sync, "#{state_dists}/", "#{Infra.apt_bucket}/dists/"]) if Dir.exist?(state_dists)
 
     puts 'Metadata bootstrap complete.'.green
   end
@@ -59,15 +59,17 @@ namespace :bootstrap do
     puts 'Syncing packages from production to test buckets...'.magenta
 
     puts 'Syncing yum packages...'.magenta
-    Shell.run("#{Infra.s3_sync} #{Infra::YUM_PRODUCTION_BUCKET}/ #{Infra.yum_bucket}/ " \
-              "--exclude '*/repodata/*' --exclude 'openvox*-release-*' --exclude 'repo_files/*' --exclude 'index.html'")
+    Shell.run([*Infra.s3_sync, "#{Infra::YUM_PRODUCTION_BUCKET}/", "#{Infra.yum_bucket}/",
+               '--exclude', '*/repodata/*', '--exclude', 'openvox*-release-*',
+               '--exclude', 'repo_files/*', '--exclude', 'index.html'])
 
     puts 'Syncing apt packages and GPG key...'.magenta
-    Shell.run("#{Infra.s3_sync} #{Infra::APT_PRODUCTION_BUCKET}/ #{Infra.apt_bucket}/ " \
-              "--exclude 'dists/*' --exclude 'openvox*-release-*' --exclude 'list_files/*' --exclude 'index.html'")
+    Shell.run([*Infra.s3_sync, "#{Infra::APT_PRODUCTION_BUCKET}/", "#{Infra.apt_bucket}/",
+               '--exclude', 'dists/*', '--exclude', 'openvox*-release-*',
+               '--exclude', 'list_files/*', '--exclude', 'index.html'])
 
     puts 'Syncing downloads...'.magenta
-    Shell.run("#{Infra.s3_sync} #{Infra::DOWNLOADS_PRODUCTION_BUCKET}/ #{Infra.downloads_bucket}/")
+    Shell.run([*Infra.s3_sync, "#{Infra::DOWNLOADS_PRODUCTION_BUCKET}/", "#{Infra.downloads_bucket}/"])
 
     puts 'Package sync complete.'.green
   end
@@ -82,7 +84,7 @@ def bootstrap_yum_metadata(container, tmp_download)
   FileUtils.mkdir_p(staging_yum)
 
   puts 'Downloading yum repodata from S3...'.magenta
-  Shell.run("#{Infra.s3_sync} #{Infra::YUM_PRODUCTION_BUCKET}/ #{yum_download}/ --exclude '*' --include '*/repodata/*'")
+  Shell.run([*Infra.s3_sync, "#{Infra::YUM_PRODUCTION_BUCKET}/", "#{yum_download}/", '--exclude', '*', '--include', '*/repodata/*'])
 
   Dir.glob(File.join(yum_download, '**', 'repodata')).each do |old_repodata_dir|
     arch_dir = File.dirname(old_repodata_dir)
@@ -112,7 +114,7 @@ def bootstrap_apt_metadata(container, tmp_download)
   FileUtils.mkdir_p(apt_download)
 
   puts 'Downloading apt dists from S3...'.magenta
-  Shell.run("#{Infra.s3_sync} #{Infra::APT_PRODUCTION_BUCKET}/dists/ #{apt_download}/dists/")
+  Shell.run([*Infra.s3_sync, "#{Infra::APT_PRODUCTION_BUCKET}/dists/", "#{apt_download}/dists/"])
 
   # The Packages files from reprepro are in standard format and can be reused
   # directly. We just need to regenerate Release/InRelease/Release.gpg with our

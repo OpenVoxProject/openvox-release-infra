@@ -102,7 +102,7 @@ task :verify do
     downloads.each do |pkg|
       rel_path = pkg.sub("#{Infra::STAGING_DIR}/downloads/", '')
       s3_path = "#{Infra.downloads_bucket}/#{rel_path}"
-      result = Shell.capture("#{Infra.s3_cmd} ls #{s3_path}", allowed_exit_codes: [0, 1])
+      result = Shell.capture([*Infra.s3_cmd, 'ls', s3_path], allowed_exit_codes: [0, 1])
       if result.exitcode.zero?
         puts "  download: #{File.basename(pkg)} found on S3".green
         verified += 1

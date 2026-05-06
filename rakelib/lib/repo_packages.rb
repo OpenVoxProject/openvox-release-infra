@@ -247,7 +247,7 @@ module RepoPackages
   def upload_artifact(local, remote)
     unless Infra.env('FORCE_OVERWRITE') == 'true'
       result = Shell.capture(
-        ['aws', 's3', '--endpoint-url', Infra::S3_ENDPOINT, 'ls', remote],
+        [*Infra.s3_cmd, 'ls', remote],
         allowed_exit_codes: [0, 1, 255], print_command: false
       )
       if result.exitcode.zero? && !result.output.strip.empty?
@@ -255,7 +255,7 @@ module RepoPackages
         return false
       end
     end
-    Shell.run(['aws', 's3', '--endpoint-url', Infra::S3_ENDPOINT, 'cp', local, remote, '--no-progress'])
+    Shell.run([*Infra.s3_cmd, 'cp', local, remote, '--no-progress'])
     true
   end
 end
