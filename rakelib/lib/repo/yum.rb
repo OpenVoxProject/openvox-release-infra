@@ -151,7 +151,7 @@ class Yum
             'Cannot determine target architectures for noarch RPM.'.red
     end
 
-    arches.map { |arch| "#{Infra.component}/#{plat}/#{platver}/#{arch}" }
+    arches.map { |target_arch| "#{Infra.component}/#{plat}/#{platver}/#{target_arch}" }
   end
 
   def arch_dirs_under(path)
