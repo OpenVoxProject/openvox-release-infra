@@ -6,8 +6,8 @@ require_relative 'lib/repo/yum'
 require_relative 'lib/utils/infra'
 require_relative 'lib/utils/shell'
 
-desc 'Bootstrap state/ and test buckets from production (runs metadata then packages)'
-task bootstrap: %w[bootstrap:metadata bootstrap:packages]
+desc 'Bootstrap state/ and test buckets from production (runs metadata, packages, then release packages)'
+task bootstrap: %w[bootstrap:metadata bootstrap:packages repo_packages:build repo_packages:upload]
 
 namespace :bootstrap do
   desc 'Download production metadata, reformat, store in state/, and deploy to test buckets'
@@ -55,6 +55,14 @@ namespace :bootstrap do
   task :packages do
     Infra.setup_aws
     abort 'Bootstrap targets test buckets. Do not run with PRODUCTION=true.'.red if Infra.production?
+
+    puts 'Removing stale release packages from test buckets...'.magenta
+    Shell.run([*Infra.s3_cmd, 'rm', '--recursive', "#{Infra.yum_bucket}/", '--exclude', '*',
+               '--include', 'openvox*-release-*'], allowed_exit_codes: [0, 1])
+    Shell.run([*Infra.s3_cmd, 'rm', '--recursive', "#{Infra.yum_bucket}/repo_files/"], allowed_exit_codes: [0, 1])
+    Shell.run([*Infra.s3_cmd, 'rm', '--recursive', "#{Infra.apt_bucket}/", '--exclude', '*',
+               '--include', 'openvox*-release-*'], allowed_exit_codes: [0, 1])
+    Shell.run([*Infra.s3_cmd, 'rm', '--recursive', "#{Infra.apt_bucket}/list_files/"], allowed_exit_codes: [0, 1])
 
     puts 'Syncing packages from production to test buckets...'.magenta
 
