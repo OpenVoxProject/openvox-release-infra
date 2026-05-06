@@ -11,6 +11,16 @@ module Infra
   S3_ENDPOINT = 'https://s3.osuosl.org'
   ARTIFACTS_BUCKET = ENV.fetch('ARTIFACTS_BUCKET', 'openvox-artifacts')
 
+  APT_PRODUCTION_BUCKET = 's3://openvox-apt'
+  YUM_PRODUCTION_BUCKET = 's3://openvox-yum'
+  DOWNLOADS_PRODUCTION_BUCKET = "s3://#{ARTIFACTS_BUCKET}/downloads"
+  GCS_PRODUCTION_BUCKET = 'gs://openvox-backup'
+
+  APT_TEST_BUCKET = "s3://#{ARTIFACTS_BUCKET}/repo_test/apt"
+  YUM_TEST_BUCKET = "s3://#{ARTIFACTS_BUCKET}/repo_test/yum"
+  DOWNLOADS_TEST_BUCKET = "s3://#{ARTIFACTS_BUCKET}/repo_test/downloads"
+  GCS_TEST_BUCKET = 'gs://openvox-backup-test'
+
   REPO_ROOT = File.expand_path('../../..', __dir__)
   PACKAGES_DIR = File.join(REPO_ROOT, 'packages')
   STAGING_DIR = File.join(REPO_ROOT, 'staging')
@@ -67,10 +77,10 @@ module Infra
   def app_signing_identity = env('MACOS_APP_SIGNING_IDENTITY', required: true)
   def installer_signing_identity = env('MACOS_INSTALLER_SIGNING_IDENTITY', required: true)
 
-  def apt_bucket = env('APT_BUCKET', default: production? ? 's3://openvox-apt' : "s3://#{ARTIFACTS_BUCKET}/repo_test/apt")
-  def yum_bucket = env('YUM_BUCKET', default: production? ? 's3://openvox-yum' : "s3://#{ARTIFACTS_BUCKET}/repo_test/yum")
-  def downloads_bucket = env('DOWNLOADS_BUCKET', default: production? ? "s3://#{ARTIFACTS_BUCKET}/downloads" : "s3://#{ARTIFACTS_BUCKET}/repo_test/downloads")
-  def gcs_bucket = env('GCS_BUCKET', default: production? ? 'gs://openvox-backup' : 'gs://openvox-backup-test')
+  def apt_bucket = env('APT_BUCKET', default: production? ? APT_PRODUCTION_BUCKET : APT_TEST_BUCKET)
+  def yum_bucket = env('YUM_BUCKET', default: production? ? YUM_PRODUCTION_BUCKET : YUM_TEST_BUCKET)
+  def downloads_bucket = env('DOWNLOADS_BUCKET', default: production? ? DOWNLOADS_PRODUCTION_BUCKET : DOWNLOADS_TEST_BUCKET)
+  def gcs_bucket = env('GCS_BUCKET', default: production? ? GCS_PRODUCTION_BUCKET : GCS_TEST_BUCKET)
 
   # Base URLs baked into release package .repo/.list files so end-user
   # package managers know where to find the OpenVox apt/yum repos.

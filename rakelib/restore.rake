@@ -4,6 +4,14 @@ require 'shellwords'
 require_relative 'lib/utils/infra'
 require_relative 'lib/utils/shell'
 
+def confirm_restore
+  return if Infra.env('CONFIRM_RESTORE') == 'true'
+  abort 'CONFIRM_RESTORE must be set in non-interactive mode.'.red unless $stdin.tty?
+  print 'Type "restore" to confirm: '.red
+  answer = $stdin.gets&.chomp
+  abort 'Aborted.'.yellow unless answer == 'restore'
+end
+
 desc 'Restore S3 repos from GCS backup'
 task :restore do
   Infra.setup_aws
@@ -27,15 +35,7 @@ task :restore do
   puts 'Destination:'.yellow
   targets.each { |name| puts "  #{destination_buckets[name]}".yellow }
 
-  unless Infra.env('CONFIRM_RESTORE') == 'true'
-    if $stdin.tty?
-      print 'Type "restore" to confirm: '.red
-      answer = $stdin.gets&.chomp
-      abort 'Aborted.'.yellow unless answer == 'restore'
-    else
-      abort 'CONFIRM_RESTORE must be set in non-interactive mode.'.red
-    end
-  end
+  confirm_restore
 
   if targets.include?('apt')
     puts 'Restoring apt repo from GCS...'.magenta
@@ -66,15 +66,7 @@ namespace :restore do
     puts '*** WARNING: This is a destructive operation. ***'.red
     puts "This will roll back #{bucket} to #{timestamp} by restoring soft-deleted objects.".red
 
-    unless Infra.env('CONFIRM_RESTORE') == 'true'
-      if $stdin.tty?
-        print 'Type "restore" to confirm: '.red
-        answer = $stdin.gets&.chomp
-        abort 'Aborted.'.yellow unless answer == 'restore'
-      else
-        abort 'CONFIRM_RESTORE must be set in non-interactive mode.'.red
-      end
-    end
+    confirm_restore
 
     puts "Rolling back #{bucket} to #{timestamp}...".magenta
     result = Shell.capture(

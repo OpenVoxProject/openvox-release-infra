@@ -58,16 +58,16 @@ namespace :bootstrap do
 
     puts 'Syncing packages from production to test buckets...'.magenta
 
-    puts 'Syncing yum packages...'.cyan
-    Shell.run("#{Infra.s3_sync} s3://openvox-yum/ #{Infra.yum_bucket}/ " \
+    puts 'Syncing yum packages...'.magenta
+    Shell.run("#{Infra.s3_sync} #{Infra::YUM_PRODUCTION_BUCKET}/ #{Infra.yum_bucket}/ " \
               "--exclude '*/repodata/*' --exclude 'openvox*-release-*' --exclude 'repo_files/*' --exclude 'index.html'")
 
-    puts 'Syncing apt packages and GPG key...'.cyan
-    Shell.run("#{Infra.s3_sync} s3://openvox-apt/ #{Infra.apt_bucket}/ " \
+    puts 'Syncing apt packages and GPG key...'.magenta
+    Shell.run("#{Infra.s3_sync} #{Infra::APT_PRODUCTION_BUCKET}/ #{Infra.apt_bucket}/ " \
               "--exclude 'dists/*' --exclude 'openvox*-release-*' --exclude 'list_files/*' --exclude 'index.html'")
 
-    puts 'Syncing downloads...'.cyan
-    Shell.run("#{Infra.s3_sync} s3://openvox-artifacts/downloads/ #{Infra.downloads_bucket}/")
+    puts 'Syncing downloads...'.magenta
+    Shell.run("#{Infra.s3_sync} #{Infra::DOWNLOADS_PRODUCTION_BUCKET}/ #{Infra.downloads_bucket}/")
 
     puts 'Package sync complete.'.green
   end
@@ -82,12 +82,12 @@ def bootstrap_yum_metadata(container, tmp_download)
   FileUtils.mkdir_p(staging_yum)
 
   puts 'Downloading yum repodata from S3...'.magenta
-  Shell.run("#{Infra.s3_sync} s3://openvox-yum/ #{yum_download}/ --exclude '*' --include '*/repodata/*'")
+  Shell.run("#{Infra.s3_sync} #{Infra::YUM_PRODUCTION_BUCKET}/ #{yum_download}/ --exclude '*' --include '*/repodata/*'")
 
   Dir.glob(File.join(yum_download, '**', 'repodata')).each do |old_repodata_dir|
     arch_dir = File.dirname(old_repodata_dir)
     rel_path = arch_dir.sub("#{yum_download}/", '')
-    puts "Reformatting yum metadata: #{rel_path}".cyan
+    puts "Reformatting yum metadata: #{rel_path}".magenta
 
     staging_arch = File.join(staging_yum, rel_path)
     FileUtils.mkdir_p(staging_arch)
@@ -112,7 +112,7 @@ def bootstrap_apt_metadata(container, tmp_download)
   FileUtils.mkdir_p(apt_download)
 
   puts 'Downloading apt dists from S3...'.magenta
-  Shell.run("#{Infra.s3_sync} s3://openvox-apt/dists/ #{apt_download}/dists/")
+  Shell.run("#{Infra.s3_sync} #{Infra::APT_PRODUCTION_BUCKET}/dists/ #{apt_download}/dists/")
 
   # The Packages files from reprepro are in standard format and can be reused
   # directly. We just need to regenerate Release/InRelease/Release.gpg with our
@@ -127,7 +127,7 @@ def bootstrap_apt_metadata(container, tmp_download)
   codenames = Dir.glob(File.join(apt_download, 'dists', '*')).select { |d| File.directory?(d) }
   codenames.each do |codename_dir|
     codename = File.basename(codename_dir)
-    puts "Reformatting apt metadata: #{codename}".cyan
+    puts "Reformatting apt metadata: #{codename}".magenta
 
     staging_codename = File.join(staging_dists, codename)
     FileUtils.mkdir_p(staging_codename)

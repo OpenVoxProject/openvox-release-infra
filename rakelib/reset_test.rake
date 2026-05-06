@@ -20,15 +20,15 @@ task :reset_test do
   end
 
   puts 'Syncing yum from production...'.magenta
-  Shell.run("#{Infra.s3_sync} --delete s3://openvox-yum/ #{Infra.yum_bucket}/ " \
+  Shell.run("#{Infra.s3_sync} --delete #{Infra::YUM_PRODUCTION_BUCKET}/ #{Infra.yum_bucket}/ " \
             "--exclude 'openvox*-release-*' --exclude 'repo_files/*' --exclude 'index.html'")
 
   puts 'Syncing apt from production...'.magenta
-  Shell.run("#{Infra.s3_sync} --delete s3://openvox-apt/ #{Infra.apt_bucket}/ " \
+  Shell.run("#{Infra.s3_sync} --delete #{Infra::APT_PRODUCTION_BUCKET}/ #{Infra.apt_bucket}/ " \
             "--exclude 'openvox*-release-*' --exclude 'list_files/*' --exclude 'index.html'")
 
   puts 'Syncing downloads from production...'.magenta
-  Shell.run("#{Infra.s3_sync} --delete s3://openvox-artifacts/downloads/ #{Infra.downloads_bucket}/")
+  Shell.run("#{Infra.s3_sync} --delete #{Infra::DOWNLOADS_PRODUCTION_BUCKET}/ #{Infra.downloads_bucket}/")
 
   FileUtils.rm_rf(Infra::STAGING_DIR)
 
