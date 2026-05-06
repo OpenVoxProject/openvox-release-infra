@@ -1,13 +1,72 @@
 # frozen_string_literal: true
 
+require 'base64'
 require 'fileutils'
 require 'rexml/document'
+require 'tempfile'
 require 'tmpdir'
 require_relative '../utils/infra'
 require_relative '../utils/shell'
 
 module MacOS
+  FILES_DIR = File.join(Infra::REPO_ROOT, 'files', 'macos')
+  KEYCHAIN_PATH = '/tmp/openvox-signing.keychain-db'
+  KEYCHAIN_PASSWORD = 'signing-temp'
+  NOTARY_PROFILE = 'openvox-notary'
+
   module_function
+
+  def app_signing_identity = Infra.env('MACOS_APP_SIGNING_IDENTITY', required: true)
+  def installer_signing_identity = Infra.env('MACOS_INSTALLER_SIGNING_IDENTITY', required: true)
+
+  def setup_signing
+    %w[MACOS_APP_CERT_B64 MACOS_INSTALLER_CERT_B64 MACOS_CERT_PASSWORD
+       MACOS_APP_SIGNING_IDENTITY MACOS_INSTALLER_SIGNING_IDENTITY
+       MACOS_NOTARY_APPLE_ID MACOS_NOTARY_TEAM_ID MACOS_NOTARY_APP_TOKEN].each { |name| Infra.env(name, required: true) }
+
+    Shell.run(['security', 'create-keychain', '-p', KEYCHAIN_PASSWORD, KEYCHAIN_PATH])
+    Shell.run(['security', 'set-keychain-settings', '-lut', '21600', KEYCHAIN_PATH])
+    Shell.run(['security', 'unlock-keychain', '-p', KEYCHAIN_PASSWORD, KEYCHAIN_PATH])
+
+    # Add to search list so codesign can find it
+    existing = Shell.capture(['security', 'list-keychains', '-d', 'user']).output
+    keychains = existing.scan(/"([^"]+)"/).flatten
+    keychains.unshift(KEYCHAIN_PATH)
+    Shell.run(['security', 'list-keychains', '-d', 'user', '-s', *keychains])
+
+    # Import certificates
+    import_cert(ENV.fetch('MACOS_APP_CERT_B64'), ENV.fetch('MACOS_CERT_PASSWORD'))
+    import_cert(ENV.fetch('MACOS_INSTALLER_CERT_B64'), ENV.fetch('MACOS_CERT_PASSWORD'))
+
+    # Store notarytool credentials
+    Shell.run([
+      'xcrun', 'notarytool', 'store-credentials', NOTARY_PROFILE,
+      '--apple-id', ENV.fetch('MACOS_NOTARY_APPLE_ID'),
+      '--team-id', ENV.fetch('MACOS_NOTARY_TEAM_ID'),
+      '--password', ENV.fetch('MACOS_NOTARY_APP_TOKEN'),
+      '--keychain', KEYCHAIN_PATH
+    ])
+  end
+
+  def teardown_signing
+    Shell.run(['security', 'delete-keychain', KEYCHAIN_PATH], allowed_exit_codes: [0, 1])
+  end
+
+  def import_cert(cert_b64, password)
+    certfile = Tempfile.new(['cert', '.p12'])
+    certfile.binmode
+    certfile.write(Base64.decode64(cert_b64))
+    certfile.close
+    Shell.run([
+      'security', 'import', certfile.path,
+      '-k', KEYCHAIN_PATH,
+      '-P', password,
+      '-T', '/usr/bin/codesign',
+      '-T', '/usr/bin/productsign'
+    ])
+  ensure
+    certfile&.unlink
+  end
 
   def sign
     dmgs = Dir.glob(File.join(Infra::PACKAGES_DIR, 'dmg', '*.dmg'))
@@ -158,8 +217,8 @@ module MacOS
 
       # MacOS will re-lock keychains after some time, and notarization takes a while,
       # so we unlock every time through the loop.
-      Shell.run(['security', 'unlock-keychain', '-p', Infra::MACOS_KEYCHAIN_PASSWORD, Infra::MACOS_KEYCHAIN_PATH])
-      entitlements = is_x86 ? ['--entitlements', File.join(Infra::FILES_MACOS, 'ruby_entitlements.plist')] : []
+      Shell.run(['security', 'unlock-keychain', '-p', KEYCHAIN_PASSWORD, KEYCHAIN_PATH])
+      entitlements = is_x86 ? ['--entitlements', File.join(FILES_DIR, 'ruby_entitlements.plist')] : []
 
       sign_plugin_binary(plugins, entitlements)
       sign_component_binaries(payload, entitlements)
@@ -177,8 +236,8 @@ module MacOS
                  '--plugins', plugins, unsigned_pkg_path])
 
       signed_pkg_path = File.join(output, File.basename(installer_pkg))
-      Shell.run(['productsign', '--keychain', Infra::MACOS_KEYCHAIN_PATH,
-                 '--sign', Infra.installer_signing_identity,
+      Shell.run(['productsign', '--keychain', KEYCHAIN_PATH,
+                 '--sign', installer_signing_identity,
                  unsigned_pkg_path, signed_pkg_path])
 
       build_uninstaller_app(output)
@@ -250,7 +309,7 @@ module MacOS
     uninstaller_name = project == 'openbolt' ? 'Uninstall OpenBolt' : 'Uninstall OpenVox Agent'
     app_path = File.join(output, "#{uninstaller_name}.app")
 
-    Shell.run(['osacompile', '-o', app_path, File.join(Infra::FILES_MACOS, "#{project}-uninstaller.applescript")])
+    Shell.run(['osacompile', '-o', app_path, File.join(FILES_DIR, "#{project}-uninstaller.applescript")])
 
     FileUtils.mv(
       File.join(output, "#{project}-uninstaller.tool"),
@@ -258,11 +317,11 @@ module MacOS
     )
 
     FileUtils.cp(
-      File.join(Infra::FILES_MACOS, 'openvox.png'),
+      File.join(FILES_DIR, 'openvox.png'),
       File.join(app_path, 'Contents', 'Resources', 'openvox.png')
     )
     FileUtils.cp(
-      File.join(Infra::FILES_MACOS, 'openvox.icns'),
+      File.join(FILES_DIR, 'openvox.icns'),
       File.join(app_path, 'Contents', 'Resources', 'applet.icns')
     )
 
@@ -283,8 +342,8 @@ module MacOS
   end
 
   def codesign_and_verify(file, entitlements: [], runtime: true)
-    sign_cmd = ['codesign', '--timestamp', '--keychain', Infra::MACOS_KEYCHAIN_PATH,
-                '-vfs', Infra.app_signing_identity]
+    sign_cmd = ['codesign', '--timestamp', '--keychain', KEYCHAIN_PATH,
+                '-vfs', app_signing_identity]
     sign_cmd.push('--options', 'runtime') if runtime
     sign_cmd.concat(entitlements)
     sign_cmd << file
@@ -297,7 +356,7 @@ module MacOS
     puts 'Notarizing...'.magenta
     result = Shell.capture([
       'xcrun', 'notarytool', 'submit', dmg,
-      '--keychain-profile', Infra::MACOS_NOTARY_PROFILE,
+      '--keychain-profile', NOTARY_PROFILE,
       '--wait'
     ], silent: false)
     unless result.output.match?(/^\s*status: Accepted$/i)

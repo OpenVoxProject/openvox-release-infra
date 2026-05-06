@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'fileutils'
+require 'shellwords'
 require 'zlib'
 require_relative '../utils/infra'
 
@@ -9,12 +10,21 @@ class Yum
     @container = container
   end
 
+  def sign_rpm(host_path)
+    escaped = Shellwords.shellescape(Infra.container_path(host_path))
+    @container.exec("GPG_TTY= rpmsign --addsign --define '%_gpg_name #{Infra::GPG_KEY_ID}' #{escaped}")
+    result = @container.capture("rpm --checksig #{escaped}", silent: false)
+    return unless result.output.match?(/NOT OK|NOKEY|MISSING KEYS|NOT INSTALLED/i)
+
+    abort "RPM signature verification failed for #{File.basename(host_path)}: #{result.output}".red
+  end
+
   def sign
     rpms = Dir.glob(File.join(Infra::PACKAGES_DIR, 'rpm', '*.rpm'))
     return if rpms.empty?
 
     puts "Signing #{pluralize(rpms.size, 'RPM')}...".magenta
-    rpms.each { |rpm| Infra.sign_rpm(@container, rpm) }
+    rpms.each { |rpm| sign_rpm(rpm) }
     puts 'RPM signing complete.'.green
   end
 

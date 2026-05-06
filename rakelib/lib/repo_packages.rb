@@ -4,6 +4,8 @@ require 'erb'
 require 'fileutils'
 require 'json'
 require 'shellwords'
+require_relative 'repo/apt'
+require_relative 'repo/yum'
 require_relative 'utils/infra'
 require_relative 'utils/shell'
 
@@ -58,11 +60,17 @@ module RepoPackages
          "#{pluralize(config_files.size, 'repo/list file')}".magenta
     abort 'No packages were built. Check the package JSON files.'.red if rpms.empty? && debs.empty?
 
-    puts 'Signing RPMs...'.magenta unless rpms.empty?
-    rpms.each { |rpm| Infra.sign_rpm(container, rpm) }
+    unless rpms.empty?
+      puts 'Signing RPMs...'.magenta
+      yum = Yum.new(container)
+      rpms.each { |rpm| yum.sign_rpm(rpm) }
+    end
 
-    puts 'Signing DEBs...'.magenta unless debs.empty?
-    debs.each { |deb| Infra.sign_deb(container, deb) }
+    unless debs.empty?
+      puts 'Signing DEBs...'.magenta
+      apt = Apt.new(container)
+      debs.each { |deb| apt.sign_deb(deb) }
+    end
 
     puts 'Signing config files...'.magenta unless config_files.empty?
     config_files.each { |file| Infra.gpg_detach_sign(container, file) }

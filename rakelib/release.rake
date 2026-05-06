@@ -86,12 +86,14 @@ task :release do
     puts 'MacOS packages must be signed on a MacOS host. Signing of these packages will be skipped.'.yellow
     sign_dmg = false
   end
-  %w[WINDOWS_SM_API_KEY WINDOWS_SM_HOST WINDOWS_SM_CLIENT_CERT_B64 WINDOWS_SM_CLIENT_CERT_PASSWORD WINDOWS_CERT_ALIAS].each { |name| Infra.env(name, required: true) } if sign_msi
   Infra.env('GPG_PRIVATE_KEY_B64', required: true) if sign_rpm || sign_deb
 
   # Sign packages, prepare packages and repo metadata in staging/, then
   # move updated metadata to state/ for commit.
-  container = Infra.start_container if sign_rpm || sign_deb || sign_msi
+  container_env_vars = []
+  container_env_vars << 'GPG_PRIVATE_KEY_B64' if sign_rpm || sign_deb
+  container_env_vars.concat(Windows::ENV_VARS) if sign_msi
+  container = Infra.start_container(env_vars: container_env_vars) if sign_rpm || sign_deb || sign_msi
   begin
     Infra.import_gpg_key(container) if sign_rpm || sign_deb
 
@@ -111,6 +113,7 @@ task :release do
 
     if sign_msi
       windows = Windows.new(container)
+      windows.setup_signing
       windows.sign
       windows.prepare
     end
@@ -120,11 +123,11 @@ task :release do
 
   if sign_dmg
     begin
-      Infra.setup_macos_signing
+      MacOS.setup_signing
       MacOS.sign
       MacOS.prepare
     ensure
-      Infra.teardown_macos_signing
+      MacOS.teardown_signing
     end
   end
 

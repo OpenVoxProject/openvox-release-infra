@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'fileutils'
+require 'shellwords'
 require_relative '../utils/infra'
 
 class Apt
@@ -8,12 +9,18 @@ class Apt
     @container = container
   end
 
+  def sign_deb(host_path)
+    escaped = Shellwords.shellescape(Infra.container_path(host_path))
+    @container.exec("debsigs --sign=origin -k #{Infra::GPG_KEY_ID} #{escaped}")
+    @container.exec("debsigs --verify #{escaped}")
+  end
+
   def sign
     debs = Dir.glob(File.join(Infra::PACKAGES_DIR, 'deb', '*.deb'))
     return if debs.empty?
 
     puts "Signing #{pluralize(debs.size, 'DEB')}...".magenta
-    debs.each { |deb| Infra.sign_deb(@container, deb) }
+    debs.each { |deb| sign_deb(deb) }
     puts 'DEB signing complete.'.green
   end
 
