@@ -146,7 +146,7 @@ def bootstrap_apt_metadata(container, tmp_download)
 
     # Regenerate Packages.gz, Release, InRelease, Release.gpg
     apt = Apt.new(container)
-    apt.send(:rebuild_indexes, codename)
+    apt.rebuild_indexes(codename)
   end
 
   Apt.update_state

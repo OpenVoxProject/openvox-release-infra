@@ -136,8 +136,24 @@ class Apt
     referenced
   end
 
-  private
+  # gzip the Packages file (we have both Packages and Packages.gz, the latter is used
+  # by apt clients for efficiency), then create the Release file, then the
+  # signed Release.gpg and InRelease files.
+  def rebuild_indexes(codename)
+    dists_dir = File.join(Infra::STAGING_DIR, 'apt', 'dists', codename)
 
+    Dir.glob(File.join(dists_dir, '*', 'binary-*')).each do |binary_dir|
+      packages_file = File.join(binary_dir, 'Packages')
+      next unless File.exist?(packages_file)
+
+      @container.exec("gzip -n -9 -k -f #{Infra.container_path(packages_file)}")
+    end
+
+    generate_release(dists_dir, codename)
+    sign_release(dists_dir)
+  end
+
+  private
 
   # Use the apt-ftparchive packages pool command to generate stanzas for the Packages file
   # for all of the packages we have in the staging directory.
@@ -230,23 +246,6 @@ class Apt
         file.write("\n") unless stanza.end_with?("\n")
       end
     end
-  end
-
-  # gzip the Packages file (we have both Packages and Packages.gz, the latter is used
-  # by apt clients for efficiency), then create the Release file, then the
-  # signed Release.gpg and InRelease files.
-  def rebuild_indexes(codename)
-    dists_dir = File.join(Infra::STAGING_DIR, 'apt', 'dists', codename)
-
-    Dir.glob(File.join(dists_dir, '*', 'binary-*')).each do |binary_dir|
-      packages_file = File.join(binary_dir, 'Packages')
-      next unless File.exist?(packages_file)
-
-      @container.exec("gzip -n -9 -k -f #{Infra.container_path(packages_file)}")
-    end
-
-    generate_release(dists_dir, codename)
-    sign_release(dists_dir)
   end
 
   # Append .0 to the osver (e.g. 13.0 for debian13). This is probably not
