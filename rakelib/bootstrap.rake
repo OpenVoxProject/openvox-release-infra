@@ -126,18 +126,18 @@ def bootstrap_apt_metadata(container, tmp_download)
   FileUtils.rm_rf(staging_dists)
   FileUtils.mkdir_p(staging_dists)
 
-  codenames = Dir.glob(File.join(apt_download, 'dists', '*')).select { |d| File.directory?(d) }
-  codenames.each do |codename_dir|
-    codename = File.basename(codename_dir)
-    puts "Reformatting apt metadata: #{codename}".magenta
+  dist_dirs = Dir.glob(File.join(apt_download, 'dists', '*')).select { |path| File.directory?(path) }
+  dist_dirs.each do |dist_dir|
+    dist = File.basename(dist_dir)
+    puts "Reformatting apt metadata: #{dist}".magenta
 
-    staging_codename = File.join(staging_dists, codename)
-    FileUtils.mkdir_p(staging_codename)
+    staging_dist = File.join(staging_dists, dist)
+    FileUtils.mkdir_p(staging_dist)
 
     # Copy Packages files into staging (these are format-compatible)
-    Dir.glob(File.join(codename_dir, '**', 'binary-*')).each do |binary_dir|
-      rel = binary_dir.sub("#{codename_dir}/", '')
-      dest = File.join(staging_codename, rel)
+    Dir.glob(File.join(dist_dir, '**', 'binary-*')).each do |binary_dir|
+      rel = binary_dir.sub("#{dist_dir}/", '')
+      dest = File.join(staging_dist, rel)
       FileUtils.mkdir_p(dest)
 
       packages_file = File.join(binary_dir, 'Packages')
@@ -146,9 +146,9 @@ def bootstrap_apt_metadata(container, tmp_download)
 
     # Regenerate Packages.gz, Release, InRelease, Release.gpg
     apt = Apt.new(container)
-    apt.rebuild_indexes(codename)
+    apt.rebuild_indexes(dist)
   end
 
   Apt.update_state
-  puts "apt bootstrap complete: #{codenames.size} codenames.".green
+  puts "apt bootstrap complete: #{dist_dirs.size} dists.".green
 end

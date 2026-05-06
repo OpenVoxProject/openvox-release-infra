@@ -27,7 +27,7 @@ task :verify do
   yum_staging = File.join(Infra::STAGING_DIR, 'yum')
 
   apt_repos = Dir.glob(File.join(Infra::STAGING_DIR, 'apt', 'pool', '**', '*.deb'))
-                 .filter_map { |deb| Platform.from_deb(deb)&.codename }
+                 .filter_map { |deb| Platform.from_deb(deb)&.dist }
                  .uniq
   all_rpm_repos = Dir.glob(File.join(yum_staging, '**', '*.rpm'))
                      .map { |rpm| File.dirname(rpm) }.uniq
@@ -41,7 +41,7 @@ task :verify do
       container.exec('rm -f /etc/apt/sources.list && rm -rf /etc/apt/sources.list.d/*')
       container.exec("cp #{Infra::CONTAINER_WORK}/files/repo_packages/keys/openvox-keyring.gpg /usr/share/keyrings/openvox.gpg")
 
-      apt_repos.each { |repo| verify_apt_codename(container, repo) ? verified += 1 : failed += 1 }
+      apt_repos.each { |repo| verify_apt_repo(container, repo) ? verified += 1 : failed += 1 }
     ensure
       container.teardown
     end
@@ -106,9 +106,9 @@ task :verify do
   end
 end
 
-def verify_apt_codename(container, codename)
+def verify_apt_repo(container, dist)
   apt_url = Infra.apt_bucket.sub('s3://', "#{Infra::S3_ENDPOINT}/")
-  sources_line = "deb [signed-by=/usr/share/keyrings/openvox.gpg] #{apt_url} #{codename} #{Infra.component}"
+  sources_line = "deb [signed-by=/usr/share/keyrings/openvox.gpg] #{apt_url} #{dist} #{Infra.component}"
   container.exec("echo '#{sources_line}' > /etc/apt/sources.list.d/openvox.list")
   container.exec('apt-get clean && rm -rf /var/lib/apt/lists/*')
   container.exec('apt-get update')
@@ -116,15 +116,15 @@ def verify_apt_codename(container, codename)
   container.exec('rm -f /etc/apt/sources.list.d/openvox.list')
 
   if result.output.include?(Infra.version)
-    puts "  apt: #{Infra.project} #{Infra.version} found in #{codename}".green
+    puts "  apt: #{Infra.project} #{Infra.version} found in #{dist}".green
     true
   else
-    puts "  apt: #{Infra.project} #{Infra.version} NOT found in #{codename}".red
+    puts "  apt: #{Infra.project} #{Infra.version} NOT found in #{dist}".red
     false
   end
 rescue SystemExit
   container.exec('rm -f /etc/apt/sources.list.d/openvox.list', allowed_exit_codes: [0, 1])
-  puts "  apt: verification failed for #{codename}".red
+  puts "  apt: verification failed for #{dist}".red
   false
 end
 

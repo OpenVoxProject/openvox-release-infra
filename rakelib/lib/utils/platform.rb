@@ -34,8 +34,9 @@ class Platform
     new(os: parts[0], version: parts[1], arch: parts[2])
   end
 
-  # The codename used in apt repos (e.g. "debian13", "ubuntu24.04")
-  def codename
+  # The dist identifier used in apt repos (e.g. "debian13", "ubuntu24.04").
+  # This is the directory name under dists/ and the value of the Codename field in Release files.
+  def dist
     "#{os}#{version}"
   end
 

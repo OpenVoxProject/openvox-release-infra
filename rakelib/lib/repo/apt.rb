@@ -48,7 +48,7 @@ class Apt
     # will get merged into the existing Packages file.
     new_stanzas = generate_stanzas(debs)
 
-    affected_codenames = Set.new
+    affected_dists = Set.new
     packages_cache = {}
 
     # Process arch-specific packages before arch:all so new binary-<arch> dirs
@@ -56,16 +56,16 @@ class Apt
     sorted_stanzas = new_stanzas.sort_by { |basename, _| basename.end_with?('_all.deb') ? 1 : 0 }
     sorted_stanzas.each do |basename, stanza|
       platform = Platform.from_deb(basename)
-      abort "Cannot parse DEB filename: #{basename}. Expected format: <name>_<ver>+<codename>_<arch>.deb".red unless platform
+      abort "Cannot parse DEB filename: #{basename}. Expected format: <name>_<ver>+<dist>_<arch>.deb".red unless platform
 
-      affected_codenames << platform.codename
+      affected_dists << platform.dist
       identity = parse_stanza_identity(stanza)
 
       # Add the new stanza for the package to every relevant binary-<arch> Packages file.
       # For arch-specific packages, this is one file. For "all" packages, it gets added
       # to the Packages file in all existing binary-<arch> dir.
-      target_binary_arches(platform.codename, platform.arch).each do |target_arch|
-        packages_dir = File.join(Infra::STAGING_DIR, 'apt', 'dists', codename, Infra.component, "binary-#{target_arch}")
+      target_binary_arches(platform.dist, platform.arch).each do |target_arch|
+        packages_dir = File.join(Infra::STAGING_DIR, 'apt', 'dists', platform.dist, Infra.component, "binary-#{target_arch}")
         FileUtils.mkdir_p(packages_dir)
         packages_file = File.join(packages_dir, 'Packages')
 
@@ -91,13 +91,13 @@ class Apt
         end
 
         packages_cache[packages_file] << stanza
-        puts "Added to #{codename}/#{Infra.component}/binary-#{target_arch}: #{basename}".cyan
+        puts "Added to #{platform.dist}/#{Infra.component}/binary-#{target_arch}: #{basename}".cyan
       end
     end
 
     packages_cache.each { |path, stanzas| write_packages_file(path, stanzas) }
-    affected_codenames.each { |codename| rebuild_indexes(codename) }
-    puts "apt metadata updated for #{affected_codenames.size} codenames.".green
+    affected_dists.each { |dist| rebuild_indexes(dist) }
+    puts "apt metadata updated for #{affected_dists.size} dists.".green
   end
 
   # Copy from state/apt/dists to staging/apt/dists
@@ -139,8 +139,8 @@ class Apt
   # gzip the Packages file (we have both Packages and Packages.gz, the latter is used
   # by apt clients for efficiency), then create the Release file, then the
   # signed Release.gpg and InRelease files.
-  def rebuild_indexes(codename)
-    dists_dir = File.join(Infra::STAGING_DIR, 'apt', 'dists', codename)
+  def rebuild_indexes(dist)
+    dists_dir = File.join(Infra::STAGING_DIR, 'apt', 'dists', dist)
 
     Dir.glob(File.join(dists_dir, '*', 'binary-*')).each do |binary_dir|
       packages_file = File.join(binary_dir, 'Packages')
@@ -149,7 +149,7 @@ class Apt
       @container.exec("gzip -n -9 -k -f #{Infra.container_path(packages_file)}")
     end
 
-    generate_release(dists_dir, codename)
+    generate_release(dists_dir, dist)
     sign_release(dists_dir)
   end
 
@@ -181,12 +181,12 @@ class Apt
   # For arch:all packages, find all existing binary-<arch> directories so we can put
   # the package into all of them. Some apt repos have separate binary-all directories,
   # but ours doesn't.
-  def target_binary_arches(codename, arch)
+  def target_binary_arches(dist, arch)
     return [arch] unless arch == 'all'
 
-    comp_dir = File.join(Infra::STAGING_DIR, 'apt', 'dists', codename, Infra.component)
+    comp_dir = File.join(Infra::STAGING_DIR, 'apt', 'dists', dist, Infra.component)
     unless Dir.exist?(comp_dir)
-      abort "No binary-<arch> directories exist for #{codename}/#{Infra.component}. " \
+      abort "No binary-<arch> directories exist for #{dist}/#{Infra.component}. " \
             'Cannot determine target architectures for arch:all DEB.'.red
     end
 
@@ -196,7 +196,7 @@ class Apt
                 .reject { |arch_name| arch_name == 'all' }
 
     if arches.empty?
-      abort "No binary-<arch> directories found for #{codename}/#{Infra.component}. " \
+      abort "No binary-<arch> directories found for #{dist}/#{Infra.component}. " \
             'Cannot determine target architectures for arch:all DEB.'.red
     end
 
@@ -252,9 +252,9 @@ class Apt
   # really necessary, but we were doing this previously when we were using
   # reprepro, and package managers sometimes have weird logic around
   # 13 vs. 13.0, so keep it for consistency.
-  def version_from_codename(codename)
-    match = codename.match(/(\d[\d.]*)$/)
-    abort "Cannot derive version from codename '#{codename}'. Codenames must end in digits.".red unless match
+  def version_from_dist(dist)
+    match = dist.match(/(\d[\d.]*)$/)
+    abort "Cannot derive version from dist '#{dist}'. Dist must end in digits.".red unless match
 
     ver = match[1]
     ver.include?('.') ? ver : "#{ver}.0"
@@ -262,19 +262,19 @@ class Apt
 
   # Create the Release file using the apt-ftparchive release command, which
   # scans the directory and computes checksums of everything it finds.
-  def generate_release(dists_dir, codename)
-    version = version_from_codename(codename)
+  def generate_release(dists_dir, dist)
+    version = version_from_dist(dist)
     container_dists = Infra.container_path(dists_dir)
     release_file = Infra.container_path(File.join(dists_dir, 'Release'))
 
     @container.exec(
       'apt-ftparchive release ' \
       "-o APT::FTPArchive::Release::Origin='Vox Pupuli' " \
-      "-o APT::FTPArchive::Release::Label='openvox-#{codename}' " \
+      "-o APT::FTPArchive::Release::Label='openvox-#{dist}' " \
       '-o APT::FTPArchive::Release::Suite=stable ' \
-      "-o APT::FTPArchive::Release::Codename=#{codename} " \
+      "-o APT::FTPArchive::Release::Codename=#{dist} " \
       "-o APT::FTPArchive::Release::Version=#{version} " \
-      "-o APT::FTPArchive::Release::Description='OpenVox #{codename} Repository' " \
+      "-o APT::FTPArchive::Release::Description='OpenVox #{dist} Repository' " \
       '-o APT::FTPArchive::Release::NumericTimezone=false ' \
       "#{container_dists} > #{release_file}"
     )

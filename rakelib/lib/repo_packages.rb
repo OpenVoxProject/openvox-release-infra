@@ -188,7 +188,7 @@ module RepoPackages
       install_file(File.join(KEYS_DIR, 'openvox-keyring.gpg'),
         File.join(build_dir, 'etc', 'apt', 'keyrings', 'openvox-keyring.gpg'))
       list_path = File.join(build_dir, 'etc', 'apt', 'sources.list.d', "#{pkg_name}.list")
-      config_file = install_template('apt.list.erb', list_path, package_def: package_def, codename: platform)
+      config_file = install_template('apt.list.erb', list_path, package_def: package_def, dist: platform)
       install_file(File.join(TEMPLATES_DIR, 'apt.pref'),
         File.join(build_dir, 'etc', 'apt', 'preferences.d', 'openvox-release.pref'))
     else
@@ -216,7 +216,7 @@ module RepoPackages
     dest
   end
 
-  def render_template(template_name, package_def:, os_name: nil, os_version: nil, codename: nil)
+  def render_template(template_name, package_def:, os_name: nil, os_version: nil, dist: nil)
     @template_cache ||= {}
     @template_cache[template_name] ||= ERB.new(File.read(File.join(TEMPLATES_DIR, template_name)), trim_mode: '-')
 
