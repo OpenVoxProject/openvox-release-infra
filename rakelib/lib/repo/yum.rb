@@ -74,12 +74,11 @@ class Yum
           "-o #{container_merge}"
         )
 
-        merged_repodata = File.join(merge_tmp, 'repodata')
-        abort "mergerepo_c produced no repomd.xml at #{merged_repodata}".red unless File.exist?(File.join(merged_repodata, 'repomd.xml'))
+        container_merged_repomd = "#{container_merge}/repodata/repomd.xml"
+        result = @container.capture("test -f #{container_merged_repomd}", allowed_exit_codes: [0, 1])
+        abort "mergerepo_c produced no repomd.xml at #{container_merge}/repodata".red unless result.exitcode.zero?
 
-        FileUtils.rm_rf(File.join(staging_path, 'repodata'))
-        FileUtils.mv(merged_repodata, staging_path)
-        FileUtils.rm_rf(merge_tmp)
+        @container.exec("rm -rf #{container_staging}/repodata && mv #{container_merge}/repodata #{container_staging} && rm -rf #{container_merge}")
       end
 
       repomd = File.join(staging_path, 'repodata', 'repomd.xml')

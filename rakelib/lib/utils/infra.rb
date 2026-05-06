@@ -118,6 +118,19 @@ module Infra
     container&.teardown
   end
 
+  # Remove a directory that may contain root-owned files left by a container.
+  # Tries host-side rm_rf first; falls back to a one-shot container if needed.
+  def force_remove(path)
+    FileUtils.rm_rf(path)
+    return unless Dir.exist?(path)
+
+    Container.run_once(
+      image: 'debian:13',
+      cmd: "rm -rf /target/#{File.basename(path)}",
+      volumes: { File.dirname(path) => '/target' }
+    )
+  end
+
   def import_gpg_key(container)
     container.exec(
       "echo \"$GPG_PRIVATE_KEY_B64\" | base64 -d | gpg --batch --import && " \

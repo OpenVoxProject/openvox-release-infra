@@ -53,8 +53,8 @@ task :release do
   Infra.setup_aws
   Infra.print_target(:apt_bucket, :yum_bucket, :downloads_bucket)
 
-  FileUtils.rm_rf(Infra::PACKAGES_DIR)
-  FileUtils.rm_rf(Infra::STAGING_DIR)
+  Infra.force_remove(Infra::PACKAGES_DIR)
+  Infra.force_remove(Infra::STAGING_DIR)
   FileUtils.mkdir_p(Infra::PACKAGES_DIR)
   FileUtils.mkdir_p(Infra::STAGING_DIR)
 

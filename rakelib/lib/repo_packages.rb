@@ -33,7 +33,7 @@ module RepoPackages
   end
 
   def build_and_sign(container)
-    FileUtils.rm_rf(Infra::STAGING_DIR)
+    Infra.force_remove(Infra::STAGING_DIR)
     [RPM_OUT, DEB_OUT, REPO_FILES_OUT, LIST_FILES_OUT, BUILD_DIR].each { |dir| FileUtils.mkdir_p(dir) }
 
     # Load package definitions

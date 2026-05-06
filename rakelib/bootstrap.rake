@@ -17,7 +17,7 @@ namespace :bootstrap do
     Infra.env('GPG_PRIVATE_KEY_B64', required: true)
     abort 'Bootstrap targets test buckets. Do not run with PRODUCTION=true.'.red if Infra.production?
 
-    FileUtils.rm_rf(Infra::STAGING_DIR)
+    Infra.force_remove(Infra::STAGING_DIR)
     FileUtils.mkdir_p(Infra::STAGING_DIR)
 
     tmp_download = File.join(Infra::REPO_ROOT, 'tmp_bootstrap')
