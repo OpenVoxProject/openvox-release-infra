@@ -81,7 +81,9 @@ jobs:
       # Cache the Docker image as a tarball keyed on the Dockerfile hash.
       # Faster than buildx type=gha for a simple single-layer image because
       # it avoids the buildx export/import round-trip (~20s even on cache hit).
-      - uses: actions/cache@v4
+      # Uses separate restore/save so the save runs even when the job fails.
+      - id: docker-cache
+        uses: actions/cache/restore@v4
         with:
           path: /tmp/release-image.tar
           key: docker-release-${{ hashFiles('Dockerfile') }}
@@ -94,6 +96,12 @@ jobs:
             docker build -t release:latest .
             docker save release:latest -o /tmp/release-image.tar
           fi
+
+      - uses: actions/cache/save@v4
+        if: always() && steps.docker-cache.outputs.cache-hit != 'true'
+        with:
+          path: /tmp/release-image.tar
+          key: docker-release-${{ hashFiles('Dockerfile') }}
 
       - name: Add SSH key
         run: |
