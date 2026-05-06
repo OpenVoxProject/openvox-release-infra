@@ -21,7 +21,7 @@ task :rollback do
     Shell.run(['git', 'checkout', commit, '--', 'state/'])
   end
 
-  Infra.commit_state("Rollback: restore state from #{commit}")
+  Infra.commit_state("Rollback: Restore state from #{commit}")
 
   # The deploy task deploys what it finds in STAGING_DIR. Since we aren't
   # changing any package files, just rolling back the metadata, we can simply

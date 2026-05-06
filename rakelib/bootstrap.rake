@@ -38,7 +38,7 @@ namespace :bootstrap do
       FileUtils.rm_rf(tmp_download)
     end
 
-    Infra.commit_state('Bootstrap from current production repos')
+    Infra.commit_state('Bootstrap: Initial commit from current production repos')
 
     # Deploy reformatted metadata to test buckets
     puts 'Deploying metadata to test buckets...'.magenta

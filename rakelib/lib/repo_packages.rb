@@ -129,7 +129,7 @@ module RepoPackages
     Dir.chdir(Infra::REPO_ROOT) do
       Shell.run(['git', 'add', package_json_path])
       Shell.run(['git', 'commit', '-s', '-m',
-                 "openvox-release packages: add #{label} to #{component}", '--', package_json_path])
+                 "Repo_packages: Add #{label} to #{component}", '--', package_json_path])
     end
     puts 'Committed locally. Push manually when ready.'.green
   end

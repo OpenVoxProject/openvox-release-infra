@@ -55,7 +55,7 @@ namespace :fix do
       Infra.teardown_with_chown(container)
     end
 
-    Infra.commit_state('Fix: remove non-src RPMs from src/ directories')
+    Infra.commit_state('Fix: Remove non-src RPMs from src/ directories')
     puts 'Done. Run `bundle exec rake deploy` to push changes to S3.'.green
   end
 
