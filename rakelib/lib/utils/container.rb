@@ -31,27 +31,6 @@ class Container
     Shell.run(cmd)
   end
 
-  # Ensure an image exists by running a block with a temporary container
-  # and committing the result. Skips if the image already exists.
-  # Returns the target tag.
-  def self.prepare_image(target_tag:, base_image:, setup_name:)
-    return target_tag if image_exists?(target_tag)
-
-    runner = new(name: setup_name, image: base_image)
-    begin
-      yield runner
-      runner.commit(target_tag)
-    ensure
-      begin
-        runner.teardown
-      rescue StandardError => e
-        warn "WARNING: teardown also failed: #{e.message}".yellow
-      end
-    end
-    puts "Image #{target_tag} committed.".green
-    target_tag
-  end
-
   def self.run_once(image:, cmd:, volumes: {}, platform: nil)
     args = ['docker', 'run', '--rm']
     args.push('--platform', platform) if platform

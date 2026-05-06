@@ -23,18 +23,7 @@ module Infra
   MACOS_NOTARY_PROFILE = 'openvox-notary'
 
   CONTAINER_TAG = 'release:latest'
-  CONTAINER_BASE = 'debian:13'
-  CONTAINER_INSTALL = <<~'BASH'
-    apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-      createrepo-c rpm debsigs gnupg dpkg-dev gzip apt-utils \
-      osslsigncode default-jre-headless curl \
-      ruby ruby-dev gcc make jq && \
-    gem install --no-document fpm && \
-    curl -sL https://github.com/ebourg/jsign/releases/download/7.4/jsign-7.4.jar -o /usr/local/lib/jsign.jar && \
-    printf '#!/bin/sh\nexec java -jar /usr/local/lib/jsign.jar "$@"\n' > /usr/local/bin/jsign && \
-    chmod +x /usr/local/bin/jsign
-  BASH
+  DOCKERFILE = File.join(REPO_ROOT, 'Dockerfile')
 
   SAFE_INPUT = /\A[a-zA-Z0-9._+-]+\z/
 
@@ -98,9 +87,7 @@ module Infra
   def s3_sync = "#{s3_cmd} sync --no-progress"
 
   def start_container
-    Container.prepare_image(target_tag: CONTAINER_TAG, base_image: CONTAINER_BASE, setup_name: 'release-setup') do |runner|
-      runner.run(CONTAINER_INSTALL)
-    end
+    Container.build_image(dockerfile: DOCKERFILE, tag: CONTAINER_TAG) unless Container.image_exists?(CONTAINER_TAG)
 
     name = CONTAINER_TAG.split(':').first
     container_env = {}

@@ -1,0 +1,3 @@
+# The Dockerfile doesn't COPY anything from the repo, so exclude
+# everything to avoid sending the build context to the daemon.
+*

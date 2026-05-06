@@ -87,6 +87,23 @@ jobs:
         with:
           ref: main
 
+      # Cache the Docker image as a tarball keyed on the Dockerfile hash.
+      # Faster than buildx type=gha for a simple single-layer image because
+      # it avoids the buildx export/import round-trip (~20s even on cache hit).
+      - uses: actions/cache@v4
+        with:
+          path: /tmp/release-image.tar
+          key: docker-release-${{ hashFiles('Dockerfile') }}
+
+      - name: Load or build container
+        run: |
+          if [[ -f /tmp/release-image.tar ]]; then
+            docker load -i /tmp/release-image.tar
+          else
+            docker build -t release:latest .
+            docker save release:latest -o /tmp/release-image.tar
+          fi
+
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '4'
@@ -109,6 +126,21 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
+
+      # See build-test job for explanation of this caching approach.
+      - uses: actions/cache@v4
+        with:
+          path: /tmp/release-image.tar
+          key: docker-release-${{ hashFiles('Dockerfile') }}
+
+      - name: Load or build container
+        run: |
+          if [[ -f /tmp/release-image.tar ]]; then
+            docker load -i /tmp/release-image.tar
+          else
+            docker build -t release:latest .
+            docker save release:latest -o /tmp/release-image.tar
+          fi
 
       - uses: ruby/setup-ruby@v1
         with:
