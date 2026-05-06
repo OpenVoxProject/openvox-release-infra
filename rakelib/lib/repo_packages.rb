@@ -46,7 +46,7 @@ module RepoPackages
 
     package_defs.each do |package_def|
       puts "Building repo packages for #{package_def['package']}...".magenta
-      package_def.fetch('platforms').each do |platform|
+      package_def['platforms'].each do |platform|
         next if platform_filter && !platform_filter.include?(platform)
 
         build_platform(container, package_def, infer_kind(platform), platform)
@@ -167,9 +167,8 @@ module RepoPackages
     output_ext = deb ? '.deb' : '.noarch.rpm'
     output_file = File.join(output_dir, "#{pkg_name}-#{platform}#{output_ext}")
 
-    iteration = deb ? "#{package_def['release']}#{flat_platform}" : "#{package_def['release']}.#{flat_platform}"
-    output_type = deb ? 'deb' : 'rpm'
-    run_fpm(container, package_def, build_dir, output_file, output_type: output_type, iteration: iteration)
+    iteration = "#{package_def['release']}#{'.' unless deb}#{flat_platform}"
+    run_fpm(container, package_def, build_dir, output_file, kind, iteration)
 
     if deb
       FileUtils.cp(config_file, File.join(LIST_FILES_OUT, "#{pkg_name}-#{flat_platform}.list"))
@@ -188,18 +187,18 @@ module RepoPackages
       install_file(File.join(KEYS_DIR, 'openvox-keyring.gpg'),
         File.join(build_dir, 'etc', 'apt', 'keyrings', 'openvox-keyring.gpg'))
       list_path = File.join(build_dir, 'etc', 'apt', 'sources.list.d', "#{pkg_name}.list")
-      config_file = install_template('apt.list.erb', list_path, package_def: package_def, dist: platform)
+      config_file = install_template('apt.list.erb', list_path, component: package_def['component'], dist: platform)
       install_file(File.join(TEMPLATES_DIR, 'apt.pref'),
         File.join(build_dir, 'etc', 'apt', 'preferences.d', 'openvox-release.pref'))
     else
-      target_repo = package_def.fetch('target_repo')
+      component = package_def['component']
       install_file(File.join(KEYS_DIR, 'GPG-KEY-openvox.pub'),
-        File.join(build_dir, 'etc', 'pki', 'rpm-gpg', "GPG-KEY-openvox-#{target_repo}-release"))
+        File.join(build_dir, 'etc', 'pki', 'rpm-gpg', "GPG-KEY-openvox-#{component}-release"))
       os_name, os_version = platform.split('-', 2)
       repo_subdir = os_name == 'sles' ? 'etc/zypp/repos.d' : 'etc/yum.repos.d'
       repo_path = File.join(build_dir, repo_subdir, "#{pkg_name}.repo")
       config_file = install_template('rpm.repo.erb', repo_path,
-        package_def: package_def, os_name: os_name, os_version: os_version)
+        component: component, os_name: os_name, os_version: os_version)
     end
 
     [build_dir, config_file]
@@ -210,25 +209,26 @@ module RepoPackages
     FileUtils.cp(source, dest)
   end
 
-  def install_template(template_name, dest, **template_vars)
-    FileUtils.mkdir_p(File.dirname(dest))
-    File.write(dest, render_template(template_name, **template_vars))
-    dest
-  end
-
-  def render_template(template_name, package_def:, os_name: nil, os_version: nil, dist: nil)
+  def install_template(template_name, dest, component:, os_name: nil, os_version: nil, dist: nil)
     @template_cache ||= {}
     @template_cache[template_name] ||= ERB.new(File.read(File.join(TEMPLATES_DIR, template_name)), trim_mode: '-')
 
-    target_repo = package_def.fetch('target_repo')
-    major = target_repo.gsub(/\D/, '')
-    yum_base = Infra.yum_release_package_base
-    apt_base = Infra.apt_release_package_base
+    content = @template_cache[template_name].result_with_hash(
+      component: component,
+      major: component.gsub(/\D/, ''),
+      yum_base: Infra.yum_release_package_base,
+      apt_base: Infra.apt_release_package_base,
+      os_name: os_name,
+      os_version: os_version,
+      dist: dist
+    )
 
-    @template_cache[template_name].result(binding)
+    FileUtils.mkdir_p(File.dirname(dest))
+    File.write(dest, content)
+    dest
   end
 
-  def run_fpm(container, package_def, build_dir, output_file, output_type:, iteration:)
+  def run_fpm(container, package_def, build_dir, output_file, output_type, iteration)
     args = [
       'fpm',
       '--input-type', 'dir',
