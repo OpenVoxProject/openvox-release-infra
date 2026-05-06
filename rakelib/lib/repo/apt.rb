@@ -60,7 +60,7 @@ class Apt
       abort "Cannot parse DEB filename: #{basename}. Expected format: <name>_<ver>+<dist>_<arch>.deb".red unless platform
 
       affected_dists << platform.dist
-      identity = parse_stanza_identity(stanza)
+      identity = stanza_identity(stanza)
 
       # Add the new stanza for the package to every relevant binary-<arch> Packages file.
       # For arch-specific packages, this is one file. For "all" packages, it gets added
@@ -70,19 +70,15 @@ class Apt
         FileUtils.mkdir_p(packages_dir)
         packages_file = File.join(packages_dir, 'Packages')
 
-        # The packages_cache first loads the Packages file from staging/, then gets updated
-        # with new packages. We do ||= so we only load from the file the first time.
         packages_cache[packages_file] ||= load_stanzas(packages_file)
 
-        # Look to see if we already have a matching package-version-architecture stanza
-        existing = packages_cache[packages_file].find { |entry| parse_stanza_identity(entry) == identity }
+        existing = packages_cache[packages_file][identity]
         if existing
           if Infra.env('FORCE_OVERWRITE') == 'true'
             puts "Overwriting existing entry for #{basename} in binary-#{target_arch}".yellow
-            packages_cache[packages_file].delete(existing)
-          elsif existing[/^SHA256: (.+)$/, 1] == stanza[/^SHA256: (.+)$/, 1]
-            # If we have the exact same unchanged package for some reason,
-            # no need to do any more work in this iteration of the loop.
+            packages_cache[packages_file].delete(identity)
+          elsif (sha = stanza[/^SHA256: (.+)$/, 1]) && sha == existing[/^SHA256: (.+)$/, 1]
+            # If the hash is identical, we're not really updating anything
             next
           else
             abort "Version collision: #{basename} has same Package/Version/Architecture " \
@@ -91,12 +87,12 @@ class Apt
           end
         end
 
-        packages_cache[packages_file] << stanza
+        packages_cache[packages_file][identity] = stanza
         puts "Added to #{platform.dist}/#{Infra.component}/binary-#{target_arch}: #{basename}".cyan
       end
     end
 
-    packages_cache.each { |path, stanzas| write_packages_file(path, stanzas) }
+    packages_cache.each { |path, stanzas| write_packages_file(path, stanzas.values) }
     affected_dists.each { |dist| rebuild_indexes(dist) }
     puts "apt metadata updated for #{affected_dists.size} dists.".green
   end
@@ -165,9 +161,7 @@ class Apt
     stanzas = {}
     output.split("\n\n").reject(&:empty?).each do |stanza_text|
       filename = stanza_text[/^Filename: (.+)$/, 1]
-      unless filename
-        abort "apt-ftparchive emitted a block without a Filename: field:\n#{stanza_text}".red
-      end
+      abort "apt-ftparchive emitted a block without a Filename: field:\n#{stanza_text}".red unless filename
       stanzas[File.basename(filename)] = "#{stanza_text}\n"
     end
 
@@ -204,17 +198,12 @@ class Apt
     arches
   end
 
-  # Extract information from a stanza that uniquely identifies it for
-  # a particular package-version-architecture.
-  def parse_stanza_identity(stanza)
-    identity = {
-      package: stanza[/^Package: (.+)$/, 1],
-      version: stanza[/^Version: (.+)$/, 1],
-      architecture: stanza[/^Architecture: (.+)$/, 1],
-    }
-    missing = identity.select { |_key, val| val.nil? }.keys
-    abort "Malformed stanza: missing #{missing.join(', ')} field(s).\nStanza:\n#{stanza}".red unless missing.empty?
-    identity
+  def stanza_identity(stanza)
+    package = stanza[/^Package: (.+)$/, 1]
+    version = stanza[/^Version: (.+)$/, 1]
+    architecture = stanza[/^Architecture: (.+)$/, 1]
+    abort "Malformed stanza (missing Package, Version, or Architecture):\n#{stanza}".red unless package && version && architecture
+    "#{package}/#{version}/#{architecture}"
   end
 
   # Scan through the Packages file, extracting each stanza. This is implemented
@@ -223,19 +212,23 @@ class Apt
   # manually and an editor ended up inserting \r\n, that would break. So instead,
   # we use line.chomp.empty? to search for blank lines.
   def load_stanzas(packages_file)
-    return [] unless File.exist?(packages_file)
+    return {} unless File.exist?(packages_file)
 
-    stanzas = []
+    stanzas = {}
     current = []
     File.foreach(packages_file) do |line|
       if line.chomp.empty? && !current.empty?
-        stanzas << current.join
+        entry = current.join
+        stanzas[stanza_identity(entry)] = entry
         current = []
       else
         current << line
       end
     end
-    stanzas << current.join unless current.empty?
+    unless current.empty?
+      entry = current.join
+      stanzas[stanza_identity(entry)] = entry
+    end
     stanzas
   end
 
