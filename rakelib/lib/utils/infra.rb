@@ -118,10 +118,12 @@ module Infra
   end
 
   def import_gpg_key(container)
-    container.exec('set -euo pipefail; echo "$GPG_PRIVATE_KEY_B64" | base64 -d | gpg --batch --import')
-    container.exec("gpg --list-secret-keys '#{GPG_KEY_ID}' >/dev/null")
-    container.exec("printf 'trust\\n5\\ny\\n' | gpg --batch --command-fd 0 --edit-key '#{GPG_KEY_ID}'")
-    container.exec("gpg --export --armor '#{GPG_KEY_ID}' > /tmp/gpg-pub.key && rpm --import /tmp/gpg-pub.key && rm /tmp/gpg-pub.key")
+    container.exec(
+      "echo \"$GPG_PRIVATE_KEY_B64\" | base64 -d | gpg --batch --import && " \
+      "gpg --list-secret-keys '#{GPG_KEY_ID}' >/dev/null && " \
+      "printf 'trust\\n5\\ny\\n' | gpg --batch --command-fd 0 --edit-key '#{GPG_KEY_ID}' && " \
+      "gpg --export --armor '#{GPG_KEY_ID}' > /tmp/gpg-pub.key && rpm --import /tmp/gpg-pub.key && rm /tmp/gpg-pub.key"
+    )
   end
 
   def gpg_detach_sign(container, host_path)
