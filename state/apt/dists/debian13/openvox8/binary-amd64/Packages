@@ -1,0 +1,1494 @@
+Package: openbolt
+Version: 5.5.0-1+debian13
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 126088
+Conflicts: puppet-bolt
+Breaks: puppet-bolt (<< 6)
+Replaces: puppet-bolt (<< 6)
+Provides: puppet-bolt (= 5)
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openbolt/openbolt_5.5.0-1+debian13_amd64.deb
+Size: 42279844
+SHA512: d424ee583e3c4171f0d7b8a18b3b1809722d582aac23ddbc8e32c788d0188d650a1612e0359123d9140752908de61684d08024b1769dbde6a38808ddba241258
+SHA256: fc7cc65b2c884374d57ccd89d2603d579c9d75bd4c5c11f769f70a9bd2f3eff1
+SHA1: 158798d2a91476ad0fbab73896fbbb2a3fe2edb0
+MD5sum: 7d465ddd4db15bf1a919755301d52d6e
+Description: Tool for executing commands, tasks, and plans on remote systems
+ .
+ Contains the following components:
+ gem-prune
+ openbolt 5.5.0
+ openbolt-create-ruby-tarballs
+ openbolt-runtime 2026.04.20.1
+
+Package: openbolt
+Version: 5.4.0-1+debian13
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 126687
+Conflicts: puppet-bolt
+Breaks: puppet-bolt (<< 6)
+Replaces: puppet-bolt (<< 6)
+Provides: puppet-bolt (= 5)
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openbolt/openbolt_5.4.0-1+debian13_amd64.deb
+Size: 42426764
+SHA512: 09ec0d651f902e09d233bbdce736c80cfd4e238c9e4560c95a7d2df3a371462c07713c65201f3fccf7d69e9419cd0149e6fbc8a346141c4af20e6fa8eb9eea09
+SHA256: e7e3a202daad2481ab6a58470154cc5b78fa4ea33e14149d0cc2400b226d15e4
+SHA1: 5d848e32cd9bc56265c2e4f2485a9ecdd81f0b76
+MD5sum: 061a6d6283a24ffd6991b4b666fa929e
+Description: Tool for executing commands, tasks, and plans on remote systems
+ .
+ Contains the following components:
+ gem-prune
+ openbolt 5.4.0
+ openbolt-create-ruby-tarballs
+ openbolt-runtime 2026.03.04.1
+
+Package: openbolt
+Version: 5.3.0-1+debian13
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 125409
+Conflicts: puppet-bolt
+Breaks: puppet-bolt (<< 6)
+Replaces: puppet-bolt (<< 6)
+Provides: puppet-bolt (= 5)
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openbolt/openbolt_5.3.0-1+debian13_amd64.deb
+Size: 41951560
+SHA512: 8ea832b247135870c994b7e11017ab239ac3f172b7d1426a0b2088a70d393439354f3c02595e66c296f65b1aba978098277564d6a8365a348c1b00bd8e4a2cd3
+SHA256: eba3cb17e3df0b85734cf30858f1b7905a51d75d620d1ded2b9158fa714a7b1f
+SHA1: 4e3b4ac1e122309b6cf994fbf885f834c3470812
+MD5sum: 73bbaa524c82162fa28abb211de1d7f6
+Description: Tool for executing commands, tasks, and plans on remote systems
+ .
+ Contains the following components:
+ gem-prune
+ openbolt 5.3.0
+ openbolt-create-ruby-tarballs
+ openbolt-runtime 2025.12.15.1
+
+Package: openbolt-dbgsym
+Source: openbolt
+Version: 5.5.0-1+debian13
+Auto-Built-Package: debug-symbols
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 3145
+Depends: openbolt (= 5.5.0-1+debian13)
+Priority: optional
+Section: debug
+Filename: pool/openvox8/o/openbolt/openbolt-dbgsym_5.5.0-1+debian13_amd64.deb
+Size: 703846
+SHA512: 2c23285bdf539826a93a840dae312e4d52931d2ab07d43a70f315eeba0b60a045c5e7f27e068370541ff8f6b016eddfeaa214374affd7c3fd85e049ab249547a
+SHA256: 1eb021c23df3dc14aaf9b5caba2c675de1ae83e72ca64a16eff896dae48d6f30
+SHA1: e822ee187a60885d1412c8fe440ad81380935aca
+MD5sum: 33c1495f9583fbfb47a4efd6978bcb17
+Description: debug symbols for openbolt
+Build-Ids: 01ffaa8bc123cd0bfa9cc9ac515d814cbe1dab33 0202c86f55aeb9465668d32f6ad6a0fb382e4848 020801e0984d78bb15d17b4fb0dc3fc2c3faa598 02152ca938c58b93127079cd6bcce270ae640928 037ff439d9b65ce704938d959fd34ddb8d619f7a 04532b3fe8f0b0052705b32cd41d7593bb645fa8 047f6693b990dcf22b069c4179590d9684c3755c 076da19e12855449d33305cb383c618c29956a96 08926daa5746242800429d36b69b8f926ed74ab4 0a680025f2ff11dbe2580c7b9e3b0f64268f27a4 0ef99cfcace36ba63da10215a7588fa2875f3140 0f3590fd9f6d3fde518d384aff62ed4fe3817760 0fbe77fb973f6bc601191946dd545c397f31da56 0fe092170e2447e327d21f43c63b46a5d3966341 102fa213c26ac195e5d81a114c2c00954d91ac2d 10c9c35b3c3a1dd193adcebcf1b52199733540e6 10dd455cec9a260a71465496b9e0241803fc1018 16330de8c2b809c157595e44807c821cdf77d526 18247a64032ec25125b4139777f4b4a42d4a1fb5 1b05dc0071b5effb6ff4ed6b76c981809080d47a 1b813841107fe701ba31d7d575597f11ac9a08b9 1c5152a48217daad598343d924e303c7ee01c28f 1e8bf18d0ef6a6ac5a33d50971368c814a659219 1f2f9905f8eb5ae8a07f9c68341f31b7ede6ac3a 230c8242c1b632de541898313a52b50a16104269 23786d8aa6541ce7c7bb4fa4fc621b51573754d2 258782f7e926eecccfc87fa5892f5608b8c5ed51 258daf91a5362aa2f595e50c55e1c9617bd59c79 26051d7bd4e04fc8848c826aea20f81b89ae8075 2710898d54ae28e442698f4cd4293c51e0d8805c 27e9811adf5a0cc12b7cbb396654d74a4d820941 2fbd219a581cf2f7eb040f7cf7292029e21d8aa1 31762173116797228f8c31d3cd718e7d4f88eb70 31bdd15cb9ac44ac95b7b8fc6b8d14c32c20220a 32de550fad92eb2fc926395900cdbad147d1fe93 34ca6877031e211afb0338680532e6b907be36e7 36afc403112df9173e071a8d3bb8ec39ae2ccc72 3a17f4758b715f40dc4677efb993faa7545e9995 3b3622a2bb3ca1244b20ea73253cf4a2bdff201e 3b8ba1eb098c6f337a1c7a5f8d231c3301a02c60 3c37fe86c9a745a1d823c865ee0998bbf50efc10 3d7345d543a865b0dbf6024dd56d7e369b7027ff 3d9281866215f349af1b752ab0684927903309e4 3fa204b2dcd4877765b06d6cf1e2ce20957038ba 4007fc7fd289fd2dd59d4d8492c79b651149bf05 45128189535741a2e4acbc6ac349f376b1be0745 467a945726be6fd5802aa50842e749c9a656ef12 469f142a2d7fc7f775c760b310d574ad63079bfd 47043d772b14150efc98585c9ef86f86da5d1625 48906914e0f866d87ba45d633048149e7046be82 4cb8fc02a979df4bc24ee7f635089a3fdd3e0c2c 4dce0fe0b0cd54046b1a5d70f02f21aeac333339 4dd70d85ad46fe729b538e0d99712a765d279353 4eeb4feb0c939f2b6e6ef1f22947e30d93a430bb 51aea155ee19668b04b7283c1427d2d48b803467 55cec6b296eb53bcc495412408db42eb8ab791b0 576c5d9c578626ed358bd913417bcb5cb24cbeb9 5ae037c5439ac370b828dfe887ad5a12b875fcd0 5c141ae038a3a5c0d04de9db638457d46fce46bf 609e183e96c1ed6db64b77493a52f0ce55000a84 615bdac92cb33b0bd8e454c78ee043d517fa5af4 64ef4ea4d5dac46148c950a3545b5fa25802ec89 6579485489db79f9987b883fcf8b25c364859a53 666ad747d8ebc604e017de2b6ee9560debdfe95a 6ae972c0c9ff51f75f8cb7315a16bf394841b08f 6b69d8cdf8e0073808dd5d03a97e22f1914b609c 712e68781b1e909867505ed5fa38a20ee1bfeea2 7a874d7e17914d92ab8baed2c6abfa20791ac2f4 7dd1107cd80e639358d5fc553ed10cb5b482e528 825f231ea2a42bf738346d2185485b43e89026d1 83574eefedac59a1f11e8b021204a1f847b01816 86355a68c7dd1069ab619edf38b59f37879bc88a 877f5e8228a05faa8a76a7f8bb6664f35b1e7eed 896355ab68491453bd8a7f97e9d448cdd795367a 8d4079fa066ec29e1ddcab96b33a3109d5dd3233 8eab02d347893b2f9866cf082b3babca4c49e450 90c69cec3d0ffba177294fd304883b337ea8ab2f 927007d01a5a7c218747475ee349de1e8b67999b 93c2a20829123cadbcaf464d73c829862d0c5925 993070ae65594f618b5dd3e4a8d9564c4eebce89 9dfd34f7f8fa01a99303b025376723fc37eec636 9e762f34055adaf42a197c107fe5cba6458e1811 a4044417d56e53ba7932953f93d2e9bb9b89d7a8 a4a25118a52846dedceb9697cf67cb32b5d85bd8 a6eec42aa2fc36a561024563025401cd98182bdc a6f28944e8f26b3f8d3d886d5fb8becd87c35103 aae821768c98858f9e8baa607de3afd4338b4f6b ac6c803624bab137016839d2b0db91eb664399f1 acc74122f5ae61c5c8d795e16f9e2855d54d31d7 b0ec17564b62865b27721429b5dd960b8bcfd69e b935870c2ab15faea18d63a83ec4e8a7df560eb3 baa82ef4cebed3b4ad9307abac1b92b9ea55bba0 baf46f87669b10b89a1f4e1aa1a916c65cf5fbfd bba26715621c4c6cf535ac52d7019dd12f66aede bbe7983b686869a54f521d995b2c88d2f3ded196 bd41d4f84ec48248bdbbea839e5217b34e28c966 be66ebb09b6052a1edc0195803943ad94f391e8c c14c32a2d956fb7b9a8c1991f5e6c881f88d1334 c51305b31e3317d91003bcabe28d2065e021f076 c62c086995eed8c0fd8d7d12d9a9b6e797775232 c99daf69cfd3c93ae9fd2dcdbf842e80ca9b8179 ca5427ad0d4a527297abe1a10ba45097548d234e cdf4aed382ce05945274ab464b9ccbf4b9fb62e0 ce230d1754e69b15997f6a462ee4309c144bd24e d1df0a3af75b2846849f06485835f8c9164afb96 d285fe3f166cc6bdeeea6f72dcb397fabf832873 dce3f66a5b0c1bb31825a8117a450f5f2958d77f dd4eb88c59ed5ada5ae4e646583643c8c1af227e e0a236cde60ed9c5dd7caf799787145fa37de2d2 e346a2923689be3cebbde5243a3913e8a59a309e e34fab927966a820242d43e49b2d46ce00facb2c e370e2bb6f1882c31ead8269c9ab2a5de5bbe6d8 e3ad8a049465b71030ef8696b780c9b7d4f382b8 e6870ca7d7a40bf5b78b7bf8c20ff0d535c27e9a e6e3cfec63e6768508dc5e8d0929c31e68e352d0 e85e523c2656836cd80938e44177afe2b0e64ce7 ee4120d723e5ea535a496c7239e137fcdbd9624e ee422b15026f370a9272ee3ae758fae6f690aeca eeec161272e61431452885ff7505f15a9ac94d5d ef3396929123cb375d362b35dd49bab2c69d0bd0 f623ed035cfe28fd766d3e6ae76a9a1b6a07e36b f6deea8ccd689c4272eec432e5e8bd0a1e50738f fa31541f3c263ede734a1b83940da678316aa3eb faa2db0178c9b4766a95ff0c450aa2efc8ef5232 fade11f8b9a1f166fbbebf8ad2ed2b68d938b102 fc3c97ae862d2bd51a7cce7a5ca884a870a55016 fc6649b6ed3ef6ea791615d5fe8caf554e03aaff fdccea1173c10159edd8ac120f94595eb77d8668 ff5345a1c44f7e290c6bfae154f104bff1885130 ffd0d465a10cdc3f008a9d5a5b8bf2529372161d
+
+Package: openbolt-dbgsym
+Source: openbolt
+Version: 5.4.0-1+debian13
+Auto-Built-Package: debug-symbols
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 3149
+Depends: openbolt (= 5.4.0-1+debian13)
+Priority: optional
+Section: debug
+Filename: pool/openvox8/o/openbolt/openbolt-dbgsym_5.4.0-1+debian13_amd64.deb
+Size: 703458
+SHA512: b93ae4fc91e5f8c06a14c955789a4660cd943679a452f6191a2fa88e7b757b985df6570865c6e8485dc58fa4444d4081d349fba52853bc14c000d38eab5a01af
+SHA256: 6da9dd7710c6d600ea357960d92ac4acb775a1bb2bd1e121681cfb4e33e1d3a1
+SHA1: 5e7faebc709c13eaa770e8446d6bbed6c40c2b95
+MD5sum: e0b56acf5fbc185012c4f228c557a1ed
+Description: debug symbols for openbolt
+Build-Ids: 01ffaa8bc123cd0bfa9cc9ac515d814cbe1dab33 02152ca938c58b93127079cd6bcce270ae640928 02b794f684fcbb2e9f8aa1863255ee7b9acafb97 03e064ce70566b19d53d62c2456152bcd8b3f021 076da19e12855449d33305cb383c618c29956a96 08926daa5746242800429d36b69b8f926ed74ab4 0a680025f2ff11dbe2580c7b9e3b0f64268f27a4 0c962ce6a3cbd46a95c6d89c61d145f81bbd0a33 0f3590fd9f6d3fde518d384aff62ed4fe3817760 0fbe77fb973f6bc601191946dd545c397f31da56 0fe092170e2447e327d21f43c63b46a5d3966341 102fa213c26ac195e5d81a114c2c00954d91ac2d 10c9c35b3c3a1dd193adcebcf1b52199733540e6 10dd455cec9a260a71465496b9e0241803fc1018 138cd1bb5516ba91b25bd56663c3de0a1af1377f 16330de8c2b809c157595e44807c821cdf77d526 18247a64032ec25125b4139777f4b4a42d4a1fb5 1b05dc0071b5effb6ff4ed6b76c981809080d47a 1b813841107fe701ba31d7d575597f11ac9a08b9 1c5152a48217daad598343d924e303c7ee01c28f 1e8bf18d0ef6a6ac5a33d50971368c814a659219 1f2f9905f8eb5ae8a07f9c68341f31b7ede6ac3a 20d214db0c49e96d9383fe7c91ea14f15539e6cf 21832183844c7d4d5c9e9e3514452b91eb1e7306 230c8242c1b632de541898313a52b50a16104269 23786d8aa6541ce7c7bb4fa4fc621b51573754d2 258daf91a5362aa2f595e50c55e1c9617bd59c79 26051d7bd4e04fc8848c826aea20f81b89ae8075 2710898d54ae28e442698f4cd4293c51e0d8805c 27e9811adf5a0cc12b7cbb396654d74a4d820941 31762173116797228f8c31d3cd718e7d4f88eb70 31bdd15cb9ac44ac95b7b8fc6b8d14c32c20220a 36afc403112df9173e071a8d3bb8ec39ae2ccc72 3a17f4758b715f40dc4677efb993faa7545e9995 3b3622a2bb3ca1244b20ea73253cf4a2bdff201e 3b8ba1eb098c6f337a1c7a5f8d231c3301a02c60 3d7345d543a865b0dbf6024dd56d7e369b7027ff 3d9281866215f349af1b752ab0684927903309e4 45128189535741a2e4acbc6ac349f376b1be0745 467a945726be6fd5802aa50842e749c9a656ef12 469f142a2d7fc7f775c760b310d574ad63079bfd 46bbd581bf20824b0cee6da5aa9816c6d34faf17 47043d772b14150efc98585c9ef86f86da5d1625 48906914e0f866d87ba45d633048149e7046be82 4cb8fc02a979df4bc24ee7f635089a3fdd3e0c2c 4dce0fe0b0cd54046b1a5d70f02f21aeac333339 4dd70d85ad46fe729b538e0d99712a765d279353 51aea155ee19668b04b7283c1427d2d48b803467 56423fb5bf5bf1c77ab12da0230069c98d7c3331 5ae037c5439ac370b828dfe887ad5a12b875fcd0 5c141ae038a3a5c0d04de9db638457d46fce46bf 609e183e96c1ed6db64b77493a52f0ce55000a84 61359044e075c919960920e5d32bccca66286f6c 615bdac92cb33b0bd8e454c78ee043d517fa5af4 64ef4ea4d5dac46148c950a3545b5fa25802ec89 6579485489db79f9987b883fcf8b25c364859a53 6ae972c0c9ff51f75f8cb7315a16bf394841b08f 6b69d8cdf8e0073808dd5d03a97e22f1914b609c 7053347639376aa3d056f647a1f0201ad238a119 712e68781b1e909867505ed5fa38a20ee1bfeea2 7a874d7e17914d92ab8baed2c6abfa20791ac2f4 7dd1107cd80e639358d5fc553ed10cb5b482e528 814b1a91967fd7cb0b067c9ec9641e5d252e513b 83574eefedac59a1f11e8b021204a1f847b01816 86f56a7ae389a96685f74133dabde6dfd3cace55 877f5e8228a05faa8a76a7f8bb6664f35b1e7eed 888c97793aea1382972409ffe43fab0f0cc70759 896355ab68491453bd8a7f97e9d448cdd795367a 89a854507cdffc8cf94fd4707c4e9531295e08b8 8d4079fa066ec29e1ddcab96b33a3109d5dd3233 8eab02d347893b2f9866cf082b3babca4c49e450 8f202b942fe9d50e48938e9eecb4b24f2d78a593 90c69cec3d0ffba177294fd304883b337ea8ab2f 927007d01a5a7c218747475ee349de1e8b67999b 93c2a20829123cadbcaf464d73c829862d0c5925 993070ae65594f618b5dd3e4a8d9564c4eebce89 9dfd34f7f8fa01a99303b025376723fc37eec636 9e762f34055adaf42a197c107fe5cba6458e1811 a4044417d56e53ba7932953f93d2e9bb9b89d7a8 a4a25118a52846dedceb9697cf67cb32b5d85bd8 a6f28944e8f26b3f8d3d886d5fb8becd87c35103 aae821768c98858f9e8baa607de3afd4338b4f6b ac6c803624bab137016839d2b0db91eb664399f1 acc74122f5ae61c5c8d795e16f9e2855d54d31d7 af83cff2eb7edf2531ce09dba1302eeacedd2d7c b0ec17564b62865b27721429b5dd960b8bcfd69e b935870c2ab15faea18d63a83ec4e8a7df560eb3 baf46f87669b10b89a1f4e1aa1a916c65cf5fbfd bba26715621c4c6cf535ac52d7019dd12f66aede bbe7983b686869a54f521d995b2c88d2f3ded196 bd41d4f84ec48248bdbbea839e5217b34e28c966 be66ebb09b6052a1edc0195803943ad94f391e8c c14c32a2d956fb7b9a8c1991f5e6c881f88d1334 c37382a8dbd1b20d793957cf764123f1ad4e3f00 c51305b31e3317d91003bcabe28d2065e021f076 c62c086995eed8c0fd8d7d12d9a9b6e797775232 c99daf69cfd3c93ae9fd2dcdbf842e80ca9b8179 ca5427ad0d4a527297abe1a10ba45097548d234e cc785bbb997993a0feb97f0d82934264cd895df7 ce230d1754e69b15997f6a462ee4309c144bd24e ceb8c59f54b1b643a9198abdc733569d686000fd d16966136a48dcad4e1e8bbcb724f7e5235552c0 d1df0a3af75b2846849f06485835f8c9164afb96 d285fe3f166cc6bdeeea6f72dcb397fabf832873 d546d8268b30f1a298a90ebebf4ee5e78942700a d6ae34bc954fea9388415fa3afc866931edbdf83 dd4eb88c59ed5ada5ae4e646583643c8c1af227e deb01a5fb67ad7ef004740a9a3e64dcc84633391 e34fab927966a820242d43e49b2d46ce00facb2c e6870ca7d7a40bf5b78b7bf8c20ff0d535c27e9a ec53aee0a0ff6a7d864154ea4fbbbc133e993c7b ee4120d723e5ea535a496c7239e137fcdbd9624e ee422b15026f370a9272ee3ae758fae6f690aeca f01b7dc995c80b1c2901826b1a83559740f43e10 f285c35266b0269e0fab6fe26e415616d931a47f f5990a69bf577cc4bd9d077dcabac4492783044b f623ed035cfe28fd766d3e6ae76a9a1b6a07e36b f6deea8ccd689c4272eec432e5e8bd0a1e50738f f786df0735265e7ebe2ae02a856b17aaf975c440 f909d308ad3762e3421b2db730df0164c046835d fa31541f3c263ede734a1b83940da678316aa3eb faa2db0178c9b4766a95ff0c450aa2efc8ef5232 fade11f8b9a1f166fbbebf8ad2ed2b68d938b102 fb5ba0c3500f2172e99351f7bc6bb7eb2db9c9a4 fb6e2ff298c8b6efa05b37e73bdb2398293303cb fc4b2a5c1ebe39361a23dd43ca9f2e92fbdf9e19 fdccea1173c10159edd8ac120f94595eb77d8668 fe5f9f8907874007d1091842560c69b9fe0ce4ad ff5345a1c44f7e290c6bfae154f104bff1885130 ffd0d465a10cdc3f008a9d5a5b8bf2529372161d
+
+Package: openbolt-dbgsym
+Source: openbolt
+Version: 5.3.0-1+debian13
+Auto-Built-Package: debug-symbols
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 3151
+Depends: openbolt (= 5.3.0-1+debian13)
+Priority: optional
+Section: debug
+Filename: pool/openvox8/o/openbolt/openbolt-dbgsym_5.3.0-1+debian13_amd64.deb
+Size: 705106
+SHA512: 3515591fee7a9bae691e541b67f488aba7d8d7f9989d16e0460916cae0889abd49f50e148f5a24a26667c8f05c75773ad60683f54cff0ae3361b927a0b2798fd
+SHA256: a78d016f134f4c6fb584b5a232935e601fd8e9fdab0f44c4893d7001fbb67c4e
+SHA1: b4fea3e2b7dda3438d1f443e70a8a55bd7f947f1
+MD5sum: 063d31c3ad2b606d5fa13c3af6ee01f2
+Description: debug symbols for openbolt
+Build-Ids: 01ffaa8bc123cd0bfa9cc9ac515d814cbe1dab33 02152ca938c58b93127079cd6bcce270ae640928 02b794f684fcbb2e9f8aa1863255ee7b9acafb97 076da19e12855449d33305cb383c618c29956a96 08926daa5746242800429d36b69b8f926ed74ab4 0a680025f2ff11dbe2580c7b9e3b0f64268f27a4 0c962ce6a3cbd46a95c6d89c61d145f81bbd0a33 0f3590fd9f6d3fde518d384aff62ed4fe3817760 0fe092170e2447e327d21f43c63b46a5d3966341 102fa213c26ac195e5d81a114c2c00954d91ac2d 10c9c35b3c3a1dd193adcebcf1b52199733540e6 10dd455cec9a260a71465496b9e0241803fc1018 138cd1bb5516ba91b25bd56663c3de0a1af1377f 16330de8c2b809c157595e44807c821cdf77d526 18247a64032ec25125b4139777f4b4a42d4a1fb5 1b05dc0071b5effb6ff4ed6b76c981809080d47a 1b813841107fe701ba31d7d575597f11ac9a08b9 1c5152a48217daad598343d924e303c7ee01c28f 1e8bf18d0ef6a6ac5a33d50971368c814a659219 1f2f9905f8eb5ae8a07f9c68341f31b7ede6ac3a 230c8242c1b632de541898313a52b50a16104269 23786d8aa6541ce7c7bb4fa4fc621b51573754d2 258daf91a5362aa2f595e50c55e1c9617bd59c79 26051d7bd4e04fc8848c826aea20f81b89ae8075 2710898d54ae28e442698f4cd4293c51e0d8805c 27e9811adf5a0cc12b7cbb396654d74a4d820941 30bbcdcfb2da7851340ce063d77834dfb4030c9e 31762173116797228f8c31d3cd718e7d4f88eb70 31bdd15cb9ac44ac95b7b8fc6b8d14c32c20220a 36afc403112df9173e071a8d3bb8ec39ae2ccc72 3a17f4758b715f40dc4677efb993faa7545e9995 3b3622a2bb3ca1244b20ea73253cf4a2bdff201e 3b8ba1eb098c6f337a1c7a5f8d231c3301a02c60 3cfc5b5b7a8b66099c14149ffb76047b58227698 3d7345d543a865b0dbf6024dd56d7e369b7027ff 3d9281866215f349af1b752ab0684927903309e4 45128189535741a2e4acbc6ac349f376b1be0745 469f142a2d7fc7f775c760b310d574ad63079bfd 46bbd581bf20824b0cee6da5aa9816c6d34faf17 47043d772b14150efc98585c9ef86f86da5d1625 48906914e0f866d87ba45d633048149e7046be82 4cb8fc02a979df4bc24ee7f635089a3fdd3e0c2c 4dce0fe0b0cd54046b1a5d70f02f21aeac333339 4dd70d85ad46fe729b538e0d99712a765d279353 51aea155ee19668b04b7283c1427d2d48b803467 56423fb5bf5bf1c77ab12da0230069c98d7c3331 5ae037c5439ac370b828dfe887ad5a12b875fcd0 5c141ae038a3a5c0d04de9db638457d46fce46bf 601dae3eb102392d25ea884c555faab365cc4eec 609e183e96c1ed6db64b77493a52f0ce55000a84 61359044e075c919960920e5d32bccca66286f6c 615bdac92cb33b0bd8e454c78ee043d517fa5af4 64ef4ea4d5dac46148c950a3545b5fa25802ec89 6579485489db79f9987b883fcf8b25c364859a53 6ae972c0c9ff51f75f8cb7315a16bf394841b08f 6b69d8cdf8e0073808dd5d03a97e22f1914b609c 7053347639376aa3d056f647a1f0201ad238a119 712e68781b1e909867505ed5fa38a20ee1bfeea2 7a874d7e17914d92ab8baed2c6abfa20791ac2f4 7dd1107cd80e639358d5fc553ed10cb5b482e528 83574eefedac59a1f11e8b021204a1f847b01816 86182ede4a77d4451907960c336488d3e3a7f901 86f56a7ae389a96685f74133dabde6dfd3cace55 877f5e8228a05faa8a76a7f8bb6664f35b1e7eed 888c97793aea1382972409ffe43fab0f0cc70759 896355ab68491453bd8a7f97e9d448cdd795367a 8d4079fa066ec29e1ddcab96b33a3109d5dd3233 8eab02d347893b2f9866cf082b3babca4c49e450 8f202b942fe9d50e48938e9eecb4b24f2d78a593 90c69cec3d0ffba177294fd304883b337ea8ab2f 927007d01a5a7c218747475ee349de1e8b67999b 93c2a20829123cadbcaf464d73c829862d0c5925 95704bb0128a8320d01049b9590ba0f4abb244f6 9670857a2f05e006fa9039399fb76cfccaef535c 993070ae65594f618b5dd3e4a8d9564c4eebce89 9dfd34f7f8fa01a99303b025376723fc37eec636 9e762f34055adaf42a197c107fe5cba6458e1811 a4044417d56e53ba7932953f93d2e9bb9b89d7a8 a4a25118a52846dedceb9697cf67cb32b5d85bd8 a6f28944e8f26b3f8d3d886d5fb8becd87c35103 aae821768c98858f9e8baa607de3afd4338b4f6b abaabbebc5b4438324bfe7a712027bf5e8ff31d6 ac6c803624bab137016839d2b0db91eb664399f1 acc74122f5ae61c5c8d795e16f9e2855d54d31d7 af83cff2eb7edf2531ce09dba1302eeacedd2d7c b0ec17564b62865b27721429b5dd960b8bcfd69e b935870c2ab15faea18d63a83ec4e8a7df560eb3 baf46f87669b10b89a1f4e1aa1a916c65cf5fbfd bba26715621c4c6cf535ac52d7019dd12f66aede bbe7983b686869a54f521d995b2c88d2f3ded196 bd41d4f84ec48248bdbbea839e5217b34e28c966 be66ebb09b6052a1edc0195803943ad94f391e8c c14c32a2d956fb7b9a8c1991f5e6c881f88d1334 c37382a8dbd1b20d793957cf764123f1ad4e3f00 c51305b31e3317d91003bcabe28d2065e021f076 c62c086995eed8c0fd8d7d12d9a9b6e797775232 c87d396fd78f3ab0754763f62fd1b5d7a333b05c c99daf69cfd3c93ae9fd2dcdbf842e80ca9b8179 ca5427ad0d4a527297abe1a10ba45097548d234e cc785bbb997993a0feb97f0d82934264cd895df7 ce230d1754e69b15997f6a462ee4309c144bd24e d16966136a48dcad4e1e8bbcb724f7e5235552c0 d1df0a3af75b2846849f06485835f8c9164afb96 d285fe3f166cc6bdeeea6f72dcb397fabf832873 d546d8268b30f1a298a90ebebf4ee5e78942700a dd4eb88c59ed5ada5ae4e646583643c8c1af227e e34fab927966a820242d43e49b2d46ce00facb2c e6870ca7d7a40bf5b78b7bf8c20ff0d535c27e9a e84cfb6b25d76655fa664ed18e1b8947a9b2115a ec53aee0a0ff6a7d864154ea4fbbbc133e993c7b ee4120d723e5ea535a496c7239e137fcdbd9624e ee422b15026f370a9272ee3ae758fae6f690aeca f01b7dc995c80b1c2901826b1a83559740f43e10 f214b3c01c9026e8e92e3b0c6bc9f7c281416791 f285c35266b0269e0fab6fe26e415616d931a47f f5990a69bf577cc4bd9d077dcabac4492783044b f623ed035cfe28fd766d3e6ae76a9a1b6a07e36b f6deea8ccd689c4272eec432e5e8bd0a1e50738f f786df0735265e7ebe2ae02a856b17aaf975c440 f909d308ad3762e3421b2db730df0164c046835d fa31541f3c263ede734a1b83940da678316aa3eb faa2db0178c9b4766a95ff0c450aa2efc8ef5232 fade11f8b9a1f166fbbebf8ad2ed2b68d938b102 fb5ba0c3500f2172e99351f7bc6bb7eb2db9c9a4 fb6e2ff298c8b6efa05b37e73bdb2398293303cb fc4b2a5c1ebe39361a23dd43ca9f2e92fbdf9e19 fdccea1173c10159edd8ac120f94595eb77d8668 fe5f9f8907874007d1091842560c69b9fe0ce4ad ff5345a1c44f7e290c6bfae154f104bff1885130 ffd0d465a10cdc3f008a9d5a5b8bf2529372161d
+
+Package: openvox-agent
+Version: 8.26.2-1+debian13
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 83222
+Depends: findutils, tar
+Conflicts: puppet-agent
+Breaks: puppet-agent (<< 9)
+Replaces: puppet-agent (<< 9)
+Provides: puppet-agent (= 8.26.2)
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openvox-agent/openvox-agent_8.26.2-1+debian13_amd64.deb
+Size: 26231316
+SHA512: 4e8cc1aa9fb3c50f5aa4671c47236a1d8b2a3e8eb82a4c9d50e2de11faee07d02dc0ba911c5f20261bbccb65afa80f2ca1d929cdbefad6f3e55e86c8829363f0
+SHA256: eb79b87a2690e8ceef13f904540cecf7322ddbcf21a754c5f3105bbac9c12bce
+SHA1: 1a9070f9b9af8ce27e1ff39a20a3cb3792ca509f
+MD5sum: b9772a82b46c79bedb52b80ba6809ece
+Description: The OpenVox Agent package contains all of the elements needed to run the agent, including ruby and openfact.
+ .
+ Contains the following components:
+ cleanup
+ execution_wrapper
+ module-puppetlabs-augeas_core v1.5.0
+ module-puppetlabs-cron_core v1.3.0
+ module-puppetlabs-host_core v1.3.0
+ module-puppetlabs-mount_core v1.3.0
+ module-puppetlabs-scheduled_task v3.2.0
+ module-puppetlabs-selinux_core v1.4.0
+ module-puppetlabs-sshkeys_core v2.5.0
+ module-puppetlabs-yumrepo_core v2.1.0
+ module-puppetlabs-zfs_core v1.6.1
+ module-puppetlabs-zone_core v1.2.0
+ openfact 5.6.0
+ puppet 8.26.1
+ puppet-resource_api 1.9.0
+ puppet-runtime 2026.04.17.1
+ shellpath 2023-02-15
+ wrapper-script
+
+Package: openvox-agent
+Version: 8.26.1-1+debian13
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 83255
+Depends: findutils, tar
+Conflicts: puppet-agent
+Breaks: puppet-agent (<< 9)
+Replaces: puppet-agent (<< 9)
+Provides: puppet-agent (= 8)
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openvox-agent/openvox-agent_8.26.1-1+debian13_amd64.deb
+Size: 26254382
+SHA512: ac357392e49f133c05ef2a0794d0ccc76d5c9acb6ce63e1c7792ee9630a3b9c149c9ab96308a0a6a81c79af9086bd1132069171b69e2cf2c1b55d3f5dbe87dd0
+SHA256: 87cb1a147c6f8dfd563409aae446a416f8d1fa8f03dfe53bc761dd5ccd9fe85c
+SHA1: b61a817fa5471e9084695b18e3b6b4dfeef98cd4
+MD5sum: fa141d2af84c6cd5f22d8103365ff71c
+Description: The OpenVox Agent package contains all of the elements needed to run the agent, including ruby and openfact.
+ .
+ Contains the following components:
+ cleanup
+ execution_wrapper
+ module-puppetlabs-augeas_core v1.5.0
+ module-puppetlabs-cron_core v1.3.0
+ module-puppetlabs-host_core v1.3.0
+ module-puppetlabs-mount_core v1.3.0
+ module-puppetlabs-scheduled_task v3.2.0
+ module-puppetlabs-selinux_core v1.4.0
+ module-puppetlabs-sshkeys_core v2.5.0
+ module-puppetlabs-yumrepo_core v2.1.0
+ module-puppetlabs-zfs_core v1.6.1
+ module-puppetlabs-zone_core v1.2.0
+ openfact 5.6.0
+ puppet 8.26.1
+ puppet-resource_api 1.9.0
+ puppet-runtime 2026.04.15.1
+ shellpath 2023-02-15
+ wrapper-script
+
+Package: openvox-agent
+Version: 8.26.0-1+debian13
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 83222
+Depends: findutils, tar
+Conflicts: puppet-agent
+Breaks: puppet-agent (<< 9)
+Replaces: puppet-agent (<< 9)
+Provides: puppet-agent (= 8)
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openvox-agent/openvox-agent_8.26.0-1+debian13_amd64.deb
+Size: 26231502
+SHA512: 76765155a78299db66eddc3976c8fcbcf0db2e66ee999c081d062811567999f1fb843bde203eaa8fd5b9c85f43f4cc325e82ceec7d020c7b3f25456ebc4b0207
+SHA256: 688933c45c3054e0bb6ecdeebcc5f3231acec8d4610224820115e7906d5b1cc9
+SHA1: 5757c895dc81f926884d64eb58badfc51c5d7559
+MD5sum: 721ce8c3b5e5006185637f40229ae4f7
+Description: The OpenVox Agent package contains all of the elements needed to run the agent, including ruby and openfact.
+ .
+ Contains the following components:
+ cleanup
+ execution_wrapper
+ module-puppetlabs-augeas_core v1.5.0
+ module-puppetlabs-cron_core v1.3.0
+ module-puppetlabs-host_core v1.3.0
+ module-puppetlabs-mount_core v1.3.0
+ module-puppetlabs-scheduled_task v3.2.0
+ module-puppetlabs-selinux_core v1.4.0
+ module-puppetlabs-sshkeys_core v2.5.0
+ module-puppetlabs-yumrepo_core v2.1.0
+ module-puppetlabs-zfs_core v1.6.1
+ module-puppetlabs-zone_core v1.2.0
+ openfact 5.6.0
+ puppet 8.26.0
+ puppet-resource_api 1.9.0
+ puppet-runtime 2026.04.09.1
+ shellpath 2023-02-15
+ wrapper-script
+
+Package: openvox-agent
+Version: 8.25.0-1+debian13
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 84115
+Depends: findutils, tar
+Conflicts: puppet-agent
+Breaks: puppet-agent (<< 9)
+Replaces: puppet-agent (<< 9)
+Provides: puppet-agent (= 8)
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openvox-agent/openvox-agent_8.25.0-1+debian13_amd64.deb
+Size: 26435414
+SHA512: d9be8da7a4b5b0a0bf371dbf9b6e9537637d7c61b11bf199260a15a2142313b7ee97ce6627f2332313a98124ac60bfa0be42a8ab2cdf342a778071141fd4d636
+SHA256: df148ffd1a9607ee9dbddb7c18ed044f0cf3fef709c23e3a936226bc2085a695
+SHA1: a436a1e52fa73815754c9c658011a50e0277f791
+MD5sum: 050ac19b4368cb4cb539efaaac8711df
+Description: The OpenVox Agent package contains all of the elements needed to run the agent, including ruby and openfact.
+ .
+ Contains the following components:
+ cleanup
+ execution_wrapper
+ module-puppetlabs-augeas_core v1.5.0
+ module-puppetlabs-cron_core v1.3.0
+ module-puppetlabs-host_core v1.3.0
+ module-puppetlabs-mount_core v1.3.0
+ module-puppetlabs-scheduled_task v3.2.0
+ module-puppetlabs-selinux_core v1.4.0
+ module-puppetlabs-sshkeys_core v2.5.0
+ module-puppetlabs-yumrepo_core v2.1.0
+ module-puppetlabs-zfs_core v1.6.1
+ module-puppetlabs-zone_core v1.2.0
+ openfact 5.4.0
+ puppet 8.25.0
+ puppet-resource_api 1.9.0
+ puppet-runtime 2026.02.16.1
+ shellpath 2023-02-15
+ wrapper-script
+
+Package: openvox-agent
+Version: 8.24.2-1+debian13
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 86947
+Depends: findutils, tar
+Conflicts: puppet-agent
+Breaks: puppet-agent (<< 9)
+Replaces: puppet-agent (<< 9)
+Provides: puppet-agent (= 8)
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openvox-agent/openvox-agent_8.24.2-1+debian13_amd64.deb
+Size: 27369774
+SHA512: a5ea30aa518bdca5736302eb87076d78a108e2024c898e82730d3cbeeaab62494fc2626ed6cba3d9fdb1afb4cb6f2151da2d83980177c6c543378fd3da6cfcca
+SHA256: 4d5412b944c778ba8c639b83f3c7c348dd78832e085600bb4fa18dedde2b40b8
+SHA1: b01492199474d69e0274d85538a49a40e645db8b
+MD5sum: 7667d168f9f0426d37a5366cf5e2788d
+Description: The OpenVox Agent package contains all of the elements needed to run the agent, including ruby and openfact.
+ .
+ Contains the following components:
+ cleanup
+ execution_wrapper
+ module-puppetlabs-augeas_core v1.5.0
+ module-puppetlabs-cron_core v1.3.0
+ module-puppetlabs-host_core v1.3.0
+ module-puppetlabs-mount_core v1.3.0
+ module-puppetlabs-scheduled_task v3.2.0
+ module-puppetlabs-selinux_core v1.4.0
+ module-puppetlabs-sshkeys_core v2.5.0
+ module-puppetlabs-yumrepo_core v2.1.0
+ module-puppetlabs-zfs_core v1.6.1
+ module-puppetlabs-zone_core v1.2.0
+ openfact 5.2.1
+ puppet 8.24.2
+ puppet-resource_api 1.9.0
+ puppet-runtime 2025.12.05.1
+ shellpath 2023-02-15
+ wrapper-script
+
+Package: openvox-agent
+Version: 8.24.1-1+debian13
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 86947
+Depends: findutils, tar
+Conflicts: puppet-agent
+Breaks: puppet-agent (<< 9)
+Replaces: puppet-agent (<< 9)
+Provides: puppet-agent (= 8)
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openvox-agent/openvox-agent_8.24.1-1+debian13_amd64.deb
+Size: 27369768
+SHA512: a5a1619d549df31f19a476b147bf047fc7b8cb808140485ee7d8dcecd14fa91fe65a3571515c31df72e3dc7bf8595a9aac4933a3d1560f6f1434b902c7b99603
+SHA256: bcb0f63d8b70f4968cd2a0e0ee7ec44bb73251297b1d2cb57b9ce30b2b4da649
+SHA1: 241db0913ed237ab0fade272c4f909fe401c3289
+MD5sum: b0480388934246a0ff94d9a6787bfe80
+Description: The OpenVox Agent package contains all of the elements needed to run the agent, including ruby and openfact.
+ .
+ Contains the following components:
+ cleanup
+ execution_wrapper
+ module-puppetlabs-augeas_core v1.5.0
+ module-puppetlabs-cron_core v1.3.0
+ module-puppetlabs-host_core v1.3.0
+ module-puppetlabs-mount_core v1.3.0
+ module-puppetlabs-scheduled_task v3.2.0
+ module-puppetlabs-selinux_core v1.4.0
+ module-puppetlabs-sshkeys_core v2.5.0
+ module-puppetlabs-yumrepo_core v2.1.0
+ module-puppetlabs-zfs_core v1.6.1
+ module-puppetlabs-zone_core v1.2.0
+ openfact 5.2.0
+ puppet 8.24.1
+ puppet-resource_api 1.9.0
+ puppet-runtime 2025.12.05.1
+ shellpath 2023-02-15
+ wrapper-script
+
+Package: openvox-agent
+Version: 8.24.0-1+debian13
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 86934
+Depends: findutils, tar
+Conflicts: puppet-agent
+Breaks: puppet-agent (<< 9)
+Replaces: puppet-agent (<< 9)
+Provides: puppet-agent (= 8)
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openvox-agent/openvox-agent_8.24.0-1+debian13_amd64.deb
+Size: 27367744
+SHA512: d0cb922ef3e410d1d864b676ddeb2e0eebf7b491b4277abfcd85cc5cd95fe05a40ef28e00f13de8d6db807b6c435172392c5c569e73ee060d4f79d233b8764bb
+SHA256: 726ae1de01f03f92ce510b12d17a65dd335dbf43231c5b06020ed53fba338ba7
+SHA1: 9c35ec20e56d024da1133a430f92e49d004794ba
+MD5sum: 76a221bf0d8fc98b6f5b123520d5c1aa
+Description: The OpenVox Agent package contains all of the elements needed to run the agent, including ruby and openfact.
+ .
+ Contains the following components:
+ cleanup
+ execution_wrapper
+ module-puppetlabs-augeas_core v1.5.0
+ module-puppetlabs-cron_core v1.3.0
+ module-puppetlabs-host_core v1.3.0
+ module-puppetlabs-mount_core v1.3.0
+ module-puppetlabs-scheduled_task v3.2.0
+ module-puppetlabs-selinux_core v1.4.0
+ module-puppetlabs-sshkeys_core v2.5.0
+ module-puppetlabs-yumrepo_core v2.1.0
+ module-puppetlabs-zfs_core v1.6.1
+ module-puppetlabs-zone_core v1.2.0
+ openfact 5.2.0
+ puppet 8.24.0
+ puppet-resource_api 1.9.0
+ puppet-runtime 2025.12.03.1
+ shellpath 2023-02-15
+ wrapper-script
+
+Package: openvox-agent
+Version: 8.23.1-1+debian13
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 84076
+Depends: findutils, tar
+Conflicts: puppet-agent
+Breaks: puppet-agent (<< 9)
+Replaces: puppet-agent (<< 9)
+Provides: puppet-agent (= 8)
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openvox-agent/openvox-agent_8.23.1-1+debian13_amd64.deb
+Size: 26377712
+SHA512: bcebad5abf596546ed8fa3db0f6a2e303c6d0f152159bcacfe1e91efdb1f7e2a407dff883a90da92f93d96a7b8256c8895b7014b21acc8101a5da10a7526ea8d
+SHA256: 8dbd79653475ba2b7befe9234c1e9da8c430ecedf8725b23617912c6eba3610b
+SHA1: 4f711dada3e6b6ba9d1d17b620c104eca460ed66
+MD5sum: bbf64f8c7e6e483e7031012569476a98
+Description: The OpenVox Agent package contains all of the elements needed to run the agent, including ruby and openfact.
+ .
+ Contains the following components:
+ cleanup
+ execution_wrapper
+ module-puppetlabs-augeas_core v1.5.0
+ module-puppetlabs-cron_core v1.3.0
+ module-puppetlabs-host_core v1.3.0
+ module-puppetlabs-mount_core v1.3.0
+ module-puppetlabs-scheduled_task v3.2.0
+ module-puppetlabs-selinux_core v1.4.0
+ module-puppetlabs-sshkeys_core v2.5.0
+ module-puppetlabs-yumrepo_core v2.1.0
+ module-puppetlabs-zfs_core v1.6.1
+ module-puppetlabs-zone_core v1.2.0
+ openfact 5.1.0
+ puppet 8.23.1
+ puppet-resource_api 1.9.0
+ puppet-runtime 2025.09.08.1
+ shellpath 2023-02-15
+ wrapper-script
+
+Package: openvox-agent
+Version: 8.23.0-1+debian13
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 84076
+Depends: findutils, tar
+Conflicts: puppet-agent
+Breaks: puppet-agent (<< 9)
+Replaces: puppet-agent (<< 9)
+Provides: puppet-agent (= 8)
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openvox-agent/openvox-agent_8.23.0-1+debian13_amd64.deb
+Size: 26377912
+SHA512: 665294c677cbe544fc284e2a3de904f043cd414f06bba95f6039b08a3301a21c1d1fda846feb5437f56e3646089d92d6d5cf428e8c095e5f22c720fef8914482
+SHA256: 457e1fe4917a3c035b1a456d3bba17d1b24fd282e3109a916ffc6a25d7db3aaa
+SHA1: fa3646aa33dbeed9e0fd9d5ff0cc33a0e1fcc10c
+MD5sum: 1e783158a0a1c5ea3d50e3991b33dc5b
+Description: The OpenVox Agent package contains all of the elements needed to run the agent, including ruby and openfact.
+ .
+ Contains the following components:
+ cleanup
+ execution_wrapper
+ module-puppetlabs-augeas_core v1.5.0
+ module-puppetlabs-cron_core v1.3.0
+ module-puppetlabs-host_core v1.3.0
+ module-puppetlabs-mount_core v1.3.0
+ module-puppetlabs-scheduled_task v3.2.0
+ module-puppetlabs-selinux_core v1.4.0
+ module-puppetlabs-sshkeys_core v2.5.0
+ module-puppetlabs-yumrepo_core v2.1.0
+ module-puppetlabs-zfs_core v1.6.1
+ module-puppetlabs-zone_core v1.2.0
+ openfact 5.1.0
+ puppet 8.23.0
+ puppet-resource_api 1.9.0
+ puppet-runtime 2025.09.04.1
+ shellpath 2023-02-15
+ wrapper-script
+
+Package: openvox-agent
+Version: 8.22.1-1+debian13
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 84812
+Depends: findutils, tar
+Conflicts: puppet-agent
+Breaks: puppet-agent (<< 9)
+Replaces: puppet-agent (<< 9)
+Provides: puppet-agent
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openvox-agent/openvox-agent_8.22.1-1+debian13_amd64.deb
+Size: 26439558
+SHA512: 96b62e4dfae579dbe17f81f600355403d8b84e61a3beaf207e0c7546956721fa6ab788e8106b878c975910709784f84d66361b772e0955603f477eefb297b8c5
+SHA256: c05603233da067506f713762950d38b4edd6abf68dd5dce50c928ce04b6c1989
+SHA1: a2803b0171aceaa1c6f8d3c24c073ce5acd49f6f
+MD5sum: 6250357d66a96e6ada0595952f2333c9
+Description: The OpenVox Agent package contains all of the elements needed to run the agent, including ruby and openfact.
+ .
+ Contains the following components:
+ cleanup
+ execution_wrapper
+ module-puppetlabs-augeas_core v1.5.0
+ module-puppetlabs-cron_core v1.3.0
+ module-puppetlabs-host_core v1.3.0
+ module-puppetlabs-mount_core v1.3.0
+ module-puppetlabs-scheduled_task v3.2.0
+ module-puppetlabs-selinux_core v1.4.0
+ module-puppetlabs-sshkeys_core v2.5.0
+ module-puppetlabs-yumrepo_core v2.1.0
+ module-puppetlabs-zfs_core v1.6.1
+ module-puppetlabs-zone_core v1.2.0
+ openfact 5.0.0
+ puppet 8.22.0
+ puppet-resource_api 1.9.0
+ puppet-runtime 2025.08.23.1
+ shellpath 2023-02-15
+ wrapper-script
+
+Package: openvox-agent
+Version: 8.22.0-1+debian13
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 84812
+Depends: findutils, tar
+Conflicts: puppet-agent
+Breaks: puppet-agent (<< 9)
+Replaces: puppet-agent (<< 9)
+Provides: puppet-agent
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openvox-agent/openvox-agent_8.22.0-1+debian13_amd64.deb
+Size: 26439566
+SHA512: b0fe55f4e23c42830f26fc9ce51264e9861a1f509ed6ff723342f6fbbe4f702c004492af4ea60917a4ba7ae0245668f7a1971f58dba390082aec8e7a22df8ebb
+SHA256: 0b75ff176d294ab8f7b09920d04729edd6263f1213b19e368eb4dc7192382abd
+SHA1: 1567c857f4818acab09d3d2c831fa3d456d92b6b
+MD5sum: 864eade7adb10577c2d9915a0487cae9
+Description: The OpenVox Agent package contains all of the elements needed to run the agent, including ruby and openfact.
+ .
+ Contains the following components:
+ cleanup
+ execution_wrapper
+ module-puppetlabs-augeas_core v1.5.0
+ module-puppetlabs-cron_core v1.3.0
+ module-puppetlabs-host_core v1.3.0
+ module-puppetlabs-mount_core v1.3.0
+ module-puppetlabs-scheduled_task v3.2.0
+ module-puppetlabs-selinux_core v1.4.0
+ module-puppetlabs-sshkeys_core v2.5.0
+ module-puppetlabs-yumrepo_core v2.1.0
+ module-puppetlabs-zfs_core v1.6.1
+ module-puppetlabs-zone_core v1.2.0
+ openfact 5.0.0
+ openvox 8.22.0
+ puppet-resource_api 1.9.0
+ puppet-runtime 2025.08.23.1
+ shellpath 2023-02-15
+ wrapper-script
+
+Package: openvox-agent
+Version: 8.19.2-1+debian13
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 100325
+Depends: findutils, tar
+Conflicts: puppet-agent
+Breaks: puppet-agent (<< 9)
+Replaces: puppet-agent (<< 9)
+Provides: puppet-agent
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openvox-agent/openvox-agent_8.19.2-1+debian13_amd64.deb
+Size: 31893046
+SHA512: 24bbb829679ef560f60251d213b8c584232db7069977757a9de5189c68c382b7d71c6b7ae8db7aed043f4de60a35397729c9561a9d6014f48713856ca7e513ca
+SHA256: e8069ace0fc47a61b260243ab4ca58b6a920c0118e639e94b71bccf6810507a0
+SHA1: 20f1949147d3b2523f9c0236ac6c8f325dc02ddb
+MD5sum: f0ee454cf81a1a6b6a3daa1c4024f7ae
+Description: The OpenVox Agent package contains all of the elements needed to run the agent, including ruby and facter.
+ .
+ Contains the following components:
+ cleanup
+ facter 4.10.0-3-gaae367139
+ module-puppetlabs-augeas_core v1.5.0
+ module-puppetlabs-cron_core v1.3.0
+ module-puppetlabs-host_core v1.3.0
+ module-puppetlabs-mount_core v1.3.0
+ module-puppetlabs-scheduled_task v3.2.0
+ module-puppetlabs-selinux_core v1.4.0
+ module-puppetlabs-sshkeys_core v2.5.0
+ module-puppetlabs-yumrepo_core v2.1.0
+ module-puppetlabs-zfs_core v1.6.1
+ module-puppetlabs-zone_core v1.2.0
+ puppet 8.19.2
+ puppet-resource_api 1.9.0
+ puppet-runtime 202505151
+ pxp-agent 202505161
+ shellpath 2023-02-15
+ wrapper-script
+
+Package: openvox-agent
+Version: 8.19.1-1+debian13
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 100325
+Depends: findutils, tar
+Conflicts: puppet-agent
+Breaks: puppet-agent (<< 9)
+Replaces: puppet-agent (<< 9)
+Provides: puppet-agent
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openvox-agent/openvox-agent_8.19.1-1+debian13_amd64.deb
+Size: 31892878
+SHA512: a4bdd8aadd8f6bb82240f2ce1471583dcda739091fc9ef61fd7e0eb1df37c0528d7167e3ceeb1cfd95afe5030fd8f669a41d3e15a323d479671bbc81da927311
+SHA256: aa49b6cdd12bf45756813dc0689d8798baf07e5e0cb820670420469e36bb024e
+SHA1: be05de80588612bc54948edfd95da7151afa07c1
+MD5sum: 6bed3a23a3ba96ae12ba3c3395827a7e
+Description: The OpenVox Agent package contains all of the elements needed to run the agent, including ruby and facter.
+ .
+ Contains the following components:
+ cleanup
+ facter 4.10.0-3-gaae367139
+ module-puppetlabs-augeas_core v1.5.0
+ module-puppetlabs-cron_core v1.3.0
+ module-puppetlabs-host_core v1.3.0
+ module-puppetlabs-mount_core v1.3.0
+ module-puppetlabs-scheduled_task v3.2.0
+ module-puppetlabs-selinux_core v1.4.0
+ module-puppetlabs-sshkeys_core v2.5.0
+ module-puppetlabs-yumrepo_core v2.1.0
+ module-puppetlabs-zfs_core v1.6.1
+ module-puppetlabs-zone_core v1.2.0
+ puppet 8.19.1
+ puppet-resource_api 1.9.0
+ puppet-runtime 202505151
+ pxp-agent 202505161
+ shellpath 2023-02-15
+ wrapper-script
+
+Package: openvox-agent
+Version: 8.19.0-1+debian13
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 100325
+Depends: findutils, tar
+Conflicts: puppet-agent
+Breaks: puppet-agent (<< 9)
+Replaces: puppet-agent (<< 9)
+Provides: puppet-agent
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openvox-agent/openvox-agent_8.19.0-1+debian13_amd64.deb
+Size: 31892902
+SHA512: df5853573af9ce5d1aa4d600d887e2722b2516f1858ca86594e257d52c1f78f90cac0ab147c8a9156281a7a674d62ec91c7ea1e38ad1a1e1b9fb4607209fb4c2
+SHA256: e62393522160940bcd7cfe3ed51eb9d9c5a3667c3a512ad4f58f93bef29cd8f0
+SHA1: e96ccef56cac53962b77553ba079051d787a1294
+MD5sum: ba9080609fbdff7c810dcdce1037ac95
+Description: The OpenVox Agent package contains all of the elements needed to run the agent, including ruby and facter.
+ .
+ Contains the following components:
+ cleanup
+ facter 4.10.0-3-gaae367139
+ module-puppetlabs-augeas_core v1.5.0
+ module-puppetlabs-cron_core v1.3.0
+ module-puppetlabs-host_core v1.3.0
+ module-puppetlabs-mount_core v1.3.0
+ module-puppetlabs-scheduled_task v3.2.0
+ module-puppetlabs-selinux_core v1.4.0
+ module-puppetlabs-sshkeys_core v2.5.0
+ module-puppetlabs-yumrepo_core v2.1.0
+ module-puppetlabs-zfs_core v1.6.1
+ module-puppetlabs-zone_core v1.2.0
+ puppet 8.19.0
+ puppet-resource_api 1.9.0
+ puppet-runtime 202505151
+ pxp-agent 202505161
+ shellpath 2023-02-15
+ wrapper-script
+
+Package: openvox-agent
+Version: 8.18.1-1+debian13
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 100325
+Depends: findutils, tar
+Conflicts: puppet-agent
+Breaks: puppet-agent (<< 9)
+Replaces: puppet-agent (<< 9)
+Provides: puppet-agent
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openvox-agent/openvox-agent_8.18.1-1+debian13_amd64.deb
+Size: 31892874
+SHA512: f8018fb945d744ebc75e91c52cebb2994fc396b9a6e66071370aa2c85ad4eced61fc72a93d821fbae0f058351a900db4aa8728209af310b3fa4934d6558c525d
+SHA256: ae4cc894095b786930be1c012443b469325e4d4894c57b210232b3466831210b
+SHA1: a501d30ca07885f68860fb9f8c8be1a2907039b3
+MD5sum: 8ff74e579e675b1c18a3b2a3ed454448
+Description: The OpenVox Agent package contains all of the elements needed to run the agent, including ruby and facter.
+ .
+ Contains the following components:
+ cleanup
+ facter 4.10.0-3-gaae367139
+ module-puppetlabs-augeas_core v1.5.0
+ module-puppetlabs-cron_core v1.3.0
+ module-puppetlabs-host_core v1.3.0
+ module-puppetlabs-mount_core v1.3.0
+ module-puppetlabs-scheduled_task v3.2.0
+ module-puppetlabs-selinux_core v1.4.0
+ module-puppetlabs-sshkeys_core v2.5.0
+ module-puppetlabs-yumrepo_core v2.1.0
+ module-puppetlabs-zfs_core v1.6.1
+ module-puppetlabs-zone_core v1.2.0
+ puppet 8.18.1
+ puppet-resource_api 1.9.0
+ puppet-runtime 202505151
+ pxp-agent 202505161
+ shellpath 2023-02-15
+ wrapper-script
+
+Package: openvox-agent
+Version: 8.18.0-1+debian13
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 100325
+Depends: findutils, tar
+Conflicts: puppet-agent
+Breaks: puppet-agent (<< 9)
+Replaces: puppet-agent (<< 9)
+Provides: puppet-agent
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openvox-agent/openvox-agent_8.18.0-1+debian13_amd64.deb
+Size: 31892592
+SHA512: bc1016045dd35d6286a10f0dbc44043342b0305e119527ff451efc9a9eafd613639b40a2f42a27cc492faa0daba283a313eafc56c49e8f8bfbf6d3ae7b1e1242
+SHA256: e580b416575fdd108a6d88a8e6c2e2510407984807fe8ff7759e245a1532048e
+SHA1: 2d69b49f9c4736f2a38b523493b2a35bed0b4aa3
+MD5sum: e7cde532b2799efdda51a77240a19fc3
+Description: The OpenVox Agent package contains all of the elements needed to run the agent, including ruby and facter.
+ .
+ Contains the following components:
+ cleanup
+ facter 4.10.0-3-gaae367139
+ module-puppetlabs-augeas_core v1.5.0
+ module-puppetlabs-cron_core v1.3.0
+ module-puppetlabs-host_core v1.3.0
+ module-puppetlabs-mount_core v1.3.0
+ module-puppetlabs-scheduled_task v3.2.0
+ module-puppetlabs-selinux_core v1.4.0
+ module-puppetlabs-sshkeys_core v2.5.0
+ module-puppetlabs-yumrepo_core v2.1.0
+ module-puppetlabs-zfs_core v1.6.1
+ module-puppetlabs-zone_core v1.2.0
+ puppet 8.18.0
+ puppet-resource_api 1.9.0
+ puppet-runtime 202505151
+ pxp-agent 202505161
+ shellpath 2023-02-15
+ wrapper-script
+
+Package: openvox-agent
+Version: 8.17.0-1+debian13
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 100328
+Depends: findutils, tar
+Conflicts: puppet-agent
+Breaks: puppet-agent
+Replaces: puppet-agent
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openvox-agent/openvox-agent_8.17.0-1+debian13_amd64.deb
+Size: 31893408
+SHA512: 87849cc3dc957d1c75a86be716398c39fa4c034f4bdccb283ba0e782a68ecc0bb6b84f617f63db5d64868be63f445186ad247331a79109ddfa6d0c3e8210dedc
+SHA256: 2c6597a8b5db665dc13b738385564ed15fe3fa69817d431c41fa98d0f2f8a98b
+SHA1: 1e4f12c0f9149970d269782b1e161297ea0dc272
+MD5sum: 26c95ceaad8e4ddbc507d100c5224391
+Description: The OpenVox Agent package contains all of the elements needed to run the agent, including ruby and facter.
+ .
+ Contains the following components:
+ cleanup
+ facter 4.10.0-3-gaae367139
+ module-puppetlabs-augeas_core v1.5.0
+ module-puppetlabs-cron_core v1.3.0
+ module-puppetlabs-host_core v1.3.0
+ module-puppetlabs-mount_core v1.3.0
+ module-puppetlabs-scheduled_task v3.2.0
+ module-puppetlabs-selinux_core v1.4.0
+ module-puppetlabs-sshkeys_core v2.5.0
+ module-puppetlabs-yumrepo_core v2.1.0
+ module-puppetlabs-zfs_core v1.6.1
+ module-puppetlabs-zone_core v1.2.0
+ puppet 8.17.0
+ puppet-resource_api 1.9.0
+ puppet-runtime 202504291
+ pxp-agent 202504291
+ shellpath 2023-02-15
+ wrapper-script
+
+Package: openvox-agent-dbgsym
+Source: openvox-agent
+Version: 8.26.2-1+debian13
+Auto-Built-Package: debug-symbols
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 3276
+Depends: openvox-agent (= 8.26.2-1+debian13)
+Priority: optional
+Section: debug
+Filename: pool/openvox8/o/openvox-agent/openvox-agent-dbgsym_8.26.2-1+debian13_amd64.deb
+Size: 711004
+SHA512: 9799659b8db53a61c5db2a3a819b4e338f5bdee4a6a721c8029a2c5d0ff36d8e8120eede42c7e0c618a14ff505fcb138dc79871c5c75ef4e56114c3789e21280
+SHA256: 30f3627165f1cbb5c64cd77594492735b0d2849b93db3cd6fd394c8b5ddf7508
+SHA1: 6b9536fcc09203022afdaa9cabf7904f772c6c15
+MD5sum: afe4c6d7e5907e44bba5627ee3a73f27
+Description: debug symbols for openvox-agent
+Build-Ids: 00faa69e3c8719e90b8fe6e68015b0895396a609 00fe4af5197f5df4de79d44d1774c0a12cbd3740 06b4485047b5aa3b49165cf8faf6674f38295d03 098c3f5ad9f63158323441c46f5fff29c66a9f0e 0a0b3edd05d568977775003edfb137bace83925c 0b463150153d999961107fa5d37fff67d2e57f16 0c7bb23be30dc1887b974c0d4f785bb303b94102 0ebca60fb3ab6bfd85314d308617b6488dc9cfe8 120a1cf588d19ada43eb7ad1519bac9cba006c1e 127b0007ab2e921cee85beb6cc47463f3df05ac0 143bd20a72b839cbe05a928f7cd2d9a5e0f4770c 1506a89ba6c33d577245045d373bfd56cd39cf27 15972cee4cb7bb0eaa0a7b325678b8e221fab26a 18db1d867bd1c91cb5d6f51966a239d57416eb1a 1a84dd45c50ba54df12232cef1dbbba3b988984a 1b6d78b24b1e83248d6d134321b3de4cdf8d3727 1f4e88d85b79ed6193d42bb2c7e9c0b80ac246b4 1f77e81c390f03042eb23be8a449289d7dd1d7d1 20f3eba81156c18838e23c72868d28a5ae6143c1 21c3128b2b9c5f3633d7013f05440feeabf855c4 21dbe27273ad2c217924d893effbdf6fd0dffcb6 22bae251c29da88ba807f109392c3df6192236ed 22f2dbc8ab9627e4cfd64df00f8f096fb30db043 270df6c089b95653540010c93afbc84e7facb989 297a3b20aaadcfbd7b5f64cb7505c30e8f777b96 2ac2b701e0f930e05ba02561e3f18e9db04edd54 2c3b732711bd334d0915c2df77e48b9f023ff611 2c41042cbf147f48f13989d970e03836c1a0f20d 2d6fa3f71a03a0a65fdfc3fa59714192f887b82c 2db4b2bce82db1a4672d087c8da0d09dd29f932c 2e18ce454ea39f9b799e8b61813eb1d89536cb34 2f12b4dbfb47c731131525aa5fb7464401b12a4a 2f1e27f306828bcb094fd55ca2dfac8bc202033c 2fb2df8792e6355644e9a5d38eb1ada683f79aaf 301cfd6172f73e9fcab14365df7d0e2a5ec83f19 35d66a46b31162abad1d38010704ef99b9486b94 360fbe247f3625e5fcd397d89de2bb39e6c5d102 3659f58f6fbe9d92212634aa1c5b54323b0d4b85 3b89fe4169744fbb43385b4eee47b894f8c56d12 3ee96f85e428bd1a589538f458523d5d336d9e06 455c0b6b3374d32dfcb2da4d55bb11ca0cf56092 48ab98db9cc3bbe5e7e50d145238d5c85a499bf2 4954a95c50850752ff4fa83dc71ed8dadaac8196 4be0d5f006a3c23179afe0fe5fde6160b6605f07 4d023ed5837f8ad6ce6905de6bfd7ab306e7a8b8 5094ad02dc2776bb0b02be490dbbc95caa4ee27b 539cb52df2dce700431915e2fa3075c83526cae8 5678eee9c354c79d5842bdef160bfafb3308a82e 58f0fdaaeb85a253d488c1aee4d840d526bf1bdc 5bde392da699772a9e86c034892a4e01d61b44ce 5d789dac5c7e6cae6c9191cea189eab1c4a48bc1 60c638e9c17085bbd0bcef53976f1a05916890a7 60f0713d24bbba54dd6f19a7b4ac55f62657a158 61121b0b8830af8194f94898142b8c0e1dee314b 665a5976fbc7a7dc5f62a56c7554775b005071c4 68d81212027fd71856c3ab052de763ef40b40fef 6e376100d697a98cb1d877aeb8ab97f9c3c481aa 6eb3f659a0fc5b1877bae8c0f0c8abe7232e8703 6f40529865a246ce331359d9642b5174e0d8fc38 7274efb10832b22a15c4edd1a853a2cb4b7797bf 72b702bcbad25fcbee195036f06327c9a6bfd69d 735b5c63d5abf515d9be7558aa4c4d57d6379835 744b0adba6cd16fbb41a371df806ef7e7b5bd124 74e3a4a0b3dd220d5f0e155975dca8c7e8851c95 779f6bad944e67f7cebca2635fd2ee0391655e9c 79bc4efbee05d95a0988f13430167aadbed0d1bd 7a7332f03f9cc5795c6ccb0ef948484413b5623d 7ac9d0266020c7531d42d1c090e19b92fe15b442 80b336df52aedca303eeff6020ab236a14c1e332 8209b456e4696eb2998676e93d519cc0622b2cd4 825f231ea2a42bf738346d2185485b43e89026d1 8ba815537db3d34ff31dec215081e6144f80c99c 913aefc709d6ccd4705adeddc95a9088e012d08f 921f5c95f22f1c4b8ae1bc01218be7d26518d9ab 93478d0224c998d273e75c10be129fc9cfadeed2 93fd271a1c67d9a4b997ebe762d657598b6f2660 94119ef84455c1e3f552ba07efbe4c46d56cc9aa 958307a4eef7c08320003fd068ac58117cb0bc45 990241b03a9fd406f723ead8f89f723349145eb6 9b558971d86f9257b8019c5dc799b52bfc825ee5 9e2f9424f99b064a7330b7e386de233de92749ff 9f2038cc0ca07fa1f0ddfc42736540cfe35374ec a090b13da8b98454a92b22570d664e12cbff0862 a13d64316451797a302d541b76ee6ddf507b64b0 a309b89c2944205288c435d8cce3c8875abf0fd7 a45197797010aea296515667f9b61eb0d740363b a5ce9483d8b0218e0172aa7cb98d1865a4368a29 a956d1858be5618d19304fa3f8eebe61a5e3eed3 a986a45b2ffebaff8bf8c6cbcbb0a2da7d272aab ac8832c91987aa59f2c1f4dff4ee6eebe3cfe574 acce10e23dfe39776e839b66ef5c851e62798ad0 ad2ab08b2f9d5a9eb3e43a7f7b561fbed97f882d ad810b0d381e93fb615bd9c8c95b1e549f2da37f b13a263115d6b9a75897cf31240ef6f2d9c03aa5 b668e6879c58f902e4759d7fbbb58fe786810f87 bbc9d1d0dd3bed7bc6e6a1ff52d7b4f7798a16e5 bc5517828971ac66ee2e128d8f50efb847b0e9ec be493a404938fb87c42f8b7301296edd48b34325 bf1ab8f737b4ce2804e7f1443357b409ea28d466 c08d0851646ac72c3b5ece7cd0914f7cdc2e186e c54f2aca34eeec6793d6f983a672729cc5e58e8c ce3e7db3520fcb41d0907278ffbacb6b67903465 cea1b70f850faa7755462dcf7767bcc5032b960f d18ab9364e19e0680b468cb133c499dcc1cb41a5 d214fb369ac47488abaf463a7b5975448dd04fb0 d562214573985ef8107b2ecf38f614701faf4f3a d8c1a7a44476bf3ce491df5fe1b7bd46f09f3175 d981b6fd4df014e48d057d6e1ab07ac286827748 dda6532fad90db6686bc1f809298a4f9a195579a dfb2590fdd4a563915d0989d82944d1b16e19206 e4a8f71927cbd43575c715eb860223a12cb4d570 e70d66e484982096f24441a523633f41d808245d e748506f7fd7b36ce43d2bb900dca70085478152 e7e9d7e53ced97bb88f837b18af0893b475720b6 e7fc96b414e09cf31b841100c965dc5bf2c42acd eb5afefbfa081ed3efe8b76116927e527ee67b62 ebbc306bec767812164329458fb74d69bb16c7e4 ee177720f5b578fd7f958661c240ea37d0fdbd0e eec06c3a495cf258bd8b10635f0a13f316ca78ef f02f674640c8caaa85a3c29a1a0e1992b2d5641a f333b221d61d819186998b8a37cefaf9fe40f8f5 f5bb79b3609da15c681f73586ac5eaa463af2d1a f6ed7b136b1e0a877d4d23dc15c0f05b4cc8d915 f711b743fc4139d701d53ed7887049643da94bde f8aa597669d55c92d1e7aa06db0c0e41b6a93247 ff0bf7d05c8fccdfb5ac8a211a440791edb47476 ff6bf0f30989d19d3a78cbad5a32a5d62b4c7b10 ff80d3ba5f741152e306b09dfe6ec1d7d31ff0ee
+
+Package: openvox-agent-dbgsym
+Source: openvox-agent
+Version: 8.26.1-1+debian13
+Auto-Built-Package: debug-symbols
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 3276
+Depends: openvox-agent (= 8.26.1-1+debian13)
+Priority: optional
+Section: debug
+Filename: pool/openvox8/o/openvox-agent/openvox-agent-dbgsym_8.26.1-1+debian13_amd64.deb
+Size: 711084
+SHA512: b3ae085ffaed7452946d622e3fd82ae5d570a95a3191bfacd588cdb2afe87516b18233f620633e8da2cde1e5f5767898ed20144a3b3ff51bc802f66888c358c1
+SHA256: b56ffacb0f4f50fa2fdc791fe6cfd0fe91acbb623c3f866fd136b23deeb58fd6
+SHA1: 4f6257d0bfffa363200a2e8c37f20bdd366b19ef
+MD5sum: 9e7f6df168ae54bd2d7eb1bcebb51a0c
+Description: debug symbols for openvox-agent
+Build-Ids: 00faa69e3c8719e90b8fe6e68015b0895396a609 00fe4af5197f5df4de79d44d1774c0a12cbd3740 06b4485047b5aa3b49165cf8faf6674f38295d03 098c3f5ad9f63158323441c46f5fff29c66a9f0e 0a0b3edd05d568977775003edfb137bace83925c 0b463150153d999961107fa5d37fff67d2e57f16 0c7bb23be30dc1887b974c0d4f785bb303b94102 0ebca60fb3ab6bfd85314d308617b6488dc9cfe8 120a1cf588d19ada43eb7ad1519bac9cba006c1e 127b0007ab2e921cee85beb6cc47463f3df05ac0 143bd20a72b839cbe05a928f7cd2d9a5e0f4770c 1506a89ba6c33d577245045d373bfd56cd39cf27 15972cee4cb7bb0eaa0a7b325678b8e221fab26a 18db1d867bd1c91cb5d6f51966a239d57416eb1a 1a84dd45c50ba54df12232cef1dbbba3b988984a 1b6d78b24b1e83248d6d134321b3de4cdf8d3727 1f4e88d85b79ed6193d42bb2c7e9c0b80ac246b4 1f77e81c390f03042eb23be8a449289d7dd1d7d1 20f3eba81156c18838e23c72868d28a5ae6143c1 21c3128b2b9c5f3633d7013f05440feeabf855c4 21dbe27273ad2c217924d893effbdf6fd0dffcb6 22bae251c29da88ba807f109392c3df6192236ed 22f2dbc8ab9627e4cfd64df00f8f096fb30db043 270df6c089b95653540010c93afbc84e7facb989 297a3b20aaadcfbd7b5f64cb7505c30e8f777b96 2ac2b701e0f930e05ba02561e3f18e9db04edd54 2c3b732711bd334d0915c2df77e48b9f023ff611 2c41042cbf147f48f13989d970e03836c1a0f20d 2d6fa3f71a03a0a65fdfc3fa59714192f887b82c 2db4b2bce82db1a4672d087c8da0d09dd29f932c 2e18ce454ea39f9b799e8b61813eb1d89536cb34 2f12b4dbfb47c731131525aa5fb7464401b12a4a 2f1e27f306828bcb094fd55ca2dfac8bc202033c 2fb2df8792e6355644e9a5d38eb1ada683f79aaf 301cfd6172f73e9fcab14365df7d0e2a5ec83f19 360fbe247f3625e5fcd397d89de2bb39e6c5d102 3659f58f6fbe9d92212634aa1c5b54323b0d4b85 3b89fe4169744fbb43385b4eee47b894f8c56d12 3ee96f85e428bd1a589538f458523d5d336d9e06 41b78e4be20882fe8b5d821c8faafad2dd88ae20 455c0b6b3374d32dfcb2da4d55bb11ca0cf56092 48ab98db9cc3bbe5e7e50d145238d5c85a499bf2 4954a95c50850752ff4fa83dc71ed8dadaac8196 4be0d5f006a3c23179afe0fe5fde6160b6605f07 4d023ed5837f8ad6ce6905de6bfd7ab306e7a8b8 5094ad02dc2776bb0b02be490dbbc95caa4ee27b 539cb52df2dce700431915e2fa3075c83526cae8 5678eee9c354c79d5842bdef160bfafb3308a82e 58f0fdaaeb85a253d488c1aee4d840d526bf1bdc 5bde392da699772a9e86c034892a4e01d61b44ce 5d789dac5c7e6cae6c9191cea189eab1c4a48bc1 60c638e9c17085bbd0bcef53976f1a05916890a7 60f0713d24bbba54dd6f19a7b4ac55f62657a158 61121b0b8830af8194f94898142b8c0e1dee314b 665a5976fbc7a7dc5f62a56c7554775b005071c4 68d81212027fd71856c3ab052de763ef40b40fef 6e376100d697a98cb1d877aeb8ab97f9c3c481aa 6eb3f659a0fc5b1877bae8c0f0c8abe7232e8703 6f40529865a246ce331359d9642b5174e0d8fc38 7274efb10832b22a15c4edd1a853a2cb4b7797bf 72b702bcbad25fcbee195036f06327c9a6bfd69d 735b5c63d5abf515d9be7558aa4c4d57d6379835 744b0adba6cd16fbb41a371df806ef7e7b5bd124 74e3a4a0b3dd220d5f0e155975dca8c7e8851c95 779f6bad944e67f7cebca2635fd2ee0391655e9c 79bc4efbee05d95a0988f13430167aadbed0d1bd 7a7332f03f9cc5795c6ccb0ef948484413b5623d 7ac9d0266020c7531d42d1c090e19b92fe15b442 80b336df52aedca303eeff6020ab236a14c1e332 8209b456e4696eb2998676e93d519cc0622b2cd4 825f231ea2a42bf738346d2185485b43e89026d1 8ba815537db3d34ff31dec215081e6144f80c99c 913aefc709d6ccd4705adeddc95a9088e012d08f 921f5c95f22f1c4b8ae1bc01218be7d26518d9ab 93478d0224c998d273e75c10be129fc9cfadeed2 94119ef84455c1e3f552ba07efbe4c46d56cc9aa 958307a4eef7c08320003fd068ac58117cb0bc45 990241b03a9fd406f723ead8f89f723349145eb6 9b558971d86f9257b8019c5dc799b52bfc825ee5 9f2038cc0ca07fa1f0ddfc42736540cfe35374ec a090b13da8b98454a92b22570d664e12cbff0862 a13d64316451797a302d541b76ee6ddf507b64b0 a309b89c2944205288c435d8cce3c8875abf0fd7 a45197797010aea296515667f9b61eb0d740363b a5ce9483d8b0218e0172aa7cb98d1865a4368a29 a956d1858be5618d19304fa3f8eebe61a5e3eed3 a986a45b2ffebaff8bf8c6cbcbb0a2da7d272aab ac8832c91987aa59f2c1f4dff4ee6eebe3cfe574 acce10e23dfe39776e839b66ef5c851e62798ad0 ad2ab08b2f9d5a9eb3e43a7f7b561fbed97f882d ad41dcac8ef94053e9024a9e0fde323978755c43 ad810b0d381e93fb615bd9c8c95b1e549f2da37f b13a263115d6b9a75897cf31240ef6f2d9c03aa5 b668e6879c58f902e4759d7fbbb58fe786810f87 bbc9d1d0dd3bed7bc6e6a1ff52d7b4f7798a16e5 bc5517828971ac66ee2e128d8f50efb847b0e9ec be493a404938fb87c42f8b7301296edd48b34325 bf1ab8f737b4ce2804e7f1443357b409ea28d466 c08d0851646ac72c3b5ece7cd0914f7cdc2e186e c54f2aca34eeec6793d6f983a672729cc5e58e8c ce3e7db3520fcb41d0907278ffbacb6b67903465 cea1b70f850faa7755462dcf7767bcc5032b960f d18ab9364e19e0680b468cb133c499dcc1cb41a5 d214fb369ac47488abaf463a7b5975448dd04fb0 d562214573985ef8107b2ecf38f614701faf4f3a d8c1a7a44476bf3ce491df5fe1b7bd46f09f3175 d95c668c8159fd87203fd2d6835fd85cbfa75186 d981b6fd4df014e48d057d6e1ab07ac286827748 dda6532fad90db6686bc1f809298a4f9a195579a dfb2590fdd4a563915d0989d82944d1b16e19206 e4a8f71927cbd43575c715eb860223a12cb4d570 e748506f7fd7b36ce43d2bb900dca70085478152 e7e9d7e53ced97bb88f837b18af0893b475720b6 e7fc96b414e09cf31b841100c965dc5bf2c42acd eb5afefbfa081ed3efe8b76116927e527ee67b62 ebbc306bec767812164329458fb74d69bb16c7e4 ee177720f5b578fd7f958661c240ea37d0fdbd0e eec06c3a495cf258bd8b10635f0a13f316ca78ef f02f674640c8caaa85a3c29a1a0e1992b2d5641a f333b221d61d819186998b8a37cefaf9fe40f8f5 f5bb79b3609da15c681f73586ac5eaa463af2d1a f6ed7b136b1e0a877d4d23dc15c0f05b4cc8d915 f711b743fc4139d701d53ed7887049643da94bde f8aa597669d55c92d1e7aa06db0c0e41b6a93247 fb2c0abec835ef9297eaee9be9257b4f92b72dca ff0bf7d05c8fccdfb5ac8a211a440791edb47476 ff6bf0f30989d19d3a78cbad5a32a5d62b4c7b10 ff80d3ba5f741152e306b09dfe6ec1d7d31ff0ee
+
+Package: openvox-agent-dbgsym
+Source: openvox-agent
+Version: 8.26.0-1+debian13
+Auto-Built-Package: debug-symbols
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 3278
+Depends: openvox-agent (= 8.26.0-1+debian13)
+Priority: optional
+Section: debug
+Filename: pool/openvox8/o/openvox-agent/openvox-agent-dbgsym_8.26.0-1+debian13_amd64.deb
+Size: 711688
+SHA512: 3059a9fc20014aa64bd1a9017c5c9f975f61377f5161f9afc2212aa239fb26a5289e8904383e30ed61f77af3f4aa675ef9cae22d0c97e04178ce8a41ebf3c245
+SHA256: 5d9140282f214a01f89137fdd4097609cade053abf901f7a7d696ca10830e547
+SHA1: 3bfc2014fbccc068714ba299d8aac3582df88b32
+MD5sum: 2d82dd355bf89ad1ee18f16ba60c1054
+Description: debug symbols for openvox-agent
+Build-Ids: 00faa69e3c8719e90b8fe6e68015b0895396a609 00fe4af5197f5df4de79d44d1774c0a12cbd3740 06b4485047b5aa3b49165cf8faf6674f38295d03 098c3f5ad9f63158323441c46f5fff29c66a9f0e 0a0b3edd05d568977775003edfb137bace83925c 0b463150153d999961107fa5d37fff67d2e57f16 0c7bb23be30dc1887b974c0d4f785bb303b94102 0d23752cdf382048e2a2712a9313247aa3599e9a 0ebca60fb3ab6bfd85314d308617b6488dc9cfe8 120a1cf588d19ada43eb7ad1519bac9cba006c1e 127b0007ab2e921cee85beb6cc47463f3df05ac0 143bd20a72b839cbe05a928f7cd2d9a5e0f4770c 1506a89ba6c33d577245045d373bfd56cd39cf27 15972cee4cb7bb0eaa0a7b325678b8e221fab26a 18db1d867bd1c91cb5d6f51966a239d57416eb1a 1a84dd45c50ba54df12232cef1dbbba3b988984a 1b6d78b24b1e83248d6d134321b3de4cdf8d3727 1f4e88d85b79ed6193d42bb2c7e9c0b80ac246b4 1f77e81c390f03042eb23be8a449289d7dd1d7d1 20f3eba81156c18838e23c72868d28a5ae6143c1 21c3128b2b9c5f3633d7013f05440feeabf855c4 21dbe27273ad2c217924d893effbdf6fd0dffcb6 22bae251c29da88ba807f109392c3df6192236ed 22f2dbc8ab9627e4cfd64df00f8f096fb30db043 270df6c089b95653540010c93afbc84e7facb989 297a3b20aaadcfbd7b5f64cb7505c30e8f777b96 2ac2b701e0f930e05ba02561e3f18e9db04edd54 2c3b732711bd334d0915c2df77e48b9f023ff611 2c41042cbf147f48f13989d970e03836c1a0f20d 2d6fa3f71a03a0a65fdfc3fa59714192f887b82c 2db4b2bce82db1a4672d087c8da0d09dd29f932c 2e18ce454ea39f9b799e8b61813eb1d89536cb34 2f12b4dbfb47c731131525aa5fb7464401b12a4a 2f1e27f306828bcb094fd55ca2dfac8bc202033c 2fb2df8792e6355644e9a5d38eb1ada683f79aaf 301cfd6172f73e9fcab14365df7d0e2a5ec83f19 360fbe247f3625e5fcd397d89de2bb39e6c5d102 3659f58f6fbe9d92212634aa1c5b54323b0d4b85 3b89fe4169744fbb43385b4eee47b894f8c56d12 3ee96f85e428bd1a589538f458523d5d336d9e06 455c0b6b3374d32dfcb2da4d55bb11ca0cf56092 48ab98db9cc3bbe5e7e50d145238d5c85a499bf2 4954a95c50850752ff4fa83dc71ed8dadaac8196 4be0d5f006a3c23179afe0fe5fde6160b6605f07 4d023ed5837f8ad6ce6905de6bfd7ab306e7a8b8 5094ad02dc2776bb0b02be490dbbc95caa4ee27b 539cb52df2dce700431915e2fa3075c83526cae8 5678eee9c354c79d5842bdef160bfafb3308a82e 58f0fdaaeb85a253d488c1aee4d840d526bf1bdc 5bde392da699772a9e86c034892a4e01d61b44ce 5d789dac5c7e6cae6c9191cea189eab1c4a48bc1 60c638e9c17085bbd0bcef53976f1a05916890a7 60f0713d24bbba54dd6f19a7b4ac55f62657a158 61121b0b8830af8194f94898142b8c0e1dee314b 665a5976fbc7a7dc5f62a56c7554775b005071c4 68d81212027fd71856c3ab052de763ef40b40fef 6e376100d697a98cb1d877aeb8ab97f9c3c481aa 6eb3f659a0fc5b1877bae8c0f0c8abe7232e8703 6f40529865a246ce331359d9642b5174e0d8fc38 7274efb10832b22a15c4edd1a853a2cb4b7797bf 72b702bcbad25fcbee195036f06327c9a6bfd69d 735b5c63d5abf515d9be7558aa4c4d57d6379835 744b0adba6cd16fbb41a371df806ef7e7b5bd124 74e3a4a0b3dd220d5f0e155975dca8c7e8851c95 779f6bad944e67f7cebca2635fd2ee0391655e9c 79bc4efbee05d95a0988f13430167aadbed0d1bd 7a7332f03f9cc5795c6ccb0ef948484413b5623d 7ac9d0266020c7531d42d1c090e19b92fe15b442 80b336df52aedca303eeff6020ab236a14c1e332 8209b456e4696eb2998676e93d519cc0622b2cd4 825f231ea2a42bf738346d2185485b43e89026d1 8ba815537db3d34ff31dec215081e6144f80c99c 8d4f734bc5feef86f4b5b4d35ef1bcfaca2e79b9 913aefc709d6ccd4705adeddc95a9088e012d08f 921f5c95f22f1c4b8ae1bc01218be7d26518d9ab 93478d0224c998d273e75c10be129fc9cfadeed2 94119ef84455c1e3f552ba07efbe4c46d56cc9aa 958307a4eef7c08320003fd068ac58117cb0bc45 990241b03a9fd406f723ead8f89f723349145eb6 9b558971d86f9257b8019c5dc799b52bfc825ee5 9f2038cc0ca07fa1f0ddfc42736540cfe35374ec a090b13da8b98454a92b22570d664e12cbff0862 a13d64316451797a302d541b76ee6ddf507b64b0 a309b89c2944205288c435d8cce3c8875abf0fd7 a45197797010aea296515667f9b61eb0d740363b a5ce9483d8b0218e0172aa7cb98d1865a4368a29 a956d1858be5618d19304fa3f8eebe61a5e3eed3 a986a45b2ffebaff8bf8c6cbcbb0a2da7d272aab ac8832c91987aa59f2c1f4dff4ee6eebe3cfe574 acce10e23dfe39776e839b66ef5c851e62798ad0 ad2ab08b2f9d5a9eb3e43a7f7b561fbed97f882d ad810b0d381e93fb615bd9c8c95b1e549f2da37f b13a263115d6b9a75897cf31240ef6f2d9c03aa5 b668e6879c58f902e4759d7fbbb58fe786810f87 bbc9d1d0dd3bed7bc6e6a1ff52d7b4f7798a16e5 bc5517828971ac66ee2e128d8f50efb847b0e9ec be493a404938fb87c42f8b7301296edd48b34325 bf1ab8f737b4ce2804e7f1443357b409ea28d466 c08d0851646ac72c3b5ece7cd0914f7cdc2e186e c54f2aca34eeec6793d6f983a672729cc5e58e8c ce3e7db3520fcb41d0907278ffbacb6b67903465 cea1b70f850faa7755462dcf7767bcc5032b960f d0e246649f078e0ac64671a889ce381fb7933d2f d18ab9364e19e0680b468cb133c499dcc1cb41a5 d214fb369ac47488abaf463a7b5975448dd04fb0 d562214573985ef8107b2ecf38f614701faf4f3a d8c1a7a44476bf3ce491df5fe1b7bd46f09f3175 d981b6fd4df014e48d057d6e1ab07ac286827748 dda6532fad90db6686bc1f809298a4f9a195579a dfb2590fdd4a563915d0989d82944d1b16e19206 e4a8f71927cbd43575c715eb860223a12cb4d570 e748506f7fd7b36ce43d2bb900dca70085478152 e7e9d7e53ced97bb88f837b18af0893b475720b6 e7fc96b414e09cf31b841100c965dc5bf2c42acd eaaa9054d6e6a683b224c9e972ee5328ba4a4bf9 eb5afefbfa081ed3efe8b76116927e527ee67b62 ebbc306bec767812164329458fb74d69bb16c7e4 ee177720f5b578fd7f958661c240ea37d0fdbd0e eec06c3a495cf258bd8b10635f0a13f316ca78ef f02f674640c8caaa85a3c29a1a0e1992b2d5641a f333b221d61d819186998b8a37cefaf9fe40f8f5 f5bb79b3609da15c681f73586ac5eaa463af2d1a f6ed7b136b1e0a877d4d23dc15c0f05b4cc8d915 f711b743fc4139d701d53ed7887049643da94bde f8aa597669d55c92d1e7aa06db0c0e41b6a93247 ff0bf7d05c8fccdfb5ac8a211a440791edb47476 ff6bf0f30989d19d3a78cbad5a32a5d62b4c7b10 ff80d3ba5f741152e306b09dfe6ec1d7d31ff0ee
+
+Package: openvox-agent-dbgsym
+Source: openvox-agent
+Version: 8.25.0-1+debian13
+Auto-Built-Package: debug-symbols
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 3277
+Depends: openvox-agent (= 8.25.0-1+debian13)
+Priority: optional
+Section: debug
+Filename: pool/openvox8/o/openvox-agent/openvox-agent-dbgsym_8.25.0-1+debian13_amd64.deb
+Size: 710010
+SHA512: 5c774d6c98f3adb56fa7e6624713a0782dc5b186119a679bb33e830afab55c1ea3b545e4b7cc1bed145fb58640b20dce8359039651fe01a94e8dc839b6959c90
+SHA256: fa5da85e271a2210043477dc4c55d515ef763c14cfa10e1e5091d5d4ac5f9ffd
+SHA1: 26bb382fa88da9a1924e4957479448f864ae6d3a
+MD5sum: b7cdc678e0d4cade4fd2eb1b9ae2f41b
+Description: debug symbols for openvox-agent
+Build-Ids: 00faa69e3c8719e90b8fe6e68015b0895396a609 02b794f684fcbb2e9f8aa1863255ee7b9acafb97 08c843504f0712176ff64d7eb49fe6ca2e96e9d7 0a0b3edd05d568977775003edfb137bace83925c 0c7bb23be30dc1887b974c0d4f785bb303b94102 0ebca60fb3ab6bfd85314d308617b6488dc9cfe8 101b46c00618f751f35db6b7af8910613d1160b6 10914239147fac5fa3b8bd46bae269b6ea8443a9 120a1cf588d19ada43eb7ad1519bac9cba006c1e 12bb2661e7933857401bdb8a3f470cbdab744a8a 143bd20a72b839cbe05a928f7cd2d9a5e0f4770c 146209fd73bbb401bcc9391c83e484f764235f8a 1506a89ba6c33d577245045d373bfd56cd39cf27 15972cee4cb7bb0eaa0a7b325678b8e221fab26a 188c20689f03ab77b0d1c965b1166305f8b74b26 18db1d867bd1c91cb5d6f51966a239d57416eb1a 1a84dd45c50ba54df12232cef1dbbba3b988984a 1b6d78b24b1e83248d6d134321b3de4cdf8d3727 1c9d0f3be5f5fd1f8c602476eb1a01144863145f 1f77e81c390f03042eb23be8a449289d7dd1d7d1 20f3eba81156c18838e23c72868d28a5ae6143c1 21c3128b2b9c5f3633d7013f05440feeabf855c4 21dbe27273ad2c217924d893effbdf6fd0dffcb6 22bae251c29da88ba807f109392c3df6192236ed 22f2dbc8ab9627e4cfd64df00f8f096fb30db043 270df6c089b95653540010c93afbc84e7facb989 2878654f515e1eb197e1208e07c303c216978d22 2ac2b701e0f930e05ba02561e3f18e9db04edd54 2c3b732711bd334d0915c2df77e48b9f023ff611 2c41042cbf147f48f13989d970e03836c1a0f20d 2d6fa3f71a03a0a65fdfc3fa59714192f887b82c 2db4b2bce82db1a4672d087c8da0d09dd29f932c 2e18ce454ea39f9b799e8b61813eb1d89536cb34 2f0470f2aebd55ddc61465836d098ba9ea72bec2 2fb2df8792e6355644e9a5d38eb1ada683f79aaf 301cfd6172f73e9fcab14365df7d0e2a5ec83f19 360fbe247f3625e5fcd397d89de2bb39e6c5d102 387318f50da65f6aca1e5b24c38cc13ba392fd25 3ee96f85e428bd1a589538f458523d5d336d9e06 455c0b6b3374d32dfcb2da4d55bb11ca0cf56092 469cb2def140815a09a69022d6b91b0206e37675 48ab98db9cc3bbe5e7e50d145238d5c85a499bf2 4be0d5f006a3c23179afe0fe5fde6160b6605f07 4d023ed5837f8ad6ce6905de6bfd7ab306e7a8b8 4e064af1c363c17048ecb8546d6a90483390f9be 5094ad02dc2776bb0b02be490dbbc95caa4ee27b 539cb52df2dce700431915e2fa3075c83526cae8 5678eee9c354c79d5842bdef160bfafb3308a82e 58f0fdaaeb85a253d488c1aee4d840d526bf1bdc 5bde392da699772a9e86c034892a4e01d61b44ce 5d789dac5c7e6cae6c9191cea189eab1c4a48bc1 60c638e9c17085bbd0bcef53976f1a05916890a7 60f0713d24bbba54dd6f19a7b4ac55f62657a158 626efb42974b2522e08e3f0bea8ffe05b5a7f464 62a5df2be23cb233e6844ca10d0e7b686f2b3e97 63dee3cfc64a3df15f6ae9524177cee303630a64 665a5976fbc7a7dc5f62a56c7554775b005071c4 686430528c536c40ad15b992ade1ad4d739bfa8d 68d81212027fd71856c3ab052de763ef40b40fef 6eb3f659a0fc5b1877bae8c0f0c8abe7232e8703 6f40529865a246ce331359d9642b5174e0d8fc38 7274efb10832b22a15c4edd1a853a2cb4b7797bf 72b702bcbad25fcbee195036f06327c9a6bfd69d 735b5c63d5abf515d9be7558aa4c4d57d6379835 744b0adba6cd16fbb41a371df806ef7e7b5bd124 74e3a4a0b3dd220d5f0e155975dca8c7e8851c95 79bc4efbee05d95a0988f13430167aadbed0d1bd 7a7332f03f9cc5795c6ccb0ef948484413b5623d 7ac9d0266020c7531d42d1c090e19b92fe15b442 8209b456e4696eb2998676e93d519cc0622b2cd4 8ba815537db3d34ff31dec215081e6144f80c99c 913aefc709d6ccd4705adeddc95a9088e012d08f 921f5c95f22f1c4b8ae1bc01218be7d26518d9ab 94119ef84455c1e3f552ba07efbe4c46d56cc9aa 94e433bbb83ad1b43651202ddc697b9e16818eee 958307a4eef7c08320003fd068ac58117cb0bc45 96d74bc109efdca327af96f99f68f1174a2dad46 990241b03a9fd406f723ead8f89f723349145eb6 9d47aec2af394165f32cdfb3eb9a8f8720361b44 9f2038cc0ca07fa1f0ddfc42736540cfe35374ec a090b13da8b98454a92b22570d664e12cbff0862 a111c2d405d26952e3edf686852ce44d078930e9 a13d64316451797a302d541b76ee6ddf507b64b0 a309b89c2944205288c435d8cce3c8875abf0fd7 a45197797010aea296515667f9b61eb0d740363b a5ce9483d8b0218e0172aa7cb98d1865a4368a29 a956d1858be5618d19304fa3f8eebe61a5e3eed3 ac8832c91987aa59f2c1f4dff4ee6eebe3cfe574 ad2ab08b2f9d5a9eb3e43a7f7b561fbed97f882d b1017c54d824dcfbfc71b90a0f4256366f6fd879 b13a263115d6b9a75897cf31240ef6f2d9c03aa5 b668e6879c58f902e4759d7fbbb58fe786810f87 bc5517828971ac66ee2e128d8f50efb847b0e9ec be493a404938fb87c42f8b7301296edd48b34325 bf1ab8f737b4ce2804e7f1443357b409ea28d466 c08d0851646ac72c3b5ece7cd0914f7cdc2e186e c54f2aca34eeec6793d6f983a672729cc5e58e8c c8fac453052710d9a1737e323612c17dc092f967 ce3e7db3520fcb41d0907278ffbacb6b67903465 cea1b70f850faa7755462dcf7767bcc5032b960f cf1c70a47224e7ae02ead1f52d6ce2739fd74bee d18ab9364e19e0680b468cb133c499dcc1cb41a5 d214fb369ac47488abaf463a7b5975448dd04fb0 d981b6fd4df014e48d057d6e1ab07ac286827748 dda6532fad90db6686bc1f809298a4f9a195579a dfb2590fdd4a563915d0989d82944d1b16e19206 e0de53e72686b20f36c03409455cfe2cced55606 e4a8f71927cbd43575c715eb860223a12cb4d570 e5bf1b145316c883043f6b72db5e79d8d4d0cba5 e748506f7fd7b36ce43d2bb900dca70085478152 e7bdd51b4a4146f6d9c141a98d4a1fd4c6892843 e7e9d7e53ced97bb88f837b18af0893b475720b6 e7fc96b414e09cf31b841100c965dc5bf2c42acd ebbc306bec767812164329458fb74d69bb16c7e4 ec3baf06fef4fec6c5282e48f8d327005902020d ed3a3d230cd8b8f19f0900effdf47608e0229533 ee177720f5b578fd7f958661c240ea37d0fdbd0e eec06c3a495cf258bd8b10635f0a13f316ca78ef f02f674640c8caaa85a3c29a1a0e1992b2d5641a f2844c5a9796633c8f1343b4afbf119a7c03a376 f333b221d61d819186998b8a37cefaf9fe40f8f5 f5bb79b3609da15c681f73586ac5eaa463af2d1a f6ed7b136b1e0a877d4d23dc15c0f05b4cc8d915 f711b743fc4139d701d53ed7887049643da94bde f8aa597669d55c92d1e7aa06db0c0e41b6a93247 fd5ee2281c098fab044acb1257e5c3052b12cf01 ff0bf7d05c8fccdfb5ac8a211a440791edb47476 ff80d3ba5f741152e306b09dfe6ec1d7d31ff0ee
+
+Package: openvox-agent-dbgsym
+Source: openvox-agent
+Version: 8.24.2-1+debian13
+Auto-Built-Package: debug-symbols
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 3346
+Depends: openvox-agent (= 8.24.2-1+debian13)
+Priority: optional
+Section: debug
+Filename: pool/openvox8/o/openvox-agent/openvox-agent-dbgsym_8.24.2-1+debian13_amd64.deb
+Size: 726876
+SHA512: 1e6b1abbc1c8ca36204811985a5ea41007d93502e602d58fb03681296f2a4e7fff1ac3d41c20a1be020034c9370f7bd35c39e0dbf3816710450141a763fe20bf
+SHA256: c3647fee8108c4ed263ebeda26f3372d64d9d38954cebc294d39311c8ae4bdb5
+SHA1: e30030e2db614c52f83d9943aa0e9c975823fe1b
+MD5sum: 0f0cf9fbdaf70443235b3b91930094d5
+Description: debug symbols for openvox-agent
+Build-Ids: 00faa69e3c8719e90b8fe6e68015b0895396a609 02b794f684fcbb2e9f8aa1863255ee7b9acafb97 06ba25d5a0d9de404642769a3351c258a7bd7b58 0a0b3edd05d568977775003edfb137bace83925c 0c7bb23be30dc1887b974c0d4f785bb303b94102 0ebca60fb3ab6bfd85314d308617b6488dc9cfe8 10914239147fac5fa3b8bd46bae269b6ea8443a9 120a1cf588d19ada43eb7ad1519bac9cba006c1e 12bb2661e7933857401bdb8a3f470cbdab744a8a 143bd20a72b839cbe05a928f7cd2d9a5e0f4770c 146209fd73bbb401bcc9391c83e484f764235f8a 1506a89ba6c33d577245045d373bfd56cd39cf27 15972cee4cb7bb0eaa0a7b325678b8e221fab26a 188c20689f03ab77b0d1c965b1166305f8b74b26 18db1d867bd1c91cb5d6f51966a239d57416eb1a 1a84dd45c50ba54df12232cef1dbbba3b988984a 1ad578e8cfdbaa0b6ac80f7b3a03ee7ce33c0a81 1b6d78b24b1e83248d6d134321b3de4cdf8d3727 1bb0dd4b01094a39340818b8eae40fd01247aa71 1c9d0f3be5f5fd1f8c602476eb1a01144863145f 1caae57d6a6b84aa52ec8bf39b467e1cb030d423 1f77e81c390f03042eb23be8a449289d7dd1d7d1 20f3eba81156c18838e23c72868d28a5ae6143c1 219ad6be9719131fd0ec5a9671455c5cdbc44460 21c3128b2b9c5f3633d7013f05440feeabf855c4 21dbe27273ad2c217924d893effbdf6fd0dffcb6 22f2dbc8ab9627e4cfd64df00f8f096fb30db043 270df6c089b95653540010c93afbc84e7facb989 2ac2b701e0f930e05ba02561e3f18e9db04edd54 2c3b732711bd334d0915c2df77e48b9f023ff611 2c41042cbf147f48f13989d970e03836c1a0f20d 2d6fa3f71a03a0a65fdfc3fa59714192f887b82c 2db4b2bce82db1a4672d087c8da0d09dd29f932c 2e18ce454ea39f9b799e8b61813eb1d89536cb34 2f0470f2aebd55ddc61465836d098ba9ea72bec2 2fb2df8792e6355644e9a5d38eb1ada683f79aaf 301cfd6172f73e9fcab14365df7d0e2a5ec83f19 360fbe247f3625e5fcd397d89de2bb39e6c5d102 387318f50da65f6aca1e5b24c38cc13ba392fd25 3ee96f85e428bd1a589538f458523d5d336d9e06 422853ff5605eefc89c8de5a6a199d1a3a203678 455c0b6b3374d32dfcb2da4d55bb11ca0cf56092 469cb2def140815a09a69022d6b91b0206e37675 48ab98db9cc3bbe5e7e50d145238d5c85a499bf2 4ae5d99efd3b80df4150a6c103456ae28be3c663 4be0d5f006a3c23179afe0fe5fde6160b6605f07 4d023ed5837f8ad6ce6905de6bfd7ab306e7a8b8 4ee2eec9a821727eb71155d26c6688ebe5fd7e9a 5094ad02dc2776bb0b02be490dbbc95caa4ee27b 539cb52df2dce700431915e2fa3075c83526cae8 5678eee9c354c79d5842bdef160bfafb3308a82e 58f0fdaaeb85a253d488c1aee4d840d526bf1bdc 5ab83b0af8f884e2251fc2793cd55fee245d35c9 5bde392da699772a9e86c034892a4e01d61b44ce 5d789dac5c7e6cae6c9191cea189eab1c4a48bc1 60f0713d24bbba54dd6f19a7b4ac55f62657a158 62a5df2be23cb233e6844ca10d0e7b686f2b3e97 63dee3cfc64a3df15f6ae9524177cee303630a64 662888eb0aa1e22f78073fdc0d6767b4bf9eb538 665a5976fbc7a7dc5f62a56c7554775b005071c4 680e0df420810f2fbb71d5c748c228678d75e380 686430528c536c40ad15b992ade1ad4d739bfa8d 68d81212027fd71856c3ab052de763ef40b40fef 6eb3f659a0fc5b1877bae8c0f0c8abe7232e8703 7274efb10832b22a15c4edd1a853a2cb4b7797bf 72b702bcbad25fcbee195036f06327c9a6bfd69d 735b5c63d5abf515d9be7558aa4c4d57d6379835 744b0adba6cd16fbb41a371df806ef7e7b5bd124 74e3a4a0b3dd220d5f0e155975dca8c7e8851c95 79bc4efbee05d95a0988f13430167aadbed0d1bd 7a7332f03f9cc5795c6ccb0ef948484413b5623d 7ac9d0266020c7531d42d1c090e19b92fe15b442 814c311a7f45357c1b69e4388db69c57e4b66f99 8209b456e4696eb2998676e93d519cc0622b2cd4 8ba815537db3d34ff31dec215081e6144f80c99c 8c14ba5191c8fc3ead10cfa5e8418aee4a625847 913aefc709d6ccd4705adeddc95a9088e012d08f 921f5c95f22f1c4b8ae1bc01218be7d26518d9ab 94119ef84455c1e3f552ba07efbe4c46d56cc9aa 94e433bbb83ad1b43651202ddc697b9e16818eee 958307a4eef7c08320003fd068ac58117cb0bc45 990241b03a9fd406f723ead8f89f723349145eb6 9f2038cc0ca07fa1f0ddfc42736540cfe35374ec a090b13da8b98454a92b22570d664e12cbff0862 a111c2d405d26952e3edf686852ce44d078930e9 a13d64316451797a302d541b76ee6ddf507b64b0 a309b89c2944205288c435d8cce3c8875abf0fd7 a45197797010aea296515667f9b61eb0d740363b a5ce9483d8b0218e0172aa7cb98d1865a4368a29 a956d1858be5618d19304fa3f8eebe61a5e3eed3 ac8832c91987aa59f2c1f4dff4ee6eebe3cfe574 acfd96205a6f356ff9606fa3cec2cb5e800e8b9b ad2ab08b2f9d5a9eb3e43a7f7b561fbed97f882d aebb4f6f3c10e4de59b095603e99fbfe1c8da651 b13a263115d6b9a75897cf31240ef6f2d9c03aa5 b649252dce304d36b3bef3ccd9e47de2e14fb1a4 b668e6879c58f902e4759d7fbbb58fe786810f87 bc5517828971ac66ee2e128d8f50efb847b0e9ec be493a404938fb87c42f8b7301296edd48b34325 bf1ab8f737b4ce2804e7f1443357b409ea28d466 c08d0851646ac72c3b5ece7cd0914f7cdc2e186e c54f2aca34eeec6793d6f983a672729cc5e58e8c c8fac453052710d9a1737e323612c17dc092f967 ce3e7db3520fcb41d0907278ffbacb6b67903465 cea1b70f850faa7755462dcf7767bcc5032b960f d18ab9364e19e0680b468cb133c499dcc1cb41a5 d214fb369ac47488abaf463a7b5975448dd04fb0 d920e211557f3fa0ba8e27cb5a87af2248365c2f d981b6fd4df014e48d057d6e1ab07ac286827748 dda6532fad90db6686bc1f809298a4f9a195579a dfb2590fdd4a563915d0989d82944d1b16e19206 e0de53e72686b20f36c03409455cfe2cced55606 e4a8f71927cbd43575c715eb860223a12cb4d570 e748506f7fd7b36ce43d2bb900dca70085478152 e7bdd51b4a4146f6d9c141a98d4a1fd4c6892843 e7e9d7e53ced97bb88f837b18af0893b475720b6 e7fc96b414e09cf31b841100c965dc5bf2c42acd ebbc306bec767812164329458fb74d69bb16c7e4 ec3baf06fef4fec6c5282e48f8d327005902020d ed3a3d230cd8b8f19f0900effdf47608e0229533 ee177720f5b578fd7f958661c240ea37d0fdbd0e eec06c3a495cf258bd8b10635f0a13f316ca78ef f02f674640c8caaa85a3c29a1a0e1992b2d5641a f2844c5a9796633c8f1343b4afbf119a7c03a376 f333b221d61d819186998b8a37cefaf9fe40f8f5 f5bb79b3609da15c681f73586ac5eaa463af2d1a f6ed7b136b1e0a877d4d23dc15c0f05b4cc8d915 f711b743fc4139d701d53ed7887049643da94bde f8aa597669d55c92d1e7aa06db0c0e41b6a93247 fd5ee2281c098fab044acb1257e5c3052b12cf01 ff0bf7d05c8fccdfb5ac8a211a440791edb47476 ff80d3ba5f741152e306b09dfe6ec1d7d31ff0ee
+
+Package: openvox-agent-dbgsym
+Source: openvox-agent
+Version: 8.24.1-1+debian13
+Auto-Built-Package: debug-symbols
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 3346
+Depends: openvox-agent (= 8.24.1-1+debian13)
+Priority: optional
+Section: debug
+Filename: pool/openvox8/o/openvox-agent/openvox-agent-dbgsym_8.24.1-1+debian13_amd64.deb
+Size: 726924
+SHA512: 1dfa2be2014b25e388e380ee4ca7f21d5de35aa46637052008854f21ef008cd48b03792ddb3a2a56a6b8ac7f714cc489bb71bad4ac96c42a6a1325811d162f85
+SHA256: 1250ff6ecc7d69176a51a7cb3cf003f605375f91ff2beb34d744680bb7d12752
+SHA1: 0a73dba79ac9ae20e6a754395d32531fe746779d
+MD5sum: b1cfb5266d4a05297d31300a0c93f87e
+Description: debug symbols for openvox-agent
+Build-Ids: 00faa69e3c8719e90b8fe6e68015b0895396a609 02b794f684fcbb2e9f8aa1863255ee7b9acafb97 06ba25d5a0d9de404642769a3351c258a7bd7b58 0a0b3edd05d568977775003edfb137bace83925c 0c7bb23be30dc1887b974c0d4f785bb303b94102 0ebca60fb3ab6bfd85314d308617b6488dc9cfe8 10914239147fac5fa3b8bd46bae269b6ea8443a9 120a1cf588d19ada43eb7ad1519bac9cba006c1e 12bb2661e7933857401bdb8a3f470cbdab744a8a 143bd20a72b839cbe05a928f7cd2d9a5e0f4770c 146209fd73bbb401bcc9391c83e484f764235f8a 1506a89ba6c33d577245045d373bfd56cd39cf27 15972cee4cb7bb0eaa0a7b325678b8e221fab26a 188c20689f03ab77b0d1c965b1166305f8b74b26 18db1d867bd1c91cb5d6f51966a239d57416eb1a 1a84dd45c50ba54df12232cef1dbbba3b988984a 1ad578e8cfdbaa0b6ac80f7b3a03ee7ce33c0a81 1b6d78b24b1e83248d6d134321b3de4cdf8d3727 1bb0dd4b01094a39340818b8eae40fd01247aa71 1c9d0f3be5f5fd1f8c602476eb1a01144863145f 1caae57d6a6b84aa52ec8bf39b467e1cb030d423 1f77e81c390f03042eb23be8a449289d7dd1d7d1 20f3eba81156c18838e23c72868d28a5ae6143c1 219ad6be9719131fd0ec5a9671455c5cdbc44460 21c3128b2b9c5f3633d7013f05440feeabf855c4 21dbe27273ad2c217924d893effbdf6fd0dffcb6 22f2dbc8ab9627e4cfd64df00f8f096fb30db043 270df6c089b95653540010c93afbc84e7facb989 2ac2b701e0f930e05ba02561e3f18e9db04edd54 2c3b732711bd334d0915c2df77e48b9f023ff611 2c41042cbf147f48f13989d970e03836c1a0f20d 2d6fa3f71a03a0a65fdfc3fa59714192f887b82c 2db4b2bce82db1a4672d087c8da0d09dd29f932c 2e18ce454ea39f9b799e8b61813eb1d89536cb34 2f0470f2aebd55ddc61465836d098ba9ea72bec2 2fb2df8792e6355644e9a5d38eb1ada683f79aaf 301cfd6172f73e9fcab14365df7d0e2a5ec83f19 360fbe247f3625e5fcd397d89de2bb39e6c5d102 387318f50da65f6aca1e5b24c38cc13ba392fd25 3ee96f85e428bd1a589538f458523d5d336d9e06 422853ff5605eefc89c8de5a6a199d1a3a203678 455c0b6b3374d32dfcb2da4d55bb11ca0cf56092 469cb2def140815a09a69022d6b91b0206e37675 48ab98db9cc3bbe5e7e50d145238d5c85a499bf2 4ae5d99efd3b80df4150a6c103456ae28be3c663 4be0d5f006a3c23179afe0fe5fde6160b6605f07 4d023ed5837f8ad6ce6905de6bfd7ab306e7a8b8 4ee2eec9a821727eb71155d26c6688ebe5fd7e9a 5094ad02dc2776bb0b02be490dbbc95caa4ee27b 539cb52df2dce700431915e2fa3075c83526cae8 5678eee9c354c79d5842bdef160bfafb3308a82e 58f0fdaaeb85a253d488c1aee4d840d526bf1bdc 5ab83b0af8f884e2251fc2793cd55fee245d35c9 5bde392da699772a9e86c034892a4e01d61b44ce 5d789dac5c7e6cae6c9191cea189eab1c4a48bc1 60f0713d24bbba54dd6f19a7b4ac55f62657a158 62a5df2be23cb233e6844ca10d0e7b686f2b3e97 63dee3cfc64a3df15f6ae9524177cee303630a64 662888eb0aa1e22f78073fdc0d6767b4bf9eb538 665a5976fbc7a7dc5f62a56c7554775b005071c4 680e0df420810f2fbb71d5c748c228678d75e380 686430528c536c40ad15b992ade1ad4d739bfa8d 68d81212027fd71856c3ab052de763ef40b40fef 6eb3f659a0fc5b1877bae8c0f0c8abe7232e8703 7274efb10832b22a15c4edd1a853a2cb4b7797bf 72b702bcbad25fcbee195036f06327c9a6bfd69d 735b5c63d5abf515d9be7558aa4c4d57d6379835 744b0adba6cd16fbb41a371df806ef7e7b5bd124 74e3a4a0b3dd220d5f0e155975dca8c7e8851c95 79bc4efbee05d95a0988f13430167aadbed0d1bd 7a7332f03f9cc5795c6ccb0ef948484413b5623d 7ac9d0266020c7531d42d1c090e19b92fe15b442 814c311a7f45357c1b69e4388db69c57e4b66f99 8209b456e4696eb2998676e93d519cc0622b2cd4 8ba815537db3d34ff31dec215081e6144f80c99c 8c14ba5191c8fc3ead10cfa5e8418aee4a625847 913aefc709d6ccd4705adeddc95a9088e012d08f 921f5c95f22f1c4b8ae1bc01218be7d26518d9ab 94119ef84455c1e3f552ba07efbe4c46d56cc9aa 94e433bbb83ad1b43651202ddc697b9e16818eee 958307a4eef7c08320003fd068ac58117cb0bc45 990241b03a9fd406f723ead8f89f723349145eb6 9f2038cc0ca07fa1f0ddfc42736540cfe35374ec a090b13da8b98454a92b22570d664e12cbff0862 a111c2d405d26952e3edf686852ce44d078930e9 a13d64316451797a302d541b76ee6ddf507b64b0 a309b89c2944205288c435d8cce3c8875abf0fd7 a45197797010aea296515667f9b61eb0d740363b a5ce9483d8b0218e0172aa7cb98d1865a4368a29 a956d1858be5618d19304fa3f8eebe61a5e3eed3 ac8832c91987aa59f2c1f4dff4ee6eebe3cfe574 acfd96205a6f356ff9606fa3cec2cb5e800e8b9b ad2ab08b2f9d5a9eb3e43a7f7b561fbed97f882d aebb4f6f3c10e4de59b095603e99fbfe1c8da651 b13a263115d6b9a75897cf31240ef6f2d9c03aa5 b649252dce304d36b3bef3ccd9e47de2e14fb1a4 b668e6879c58f902e4759d7fbbb58fe786810f87 bc5517828971ac66ee2e128d8f50efb847b0e9ec be493a404938fb87c42f8b7301296edd48b34325 bf1ab8f737b4ce2804e7f1443357b409ea28d466 c08d0851646ac72c3b5ece7cd0914f7cdc2e186e c54f2aca34eeec6793d6f983a672729cc5e58e8c c8fac453052710d9a1737e323612c17dc092f967 ce3e7db3520fcb41d0907278ffbacb6b67903465 cea1b70f850faa7755462dcf7767bcc5032b960f d18ab9364e19e0680b468cb133c499dcc1cb41a5 d214fb369ac47488abaf463a7b5975448dd04fb0 d920e211557f3fa0ba8e27cb5a87af2248365c2f d981b6fd4df014e48d057d6e1ab07ac286827748 dda6532fad90db6686bc1f809298a4f9a195579a dfb2590fdd4a563915d0989d82944d1b16e19206 e0de53e72686b20f36c03409455cfe2cced55606 e4a8f71927cbd43575c715eb860223a12cb4d570 e748506f7fd7b36ce43d2bb900dca70085478152 e7bdd51b4a4146f6d9c141a98d4a1fd4c6892843 e7e9d7e53ced97bb88f837b18af0893b475720b6 e7fc96b414e09cf31b841100c965dc5bf2c42acd ebbc306bec767812164329458fb74d69bb16c7e4 ec3baf06fef4fec6c5282e48f8d327005902020d ed3a3d230cd8b8f19f0900effdf47608e0229533 ee177720f5b578fd7f958661c240ea37d0fdbd0e eec06c3a495cf258bd8b10635f0a13f316ca78ef f02f674640c8caaa85a3c29a1a0e1992b2d5641a f2844c5a9796633c8f1343b4afbf119a7c03a376 f333b221d61d819186998b8a37cefaf9fe40f8f5 f5bb79b3609da15c681f73586ac5eaa463af2d1a f6ed7b136b1e0a877d4d23dc15c0f05b4cc8d915 f711b743fc4139d701d53ed7887049643da94bde f8aa597669d55c92d1e7aa06db0c0e41b6a93247 fd5ee2281c098fab044acb1257e5c3052b12cf01 ff0bf7d05c8fccdfb5ac8a211a440791edb47476 ff80d3ba5f741152e306b09dfe6ec1d7d31ff0ee
+
+Package: openvox-agent-dbgsym
+Source: openvox-agent
+Version: 8.24.0-1+debian13
+Auto-Built-Package: debug-symbols
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 3345
+Depends: openvox-agent (= 8.24.0-1+debian13)
+Priority: optional
+Section: debug
+Filename: pool/openvox8/o/openvox-agent/openvox-agent-dbgsym_8.24.0-1+debian13_amd64.deb
+Size: 728724
+SHA512: 299273b808224d20496d81efdcf330b2e160001fd1661d72b0bd4bd42cc1af2cefe61d9f8e264553407c3bd2616988a90bb04cef71be386eb564fee9a8411ec7
+SHA256: 61a5857a7e294e6f3d275a252e528c2ef4cfddf3c9ec325a0101fbd7aef81c1d
+SHA1: 487597c09537f194172c148a77cd5ff6eb802024
+MD5sum: 1998047d7bb33e5170871466a5a2d3ac
+Description: debug symbols for openvox-agent
+Build-Ids: 00faa69e3c8719e90b8fe6e68015b0895396a609 02b794f684fcbb2e9f8aa1863255ee7b9acafb97 0a0b3edd05d568977775003edfb137bace83925c 0c7bb23be30dc1887b974c0d4f785bb303b94102 0ebca60fb3ab6bfd85314d308617b6488dc9cfe8 10914239147fac5fa3b8bd46bae269b6ea8443a9 120a1cf588d19ada43eb7ad1519bac9cba006c1e 12bb2661e7933857401bdb8a3f470cbdab744a8a 143bd20a72b839cbe05a928f7cd2d9a5e0f4770c 146209fd73bbb401bcc9391c83e484f764235f8a 1506a89ba6c33d577245045d373bfd56cd39cf27 15972cee4cb7bb0eaa0a7b325678b8e221fab26a 188c20689f03ab77b0d1c965b1166305f8b74b26 18db1d867bd1c91cb5d6f51966a239d57416eb1a 1a84dd45c50ba54df12232cef1dbbba3b988984a 1ad578e8cfdbaa0b6ac80f7b3a03ee7ce33c0a81 1b6d78b24b1e83248d6d134321b3de4cdf8d3727 1bb0dd4b01094a39340818b8eae40fd01247aa71 1c9d0f3be5f5fd1f8c602476eb1a01144863145f 1caae57d6a6b84aa52ec8bf39b467e1cb030d423 1f77e81c390f03042eb23be8a449289d7dd1d7d1 20f3eba81156c18838e23c72868d28a5ae6143c1 219ad6be9719131fd0ec5a9671455c5cdbc44460 21c3128b2b9c5f3633d7013f05440feeabf855c4 21dbe27273ad2c217924d893effbdf6fd0dffcb6 22f2dbc8ab9627e4cfd64df00f8f096fb30db043 270df6c089b95653540010c93afbc84e7facb989 2ac2b701e0f930e05ba02561e3f18e9db04edd54 2c3b732711bd334d0915c2df77e48b9f023ff611 2c41042cbf147f48f13989d970e03836c1a0f20d 2d6fa3f71a03a0a65fdfc3fa59714192f887b82c 2db4b2bce82db1a4672d087c8da0d09dd29f932c 2e18ce454ea39f9b799e8b61813eb1d89536cb34 2f0470f2aebd55ddc61465836d098ba9ea72bec2 2fb2df8792e6355644e9a5d38eb1ada683f79aaf 301cfd6172f73e9fcab14365df7d0e2a5ec83f19 360fbe247f3625e5fcd397d89de2bb39e6c5d102 387318f50da65f6aca1e5b24c38cc13ba392fd25 3d9fbf1cb53bf6be8f75340b069f8eeec8114803 3ee96f85e428bd1a589538f458523d5d336d9e06 455c0b6b3374d32dfcb2da4d55bb11ca0cf56092 469cb2def140815a09a69022d6b91b0206e37675 48ab98db9cc3bbe5e7e50d145238d5c85a499bf2 4ae5d99efd3b80df4150a6c103456ae28be3c663 4be0d5f006a3c23179afe0fe5fde6160b6605f07 4d023ed5837f8ad6ce6905de6bfd7ab306e7a8b8 4ee2eec9a821727eb71155d26c6688ebe5fd7e9a 5094ad02dc2776bb0b02be490dbbc95caa4ee27b 539cb52df2dce700431915e2fa3075c83526cae8 5678eee9c354c79d5842bdef160bfafb3308a82e 58f0fdaaeb85a253d488c1aee4d840d526bf1bdc 5bde392da699772a9e86c034892a4e01d61b44ce 5d789dac5c7e6cae6c9191cea189eab1c4a48bc1 60f0713d24bbba54dd6f19a7b4ac55f62657a158 60f988ec0fd42d9d68403e787e609a286d5b80ad 62a5df2be23cb233e6844ca10d0e7b686f2b3e97 63dee3cfc64a3df15f6ae9524177cee303630a64 662888eb0aa1e22f78073fdc0d6767b4bf9eb538 665a5976fbc7a7dc5f62a56c7554775b005071c4 680e0df420810f2fbb71d5c748c228678d75e380 686430528c536c40ad15b992ade1ad4d739bfa8d 68d81212027fd71856c3ab052de763ef40b40fef 6b396328b7a6d3d08c767e9022112c87b35a2f2b 6eb3f659a0fc5b1877bae8c0f0c8abe7232e8703 7274efb10832b22a15c4edd1a853a2cb4b7797bf 72b702bcbad25fcbee195036f06327c9a6bfd69d 735b5c63d5abf515d9be7558aa4c4d57d6379835 744b0adba6cd16fbb41a371df806ef7e7b5bd124 74e3a4a0b3dd220d5f0e155975dca8c7e8851c95 7579f18093842e7f93ab095a670d4044824f7b94 79bc4efbee05d95a0988f13430167aadbed0d1bd 7a7332f03f9cc5795c6ccb0ef948484413b5623d 7ac9d0266020c7531d42d1c090e19b92fe15b442 8209b456e4696eb2998676e93d519cc0622b2cd4 8ba815537db3d34ff31dec215081e6144f80c99c 8c14ba5191c8fc3ead10cfa5e8418aee4a625847 913aefc709d6ccd4705adeddc95a9088e012d08f 921f5c95f22f1c4b8ae1bc01218be7d26518d9ab 94119ef84455c1e3f552ba07efbe4c46d56cc9aa 94e433bbb83ad1b43651202ddc697b9e16818eee 958307a4eef7c08320003fd068ac58117cb0bc45 990241b03a9fd406f723ead8f89f723349145eb6 9f2038cc0ca07fa1f0ddfc42736540cfe35374ec a090b13da8b98454a92b22570d664e12cbff0862 a111c2d405d26952e3edf686852ce44d078930e9 a13d64316451797a302d541b76ee6ddf507b64b0 a309b89c2944205288c435d8cce3c8875abf0fd7 a45197797010aea296515667f9b61eb0d740363b a5ce9483d8b0218e0172aa7cb98d1865a4368a29 a956d1858be5618d19304fa3f8eebe61a5e3eed3 ac8832c91987aa59f2c1f4dff4ee6eebe3cfe574 acfd96205a6f356ff9606fa3cec2cb5e800e8b9b ad2ab08b2f9d5a9eb3e43a7f7b561fbed97f882d aebb4f6f3c10e4de59b095603e99fbfe1c8da651 b13a263115d6b9a75897cf31240ef6f2d9c03aa5 b649252dce304d36b3bef3ccd9e47de2e14fb1a4 b668e6879c58f902e4759d7fbbb58fe786810f87 bc5517828971ac66ee2e128d8f50efb847b0e9ec be493a404938fb87c42f8b7301296edd48b34325 bf1ab8f737b4ce2804e7f1443357b409ea28d466 c08d0851646ac72c3b5ece7cd0914f7cdc2e186e c54f2aca34eeec6793d6f983a672729cc5e58e8c c8fac453052710d9a1737e323612c17dc092f967 ce3e7db3520fcb41d0907278ffbacb6b67903465 cea1b70f850faa7755462dcf7767bcc5032b960f d18ab9364e19e0680b468cb133c499dcc1cb41a5 d214fb369ac47488abaf463a7b5975448dd04fb0 d920e211557f3fa0ba8e27cb5a87af2248365c2f d981b6fd4df014e48d057d6e1ab07ac286827748 dda6532fad90db6686bc1f809298a4f9a195579a dfb2590fdd4a563915d0989d82944d1b16e19206 e0de53e72686b20f36c03409455cfe2cced55606 e4a8f71927cbd43575c715eb860223a12cb4d570 e748506f7fd7b36ce43d2bb900dca70085478152 e7bdd51b4a4146f6d9c141a98d4a1fd4c6892843 e7e9d7e53ced97bb88f837b18af0893b475720b6 e7fc96b414e09cf31b841100c965dc5bf2c42acd ebbc306bec767812164329458fb74d69bb16c7e4 ec3baf06fef4fec6c5282e48f8d327005902020d ed3a3d230cd8b8f19f0900effdf47608e0229533 ee177720f5b578fd7f958661c240ea37d0fdbd0e eec06c3a495cf258bd8b10635f0a13f316ca78ef f02f674640c8caaa85a3c29a1a0e1992b2d5641a f2844c5a9796633c8f1343b4afbf119a7c03a376 f333b221d61d819186998b8a37cefaf9fe40f8f5 f5bb79b3609da15c681f73586ac5eaa463af2d1a f6ed7b136b1e0a877d4d23dc15c0f05b4cc8d915 f711b743fc4139d701d53ed7887049643da94bde f8aa597669d55c92d1e7aa06db0c0e41b6a93247 fd5ee2281c098fab044acb1257e5c3052b12cf01 ff0bf7d05c8fccdfb5ac8a211a440791edb47476 ff80d3ba5f741152e306b09dfe6ec1d7d31ff0ee
+
+Package: openvox-agent-dbgsym
+Source: openvox-agent
+Version: 8.23.1-1+debian13
+Auto-Built-Package: debug-symbols
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 3325
+Depends: openvox-agent (= 8.23.1-1+debian13)
+Priority: optional
+Section: debug
+Filename: pool/openvox8/o/openvox-agent/openvox-agent-dbgsym_8.23.1-1+debian13_amd64.deb
+Size: 723520
+SHA512: 0c8cb236972aad9a1a5f01408897d2d5cd69e6335b2948b745212ab9570546a69f68deae3719f79fc281269c160097e556fb208e42857f0e04ba034bb215662b
+SHA256: a4b37e8e63401a53655bd932d167f9ad5d3bd553005878c6f805ef5e5e5d86c7
+SHA1: 65045528082282fc1ac54602cd3e61979138f62a
+MD5sum: 4cc5499daf4abd666287c3e8d3d68036
+Description: debug symbols for openvox-agent
+Build-Ids: 00faa69e3c8719e90b8fe6e68015b0895396a609 086609dc3e7ec41e4fa42ebc74af4edac4488873 0a0b3edd05d568977775003edfb137bace83925c 0c7bb23be30dc1887b974c0d4f785bb303b94102 0ebca60fb3ab6bfd85314d308617b6488dc9cfe8 120a1cf588d19ada43eb7ad1519bac9cba006c1e 12bb2661e7933857401bdb8a3f470cbdab744a8a 143bd20a72b839cbe05a928f7cd2d9a5e0f4770c 146209fd73bbb401bcc9391c83e484f764235f8a 1506a89ba6c33d577245045d373bfd56cd39cf27 15972cee4cb7bb0eaa0a7b325678b8e221fab26a 18db1d867bd1c91cb5d6f51966a239d57416eb1a 1a84dd45c50ba54df12232cef1dbbba3b988984a 1ad578e8cfdbaa0b6ac80f7b3a03ee7ce33c0a81 1b6d78b24b1e83248d6d134321b3de4cdf8d3727 1c9d0f3be5f5fd1f8c602476eb1a01144863145f 1f77e81c390f03042eb23be8a449289d7dd1d7d1 20f3eba81156c18838e23c72868d28a5ae6143c1 219ad6be9719131fd0ec5a9671455c5cdbc44460 21c3128b2b9c5f3633d7013f05440feeabf855c4 21dbe27273ad2c217924d893effbdf6fd0dffcb6 22f2dbc8ab9627e4cfd64df00f8f096fb30db043 270df6c089b95653540010c93afbc84e7facb989 2ac2b701e0f930e05ba02561e3f18e9db04edd54 2c3b732711bd334d0915c2df77e48b9f023ff611 2c41042cbf147f48f13989d970e03836c1a0f20d 2d6fa3f71a03a0a65fdfc3fa59714192f887b82c 2db4b2bce82db1a4672d087c8da0d09dd29f932c 2e18ce454ea39f9b799e8b61813eb1d89536cb34 2f0470f2aebd55ddc61465836d098ba9ea72bec2 2fb2df8792e6355644e9a5d38eb1ada683f79aaf 301cfd6172f73e9fcab14365df7d0e2a5ec83f19 360fbe247f3625e5fcd397d89de2bb39e6c5d102 387318f50da65f6aca1e5b24c38cc13ba392fd25 3ee96f85e428bd1a589538f458523d5d336d9e06 403916c851633882e84a6869e7f6af3fbb039e5e 455c0b6b3374d32dfcb2da4d55bb11ca0cf56092 48ab98db9cc3bbe5e7e50d145238d5c85a499bf2 4be0d5f006a3c23179afe0fe5fde6160b6605f07 4d023ed5837f8ad6ce6905de6bfd7ab306e7a8b8 5094ad02dc2776bb0b02be490dbbc95caa4ee27b 539cb52df2dce700431915e2fa3075c83526cae8 5439af586624adc44ab378d46fec0b4ca3a5d6ce 5444e76740ecfb82a964af49c1d6da357fee3178 5678eee9c354c79d5842bdef160bfafb3308a82e 584522d53532dd288f5d6957f7c6c8f1a0194d83 58f0fdaaeb85a253d488c1aee4d840d526bf1bdc 5bde392da699772a9e86c034892a4e01d61b44ce 5cecd94c46e47df055453c7536dc311e76b7ca31 5d789dac5c7e6cae6c9191cea189eab1c4a48bc1 60f0713d24bbba54dd6f19a7b4ac55f62657a158 62a5df2be23cb233e6844ca10d0e7b686f2b3e97 63dee3cfc64a3df15f6ae9524177cee303630a64 665a5976fbc7a7dc5f62a56c7554775b005071c4 686430528c536c40ad15b992ade1ad4d739bfa8d 68d81212027fd71856c3ab052de763ef40b40fef 6eb3f659a0fc5b1877bae8c0f0c8abe7232e8703 724ec573c3036392aa351cf5902345823a4512c5 7274efb10832b22a15c4edd1a853a2cb4b7797bf 7278dd73aba8af94635a94c3a6ec71da35580822 72b702bcbad25fcbee195036f06327c9a6bfd69d 735b5c63d5abf515d9be7558aa4c4d57d6379835 744b0adba6cd16fbb41a371df806ef7e7b5bd124 74e3a4a0b3dd220d5f0e155975dca8c7e8851c95 79bc4efbee05d95a0988f13430167aadbed0d1bd 7a7332f03f9cc5795c6ccb0ef948484413b5623d 8209b456e4696eb2998676e93d519cc0622b2cd4 8ba815537db3d34ff31dec215081e6144f80c99c 913aefc709d6ccd4705adeddc95a9088e012d08f 921f5c95f22f1c4b8ae1bc01218be7d26518d9ab 92424b1fe53cc1a3761b15dd2a12f0b70b338707 94119ef84455c1e3f552ba07efbe4c46d56cc9aa 94e433bbb83ad1b43651202ddc697b9e16818eee 958307a4eef7c08320003fd068ac58117cb0bc45 990241b03a9fd406f723ead8f89f723349145eb6 9f2038cc0ca07fa1f0ddfc42736540cfe35374ec a090b13da8b98454a92b22570d664e12cbff0862 a111c2d405d26952e3edf686852ce44d078930e9 a13d64316451797a302d541b76ee6ddf507b64b0 a309b89c2944205288c435d8cce3c8875abf0fd7 a45197797010aea296515667f9b61eb0d740363b a5ce9483d8b0218e0172aa7cb98d1865a4368a29 a956d1858be5618d19304fa3f8eebe61a5e3eed3 ac8832c91987aa59f2c1f4dff4ee6eebe3cfe574 ad2ab08b2f9d5a9eb3e43a7f7b561fbed97f882d aebb4f6f3c10e4de59b095603e99fbfe1c8da651 b13a263115d6b9a75897cf31240ef6f2d9c03aa5 b649252dce304d36b3bef3ccd9e47de2e14fb1a4 b668e6879c58f902e4759d7fbbb58fe786810f87 b7b4a9d17d58783bc70742c8ac34ab8f86af556b bc5517828971ac66ee2e128d8f50efb847b0e9ec be493a404938fb87c42f8b7301296edd48b34325 bf18be2e2c0126b76ec10f60880d76101f3847bd bf1ab8f737b4ce2804e7f1443357b409ea28d466 c08d0851646ac72c3b5ece7cd0914f7cdc2e186e c54f2aca34eeec6793d6f983a672729cc5e58e8c c8a3a514955280394c011d58f1fbba74cf4e0225 c8fac453052710d9a1737e323612c17dc092f967 ce3e7db3520fcb41d0907278ffbacb6b67903465 cea1b70f850faa7755462dcf7767bcc5032b960f d18ab9364e19e0680b468cb133c499dcc1cb41a5 d214fb369ac47488abaf463a7b5975448dd04fb0 d7f3a5ef2a50c881b510ea7f0dbed4fdbeba47ec d920e211557f3fa0ba8e27cb5a87af2248365c2f d981b6fd4df014e48d057d6e1ab07ac286827748 d9c225369b8655f9cf81bad62e83ccdf40f471d3 dda6532fad90db6686bc1f809298a4f9a195579a dfb2590fdd4a563915d0989d82944d1b16e19206 e0de53e72686b20f36c03409455cfe2cced55606 e4a8f71927cbd43575c715eb860223a12cb4d570 e748506f7fd7b36ce43d2bb900dca70085478152 e7bdd51b4a4146f6d9c141a98d4a1fd4c6892843 e7e9d7e53ced97bb88f837b18af0893b475720b6 e7fc96b414e09cf31b841100c965dc5bf2c42acd ebbc306bec767812164329458fb74d69bb16c7e4 ec3baf06fef4fec6c5282e48f8d327005902020d ed3a3d230cd8b8f19f0900effdf47608e0229533 ee177720f5b578fd7f958661c240ea37d0fdbd0e eec06c3a495cf258bd8b10635f0a13f316ca78ef f02f674640c8caaa85a3c29a1a0e1992b2d5641a f2844c5a9796633c8f1343b4afbf119a7c03a376 f333b221d61d819186998b8a37cefaf9fe40f8f5 f5bb79b3609da15c681f73586ac5eaa463af2d1a f65f46f025ed1c5f71316221d637376f1a07e49d f6ed7b136b1e0a877d4d23dc15c0f05b4cc8d915 f711b743fc4139d701d53ed7887049643da94bde f7e74fbbc98c27f196110de3e58c8b5c5332bf46 f8aa597669d55c92d1e7aa06db0c0e41b6a93247 fd5ee2281c098fab044acb1257e5c3052b12cf01 ff0bf7d05c8fccdfb5ac8a211a440791edb47476 ff80d3ba5f741152e306b09dfe6ec1d7d31ff0ee
+
+Package: openvox-agent-dbgsym
+Source: openvox-agent
+Version: 8.23.0-1+debian13
+Auto-Built-Package: debug-symbols
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 3324
+Depends: openvox-agent (= 8.23.0-1+debian13)
+Priority: optional
+Section: debug
+Filename: pool/openvox8/o/openvox-agent/openvox-agent-dbgsym_8.23.0-1+debian13_amd64.deb
+Size: 723096
+SHA512: 8162489dffc62d69d7ece826eb36bc09f6efd1c4092c45b9c40112ee78ee579251f87b5a57a7f6ac37388eee800b611d8ef2408ebcda43120f259a29fa75d4ea
+SHA256: 71e34d4911b7eee128c9db596797f2053283af19894261149f00ee6956b6290a
+SHA1: 0402a26397371c7d509bbb806669d2ec21d5cf8e
+MD5sum: ecce3973e34c73866849e90630ced724
+Description: debug symbols for openvox-agent
+Build-Ids: 00faa69e3c8719e90b8fe6e68015b0895396a609 086609dc3e7ec41e4fa42ebc74af4edac4488873 0a0b3edd05d568977775003edfb137bace83925c 0c7bb23be30dc1887b974c0d4f785bb303b94102 0ebca60fb3ab6bfd85314d308617b6488dc9cfe8 120a1cf588d19ada43eb7ad1519bac9cba006c1e 12bb2661e7933857401bdb8a3f470cbdab744a8a 143bd20a72b839cbe05a928f7cd2d9a5e0f4770c 146209fd73bbb401bcc9391c83e484f764235f8a 1506a89ba6c33d577245045d373bfd56cd39cf27 15972cee4cb7bb0eaa0a7b325678b8e221fab26a 18db1d867bd1c91cb5d6f51966a239d57416eb1a 1a84dd45c50ba54df12232cef1dbbba3b988984a 1ad578e8cfdbaa0b6ac80f7b3a03ee7ce33c0a81 1b6d78b24b1e83248d6d134321b3de4cdf8d3727 1c9d0f3be5f5fd1f8c602476eb1a01144863145f 1f77e81c390f03042eb23be8a449289d7dd1d7d1 20f3eba81156c18838e23c72868d28a5ae6143c1 219ad6be9719131fd0ec5a9671455c5cdbc44460 21c3128b2b9c5f3633d7013f05440feeabf855c4 21dbe27273ad2c217924d893effbdf6fd0dffcb6 22f2dbc8ab9627e4cfd64df00f8f096fb30db043 270df6c089b95653540010c93afbc84e7facb989 2ac2b701e0f930e05ba02561e3f18e9db04edd54 2c3b732711bd334d0915c2df77e48b9f023ff611 2c41042cbf147f48f13989d970e03836c1a0f20d 2d6fa3f71a03a0a65fdfc3fa59714192f887b82c 2db4b2bce82db1a4672d087c8da0d09dd29f932c 2e18ce454ea39f9b799e8b61813eb1d89536cb34 2f0470f2aebd55ddc61465836d098ba9ea72bec2 2fb2df8792e6355644e9a5d38eb1ada683f79aaf 301cfd6172f73e9fcab14365df7d0e2a5ec83f19 360fbe247f3625e5fcd397d89de2bb39e6c5d102 387318f50da65f6aca1e5b24c38cc13ba392fd25 3ee96f85e428bd1a589538f458523d5d336d9e06 455c0b6b3374d32dfcb2da4d55bb11ca0cf56092 48ab98db9cc3bbe5e7e50d145238d5c85a499bf2 497c10a6958db5f8ea7731e38924ca25fe80ee89 4be0d5f006a3c23179afe0fe5fde6160b6605f07 4d023ed5837f8ad6ce6905de6bfd7ab306e7a8b8 5094ad02dc2776bb0b02be490dbbc95caa4ee27b 539cb52df2dce700431915e2fa3075c83526cae8 5439af586624adc44ab378d46fec0b4ca3a5d6ce 5444e76740ecfb82a964af49c1d6da357fee3178 5678eee9c354c79d5842bdef160bfafb3308a82e 584522d53532dd288f5d6957f7c6c8f1a0194d83 58f0fdaaeb85a253d488c1aee4d840d526bf1bdc 5bde392da699772a9e86c034892a4e01d61b44ce 5d789dac5c7e6cae6c9191cea189eab1c4a48bc1 60f0713d24bbba54dd6f19a7b4ac55f62657a158 62a5df2be23cb233e6844ca10d0e7b686f2b3e97 63dee3cfc64a3df15f6ae9524177cee303630a64 665a5976fbc7a7dc5f62a56c7554775b005071c4 686430528c536c40ad15b992ade1ad4d739bfa8d 68d81212027fd71856c3ab052de763ef40b40fef 6eb3f659a0fc5b1877bae8c0f0c8abe7232e8703 720e5f503dca045015914e7bd5fbace96b252109 724ec573c3036392aa351cf5902345823a4512c5 7274efb10832b22a15c4edd1a853a2cb4b7797bf 7278dd73aba8af94635a94c3a6ec71da35580822 72b702bcbad25fcbee195036f06327c9a6bfd69d 735b5c63d5abf515d9be7558aa4c4d57d6379835 744b0adba6cd16fbb41a371df806ef7e7b5bd124 74e3a4a0b3dd220d5f0e155975dca8c7e8851c95 79bc4efbee05d95a0988f13430167aadbed0d1bd 7a7332f03f9cc5795c6ccb0ef948484413b5623d 8209b456e4696eb2998676e93d519cc0622b2cd4 8ba815537db3d34ff31dec215081e6144f80c99c 913aefc709d6ccd4705adeddc95a9088e012d08f 921f5c95f22f1c4b8ae1bc01218be7d26518d9ab 92424b1fe53cc1a3761b15dd2a12f0b70b338707 94119ef84455c1e3f552ba07efbe4c46d56cc9aa 94e433bbb83ad1b43651202ddc697b9e16818eee 958307a4eef7c08320003fd068ac58117cb0bc45 990241b03a9fd406f723ead8f89f723349145eb6 9f2038cc0ca07fa1f0ddfc42736540cfe35374ec a090b13da8b98454a92b22570d664e12cbff0862 a111c2d405d26952e3edf686852ce44d078930e9 a13d64316451797a302d541b76ee6ddf507b64b0 a309b89c2944205288c435d8cce3c8875abf0fd7 a45197797010aea296515667f9b61eb0d740363b a5ce9483d8b0218e0172aa7cb98d1865a4368a29 a5eddba538e17ca76d6ac95eedc3efb97847a742 a956d1858be5618d19304fa3f8eebe61a5e3eed3 ac8832c91987aa59f2c1f4dff4ee6eebe3cfe574 ad2ab08b2f9d5a9eb3e43a7f7b561fbed97f882d aebb4f6f3c10e4de59b095603e99fbfe1c8da651 b13a263115d6b9a75897cf31240ef6f2d9c03aa5 b649252dce304d36b3bef3ccd9e47de2e14fb1a4 b668e6879c58f902e4759d7fbbb58fe786810f87 b7b4a9d17d58783bc70742c8ac34ab8f86af556b bc5517828971ac66ee2e128d8f50efb847b0e9ec be493a404938fb87c42f8b7301296edd48b34325 bf18be2e2c0126b76ec10f60880d76101f3847bd bf1ab8f737b4ce2804e7f1443357b409ea28d466 c08d0851646ac72c3b5ece7cd0914f7cdc2e186e c54f2aca34eeec6793d6f983a672729cc5e58e8c c8fac453052710d9a1737e323612c17dc092f967 ce3e7db3520fcb41d0907278ffbacb6b67903465 cea1b70f850faa7755462dcf7767bcc5032b960f d18ab9364e19e0680b468cb133c499dcc1cb41a5 d214fb369ac47488abaf463a7b5975448dd04fb0 d7f3a5ef2a50c881b510ea7f0dbed4fdbeba47ec d920e211557f3fa0ba8e27cb5a87af2248365c2f d981b6fd4df014e48d057d6e1ab07ac286827748 dda6532fad90db6686bc1f809298a4f9a195579a dfb2590fdd4a563915d0989d82944d1b16e19206 e0de53e72686b20f36c03409455cfe2cced55606 e4a8f71927cbd43575c715eb860223a12cb4d570 e748506f7fd7b36ce43d2bb900dca70085478152 e7bdd51b4a4146f6d9c141a98d4a1fd4c6892843 e7e9d7e53ced97bb88f837b18af0893b475720b6 e7fc96b414e09cf31b841100c965dc5bf2c42acd ebbc306bec767812164329458fb74d69bb16c7e4 ec3baf06fef4fec6c5282e48f8d327005902020d ed3a3d230cd8b8f19f0900effdf47608e0229533 ee177720f5b578fd7f958661c240ea37d0fdbd0e eec06c3a495cf258bd8b10635f0a13f316ca78ef f02f674640c8caaa85a3c29a1a0e1992b2d5641a f2844c5a9796633c8f1343b4afbf119a7c03a376 f2a63462cfeaef9add7efe0ebf88763b5245a97e f333b221d61d819186998b8a37cefaf9fe40f8f5 f5bb79b3609da15c681f73586ac5eaa463af2d1a f65f46f025ed1c5f71316221d637376f1a07e49d f6ed7b136b1e0a877d4d23dc15c0f05b4cc8d915 f711b743fc4139d701d53ed7887049643da94bde f7e74fbbc98c27f196110de3e58c8b5c5332bf46 f8aa597669d55c92d1e7aa06db0c0e41b6a93247 fd5ee2281c098fab044acb1257e5c3052b12cf01 ff0bf7d05c8fccdfb5ac8a211a440791edb47476 ff80d3ba5f741152e306b09dfe6ec1d7d31ff0ee
+
+Package: openvox-agent-dbgsym
+Source: openvox-agent
+Version: 8.22.1-1+debian13
+Auto-Built-Package: debug-symbols
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 3323
+Depends: openvox-agent (= 8.22.1-1+debian13)
+Priority: optional
+Section: debug
+Filename: pool/openvox8/o/openvox-agent/openvox-agent-dbgsym_8.22.1-1+debian13_amd64.deb
+Size: 719258
+SHA512: d41f6152e7641fd4bc04c24040b6db60d69b72fef18541b2a0e11a9cf8dc076063e35a1f5267f048ad4213277156a14f2cd9f8cd9a473028f538a9ad580b73f7
+SHA256: eb91f6d02ee42e8e589d7e5a295214b7c9ebf67aad0a3a10677e71904229804c
+SHA1: 53c07eb82dcd30435d8f2727bce5f93c917bccf4
+MD5sum: 579916133fa91785def6e507f7700690
+Description: debug symbols for openvox-agent
+Build-Ids: 00faa69e3c8719e90b8fe6e68015b0895396a609 0a0b3edd05d568977775003edfb137bace83925c 0ebca60fb3ab6bfd85314d308617b6488dc9cfe8 120a1cf588d19ada43eb7ad1519bac9cba006c1e 12bb2661e7933857401bdb8a3f470cbdab744a8a 13562a8b621fa166048a062eae1d888a4be2d784 143bd20a72b839cbe05a928f7cd2d9a5e0f4770c 146209fd73bbb401bcc9391c83e484f764235f8a 1506a89ba6c33d577245045d373bfd56cd39cf27 15972cee4cb7bb0eaa0a7b325678b8e221fab26a 18db1d867bd1c91cb5d6f51966a239d57416eb1a 1a84dd45c50ba54df12232cef1dbbba3b988984a 1ad578e8cfdbaa0b6ac80f7b3a03ee7ce33c0a81 1b6d78b24b1e83248d6d134321b3de4cdf8d3727 1c9d0f3be5f5fd1f8c602476eb1a01144863145f 1f77e81c390f03042eb23be8a449289d7dd1d7d1 20f3eba81156c18838e23c72868d28a5ae6143c1 214938ef992c92af3ca74b046b6957034f0bd711 219ad6be9719131fd0ec5a9671455c5cdbc44460 21c3128b2b9c5f3633d7013f05440feeabf855c4 21dbe27273ad2c217924d893effbdf6fd0dffcb6 2257e9a9d2920693c18403ee7f15e14d53365264 22f2dbc8ab9627e4cfd64df00f8f096fb30db043 270df6c089b95653540010c93afbc84e7facb989 2a896adb659ccdf4f2c5cf9c5705a02103e8afa0 2ac2b701e0f930e05ba02561e3f18e9db04edd54 2c3b732711bd334d0915c2df77e48b9f023ff611 2c41042cbf147f48f13989d970e03836c1a0f20d 2d6fa3f71a03a0a65fdfc3fa59714192f887b82c 2db4b2bce82db1a4672d087c8da0d09dd29f932c 2e18ce454ea39f9b799e8b61813eb1d89536cb34 2f0470f2aebd55ddc61465836d098ba9ea72bec2 2f38633bd31f2bbe9900f59b2b1d7296353d7925 2fb2df8792e6355644e9a5d38eb1ada683f79aaf 301cfd6172f73e9fcab14365df7d0e2a5ec83f19 3311c61fc54154f9e19bce6af9c865a54b873245 387318f50da65f6aca1e5b24c38cc13ba392fd25 3ee96f85e428bd1a589538f458523d5d336d9e06 41da894762265c0cbe92ac8b261d42fea41a2dbd 42027145e062599a5412bf07fc1c23a5b1ae6569 455c0b6b3374d32dfcb2da4d55bb11ca0cf56092 46f48bd1c69d59f6871d1db9d974ac3da30dd4cc 48ab98db9cc3bbe5e7e50d145238d5c85a499bf2 4be0d5f006a3c23179afe0fe5fde6160b6605f07 4d023ed5837f8ad6ce6905de6bfd7ab306e7a8b8 4d9960b84fb16794c579b5d2722d3a719ee61fac 5094ad02dc2776bb0b02be490dbbc95caa4ee27b 539cb52df2dce700431915e2fa3075c83526cae8 54067fe43bdbbf93d89c15534ea4b270e07d08ab 5678eee9c354c79d5842bdef160bfafb3308a82e 584522d53532dd288f5d6957f7c6c8f1a0194d83 58f0fdaaeb85a253d488c1aee4d840d526bf1bdc 5d789dac5c7e6cae6c9191cea189eab1c4a48bc1 5e3b15ff39ffc06eb64870ddf817d377c65625ca 60f0713d24bbba54dd6f19a7b4ac55f62657a158 62a5df2be23cb233e6844ca10d0e7b686f2b3e97 63dee3cfc64a3df15f6ae9524177cee303630a64 665a5976fbc7a7dc5f62a56c7554775b005071c4 686430528c536c40ad15b992ade1ad4d739bfa8d 68d81212027fd71856c3ab052de763ef40b40fef 6b3922ba28530a65eed65e55b6b855d800f36d0c 6eb3f659a0fc5b1877bae8c0f0c8abe7232e8703 7274efb10832b22a15c4edd1a853a2cb4b7797bf 72b702bcbad25fcbee195036f06327c9a6bfd69d 735b5c63d5abf515d9be7558aa4c4d57d6379835 74e3a4a0b3dd220d5f0e155975dca8c7e8851c95 79bc4efbee05d95a0988f13430167aadbed0d1bd 8209b456e4696eb2998676e93d519cc0622b2cd4 8ba815537db3d34ff31dec215081e6144f80c99c 921f5c95f22f1c4b8ae1bc01218be7d26518d9ab 94119ef84455c1e3f552ba07efbe4c46d56cc9aa 94e433bbb83ad1b43651202ddc697b9e16818eee 958307a4eef7c08320003fd068ac58117cb0bc45 990241b03a9fd406f723ead8f89f723349145eb6 9f2038cc0ca07fa1f0ddfc42736540cfe35374ec a090b13da8b98454a92b22570d664e12cbff0862 a111c2d405d26952e3edf686852ce44d078930e9 a13d64316451797a302d541b76ee6ddf507b64b0 a199d2eac73313135a8193cfb651a87bd58bc049 a309b89c2944205288c435d8cce3c8875abf0fd7 a45197797010aea296515667f9b61eb0d740363b a5ce9483d8b0218e0172aa7cb98d1865a4368a29 a956d1858be5618d19304fa3f8eebe61a5e3eed3 ac8832c91987aa59f2c1f4dff4ee6eebe3cfe574 ad2ab08b2f9d5a9eb3e43a7f7b561fbed97f882d aebb4f6f3c10e4de59b095603e99fbfe1c8da651 b13a263115d6b9a75897cf31240ef6f2d9c03aa5 b59e959248b280646159788a969742a4cc1b3d76 b668e6879c58f902e4759d7fbbb58fe786810f87 b7d15340b22639a26fdf0dd62b59a7c7b57f250e bc5517828971ac66ee2e128d8f50efb847b0e9ec be493a404938fb87c42f8b7301296edd48b34325 bf1ab8f737b4ce2804e7f1443357b409ea28d466 c08d0851646ac72c3b5ece7cd0914f7cdc2e186e c54f2aca34eeec6793d6f983a672729cc5e58e8c c83efed3bafc135f48fc01fbac504e55331f20df c8fac453052710d9a1737e323612c17dc092f967 cd5f960f4d3e18b04dcb6653f7b1fb3f9e6144e8 cea1b70f850faa7755462dcf7767bcc5032b960f d18ab9364e19e0680b468cb133c499dcc1cb41a5 d214fb369ac47488abaf463a7b5975448dd04fb0 d549a1651142381031b18e465e54cfb6ba229fe0 d920e211557f3fa0ba8e27cb5a87af2248365c2f d981b6fd4df014e48d057d6e1ab07ac286827748 db4e27509f8a63c18b3dc761af1bafffeff363c5 dda6532fad90db6686bc1f809298a4f9a195579a dfb2590fdd4a563915d0989d82944d1b16e19206 e0de53e72686b20f36c03409455cfe2cced55606 e2bf57a7fa9657a9be21b980129c390c4d713c02 e4a8f71927cbd43575c715eb860223a12cb4d570 e748506f7fd7b36ce43d2bb900dca70085478152 e7bdd51b4a4146f6d9c141a98d4a1fd4c6892843 e7e9d7e53ced97bb88f837b18af0893b475720b6 e7fc96b414e09cf31b841100c965dc5bf2c42acd ebbc306bec767812164329458fb74d69bb16c7e4 ec3baf06fef4fec6c5282e48f8d327005902020d ed3a3d230cd8b8f19f0900effdf47608e0229533 ee177720f5b578fd7f958661c240ea37d0fdbd0e eec06c3a495cf258bd8b10635f0a13f316ca78ef f02f674640c8caaa85a3c29a1a0e1992b2d5641a f2844c5a9796633c8f1343b4afbf119a7c03a376 f333b221d61d819186998b8a37cefaf9fe40f8f5 f5bb79b3609da15c681f73586ac5eaa463af2d1a f6ed7b136b1e0a877d4d23dc15c0f05b4cc8d915 f711b743fc4139d701d53ed7887049643da94bde f8aa597669d55c92d1e7aa06db0c0e41b6a93247 fd35787310d9521ff765112a6d2ed84a99c26ae7 fd5ee2281c098fab044acb1257e5c3052b12cf01 ff0bf7d05c8fccdfb5ac8a211a440791edb47476 ff80d3ba5f741152e306b09dfe6ec1d7d31ff0ee
+
+Package: openvox-agent-dbgsym
+Source: openvox-agent
+Version: 8.22.0-1+debian13
+Auto-Built-Package: debug-symbols
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 3323
+Depends: openvox-agent (= 8.22.0-1+debian13)
+Priority: optional
+Section: debug
+Filename: pool/openvox8/o/openvox-agent/openvox-agent-dbgsym_8.22.0-1+debian13_amd64.deb
+Size: 719266
+SHA512: 739b2e31611ac435ce64aff72f25e0332bbcc4a0e82662f70165cfdd8d3b0f64f72e7fcab4f3ee81cbc2081691f36e2c8447b8deb3b8f6a6bf1dd7b3c0f8b459
+SHA256: 8eea9b40b5fe25c2a8dba933e29c205979e8a7a5349f4d797823f9854dbdde80
+SHA1: 2611180d317480cface815c17541ed5a6460f8db
+MD5sum: fbd1722543a40e0bb54f4bef7a6c6e7a
+Description: debug symbols for openvox-agent
+Build-Ids: 00faa69e3c8719e90b8fe6e68015b0895396a609 0a0b3edd05d568977775003edfb137bace83925c 0ebca60fb3ab6bfd85314d308617b6488dc9cfe8 120a1cf588d19ada43eb7ad1519bac9cba006c1e 12bb2661e7933857401bdb8a3f470cbdab744a8a 13562a8b621fa166048a062eae1d888a4be2d784 143bd20a72b839cbe05a928f7cd2d9a5e0f4770c 146209fd73bbb401bcc9391c83e484f764235f8a 1506a89ba6c33d577245045d373bfd56cd39cf27 15972cee4cb7bb0eaa0a7b325678b8e221fab26a 18db1d867bd1c91cb5d6f51966a239d57416eb1a 1a84dd45c50ba54df12232cef1dbbba3b988984a 1ad578e8cfdbaa0b6ac80f7b3a03ee7ce33c0a81 1b6d78b24b1e83248d6d134321b3de4cdf8d3727 1c9d0f3be5f5fd1f8c602476eb1a01144863145f 1f77e81c390f03042eb23be8a449289d7dd1d7d1 20f3eba81156c18838e23c72868d28a5ae6143c1 214938ef992c92af3ca74b046b6957034f0bd711 219ad6be9719131fd0ec5a9671455c5cdbc44460 21c3128b2b9c5f3633d7013f05440feeabf855c4 21dbe27273ad2c217924d893effbdf6fd0dffcb6 2257e9a9d2920693c18403ee7f15e14d53365264 22f2dbc8ab9627e4cfd64df00f8f096fb30db043 270df6c089b95653540010c93afbc84e7facb989 2a896adb659ccdf4f2c5cf9c5705a02103e8afa0 2ac2b701e0f930e05ba02561e3f18e9db04edd54 2c3b732711bd334d0915c2df77e48b9f023ff611 2c41042cbf147f48f13989d970e03836c1a0f20d 2d6fa3f71a03a0a65fdfc3fa59714192f887b82c 2db4b2bce82db1a4672d087c8da0d09dd29f932c 2e18ce454ea39f9b799e8b61813eb1d89536cb34 2f0470f2aebd55ddc61465836d098ba9ea72bec2 2f38633bd31f2bbe9900f59b2b1d7296353d7925 2fb2df8792e6355644e9a5d38eb1ada683f79aaf 301cfd6172f73e9fcab14365df7d0e2a5ec83f19 3311c61fc54154f9e19bce6af9c865a54b873245 387318f50da65f6aca1e5b24c38cc13ba392fd25 3ee96f85e428bd1a589538f458523d5d336d9e06 41da894762265c0cbe92ac8b261d42fea41a2dbd 42027145e062599a5412bf07fc1c23a5b1ae6569 455c0b6b3374d32dfcb2da4d55bb11ca0cf56092 46f48bd1c69d59f6871d1db9d974ac3da30dd4cc 48ab98db9cc3bbe5e7e50d145238d5c85a499bf2 4be0d5f006a3c23179afe0fe5fde6160b6605f07 4d023ed5837f8ad6ce6905de6bfd7ab306e7a8b8 4d9960b84fb16794c579b5d2722d3a719ee61fac 5094ad02dc2776bb0b02be490dbbc95caa4ee27b 539cb52df2dce700431915e2fa3075c83526cae8 54067fe43bdbbf93d89c15534ea4b270e07d08ab 5678eee9c354c79d5842bdef160bfafb3308a82e 584522d53532dd288f5d6957f7c6c8f1a0194d83 58f0fdaaeb85a253d488c1aee4d840d526bf1bdc 5d789dac5c7e6cae6c9191cea189eab1c4a48bc1 5e3b15ff39ffc06eb64870ddf817d377c65625ca 60f0713d24bbba54dd6f19a7b4ac55f62657a158 62a5df2be23cb233e6844ca10d0e7b686f2b3e97 63dee3cfc64a3df15f6ae9524177cee303630a64 665a5976fbc7a7dc5f62a56c7554775b005071c4 686430528c536c40ad15b992ade1ad4d739bfa8d 68d81212027fd71856c3ab052de763ef40b40fef 6b3922ba28530a65eed65e55b6b855d800f36d0c 6eb3f659a0fc5b1877bae8c0f0c8abe7232e8703 7274efb10832b22a15c4edd1a853a2cb4b7797bf 72b702bcbad25fcbee195036f06327c9a6bfd69d 735b5c63d5abf515d9be7558aa4c4d57d6379835 74e3a4a0b3dd220d5f0e155975dca8c7e8851c95 79bc4efbee05d95a0988f13430167aadbed0d1bd 8209b456e4696eb2998676e93d519cc0622b2cd4 8ba815537db3d34ff31dec215081e6144f80c99c 921f5c95f22f1c4b8ae1bc01218be7d26518d9ab 94119ef84455c1e3f552ba07efbe4c46d56cc9aa 94e433bbb83ad1b43651202ddc697b9e16818eee 958307a4eef7c08320003fd068ac58117cb0bc45 990241b03a9fd406f723ead8f89f723349145eb6 9f2038cc0ca07fa1f0ddfc42736540cfe35374ec a090b13da8b98454a92b22570d664e12cbff0862 a111c2d405d26952e3edf686852ce44d078930e9 a13d64316451797a302d541b76ee6ddf507b64b0 a199d2eac73313135a8193cfb651a87bd58bc049 a309b89c2944205288c435d8cce3c8875abf0fd7 a45197797010aea296515667f9b61eb0d740363b a5ce9483d8b0218e0172aa7cb98d1865a4368a29 a956d1858be5618d19304fa3f8eebe61a5e3eed3 ac8832c91987aa59f2c1f4dff4ee6eebe3cfe574 ad2ab08b2f9d5a9eb3e43a7f7b561fbed97f882d aebb4f6f3c10e4de59b095603e99fbfe1c8da651 b13a263115d6b9a75897cf31240ef6f2d9c03aa5 b59e959248b280646159788a969742a4cc1b3d76 b668e6879c58f902e4759d7fbbb58fe786810f87 b7d15340b22639a26fdf0dd62b59a7c7b57f250e bc5517828971ac66ee2e128d8f50efb847b0e9ec be493a404938fb87c42f8b7301296edd48b34325 bf1ab8f737b4ce2804e7f1443357b409ea28d466 c08d0851646ac72c3b5ece7cd0914f7cdc2e186e c54f2aca34eeec6793d6f983a672729cc5e58e8c c83efed3bafc135f48fc01fbac504e55331f20df c8fac453052710d9a1737e323612c17dc092f967 cd5f960f4d3e18b04dcb6653f7b1fb3f9e6144e8 cea1b70f850faa7755462dcf7767bcc5032b960f d18ab9364e19e0680b468cb133c499dcc1cb41a5 d214fb369ac47488abaf463a7b5975448dd04fb0 d549a1651142381031b18e465e54cfb6ba229fe0 d920e211557f3fa0ba8e27cb5a87af2248365c2f d981b6fd4df014e48d057d6e1ab07ac286827748 db4e27509f8a63c18b3dc761af1bafffeff363c5 dda6532fad90db6686bc1f809298a4f9a195579a dfb2590fdd4a563915d0989d82944d1b16e19206 e0de53e72686b20f36c03409455cfe2cced55606 e2bf57a7fa9657a9be21b980129c390c4d713c02 e4a8f71927cbd43575c715eb860223a12cb4d570 e748506f7fd7b36ce43d2bb900dca70085478152 e7bdd51b4a4146f6d9c141a98d4a1fd4c6892843 e7e9d7e53ced97bb88f837b18af0893b475720b6 e7fc96b414e09cf31b841100c965dc5bf2c42acd ebbc306bec767812164329458fb74d69bb16c7e4 ec3baf06fef4fec6c5282e48f8d327005902020d ed3a3d230cd8b8f19f0900effdf47608e0229533 ee177720f5b578fd7f958661c240ea37d0fdbd0e eec06c3a495cf258bd8b10635f0a13f316ca78ef f02f674640c8caaa85a3c29a1a0e1992b2d5641a f2844c5a9796633c8f1343b4afbf119a7c03a376 f333b221d61d819186998b8a37cefaf9fe40f8f5 f5bb79b3609da15c681f73586ac5eaa463af2d1a f6ed7b136b1e0a877d4d23dc15c0f05b4cc8d915 f711b743fc4139d701d53ed7887049643da94bde f8aa597669d55c92d1e7aa06db0c0e41b6a93247 fd35787310d9521ff765112a6d2ed84a99c26ae7 fd5ee2281c098fab044acb1257e5c3052b12cf01 ff0bf7d05c8fccdfb5ac8a211a440791edb47476 ff80d3ba5f741152e306b09dfe6ec1d7d31ff0ee
+
+Package: openvox-agent-dbgsym
+Source: openvox-agent
+Version: 8.19.2-1+debian13
+Auto-Built-Package: debug-symbols
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 7566
+Depends: openvox-agent (= 8.19.2-1+debian13)
+Priority: optional
+Section: debug
+Filename: pool/openvox8/o/openvox-agent/openvox-agent-dbgsym_8.19.2-1+debian13_amd64.deb
+Size: 1305456
+SHA512: 988179f61d79266d1b53bb1f660b02142e8851e661664b3314f44e9de085573441ad02f4320af22880eea9a4ae6f77dc84f7ee2475ad2e70cdcbf0eecd8408fe
+SHA256: 4c7e0d21490cd2fb0ceba773dd9bcd8d4e5a8397a9cd09728459d600c73dd833
+SHA1: d90726e98305668d3c46523b76f3839445e1311c
+MD5sum: 018b89462c90dd10caf76751d95ce62c
+Description: debug symbols for openvox-agent
+Build-Ids: 00faa69e3c8719e90b8fe6e68015b0895396a609 0a0b3edd05d568977775003edfb137bace83925c 0ebca60fb3ab6bfd85314d308617b6488dc9cfe8 120a1cf588d19ada43eb7ad1519bac9cba006c1e 12bb2661e7933857401bdb8a3f470cbdab744a8a 143bd20a72b839cbe05a928f7cd2d9a5e0f4770c 146209fd73bbb401bcc9391c83e484f764235f8a 1506a89ba6c33d577245045d373bfd56cd39cf27 15972cee4cb7bb0eaa0a7b325678b8e221fab26a 18db1d867bd1c91cb5d6f51966a239d57416eb1a 1a84dd45c50ba54df12232cef1dbbba3b988984a 1ad578e8cfdbaa0b6ac80f7b3a03ee7ce33c0a81 1b6d78b24b1e83248d6d134321b3de4cdf8d3727 1c9d0f3be5f5fd1f8c602476eb1a01144863145f 1f77e81c390f03042eb23be8a449289d7dd1d7d1 20f3eba81156c18838e23c72868d28a5ae6143c1 214938ef992c92af3ca74b046b6957034f0bd711 219ad6be9719131fd0ec5a9671455c5cdbc44460 21c3128b2b9c5f3633d7013f05440feeabf855c4 21dbe27273ad2c217924d893effbdf6fd0dffcb6 2257e9a9d2920693c18403ee7f15e14d53365264 22f2dbc8ab9627e4cfd64df00f8f096fb30db043 270df6c089b95653540010c93afbc84e7facb989 2a896adb659ccdf4f2c5cf9c5705a02103e8afa0 2ac2b701e0f930e05ba02561e3f18e9db04edd54 2c3b732711bd334d0915c2df77e48b9f023ff611 2c41042cbf147f48f13989d970e03836c1a0f20d 2d6fa3f71a03a0a65fdfc3fa59714192f887b82c 2db4b2bce82db1a4672d087c8da0d09dd29f932c 2e18ce454ea39f9b799e8b61813eb1d89536cb34 2f0470f2aebd55ddc61465836d098ba9ea72bec2 2f38633bd31f2bbe9900f59b2b1d7296353d7925 2fb2df8792e6355644e9a5d38eb1ada683f79aaf 301cfd6172f73e9fcab14365df7d0e2a5ec83f19 30221abf9031adcb660458d1be4063f1a5cf5da1 3311c61fc54154f9e19bce6af9c865a54b873245 35adbb05e86f98d5674690b27b8f142066becf87 35ff1aa36181becd39fe7c465d718b1c40078d74 387318f50da65f6aca1e5b24c38cc13ba392fd25 3b6c44cc8f7bf75d9fce4201316968e7fda6867c 3ee96f85e428bd1a589538f458523d5d336d9e06 3f6708bb05e92f39aa94a2841a57bb7ed17f219e 3ff5fa3a3e2462e1f97c7d16334d116bb193bc04 41da894762265c0cbe92ac8b261d42fea41a2dbd 43204c448fa18bc7d12d82a1e4f72c5e63360d7b 455c0b6b3374d32dfcb2da4d55bb11ca0cf56092 46f48bd1c69d59f6871d1db9d974ac3da30dd4cc 48ab98db9cc3bbe5e7e50d145238d5c85a499bf2 4be0d5f006a3c23179afe0fe5fde6160b6605f07 4d023ed5837f8ad6ce6905de6bfd7ab306e7a8b8 4d9960b84fb16794c579b5d2722d3a719ee61fac 5094ad02dc2776bb0b02be490dbbc95caa4ee27b 539cb52df2dce700431915e2fa3075c83526cae8 54067fe43bdbbf93d89c15534ea4b270e07d08ab 545a2628c6ee90d3cc10f77c97d0fe02992d4d75 5678eee9c354c79d5842bdef160bfafb3308a82e 584522d53532dd288f5d6957f7c6c8f1a0194d83 58f0fdaaeb85a253d488c1aee4d840d526bf1bdc 5ad8a8460af2e06913ad3c88eca379dfa98efe72 5b11bd31febf387d2932229753afe72603fe7a49 5b71005b91500d64f64c5695f996d5c23a96fac0 5d789dac5c7e6cae6c9191cea189eab1c4a48bc1 5dd373202585708a4bc5e70c6a0e6e3ed448cb3b 60f0713d24bbba54dd6f19a7b4ac55f62657a158 62a5df2be23cb233e6844ca10d0e7b686f2b3e97 63dee3cfc64a3df15f6ae9524177cee303630a64 665a5976fbc7a7dc5f62a56c7554775b005071c4 680ac8884843f5d95d0f683b2ef65dc04e1d379e 686430528c536c40ad15b992ade1ad4d739bfa8d 68d81212027fd71856c3ab052de763ef40b40fef 6b3922ba28530a65eed65e55b6b855d800f36d0c 6c1d55a1b3f0548429715ed17ddb8beca6163c7e 6eb3f659a0fc5b1877bae8c0f0c8abe7232e8703 7274efb10832b22a15c4edd1a853a2cb4b7797bf 72b702bcbad25fcbee195036f06327c9a6bfd69d 735b5c63d5abf515d9be7558aa4c4d57d6379835 74e3a4a0b3dd220d5f0e155975dca8c7e8851c95 79bc4efbee05d95a0988f13430167aadbed0d1bd 7a2b019cf9b2d914a363a29bd8d9e2808a815dcc 8102d49322b877473007b4fb7f1cb72cf1554582 8209b456e4696eb2998676e93d519cc0622b2cd4 8766aaecfcc889ef7adf6e20f7b849240da53e12 884548cff5194f49495ccfafae63e79a17ae73dd 8ba815537db3d34ff31dec215081e6144f80c99c 8ec8f6dbfb2fb4d6926a8ba47a949ea6ebab1b2b 921f5c95f22f1c4b8ae1bc01218be7d26518d9ab 94119ef84455c1e3f552ba07efbe4c46d56cc9aa 94e433bbb83ad1b43651202ddc697b9e16818eee 958307a4eef7c08320003fd068ac58117cb0bc45 990241b03a9fd406f723ead8f89f723349145eb6 9f2038cc0ca07fa1f0ddfc42736540cfe35374ec a0532694ed2a11182c50f1ee48de8b401c821385 a090b13da8b98454a92b22570d664e12cbff0862 a111c2d405d26952e3edf686852ce44d078930e9 a13d64316451797a302d541b76ee6ddf507b64b0 a199d2eac73313135a8193cfb651a87bd58bc049 a309b89c2944205288c435d8cce3c8875abf0fd7 a45197797010aea296515667f9b61eb0d740363b a5ce9483d8b0218e0172aa7cb98d1865a4368a29 a956d1858be5618d19304fa3f8eebe61a5e3eed3 ac8832c91987aa59f2c1f4dff4ee6eebe3cfe574 ad2ab08b2f9d5a9eb3e43a7f7b561fbed97f882d aebb4f6f3c10e4de59b095603e99fbfe1c8da651 b134c7973ac69d1e6dbaeebd306c035e94b52939 b13a263115d6b9a75897cf31240ef6f2d9c03aa5 b59e959248b280646159788a969742a4cc1b3d76 b668e6879c58f902e4759d7fbbb58fe786810f87 b69a22aa0dfebace6969928a27d5a3de62f86cfe b7d15340b22639a26fdf0dd62b59a7c7b57f250e bc5517828971ac66ee2e128d8f50efb847b0e9ec be3ec08f0b53bc54ec7e2147fb06fb80edd6c4ee be493a404938fb87c42f8b7301296edd48b34325 bf1ab8f737b4ce2804e7f1443357b409ea28d466 c08d0851646ac72c3b5ece7cd0914f7cdc2e186e c54f2aca34eeec6793d6f983a672729cc5e58e8c c8fac453052710d9a1737e323612c17dc092f967 cd5f960f4d3e18b04dcb6653f7b1fb3f9e6144e8 cea1b70f850faa7755462dcf7767bcc5032b960f ceaacd44a442af328c8f377d6ad911c843e0b9f7 d170df26a6013c1fa3f8598000dff20dd2ac2697 d18ab9364e19e0680b468cb133c499dcc1cb41a5 d214fb369ac47488abaf463a7b5975448dd04fb0 d476daaead77809363d78c5f4469493938ff2258 d66ee335c9d7ee34e564cb28b17402576c1c6cc6 d7a86f4eb258378caf865e5f49cab680e5b5d2bf d920e211557f3fa0ba8e27cb5a87af2248365c2f d981b6fd4df014e48d057d6e1ab07ac286827748 db4e27509f8a63c18b3dc761af1bafffeff363c5 dda6532fad90db6686bc1f809298a4f9a195579a dfb2590fdd4a563915d0989d82944d1b16e19206 e0de53e72686b20f36c03409455cfe2cced55606 e2b73e8853f72d6789bb46da9022d2a4ce959682 e2bf57a7fa9657a9be21b980129c390c4d713c02 e4a8f71927cbd43575c715eb860223a12cb4d570 e748506f7fd7b36ce43d2bb900dca70085478152 e7bdd51b4a4146f6d9c141a98d4a1fd4c6892843 e7e9d7e53ced97bb88f837b18af0893b475720b6 e7fc96b414e09cf31b841100c965dc5bf2c42acd ebbc306bec767812164329458fb74d69bb16c7e4 ec3baf06fef4fec6c5282e48f8d327005902020d ed3a3d230cd8b8f19f0900effdf47608e0229533 ee177720f5b578fd7f958661c240ea37d0fdbd0e eec06c3a495cf258bd8b10635f0a13f316ca78ef f02f674640c8caaa85a3c29a1a0e1992b2d5641a f2844c5a9796633c8f1343b4afbf119a7c03a376 f333b221d61d819186998b8a37cefaf9fe40f8f5 f5bb79b3609da15c681f73586ac5eaa463af2d1a f6ed7b136b1e0a877d4d23dc15c0f05b4cc8d915 f711b743fc4139d701d53ed7887049643da94bde f8aa597669d55c92d1e7aa06db0c0e41b6a93247 fd35787310d9521ff765112a6d2ed84a99c26ae7 fd5ee2281c098fab044acb1257e5c3052b12cf01 ff0bf7d05c8fccdfb5ac8a211a440791edb47476 ff80d3ba5f741152e306b09dfe6ec1d7d31ff0ee
+
+Package: openvox-agent-dbgsym
+Source: openvox-agent
+Version: 8.19.1-1+debian13
+Auto-Built-Package: debug-symbols
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 7566
+Depends: openvox-agent (= 8.19.1-1+debian13)
+Priority: optional
+Section: debug
+Filename: pool/openvox8/o/openvox-agent/openvox-agent-dbgsym_8.19.1-1+debian13_amd64.deb
+Size: 1305466
+SHA512: 89005a18b32a7c0ae93b5cb059ea96e7fa377be7b7278532c5a002aec4e1a000229984b446a29c58fadebc09252eab6679bc011403c4225d478b3c427ed4efde
+SHA256: e4ed2f6224d0b2c7d1f45552bb367f15be9b117e80b63beb959cd410871759ca
+SHA1: 04b3ae6caedc5bcad35a1de6987d58e01b67abec
+MD5sum: 5abcdd87f8bbcb3c31519f2477a21e00
+Description: debug symbols for openvox-agent
+Build-Ids: 00faa69e3c8719e90b8fe6e68015b0895396a609 0a0b3edd05d568977775003edfb137bace83925c 0ebca60fb3ab6bfd85314d308617b6488dc9cfe8 120a1cf588d19ada43eb7ad1519bac9cba006c1e 12bb2661e7933857401bdb8a3f470cbdab744a8a 143bd20a72b839cbe05a928f7cd2d9a5e0f4770c 146209fd73bbb401bcc9391c83e484f764235f8a 1506a89ba6c33d577245045d373bfd56cd39cf27 15972cee4cb7bb0eaa0a7b325678b8e221fab26a 18db1d867bd1c91cb5d6f51966a239d57416eb1a 1a84dd45c50ba54df12232cef1dbbba3b988984a 1ad578e8cfdbaa0b6ac80f7b3a03ee7ce33c0a81 1b6d78b24b1e83248d6d134321b3de4cdf8d3727 1c9d0f3be5f5fd1f8c602476eb1a01144863145f 1f77e81c390f03042eb23be8a449289d7dd1d7d1 20f3eba81156c18838e23c72868d28a5ae6143c1 214938ef992c92af3ca74b046b6957034f0bd711 219ad6be9719131fd0ec5a9671455c5cdbc44460 21c3128b2b9c5f3633d7013f05440feeabf855c4 21dbe27273ad2c217924d893effbdf6fd0dffcb6 2257e9a9d2920693c18403ee7f15e14d53365264 22f2dbc8ab9627e4cfd64df00f8f096fb30db043 270df6c089b95653540010c93afbc84e7facb989 2a896adb659ccdf4f2c5cf9c5705a02103e8afa0 2ac2b701e0f930e05ba02561e3f18e9db04edd54 2c3b732711bd334d0915c2df77e48b9f023ff611 2c41042cbf147f48f13989d970e03836c1a0f20d 2d6fa3f71a03a0a65fdfc3fa59714192f887b82c 2db4b2bce82db1a4672d087c8da0d09dd29f932c 2e18ce454ea39f9b799e8b61813eb1d89536cb34 2f0470f2aebd55ddc61465836d098ba9ea72bec2 2f38633bd31f2bbe9900f59b2b1d7296353d7925 2fb2df8792e6355644e9a5d38eb1ada683f79aaf 301cfd6172f73e9fcab14365df7d0e2a5ec83f19 30221abf9031adcb660458d1be4063f1a5cf5da1 3311c61fc54154f9e19bce6af9c865a54b873245 35adbb05e86f98d5674690b27b8f142066becf87 35ff1aa36181becd39fe7c465d718b1c40078d74 387318f50da65f6aca1e5b24c38cc13ba392fd25 3b6c44cc8f7bf75d9fce4201316968e7fda6867c 3ee96f85e428bd1a589538f458523d5d336d9e06 3f6708bb05e92f39aa94a2841a57bb7ed17f219e 3ff5fa3a3e2462e1f97c7d16334d116bb193bc04 41da894762265c0cbe92ac8b261d42fea41a2dbd 43204c448fa18bc7d12d82a1e4f72c5e63360d7b 455c0b6b3374d32dfcb2da4d55bb11ca0cf56092 46f48bd1c69d59f6871d1db9d974ac3da30dd4cc 48ab98db9cc3bbe5e7e50d145238d5c85a499bf2 4be0d5f006a3c23179afe0fe5fde6160b6605f07 4d023ed5837f8ad6ce6905de6bfd7ab306e7a8b8 4d9960b84fb16794c579b5d2722d3a719ee61fac 5094ad02dc2776bb0b02be490dbbc95caa4ee27b 539cb52df2dce700431915e2fa3075c83526cae8 54067fe43bdbbf93d89c15534ea4b270e07d08ab 545a2628c6ee90d3cc10f77c97d0fe02992d4d75 5678eee9c354c79d5842bdef160bfafb3308a82e 584522d53532dd288f5d6957f7c6c8f1a0194d83 58f0fdaaeb85a253d488c1aee4d840d526bf1bdc 5ad8a8460af2e06913ad3c88eca379dfa98efe72 5b11bd31febf387d2932229753afe72603fe7a49 5b71005b91500d64f64c5695f996d5c23a96fac0 5d789dac5c7e6cae6c9191cea189eab1c4a48bc1 5dd373202585708a4bc5e70c6a0e6e3ed448cb3b 60f0713d24bbba54dd6f19a7b4ac55f62657a158 62a5df2be23cb233e6844ca10d0e7b686f2b3e97 63dee3cfc64a3df15f6ae9524177cee303630a64 665a5976fbc7a7dc5f62a56c7554775b005071c4 680ac8884843f5d95d0f683b2ef65dc04e1d379e 686430528c536c40ad15b992ade1ad4d739bfa8d 68d81212027fd71856c3ab052de763ef40b40fef 6b3922ba28530a65eed65e55b6b855d800f36d0c 6c1d55a1b3f0548429715ed17ddb8beca6163c7e 6eb3f659a0fc5b1877bae8c0f0c8abe7232e8703 7274efb10832b22a15c4edd1a853a2cb4b7797bf 72b702bcbad25fcbee195036f06327c9a6bfd69d 735b5c63d5abf515d9be7558aa4c4d57d6379835 74e3a4a0b3dd220d5f0e155975dca8c7e8851c95 79bc4efbee05d95a0988f13430167aadbed0d1bd 7a2b019cf9b2d914a363a29bd8d9e2808a815dcc 8102d49322b877473007b4fb7f1cb72cf1554582 8209b456e4696eb2998676e93d519cc0622b2cd4 8766aaecfcc889ef7adf6e20f7b849240da53e12 884548cff5194f49495ccfafae63e79a17ae73dd 8ba815537db3d34ff31dec215081e6144f80c99c 8ec8f6dbfb2fb4d6926a8ba47a949ea6ebab1b2b 921f5c95f22f1c4b8ae1bc01218be7d26518d9ab 94119ef84455c1e3f552ba07efbe4c46d56cc9aa 94e433bbb83ad1b43651202ddc697b9e16818eee 958307a4eef7c08320003fd068ac58117cb0bc45 990241b03a9fd406f723ead8f89f723349145eb6 9f2038cc0ca07fa1f0ddfc42736540cfe35374ec a0532694ed2a11182c50f1ee48de8b401c821385 a090b13da8b98454a92b22570d664e12cbff0862 a111c2d405d26952e3edf686852ce44d078930e9 a13d64316451797a302d541b76ee6ddf507b64b0 a199d2eac73313135a8193cfb651a87bd58bc049 a309b89c2944205288c435d8cce3c8875abf0fd7 a45197797010aea296515667f9b61eb0d740363b a5ce9483d8b0218e0172aa7cb98d1865a4368a29 a956d1858be5618d19304fa3f8eebe61a5e3eed3 ac8832c91987aa59f2c1f4dff4ee6eebe3cfe574 ad2ab08b2f9d5a9eb3e43a7f7b561fbed97f882d aebb4f6f3c10e4de59b095603e99fbfe1c8da651 b134c7973ac69d1e6dbaeebd306c035e94b52939 b13a263115d6b9a75897cf31240ef6f2d9c03aa5 b59e959248b280646159788a969742a4cc1b3d76 b668e6879c58f902e4759d7fbbb58fe786810f87 b69a22aa0dfebace6969928a27d5a3de62f86cfe b7d15340b22639a26fdf0dd62b59a7c7b57f250e bc5517828971ac66ee2e128d8f50efb847b0e9ec be3ec08f0b53bc54ec7e2147fb06fb80edd6c4ee be493a404938fb87c42f8b7301296edd48b34325 bf1ab8f737b4ce2804e7f1443357b409ea28d466 c08d0851646ac72c3b5ece7cd0914f7cdc2e186e c54f2aca34eeec6793d6f983a672729cc5e58e8c c8fac453052710d9a1737e323612c17dc092f967 cd5f960f4d3e18b04dcb6653f7b1fb3f9e6144e8 cea1b70f850faa7755462dcf7767bcc5032b960f ceaacd44a442af328c8f377d6ad911c843e0b9f7 d170df26a6013c1fa3f8598000dff20dd2ac2697 d18ab9364e19e0680b468cb133c499dcc1cb41a5 d214fb369ac47488abaf463a7b5975448dd04fb0 d476daaead77809363d78c5f4469493938ff2258 d66ee335c9d7ee34e564cb28b17402576c1c6cc6 d7a86f4eb258378caf865e5f49cab680e5b5d2bf d920e211557f3fa0ba8e27cb5a87af2248365c2f d981b6fd4df014e48d057d6e1ab07ac286827748 db4e27509f8a63c18b3dc761af1bafffeff363c5 dda6532fad90db6686bc1f809298a4f9a195579a dfb2590fdd4a563915d0989d82944d1b16e19206 e0de53e72686b20f36c03409455cfe2cced55606 e2b73e8853f72d6789bb46da9022d2a4ce959682 e2bf57a7fa9657a9be21b980129c390c4d713c02 e4a8f71927cbd43575c715eb860223a12cb4d570 e748506f7fd7b36ce43d2bb900dca70085478152 e7bdd51b4a4146f6d9c141a98d4a1fd4c6892843 e7e9d7e53ced97bb88f837b18af0893b475720b6 e7fc96b414e09cf31b841100c965dc5bf2c42acd ebbc306bec767812164329458fb74d69bb16c7e4 ec3baf06fef4fec6c5282e48f8d327005902020d ed3a3d230cd8b8f19f0900effdf47608e0229533 ee177720f5b578fd7f958661c240ea37d0fdbd0e eec06c3a495cf258bd8b10635f0a13f316ca78ef f02f674640c8caaa85a3c29a1a0e1992b2d5641a f2844c5a9796633c8f1343b4afbf119a7c03a376 f333b221d61d819186998b8a37cefaf9fe40f8f5 f5bb79b3609da15c681f73586ac5eaa463af2d1a f6ed7b136b1e0a877d4d23dc15c0f05b4cc8d915 f711b743fc4139d701d53ed7887049643da94bde f8aa597669d55c92d1e7aa06db0c0e41b6a93247 fd35787310d9521ff765112a6d2ed84a99c26ae7 fd5ee2281c098fab044acb1257e5c3052b12cf01 ff0bf7d05c8fccdfb5ac8a211a440791edb47476 ff80d3ba5f741152e306b09dfe6ec1d7d31ff0ee
+
+Package: openvox-agent-dbgsym
+Source: openvox-agent
+Version: 8.19.0-1+debian13
+Auto-Built-Package: debug-symbols
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 7566
+Depends: openvox-agent (= 8.19.0-1+debian13)
+Priority: optional
+Section: debug
+Filename: pool/openvox8/o/openvox-agent/openvox-agent-dbgsym_8.19.0-1+debian13_amd64.deb
+Size: 1305438
+SHA512: 0daa68284e983eef83ccb6fa16d0759c64f34817d285a5f4db6d68e7b3e4b3257be0b2566182b0ee81e3449326c0ee8dbe3a528d7ddf912246a6f191adb72f9b
+SHA256: 1edae69678dba3f763ac48f51c48466df663e4c129ff52bea2d761391ff4e329
+SHA1: 05f4ce1f58323790beb8a572032435be27f73749
+MD5sum: d5de5cf19a7894d4ea2fbae29098a0f0
+Description: debug symbols for openvox-agent
+Build-Ids: 00faa69e3c8719e90b8fe6e68015b0895396a609 0a0b3edd05d568977775003edfb137bace83925c 0ebca60fb3ab6bfd85314d308617b6488dc9cfe8 120a1cf588d19ada43eb7ad1519bac9cba006c1e 12bb2661e7933857401bdb8a3f470cbdab744a8a 143bd20a72b839cbe05a928f7cd2d9a5e0f4770c 146209fd73bbb401bcc9391c83e484f764235f8a 1506a89ba6c33d577245045d373bfd56cd39cf27 15972cee4cb7bb0eaa0a7b325678b8e221fab26a 18db1d867bd1c91cb5d6f51966a239d57416eb1a 1a84dd45c50ba54df12232cef1dbbba3b988984a 1ad578e8cfdbaa0b6ac80f7b3a03ee7ce33c0a81 1b6d78b24b1e83248d6d134321b3de4cdf8d3727 1c9d0f3be5f5fd1f8c602476eb1a01144863145f 1f77e81c390f03042eb23be8a449289d7dd1d7d1 20f3eba81156c18838e23c72868d28a5ae6143c1 214938ef992c92af3ca74b046b6957034f0bd711 219ad6be9719131fd0ec5a9671455c5cdbc44460 21c3128b2b9c5f3633d7013f05440feeabf855c4 21dbe27273ad2c217924d893effbdf6fd0dffcb6 2257e9a9d2920693c18403ee7f15e14d53365264 22f2dbc8ab9627e4cfd64df00f8f096fb30db043 270df6c089b95653540010c93afbc84e7facb989 2a896adb659ccdf4f2c5cf9c5705a02103e8afa0 2ac2b701e0f930e05ba02561e3f18e9db04edd54 2c3b732711bd334d0915c2df77e48b9f023ff611 2c41042cbf147f48f13989d970e03836c1a0f20d 2d6fa3f71a03a0a65fdfc3fa59714192f887b82c 2db4b2bce82db1a4672d087c8da0d09dd29f932c 2e18ce454ea39f9b799e8b61813eb1d89536cb34 2f0470f2aebd55ddc61465836d098ba9ea72bec2 2f38633bd31f2bbe9900f59b2b1d7296353d7925 2fb2df8792e6355644e9a5d38eb1ada683f79aaf 301cfd6172f73e9fcab14365df7d0e2a5ec83f19 30221abf9031adcb660458d1be4063f1a5cf5da1 3311c61fc54154f9e19bce6af9c865a54b873245 35adbb05e86f98d5674690b27b8f142066becf87 35ff1aa36181becd39fe7c465d718b1c40078d74 387318f50da65f6aca1e5b24c38cc13ba392fd25 3b6c44cc8f7bf75d9fce4201316968e7fda6867c 3ee96f85e428bd1a589538f458523d5d336d9e06 3f6708bb05e92f39aa94a2841a57bb7ed17f219e 3ff5fa3a3e2462e1f97c7d16334d116bb193bc04 41da894762265c0cbe92ac8b261d42fea41a2dbd 43204c448fa18bc7d12d82a1e4f72c5e63360d7b 455c0b6b3374d32dfcb2da4d55bb11ca0cf56092 46f48bd1c69d59f6871d1db9d974ac3da30dd4cc 48ab98db9cc3bbe5e7e50d145238d5c85a499bf2 4be0d5f006a3c23179afe0fe5fde6160b6605f07 4d023ed5837f8ad6ce6905de6bfd7ab306e7a8b8 4d9960b84fb16794c579b5d2722d3a719ee61fac 5094ad02dc2776bb0b02be490dbbc95caa4ee27b 539cb52df2dce700431915e2fa3075c83526cae8 54067fe43bdbbf93d89c15534ea4b270e07d08ab 545a2628c6ee90d3cc10f77c97d0fe02992d4d75 5678eee9c354c79d5842bdef160bfafb3308a82e 584522d53532dd288f5d6957f7c6c8f1a0194d83 58f0fdaaeb85a253d488c1aee4d840d526bf1bdc 5ad8a8460af2e06913ad3c88eca379dfa98efe72 5b11bd31febf387d2932229753afe72603fe7a49 5b71005b91500d64f64c5695f996d5c23a96fac0 5d789dac5c7e6cae6c9191cea189eab1c4a48bc1 5dd373202585708a4bc5e70c6a0e6e3ed448cb3b 60f0713d24bbba54dd6f19a7b4ac55f62657a158 62a5df2be23cb233e6844ca10d0e7b686f2b3e97 63dee3cfc64a3df15f6ae9524177cee303630a64 665a5976fbc7a7dc5f62a56c7554775b005071c4 680ac8884843f5d95d0f683b2ef65dc04e1d379e 686430528c536c40ad15b992ade1ad4d739bfa8d 68d81212027fd71856c3ab052de763ef40b40fef 6b3922ba28530a65eed65e55b6b855d800f36d0c 6c1d55a1b3f0548429715ed17ddb8beca6163c7e 6eb3f659a0fc5b1877bae8c0f0c8abe7232e8703 7274efb10832b22a15c4edd1a853a2cb4b7797bf 72b702bcbad25fcbee195036f06327c9a6bfd69d 735b5c63d5abf515d9be7558aa4c4d57d6379835 74e3a4a0b3dd220d5f0e155975dca8c7e8851c95 79bc4efbee05d95a0988f13430167aadbed0d1bd 7a2b019cf9b2d914a363a29bd8d9e2808a815dcc 8102d49322b877473007b4fb7f1cb72cf1554582 8209b456e4696eb2998676e93d519cc0622b2cd4 8766aaecfcc889ef7adf6e20f7b849240da53e12 884548cff5194f49495ccfafae63e79a17ae73dd 8ba815537db3d34ff31dec215081e6144f80c99c 8ec8f6dbfb2fb4d6926a8ba47a949ea6ebab1b2b 921f5c95f22f1c4b8ae1bc01218be7d26518d9ab 94119ef84455c1e3f552ba07efbe4c46d56cc9aa 94e433bbb83ad1b43651202ddc697b9e16818eee 958307a4eef7c08320003fd068ac58117cb0bc45 990241b03a9fd406f723ead8f89f723349145eb6 9f2038cc0ca07fa1f0ddfc42736540cfe35374ec a0532694ed2a11182c50f1ee48de8b401c821385 a090b13da8b98454a92b22570d664e12cbff0862 a111c2d405d26952e3edf686852ce44d078930e9 a13d64316451797a302d541b76ee6ddf507b64b0 a199d2eac73313135a8193cfb651a87bd58bc049 a309b89c2944205288c435d8cce3c8875abf0fd7 a45197797010aea296515667f9b61eb0d740363b a5ce9483d8b0218e0172aa7cb98d1865a4368a29 a956d1858be5618d19304fa3f8eebe61a5e3eed3 ac8832c91987aa59f2c1f4dff4ee6eebe3cfe574 ad2ab08b2f9d5a9eb3e43a7f7b561fbed97f882d aebb4f6f3c10e4de59b095603e99fbfe1c8da651 b134c7973ac69d1e6dbaeebd306c035e94b52939 b13a263115d6b9a75897cf31240ef6f2d9c03aa5 b59e959248b280646159788a969742a4cc1b3d76 b668e6879c58f902e4759d7fbbb58fe786810f87 b69a22aa0dfebace6969928a27d5a3de62f86cfe b7d15340b22639a26fdf0dd62b59a7c7b57f250e bc5517828971ac66ee2e128d8f50efb847b0e9ec be3ec08f0b53bc54ec7e2147fb06fb80edd6c4ee be493a404938fb87c42f8b7301296edd48b34325 bf1ab8f737b4ce2804e7f1443357b409ea28d466 c08d0851646ac72c3b5ece7cd0914f7cdc2e186e c54f2aca34eeec6793d6f983a672729cc5e58e8c c8fac453052710d9a1737e323612c17dc092f967 cd5f960f4d3e18b04dcb6653f7b1fb3f9e6144e8 cea1b70f850faa7755462dcf7767bcc5032b960f ceaacd44a442af328c8f377d6ad911c843e0b9f7 d170df26a6013c1fa3f8598000dff20dd2ac2697 d18ab9364e19e0680b468cb133c499dcc1cb41a5 d214fb369ac47488abaf463a7b5975448dd04fb0 d476daaead77809363d78c5f4469493938ff2258 d66ee335c9d7ee34e564cb28b17402576c1c6cc6 d7a86f4eb258378caf865e5f49cab680e5b5d2bf d920e211557f3fa0ba8e27cb5a87af2248365c2f d981b6fd4df014e48d057d6e1ab07ac286827748 db4e27509f8a63c18b3dc761af1bafffeff363c5 dda6532fad90db6686bc1f809298a4f9a195579a dfb2590fdd4a563915d0989d82944d1b16e19206 e0de53e72686b20f36c03409455cfe2cced55606 e2b73e8853f72d6789bb46da9022d2a4ce959682 e2bf57a7fa9657a9be21b980129c390c4d713c02 e4a8f71927cbd43575c715eb860223a12cb4d570 e748506f7fd7b36ce43d2bb900dca70085478152 e7bdd51b4a4146f6d9c141a98d4a1fd4c6892843 e7e9d7e53ced97bb88f837b18af0893b475720b6 e7fc96b414e09cf31b841100c965dc5bf2c42acd ebbc306bec767812164329458fb74d69bb16c7e4 ec3baf06fef4fec6c5282e48f8d327005902020d ed3a3d230cd8b8f19f0900effdf47608e0229533 ee177720f5b578fd7f958661c240ea37d0fdbd0e eec06c3a495cf258bd8b10635f0a13f316ca78ef f02f674640c8caaa85a3c29a1a0e1992b2d5641a f2844c5a9796633c8f1343b4afbf119a7c03a376 f333b221d61d819186998b8a37cefaf9fe40f8f5 f5bb79b3609da15c681f73586ac5eaa463af2d1a f6ed7b136b1e0a877d4d23dc15c0f05b4cc8d915 f711b743fc4139d701d53ed7887049643da94bde f8aa597669d55c92d1e7aa06db0c0e41b6a93247 fd35787310d9521ff765112a6d2ed84a99c26ae7 fd5ee2281c098fab044acb1257e5c3052b12cf01 ff0bf7d05c8fccdfb5ac8a211a440791edb47476 ff80d3ba5f741152e306b09dfe6ec1d7d31ff0ee
+
+Package: openvox-agent-dbgsym
+Source: openvox-agent
+Version: 8.18.1-1+debian13
+Auto-Built-Package: debug-symbols
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 7566
+Depends: openvox-agent (= 8.18.1-1+debian13)
+Priority: optional
+Section: debug
+Filename: pool/openvox8/o/openvox-agent/openvox-agent-dbgsym_8.18.1-1+debian13_amd64.deb
+Size: 1305462
+SHA512: 54bc13aa933865aaca93c6858e832f0498d441f5f038380273e52010f36a33bde8aaa5b69f34fbf04d2f75a5f708bb6fc9ea0378771dcbc0768353a47bcd72ad
+SHA256: 654301c2624fb943c334ec47cb0547e9d9336cfddcac7da811944ba7384ed212
+SHA1: dc52a7dcd078ed7fb912249ca56b2963e8d4b359
+MD5sum: 92c63f699e9051614eea6941046b8b6f
+Description: debug symbols for openvox-agent
+Build-Ids: 00faa69e3c8719e90b8fe6e68015b0895396a609 0a0b3edd05d568977775003edfb137bace83925c 0ebca60fb3ab6bfd85314d308617b6488dc9cfe8 120a1cf588d19ada43eb7ad1519bac9cba006c1e 12bb2661e7933857401bdb8a3f470cbdab744a8a 143bd20a72b839cbe05a928f7cd2d9a5e0f4770c 146209fd73bbb401bcc9391c83e484f764235f8a 1506a89ba6c33d577245045d373bfd56cd39cf27 15972cee4cb7bb0eaa0a7b325678b8e221fab26a 18db1d867bd1c91cb5d6f51966a239d57416eb1a 1a84dd45c50ba54df12232cef1dbbba3b988984a 1ad578e8cfdbaa0b6ac80f7b3a03ee7ce33c0a81 1b6d78b24b1e83248d6d134321b3de4cdf8d3727 1c9d0f3be5f5fd1f8c602476eb1a01144863145f 1f77e81c390f03042eb23be8a449289d7dd1d7d1 20f3eba81156c18838e23c72868d28a5ae6143c1 214938ef992c92af3ca74b046b6957034f0bd711 219ad6be9719131fd0ec5a9671455c5cdbc44460 21c3128b2b9c5f3633d7013f05440feeabf855c4 21dbe27273ad2c217924d893effbdf6fd0dffcb6 2257e9a9d2920693c18403ee7f15e14d53365264 22f2dbc8ab9627e4cfd64df00f8f096fb30db043 270df6c089b95653540010c93afbc84e7facb989 2a896adb659ccdf4f2c5cf9c5705a02103e8afa0 2ac2b701e0f930e05ba02561e3f18e9db04edd54 2c3b732711bd334d0915c2df77e48b9f023ff611 2c41042cbf147f48f13989d970e03836c1a0f20d 2d6fa3f71a03a0a65fdfc3fa59714192f887b82c 2db4b2bce82db1a4672d087c8da0d09dd29f932c 2e18ce454ea39f9b799e8b61813eb1d89536cb34 2f0470f2aebd55ddc61465836d098ba9ea72bec2 2f38633bd31f2bbe9900f59b2b1d7296353d7925 2fb2df8792e6355644e9a5d38eb1ada683f79aaf 301cfd6172f73e9fcab14365df7d0e2a5ec83f19 30221abf9031adcb660458d1be4063f1a5cf5da1 3311c61fc54154f9e19bce6af9c865a54b873245 35adbb05e86f98d5674690b27b8f142066becf87 35ff1aa36181becd39fe7c465d718b1c40078d74 387318f50da65f6aca1e5b24c38cc13ba392fd25 3b6c44cc8f7bf75d9fce4201316968e7fda6867c 3ee96f85e428bd1a589538f458523d5d336d9e06 3f6708bb05e92f39aa94a2841a57bb7ed17f219e 3ff5fa3a3e2462e1f97c7d16334d116bb193bc04 41da894762265c0cbe92ac8b261d42fea41a2dbd 43204c448fa18bc7d12d82a1e4f72c5e63360d7b 455c0b6b3374d32dfcb2da4d55bb11ca0cf56092 46f48bd1c69d59f6871d1db9d974ac3da30dd4cc 48ab98db9cc3bbe5e7e50d145238d5c85a499bf2 4be0d5f006a3c23179afe0fe5fde6160b6605f07 4d023ed5837f8ad6ce6905de6bfd7ab306e7a8b8 4d9960b84fb16794c579b5d2722d3a719ee61fac 5094ad02dc2776bb0b02be490dbbc95caa4ee27b 539cb52df2dce700431915e2fa3075c83526cae8 54067fe43bdbbf93d89c15534ea4b270e07d08ab 545a2628c6ee90d3cc10f77c97d0fe02992d4d75 5678eee9c354c79d5842bdef160bfafb3308a82e 584522d53532dd288f5d6957f7c6c8f1a0194d83 58f0fdaaeb85a253d488c1aee4d840d526bf1bdc 5ad8a8460af2e06913ad3c88eca379dfa98efe72 5b11bd31febf387d2932229753afe72603fe7a49 5b71005b91500d64f64c5695f996d5c23a96fac0 5d789dac5c7e6cae6c9191cea189eab1c4a48bc1 5dd373202585708a4bc5e70c6a0e6e3ed448cb3b 60f0713d24bbba54dd6f19a7b4ac55f62657a158 62a5df2be23cb233e6844ca10d0e7b686f2b3e97 63dee3cfc64a3df15f6ae9524177cee303630a64 665a5976fbc7a7dc5f62a56c7554775b005071c4 680ac8884843f5d95d0f683b2ef65dc04e1d379e 686430528c536c40ad15b992ade1ad4d739bfa8d 68d81212027fd71856c3ab052de763ef40b40fef 6b3922ba28530a65eed65e55b6b855d800f36d0c 6c1d55a1b3f0548429715ed17ddb8beca6163c7e 6eb3f659a0fc5b1877bae8c0f0c8abe7232e8703 7274efb10832b22a15c4edd1a853a2cb4b7797bf 72b702bcbad25fcbee195036f06327c9a6bfd69d 735b5c63d5abf515d9be7558aa4c4d57d6379835 74e3a4a0b3dd220d5f0e155975dca8c7e8851c95 79bc4efbee05d95a0988f13430167aadbed0d1bd 7a2b019cf9b2d914a363a29bd8d9e2808a815dcc 8102d49322b877473007b4fb7f1cb72cf1554582 8209b456e4696eb2998676e93d519cc0622b2cd4 8766aaecfcc889ef7adf6e20f7b849240da53e12 884548cff5194f49495ccfafae63e79a17ae73dd 8ba815537db3d34ff31dec215081e6144f80c99c 8ec8f6dbfb2fb4d6926a8ba47a949ea6ebab1b2b 921f5c95f22f1c4b8ae1bc01218be7d26518d9ab 94119ef84455c1e3f552ba07efbe4c46d56cc9aa 94e433bbb83ad1b43651202ddc697b9e16818eee 958307a4eef7c08320003fd068ac58117cb0bc45 990241b03a9fd406f723ead8f89f723349145eb6 9f2038cc0ca07fa1f0ddfc42736540cfe35374ec a0532694ed2a11182c50f1ee48de8b401c821385 a090b13da8b98454a92b22570d664e12cbff0862 a111c2d405d26952e3edf686852ce44d078930e9 a13d64316451797a302d541b76ee6ddf507b64b0 a199d2eac73313135a8193cfb651a87bd58bc049 a309b89c2944205288c435d8cce3c8875abf0fd7 a45197797010aea296515667f9b61eb0d740363b a5ce9483d8b0218e0172aa7cb98d1865a4368a29 a956d1858be5618d19304fa3f8eebe61a5e3eed3 ac8832c91987aa59f2c1f4dff4ee6eebe3cfe574 ad2ab08b2f9d5a9eb3e43a7f7b561fbed97f882d aebb4f6f3c10e4de59b095603e99fbfe1c8da651 b134c7973ac69d1e6dbaeebd306c035e94b52939 b13a263115d6b9a75897cf31240ef6f2d9c03aa5 b59e959248b280646159788a969742a4cc1b3d76 b668e6879c58f902e4759d7fbbb58fe786810f87 b69a22aa0dfebace6969928a27d5a3de62f86cfe b7d15340b22639a26fdf0dd62b59a7c7b57f250e bc5517828971ac66ee2e128d8f50efb847b0e9ec be3ec08f0b53bc54ec7e2147fb06fb80edd6c4ee be493a404938fb87c42f8b7301296edd48b34325 bf1ab8f737b4ce2804e7f1443357b409ea28d466 c08d0851646ac72c3b5ece7cd0914f7cdc2e186e c54f2aca34eeec6793d6f983a672729cc5e58e8c c8fac453052710d9a1737e323612c17dc092f967 cd5f960f4d3e18b04dcb6653f7b1fb3f9e6144e8 cea1b70f850faa7755462dcf7767bcc5032b960f ceaacd44a442af328c8f377d6ad911c843e0b9f7 d170df26a6013c1fa3f8598000dff20dd2ac2697 d18ab9364e19e0680b468cb133c499dcc1cb41a5 d214fb369ac47488abaf463a7b5975448dd04fb0 d476daaead77809363d78c5f4469493938ff2258 d66ee335c9d7ee34e564cb28b17402576c1c6cc6 d7a86f4eb258378caf865e5f49cab680e5b5d2bf d920e211557f3fa0ba8e27cb5a87af2248365c2f d981b6fd4df014e48d057d6e1ab07ac286827748 db4e27509f8a63c18b3dc761af1bafffeff363c5 dda6532fad90db6686bc1f809298a4f9a195579a dfb2590fdd4a563915d0989d82944d1b16e19206 e0de53e72686b20f36c03409455cfe2cced55606 e2b73e8853f72d6789bb46da9022d2a4ce959682 e2bf57a7fa9657a9be21b980129c390c4d713c02 e4a8f71927cbd43575c715eb860223a12cb4d570 e748506f7fd7b36ce43d2bb900dca70085478152 e7bdd51b4a4146f6d9c141a98d4a1fd4c6892843 e7e9d7e53ced97bb88f837b18af0893b475720b6 e7fc96b414e09cf31b841100c965dc5bf2c42acd ebbc306bec767812164329458fb74d69bb16c7e4 ec3baf06fef4fec6c5282e48f8d327005902020d ed3a3d230cd8b8f19f0900effdf47608e0229533 ee177720f5b578fd7f958661c240ea37d0fdbd0e eec06c3a495cf258bd8b10635f0a13f316ca78ef f02f674640c8caaa85a3c29a1a0e1992b2d5641a f2844c5a9796633c8f1343b4afbf119a7c03a376 f333b221d61d819186998b8a37cefaf9fe40f8f5 f5bb79b3609da15c681f73586ac5eaa463af2d1a f6ed7b136b1e0a877d4d23dc15c0f05b4cc8d915 f711b743fc4139d701d53ed7887049643da94bde f8aa597669d55c92d1e7aa06db0c0e41b6a93247 fd35787310d9521ff765112a6d2ed84a99c26ae7 fd5ee2281c098fab044acb1257e5c3052b12cf01 ff0bf7d05c8fccdfb5ac8a211a440791edb47476 ff80d3ba5f741152e306b09dfe6ec1d7d31ff0ee
+
+Package: openvox-agent-dbgsym
+Source: openvox-agent
+Version: 8.18.0-1+debian13
+Auto-Built-Package: debug-symbols
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 7566
+Depends: openvox-agent (= 8.18.0-1+debian13)
+Priority: optional
+Section: debug
+Filename: pool/openvox8/o/openvox-agent/openvox-agent-dbgsym_8.18.0-1+debian13_amd64.deb
+Size: 1305342
+SHA512: b162ba09520c4563335609615783f144cd2cf87cb2bceb6cf8bec6e5c570e4ac6812da86b68fbd0cdca8a2b8c7aace9ffbe86824328593e33ad2548e3f814de0
+SHA256: 709e679d2b8aea6ae7a7f305520ca5df9a423ad55d46afffcdd3245fd255c806
+SHA1: 0aa21cec709fc92537c0e90f006a700f2b64b679
+MD5sum: 0c35c4f6d5f9cacc95b7847cd263ef77
+Description: debug symbols for openvox-agent
+Build-Ids: 00faa69e3c8719e90b8fe6e68015b0895396a609 0a0b3edd05d568977775003edfb137bace83925c 0ebca60fb3ab6bfd85314d308617b6488dc9cfe8 120a1cf588d19ada43eb7ad1519bac9cba006c1e 12bb2661e7933857401bdb8a3f470cbdab744a8a 143bd20a72b839cbe05a928f7cd2d9a5e0f4770c 146209fd73bbb401bcc9391c83e484f764235f8a 1506a89ba6c33d577245045d373bfd56cd39cf27 15972cee4cb7bb0eaa0a7b325678b8e221fab26a 18db1d867bd1c91cb5d6f51966a239d57416eb1a 1a84dd45c50ba54df12232cef1dbbba3b988984a 1ad578e8cfdbaa0b6ac80f7b3a03ee7ce33c0a81 1b6d78b24b1e83248d6d134321b3de4cdf8d3727 1c9d0f3be5f5fd1f8c602476eb1a01144863145f 1f77e81c390f03042eb23be8a449289d7dd1d7d1 20f3eba81156c18838e23c72868d28a5ae6143c1 214938ef992c92af3ca74b046b6957034f0bd711 219ad6be9719131fd0ec5a9671455c5cdbc44460 21c3128b2b9c5f3633d7013f05440feeabf855c4 21dbe27273ad2c217924d893effbdf6fd0dffcb6 2257e9a9d2920693c18403ee7f15e14d53365264 22f2dbc8ab9627e4cfd64df00f8f096fb30db043 270df6c089b95653540010c93afbc84e7facb989 2a896adb659ccdf4f2c5cf9c5705a02103e8afa0 2ac2b701e0f930e05ba02561e3f18e9db04edd54 2c3b732711bd334d0915c2df77e48b9f023ff611 2c41042cbf147f48f13989d970e03836c1a0f20d 2d6fa3f71a03a0a65fdfc3fa59714192f887b82c 2db4b2bce82db1a4672d087c8da0d09dd29f932c 2e18ce454ea39f9b799e8b61813eb1d89536cb34 2f0470f2aebd55ddc61465836d098ba9ea72bec2 2f38633bd31f2bbe9900f59b2b1d7296353d7925 2fb2df8792e6355644e9a5d38eb1ada683f79aaf 301cfd6172f73e9fcab14365df7d0e2a5ec83f19 30221abf9031adcb660458d1be4063f1a5cf5da1 3311c61fc54154f9e19bce6af9c865a54b873245 35adbb05e86f98d5674690b27b8f142066becf87 35ff1aa36181becd39fe7c465d718b1c40078d74 387318f50da65f6aca1e5b24c38cc13ba392fd25 3b6c44cc8f7bf75d9fce4201316968e7fda6867c 3ee96f85e428bd1a589538f458523d5d336d9e06 3f6708bb05e92f39aa94a2841a57bb7ed17f219e 3ff5fa3a3e2462e1f97c7d16334d116bb193bc04 41da894762265c0cbe92ac8b261d42fea41a2dbd 43204c448fa18bc7d12d82a1e4f72c5e63360d7b 455c0b6b3374d32dfcb2da4d55bb11ca0cf56092 46f48bd1c69d59f6871d1db9d974ac3da30dd4cc 48ab98db9cc3bbe5e7e50d145238d5c85a499bf2 4be0d5f006a3c23179afe0fe5fde6160b6605f07 4d023ed5837f8ad6ce6905de6bfd7ab306e7a8b8 4d9960b84fb16794c579b5d2722d3a719ee61fac 5094ad02dc2776bb0b02be490dbbc95caa4ee27b 539cb52df2dce700431915e2fa3075c83526cae8 54067fe43bdbbf93d89c15534ea4b270e07d08ab 545a2628c6ee90d3cc10f77c97d0fe02992d4d75 5678eee9c354c79d5842bdef160bfafb3308a82e 584522d53532dd288f5d6957f7c6c8f1a0194d83 58f0fdaaeb85a253d488c1aee4d840d526bf1bdc 5ad8a8460af2e06913ad3c88eca379dfa98efe72 5b11bd31febf387d2932229753afe72603fe7a49 5b71005b91500d64f64c5695f996d5c23a96fac0 5d789dac5c7e6cae6c9191cea189eab1c4a48bc1 5dd373202585708a4bc5e70c6a0e6e3ed448cb3b 60f0713d24bbba54dd6f19a7b4ac55f62657a158 62a5df2be23cb233e6844ca10d0e7b686f2b3e97 63dee3cfc64a3df15f6ae9524177cee303630a64 665a5976fbc7a7dc5f62a56c7554775b005071c4 680ac8884843f5d95d0f683b2ef65dc04e1d379e 686430528c536c40ad15b992ade1ad4d739bfa8d 68d81212027fd71856c3ab052de763ef40b40fef 6b3922ba28530a65eed65e55b6b855d800f36d0c 6c1d55a1b3f0548429715ed17ddb8beca6163c7e 6eb3f659a0fc5b1877bae8c0f0c8abe7232e8703 7274efb10832b22a15c4edd1a853a2cb4b7797bf 72b702bcbad25fcbee195036f06327c9a6bfd69d 735b5c63d5abf515d9be7558aa4c4d57d6379835 74e3a4a0b3dd220d5f0e155975dca8c7e8851c95 79bc4efbee05d95a0988f13430167aadbed0d1bd 7a2b019cf9b2d914a363a29bd8d9e2808a815dcc 8102d49322b877473007b4fb7f1cb72cf1554582 8209b456e4696eb2998676e93d519cc0622b2cd4 8766aaecfcc889ef7adf6e20f7b849240da53e12 884548cff5194f49495ccfafae63e79a17ae73dd 8ba815537db3d34ff31dec215081e6144f80c99c 8ec8f6dbfb2fb4d6926a8ba47a949ea6ebab1b2b 921f5c95f22f1c4b8ae1bc01218be7d26518d9ab 94119ef84455c1e3f552ba07efbe4c46d56cc9aa 94e433bbb83ad1b43651202ddc697b9e16818eee 958307a4eef7c08320003fd068ac58117cb0bc45 990241b03a9fd406f723ead8f89f723349145eb6 9f2038cc0ca07fa1f0ddfc42736540cfe35374ec a0532694ed2a11182c50f1ee48de8b401c821385 a090b13da8b98454a92b22570d664e12cbff0862 a111c2d405d26952e3edf686852ce44d078930e9 a13d64316451797a302d541b76ee6ddf507b64b0 a199d2eac73313135a8193cfb651a87bd58bc049 a309b89c2944205288c435d8cce3c8875abf0fd7 a45197797010aea296515667f9b61eb0d740363b a5ce9483d8b0218e0172aa7cb98d1865a4368a29 a956d1858be5618d19304fa3f8eebe61a5e3eed3 ac8832c91987aa59f2c1f4dff4ee6eebe3cfe574 ad2ab08b2f9d5a9eb3e43a7f7b561fbed97f882d aebb4f6f3c10e4de59b095603e99fbfe1c8da651 b134c7973ac69d1e6dbaeebd306c035e94b52939 b13a263115d6b9a75897cf31240ef6f2d9c03aa5 b59e959248b280646159788a969742a4cc1b3d76 b668e6879c58f902e4759d7fbbb58fe786810f87 b69a22aa0dfebace6969928a27d5a3de62f86cfe b7d15340b22639a26fdf0dd62b59a7c7b57f250e bc5517828971ac66ee2e128d8f50efb847b0e9ec be3ec08f0b53bc54ec7e2147fb06fb80edd6c4ee be493a404938fb87c42f8b7301296edd48b34325 bf1ab8f737b4ce2804e7f1443357b409ea28d466 c08d0851646ac72c3b5ece7cd0914f7cdc2e186e c54f2aca34eeec6793d6f983a672729cc5e58e8c c8fac453052710d9a1737e323612c17dc092f967 cd5f960f4d3e18b04dcb6653f7b1fb3f9e6144e8 cea1b70f850faa7755462dcf7767bcc5032b960f ceaacd44a442af328c8f377d6ad911c843e0b9f7 d170df26a6013c1fa3f8598000dff20dd2ac2697 d18ab9364e19e0680b468cb133c499dcc1cb41a5 d214fb369ac47488abaf463a7b5975448dd04fb0 d476daaead77809363d78c5f4469493938ff2258 d66ee335c9d7ee34e564cb28b17402576c1c6cc6 d7a86f4eb258378caf865e5f49cab680e5b5d2bf d920e211557f3fa0ba8e27cb5a87af2248365c2f d981b6fd4df014e48d057d6e1ab07ac286827748 db4e27509f8a63c18b3dc761af1bafffeff363c5 dda6532fad90db6686bc1f809298a4f9a195579a dfb2590fdd4a563915d0989d82944d1b16e19206 e0de53e72686b20f36c03409455cfe2cced55606 e2b73e8853f72d6789bb46da9022d2a4ce959682 e2bf57a7fa9657a9be21b980129c390c4d713c02 e4a8f71927cbd43575c715eb860223a12cb4d570 e748506f7fd7b36ce43d2bb900dca70085478152 e7bdd51b4a4146f6d9c141a98d4a1fd4c6892843 e7e9d7e53ced97bb88f837b18af0893b475720b6 e7fc96b414e09cf31b841100c965dc5bf2c42acd ebbc306bec767812164329458fb74d69bb16c7e4 ec3baf06fef4fec6c5282e48f8d327005902020d ed3a3d230cd8b8f19f0900effdf47608e0229533 ee177720f5b578fd7f958661c240ea37d0fdbd0e eec06c3a495cf258bd8b10635f0a13f316ca78ef f02f674640c8caaa85a3c29a1a0e1992b2d5641a f2844c5a9796633c8f1343b4afbf119a7c03a376 f333b221d61d819186998b8a37cefaf9fe40f8f5 f5bb79b3609da15c681f73586ac5eaa463af2d1a f6ed7b136b1e0a877d4d23dc15c0f05b4cc8d915 f711b743fc4139d701d53ed7887049643da94bde f8aa597669d55c92d1e7aa06db0c0e41b6a93247 fd35787310d9521ff765112a6d2ed84a99c26ae7 fd5ee2281c098fab044acb1257e5c3052b12cf01 ff0bf7d05c8fccdfb5ac8a211a440791edb47476 ff80d3ba5f741152e306b09dfe6ec1d7d31ff0ee
+
+Package: openvox-agent-dbgsym
+Source: openvox-agent
+Version: 8.17.0-1+debian13
+Auto-Built-Package: debug-symbols
+Architecture: amd64
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 7568
+Depends: openvox-agent (= 8.17.0-1+debian13)
+Priority: optional
+Section: debug
+Filename: pool/openvox8/o/openvox-agent/openvox-agent-dbgsym_8.17.0-1+debian13_amd64.deb
+Size: 1306896
+SHA512: 72b445e3b7fb3f05eb5af828492940db5ca33a3acad104d25870cfbec4e2ceb536a382f97e507bd9020528ae5411b94695e5cc6ee826064414e12f28fe7103bd
+SHA256: 0d71c66fa561d4f24ebdae25fdeffd60580a79c29dca94841577e6a5d22104f4
+SHA1: 55ce5168005f0efed8b485b6860f535344fac507
+MD5sum: ad3383c2de5d04971595c4d24af1d3b5
+Description: debug symbols for openvox-agent
+Build-Ids: 00faa69e3c8719e90b8fe6e68015b0895396a609 0a0b3edd05d568977775003edfb137bace83925c 0ebca60fb3ab6bfd85314d308617b6488dc9cfe8 120a1cf588d19ada43eb7ad1519bac9cba006c1e 12bb2661e7933857401bdb8a3f470cbdab744a8a 143bd20a72b839cbe05a928f7cd2d9a5e0f4770c 146209fd73bbb401bcc9391c83e484f764235f8a 1506a89ba6c33d577245045d373bfd56cd39cf27 15972cee4cb7bb0eaa0a7b325678b8e221fab26a 18db1d867bd1c91cb5d6f51966a239d57416eb1a 1a84dd45c50ba54df12232cef1dbbba3b988984a 1ad578e8cfdbaa0b6ac80f7b3a03ee7ce33c0a81 1b6d78b24b1e83248d6d134321b3de4cdf8d3727 1c817eb9ba84ef3e04d6d5552432877ec35c46c7 1c9d0f3be5f5fd1f8c602476eb1a01144863145f 1f77e81c390f03042eb23be8a449289d7dd1d7d1 20f3eba81156c18838e23c72868d28a5ae6143c1 214938ef992c92af3ca74b046b6957034f0bd711 219ad6be9719131fd0ec5a9671455c5cdbc44460 21c3128b2b9c5f3633d7013f05440feeabf855c4 21dbe27273ad2c217924d893effbdf6fd0dffcb6 2257e9a9d2920693c18403ee7f15e14d53365264 22f2dbc8ab9627e4cfd64df00f8f096fb30db043 270df6c089b95653540010c93afbc84e7facb989 2a896adb659ccdf4f2c5cf9c5705a02103e8afa0 2ac2b701e0f930e05ba02561e3f18e9db04edd54 2c3b732711bd334d0915c2df77e48b9f023ff611 2c41042cbf147f48f13989d970e03836c1a0f20d 2d6fa3f71a03a0a65fdfc3fa59714192f887b82c 2db4b2bce82db1a4672d087c8da0d09dd29f932c 2e18ce454ea39f9b799e8b61813eb1d89536cb34 2f0470f2aebd55ddc61465836d098ba9ea72bec2 2f38633bd31f2bbe9900f59b2b1d7296353d7925 2fb2df8792e6355644e9a5d38eb1ada683f79aaf 301cfd6172f73e9fcab14365df7d0e2a5ec83f19 30221abf9031adcb660458d1be4063f1a5cf5da1 3311c61fc54154f9e19bce6af9c865a54b873245 35adbb05e86f98d5674690b27b8f142066becf87 35ff1aa36181becd39fe7c465d718b1c40078d74 387318f50da65f6aca1e5b24c38cc13ba392fd25 3b6c44cc8f7bf75d9fce4201316968e7fda6867c 3deec8e589574443c5301364649c07a04d301c26 3ee96f85e428bd1a589538f458523d5d336d9e06 3f6708bb05e92f39aa94a2841a57bb7ed17f219e 3ff5fa3a3e2462e1f97c7d16334d116bb193bc04 41da894762265c0cbe92ac8b261d42fea41a2dbd 455c0b6b3374d32dfcb2da4d55bb11ca0cf56092 46f48bd1c69d59f6871d1db9d974ac3da30dd4cc 48ab98db9cc3bbe5e7e50d145238d5c85a499bf2 4be0d5f006a3c23179afe0fe5fde6160b6605f07 4d023ed5837f8ad6ce6905de6bfd7ab306e7a8b8 4d9960b84fb16794c579b5d2722d3a719ee61fac 5094ad02dc2776bb0b02be490dbbc95caa4ee27b 539cb52df2dce700431915e2fa3075c83526cae8 54067fe43bdbbf93d89c15534ea4b270e07d08ab 545a2628c6ee90d3cc10f77c97d0fe02992d4d75 5678eee9c354c79d5842bdef160bfafb3308a82e 56a315b2142193a8eff433091999cf002f2083f4 584522d53532dd288f5d6957f7c6c8f1a0194d83 58f0fdaaeb85a253d488c1aee4d840d526bf1bdc 5b11bd31febf387d2932229753afe72603fe7a49 5d789dac5c7e6cae6c9191cea189eab1c4a48bc1 5dd373202585708a4bc5e70c6a0e6e3ed448cb3b 60f0713d24bbba54dd6f19a7b4ac55f62657a158 62a5df2be23cb233e6844ca10d0e7b686f2b3e97 63dee3cfc64a3df15f6ae9524177cee303630a64 665a5976fbc7a7dc5f62a56c7554775b005071c4 686430528c536c40ad15b992ade1ad4d739bfa8d 68d81212027fd71856c3ab052de763ef40b40fef 6ad1d00e7b27dc978e22735fd3dccb3594517c7b 6b3922ba28530a65eed65e55b6b855d800f36d0c 6eb3f659a0fc5b1877bae8c0f0c8abe7232e8703 7274efb10832b22a15c4edd1a853a2cb4b7797bf 72b702bcbad25fcbee195036f06327c9a6bfd69d 735b5c63d5abf515d9be7558aa4c4d57d6379835 74e3a4a0b3dd220d5f0e155975dca8c7e8851c95 79bc4efbee05d95a0988f13430167aadbed0d1bd 7a2b019cf9b2d914a363a29bd8d9e2808a815dcc 8102d49322b877473007b4fb7f1cb72cf1554582 8209b456e4696eb2998676e93d519cc0622b2cd4 83bfbc2939e9d9841f115516f284389be986d912 8766aaecfcc889ef7adf6e20f7b849240da53e12 884548cff5194f49495ccfafae63e79a17ae73dd 8ba815537db3d34ff31dec215081e6144f80c99c 8ec8f6dbfb2fb4d6926a8ba47a949ea6ebab1b2b 921f5c95f22f1c4b8ae1bc01218be7d26518d9ab 94119ef84455c1e3f552ba07efbe4c46d56cc9aa 94e433bbb83ad1b43651202ddc697b9e16818eee 958307a4eef7c08320003fd068ac58117cb0bc45 9735dc2e032ea6399fc5f39bfbfb710466277980 990241b03a9fd406f723ead8f89f723349145eb6 9f2038cc0ca07fa1f0ddfc42736540cfe35374ec a0532694ed2a11182c50f1ee48de8b401c821385 a090b13da8b98454a92b22570d664e12cbff0862 a111c2d405d26952e3edf686852ce44d078930e9 a13d64316451797a302d541b76ee6ddf507b64b0 a199d2eac73313135a8193cfb651a87bd58bc049 a23d7a58dcc5ab47c8339029a103fed7c5bbff39 a2bd122ac3d8d57f96082cf66219e1ed77ced02d a309b89c2944205288c435d8cce3c8875abf0fd7 a45197797010aea296515667f9b61eb0d740363b a5ce9483d8b0218e0172aa7cb98d1865a4368a29 a956d1858be5618d19304fa3f8eebe61a5e3eed3 ac08f28211925e5526ff00f162bd246e134da7c4 ac8832c91987aa59f2c1f4dff4ee6eebe3cfe574 ad2ab08b2f9d5a9eb3e43a7f7b561fbed97f882d aebb4f6f3c10e4de59b095603e99fbfe1c8da651 b134c7973ac69d1e6dbaeebd306c035e94b52939 b13a263115d6b9a75897cf31240ef6f2d9c03aa5 b59e959248b280646159788a969742a4cc1b3d76 b668e6879c58f902e4759d7fbbb58fe786810f87 b7d15340b22639a26fdf0dd62b59a7c7b57f250e bc5517828971ac66ee2e128d8f50efb847b0e9ec be493a404938fb87c42f8b7301296edd48b34325 bf1ab8f737b4ce2804e7f1443357b409ea28d466 c08d0851646ac72c3b5ece7cd0914f7cdc2e186e c54f2aca34eeec6793d6f983a672729cc5e58e8c c8fac453052710d9a1737e323612c17dc092f967 cd5f960f4d3e18b04dcb6653f7b1fb3f9e6144e8 cea1b70f850faa7755462dcf7767bcc5032b960f d18ab9364e19e0680b468cb133c499dcc1cb41a5 d214fb369ac47488abaf463a7b5975448dd04fb0 d66ee335c9d7ee34e564cb28b17402576c1c6cc6 d72bdd685d2bb4edc42b81754baaa6ca4060ad55 d920e211557f3fa0ba8e27cb5a87af2248365c2f d981b6fd4df014e48d057d6e1ab07ac286827748 db4e27509f8a63c18b3dc761af1bafffeff363c5 dda6532fad90db6686bc1f809298a4f9a195579a dfb2590fdd4a563915d0989d82944d1b16e19206 e0de53e72686b20f36c03409455cfe2cced55606 e2bf57a7fa9657a9be21b980129c390c4d713c02 e4a8f71927cbd43575c715eb860223a12cb4d570 e748506f7fd7b36ce43d2bb900dca70085478152 e77d1dd8edd6f95ccce0ca1bba8e327dd0a140cf e7bdd51b4a4146f6d9c141a98d4a1fd4c6892843 e7e9d7e53ced97bb88f837b18af0893b475720b6 e7fc96b414e09cf31b841100c965dc5bf2c42acd ebbc306bec767812164329458fb74d69bb16c7e4 ec3baf06fef4fec6c5282e48f8d327005902020d ed3a3d230cd8b8f19f0900effdf47608e0229533 ee177720f5b578fd7f958661c240ea37d0fdbd0e eec06c3a495cf258bd8b10635f0a13f316ca78ef f02f674640c8caaa85a3c29a1a0e1992b2d5641a f1d5ee5cd48335bc567dec0afbcd977b80ccb26a f2844c5a9796633c8f1343b4afbf119a7c03a376 f333b221d61d819186998b8a37cefaf9fe40f8f5 f5bb79b3609da15c681f73586ac5eaa463af2d1a f6ed7b136b1e0a877d4d23dc15c0f05b4cc8d915 f711b743fc4139d701d53ed7887049643da94bde f8aa597669d55c92d1e7aa06db0c0e41b6a93247 fd35787310d9521ff765112a6d2ed84a99c26ae7 fd5ee2281c098fab044acb1257e5c3052b12cf01 ff0bf7d05c8fccdfb5ac8a211a440791edb47476 ff80d3ba5f741152e306b09dfe6ec1d7d31ff0ee
+
+Package: openvox-server
+Version: 8.13.0-1+debian13
+License: Apache-2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Architecture: all
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 81452
+Depends: openjdk-21-jre-headless, bash, net-tools, adduser, procps, openvox-agent (>= 8.26.2)
+Conflicts: puppetserver
+Build-Depends: cdbs, bc, mawk, lsb-release, ruby | ruby-interpreter
+Replaces: puppetserver
+Homepage: http://github.com/openvoxproject
+Priority: optional
+Section: utils
+Filename: pool/openvox8/o/openvox-server/openvox-server_8.13.0-1+debian13_all.deb
+Size: 69832638
+SHA512: fec23f10963ba6bd35c6a007d8789acadefc75ce03507e0fce446ff5decf0c1e7e3b5dfb34f801e5ba8600d886fd2f33f4462fd91e8eea50eff38e2c5acf3d59
+SHA256: 27d91d06758f9aee5e3989a27dddde5bc830c2d9bfdb75e328f295051eb91128
+SHA1: c8a57c6c369037e6d2c9294c5faee495170bdc6e
+MD5sum: 33239571870439b28233b6f12af02cba
+Description: Vox Pupuli puppetserver
+ Contains: OpenVox Server (org.openvoxproject/puppetserver 8.13.0,org.clojure/clojure 1.12.4,org.bouncycastle/bcpkix-jdk18on 1.84,org.openvoxproject/jruby-utils 5.3.8,org.openvoxproject/puppetserver 8.13.0,org.openvoxproject/trapperkeeper-webserver-jetty10 1.1.8,org.openvoxproject/trapperkeeper-metrics 2.1.11)
+
+Package: openvox-server
+Version: 8.12.1-1+debian13
+License: ASL 2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Architecture: all
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 81316
+Depends: openjdk-21-jre-headless | openjdk-17-jre-headless, bash, net-tools, adduser, procps, openvox-agent (>= 8.21.1)
+Conflicts: puppetserver
+Build-Depends: cdbs, bc, mawk, lsb-release, ruby | ruby-interpreter
+Replaces: puppetserver
+Homepage: http://github.com/openvoxproject
+Priority: optional
+Section: utils
+Filename: pool/openvox8/o/openvox-server/openvox-server_8.12.1-1+debian13_all.deb
+Size: 69723702
+SHA512: a29727b25e0053ea96f337c11d652a19b91bb78b7ec2b9d3123a1f603073fed5e370830eed0f36987109794e53035298faa014e2e96e5e57dc279aa36c6e894c
+SHA256: 1e6e1dab0df835f1f970a133c68a89e318d13c5ffcf1105c937ec19398f8a95f
+SHA1: 1fc3253c7e036db36f4e025239e9cb62f914fe98
+MD5sum: da3e9bdfd7c52497e7696f074b434f08
+Description: Vox Pupuli puppetserver
+ Contains: OpenVox Server (org.openvoxproject/puppetserver 8.12.1,org.clojure/clojure 1.12.4,org.bouncycastle/bcpkix-jdk18on 1.83,org.openvoxproject/jruby-utils 5.3.6,org.openvoxproject/puppetserver 8.12.1,org.openvoxproject/trapperkeeper-webserver-jetty10 1.1.4,org.openvoxproject/trapperkeeper-metrics 2.1.7)
+
+Package: openvox-server
+Version: 8.12.0-1+debian13
+License: ASL 2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Architecture: all
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 81318
+Depends: openjdk-21-jre-headless | openjdk-17-jre-headless, bash, net-tools, adduser, procps, openvox-agent (>= 8.21.1)
+Conflicts: puppetserver
+Build-Depends: cdbs, bc, mawk, lsb-release, ruby | ruby-interpreter
+Replaces: puppetserver
+Homepage: http://github.com/openvoxproject
+Priority: optional
+Section: utils
+Filename: pool/openvox8/o/openvox-server/openvox-server_8.12.0-1+debian13_all.deb
+Size: 69720810
+SHA512: c1eb484c96618ad0273270ef9badc9cd2d8ec0727465e434c2e42213800398f8c07c11f9ae8f5cff72d9075a676d3186b7386ae0d1f0a9fdca0fbd33af76b43f
+SHA256: ab8b6c1c453ce55af24b20b0fc793276bcda1e801aef44ff0bed7c4357f516a5
+SHA1: 0c9efd09031fc631e29c2f5759d6cd0e08849019
+MD5sum: 75852ac73bd9a49debd2c897ad9043a8
+Description: Vox Pupuli puppetserver
+ Contains: OpenVox Server (org.openvoxproject/puppetserver 8.12.0,org.clojure/clojure 1.12.4,org.bouncycastle/bcpkix-jdk18on 1.83,org.openvoxproject/jruby-utils 5.3.5,org.openvoxproject/puppetserver 8.12.0,org.openvoxproject/trapperkeeper-webserver-jetty10 1.1.3,org.openvoxproject/trapperkeeper-metrics 2.1.6)
+
+Package: openvox-server
+Version: 8.11.0-2+debian13
+License: ASL 2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Architecture: all
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 85745
+Depends: openjdk-21-jre-headless | openjdk-17-jre-headless | openjdk-11-jre-headless, bash, net-tools, adduser, procps, openvox-agent (>= 8.21.1)
+Conflicts: puppetserver
+Build-Depends: cdbs, bc, mawk, lsb-release, ruby | ruby-interpreter
+Replaces: puppetserver
+Homepage: http://github.com/openvoxproject
+Priority: optional
+Section: utils
+Filename: pool/openvox8/o/openvox-server/openvox-server_8.11.0-2+debian13_all.deb
+Size: 74328428
+SHA512: 3895079b57df73c639f011b3c05a6a498df276a8742504a4928aad357d43d29a09a8818eae98c42ac7df210fc77245bb838e8ca05469288d5d8758ec1b5a3e87
+SHA256: 2474370cd184623cd2aabcb7e93f5e097f6a85bb0810cadab1c51f30b816a6f6
+SHA1: 2979c7cfa9959828588fd01becd553f2b24b6728
+MD5sum: fa0d1109953a8f8511ccdd5192133be3
+Description: Vox Pupuli puppetserver
+ Contains: OpenVox Server (puppetlabs/puppetserver 8.11.0,org.clojure/clojure 1.11.2,org.bouncycastle/bcpkix-jdk18on 1.78.1,puppetlabs/jruby-utils 5.2.0,puppetlabs/puppetserver 8.11.0,com.puppetlabs/trapperkeeper-webserver-jetty10 1.0.18,puppetlabs/trapperkeeper-metrics 2.0.4)
+
+Package: openvox-server
+Version: 8.11.0-1+debian13
+License: ASL 2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Architecture: all
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 79477
+Depends: openjdk-17-jre-headless | openjdk-11-jre-headless, bash, net-tools, adduser, procps, openvox-agent (>= 8.21.1)
+Conflicts: puppetserver
+Build-Depends: cdbs, bc, mawk, lsb-release, ruby | ruby-interpreter
+Replaces: puppetserver
+Homepage: http://github.com/openvoxproject
+Priority: optional
+Section: utils
+Filename: pool/openvox8/o/openvox-server/openvox-server_8.11.0-1+debian13_all.deb
+Size: 67915282
+SHA512: e1122729fda557afa7d2eb9e8f5c0d190070f18a814979cd1a2e194772bad3bf97673cc51f50a050e789b2f17c384fd6f3b319ad14a43f8593134abeab0581a1
+SHA256: 632c4f907d6bcbeb5da0b7f6204a7165eb69d8a3b1393804a410983291dbd548
+SHA1: 898ebdd02b1d6a1c8363814e089c0e6f6ef812be
+MD5sum: bfedbf23803d6d595d030a95ebb61359
+Description: Vox Pupuli puppetserver
+ Contains: OpenVox Server (puppetlabs/puppetserver 8.11.0,org.clojure/clojure 1.11.2,org.bouncycastle/bcpkix-jdk18on 1.78.1,puppetlabs/jruby-utils 5.2.0,puppetlabs/puppetserver 8.11.0,com.puppetlabs/trapperkeeper-webserver-jetty10 1.0.18,puppetlabs/trapperkeeper-metrics 2.0.4)
+
+Package: openvoxdb
+Version: 8.13.0-1+debian13
+License: Apache-2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Architecture: all
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 69026
+Depends: openjdk-21-jre-headless, bash, net-tools, adduser, procps, openvox-agent (>= 8.26.2)
+Conflicts: puppetdb
+Build-Depends: cdbs, bc, mawk, lsb-release, ruby | ruby-interpreter
+Replaces: puppetdb
+Homepage: http://github.com/openvoxproject
+Priority: optional
+Section: utils
+Filename: pool/openvox8/o/openvoxdb/openvoxdb_8.13.0-1+debian13_all.deb
+Size: 62928676
+SHA512: 8c142ae44a624ecbe22bf882820eed6bf8c7cd7ac266513384270de954b5fb649ad0e8e3d875639bb5564a88d98c57630515947dd757b0e64f50cb4bf031aa8f
+SHA256: 9257765e1c60bd1f24c76b68bad22478f8838661784b3b0cd197df34ec099008
+SHA1: 593359a9d551c40246e15ee1b17c8a3be7f166db
+MD5sum: cf43f1221be97c94a4f9e692bf882bb5
+Description: Vox Pupuli puppetdb
+ Contains: OpenVox-integrated catalog and fact storage (org.openvoxproject/puppetdb 8.13.0,org.bouncycastle/bcpkix-jdk18on 1.84,org.clojure/clojure 1.12.4,org.openvoxproject/puppetdb 8.13.0)
+
+Package: openvoxdb
+Version: 8.12.1-1+debian13
+License: ASL 2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Architecture: all
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 69715
+Depends: openjdk-21-jre-headless | openjdk-17-jre-headless, bash, net-tools, adduser, procps, openvox-agent (>= 8.21.0)
+Conflicts: puppetdb
+Build-Depends: cdbs, bc, mawk, lsb-release, ruby | ruby-interpreter
+Replaces: puppetdb
+Homepage: http://github.com/openvoxproject
+Priority: optional
+Section: utils
+Filename: pool/openvox8/o/openvoxdb/openvoxdb_8.12.1-1+debian13_all.deb
+Size: 63466018
+SHA512: 1a5788d0e0e972a3b1c399961e674e4d48be0ec57005c52b19a394a900c143b26f76fb5fd00e572f5fb0803103556c1ac811e0b5aa720a3c7f823cf88f8be778
+SHA256: 67b560d8c698de703099490cd03113e309fb39e3ee8bc35721d4c442f5a7da37
+SHA1: 2c82656b2fe338f690242cef59954add8398162a
+MD5sum: db5e6b337c87a97fdb51468cb530d503
+Description: Vox Pupuli puppetdb
+ Contains: OpenVox-integrated catalog and fact storage (org.openvoxproject/puppetdb 8.12.1,org.bouncycastle/bcpkix-jdk18on 1.83,org.clojure/clojure 1.12.4,org.openvoxproject/puppetdb 8.12.1)
+
+Package: openvoxdb
+Version: 8.12.0-1+debian13
+License: ASL 2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Architecture: all
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 69715
+Depends: openjdk-21-jre-headless | openjdk-17-jre-headless, bash, net-tools, adduser, procps, openvox-agent (>= 8.21.0)
+Conflicts: puppetdb
+Build-Depends: cdbs, bc, mawk, lsb-release, ruby | ruby-interpreter
+Replaces: puppetdb
+Homepage: http://github.com/openvoxproject
+Priority: optional
+Section: utils
+Filename: pool/openvox8/o/openvoxdb/openvoxdb_8.12.0-1+debian13_all.deb
+Size: 63465664
+SHA512: 2fcf8fc6418eafbf4399c5ba2bb4ae7c7da25fbb3b251c39cd0ef8fafcb2bd8e08ba2474b4b7efe6732c5e94e4714c0e8961a68451c3812bce3cfdad044b773b
+SHA256: b48a33c1ebfd8a0617d4d133bd65825b0ad5a6086c164a3a0c399036bfe93392
+SHA1: b33a09bccdaaac0bf1b78c71fa3ab658ab305d13
+MD5sum: 5d564ad113a68e36bf738e82c085e115
+Description: Vox Pupuli puppetdb
+ Contains: OpenVox-integrated catalog and fact storage (org.openvoxproject/puppetdb 8.12.0,org.bouncycastle/bcpkix-jdk18on 1.83,org.clojure/clojure 1.12.4,org.openvoxproject/puppetdb 8.12.0)
+
+Package: openvoxdb
+Version: 8.11.0-2+debian13
+License: ASL 2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Architecture: all
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 67476
+Depends: openjdk-21-jre-headless | openjdk-17-jre-headless | openjdk-11-jre-headless, bash, net-tools, adduser, procps, openvox-agent (>= 8.21.0)
+Conflicts: puppetdb
+Build-Depends: cdbs, bc, mawk, lsb-release, ruby | ruby-interpreter
+Replaces: puppetdb
+Homepage: http://github.com/openvoxproject
+Priority: optional
+Section: utils
+Filename: pool/openvox8/o/openvoxdb/openvoxdb_8.11.0-2+debian13_all.deb
+Size: 61488244
+SHA512: 6dd933f4ad40481bf74d328b5039a54f085398cc7bea00ab8ee076fe2ce2462ac1b76c5f9125e26ec1f00738b19dc39ff7e6a80c07627af9e8021f928bfd7930
+SHA256: fc9ffea95d75c25cb4b7075b9c140e114e030adc1c861fcb8839041d677b7a9e
+SHA1: 92694203cf3b18d78ac2bdc4299303dfb4fa16e2
+MD5sum: 8197520647b459fd67835695b3ddc02e
+Description: Vox Pupuli puppetdb
+ Contains: OpenVox-integrated catalog and fact storage (puppetlabs/puppetdb 8.11.0,org.bouncycastle/bcpkix-jdk18on 1.78.1,org.clojure/clojure 1.11.2,puppetlabs/puppetdb 8.11.0)
+
+Package: openvoxdb
+Version: 8.11.0-1+debian13
+License: ASL 2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Architecture: all
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 67476
+Depends: openjdk-17-jre-headless | openjdk-11-jre-headless, bash, net-tools, adduser, procps, openvox-agent (>= 8.21.0)
+Conflicts: puppetdb
+Build-Depends: cdbs, bc, mawk, lsb-release, ruby | ruby-interpreter
+Replaces: puppetdb
+Homepage: http://github.com/openvoxproject
+Priority: optional
+Section: utils
+Filename: pool/openvox8/o/openvoxdb/openvoxdb_8.11.0-1+debian13_all.deb
+Size: 61484310
+SHA512: c878ca2e54911c006d42809c36ecf68185e1cce7f223cac3f980bfb6b31631f2dc006ebcfe9f89c905c75205de63a487e43dd2c77c2186c2f661601b7b0e8467
+SHA256: e599c4b26393c6b6fc5421bf3f2221949995e644f12e224b11a583a58f8c45cf
+SHA1: a72eab415a31a852538fe425cef8cbe4b3541139
+MD5sum: a797a1c1c80425caa749938eb2695a0e
+Description: Vox Pupuli puppetdb
+ Contains: OpenVox-integrated catalog and fact storage (puppetlabs/puppetdb 8.11.0,org.bouncycastle/bcpkix-jdk18on 1.78.1,org.clojure/clojure 1.11.2,puppetlabs/puppetdb 8.11.0)
+
+Package: openvoxdb-termini
+Version: 8.13.0-1+debian13
+License: Apache-2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Architecture: all
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 74
+Depends: openvox-agent
+Conflicts: puppetdb-termini
+Replaces: puppetdb-termini
+Homepage: http://github.com/openvoxproject
+Priority: optional
+Section: default
+Filename: pool/openvox8/o/openvoxdb-termini/openvoxdb-termini_8.13.0-1+debian13_all.deb
+Size: 22156
+SHA512: 10568ec029fb60622b2989ba7410b6f00bb4e0ff867d969b1adea4a12924b6e431553ab467fa1eb0c3002a9837b631d588ce55fa2fb7d9d76b81b87ef11382ed
+SHA256: 20b13efa69a5d5a021b70ab5bab46d22f6b584d5c0166eb413fe1292b5240be9
+SHA1: 36aaf3df05998552a1127d035c0cc5098e08c579
+MD5sum: 8d918ebd26cad5cf7760b87f9ae8ccd5
+Description: Termini for puppetdb
+ Contains terminus for:puppetdb (version 8.13.0)
+
+Package: openvoxdb-termini
+Version: 8.12.1-1+debian13
+License: ASL 2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Architecture: all
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 74
+Depends: openvox-agent
+Conflicts: puppetdb-termini
+Replaces: puppetdb-termini
+Homepage: http://github.com/openvoxproject
+Priority: optional
+Section: default
+Filename: pool/openvox8/o/openvoxdb-termini/openvoxdb-termini_8.12.1-1+debian13_all.deb
+Size: 22300
+SHA512: 1a7ac875f59f2ec569d082e3dd4ecd962e227cefbafc2f6483f153d46ba98e9d459d24d9ad4e153d919fcf8e996bdb4bc4c6f9faa327b65ca05339d4d85f6a5f
+SHA256: 5f19c7d15fc0f65b48a2d5f2b9e82b7d518ed76efa4bfec2bd4de8ef162bfc45
+SHA1: 3b7a6fc68444448d59ae88af92bd46505c2fd4b2
+MD5sum: 12615789c6ff3657fba5121651d9b7db
+Description: Termini for puppetdb
+ Contains terminus for:puppetdb (version 8.12.1)
+
+Package: openvoxdb-termini
+Version: 8.12.0-1+debian13
+License: ASL 2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Architecture: all
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 74
+Depends: openvox-agent
+Conflicts: puppetdb-termini
+Replaces: puppetdb-termini
+Homepage: http://github.com/openvoxproject
+Priority: optional
+Section: default
+Filename: pool/openvox8/o/openvoxdb-termini/openvoxdb-termini_8.12.0-1+debian13_all.deb
+Size: 22298
+SHA512: cd0ae667981133ce3aaeb420625fa4c8603abe122fd049996293c57f11b5e5a40ef0f23c313f962c6098f40d346864b0f6a8afb20916b4ac221dea09ee52612a
+SHA256: 34fd4981889604f36b3b65d65d36e432e534b15ca67353e6e68acfc786aafbd1
+SHA1: d89e76f94a1281a033eb309e0f74dedf9aedf6bd
+MD5sum: bd17935e262579894436f3c17da972ed
+Description: Termini for puppetdb
+ Contains terminus for:puppetdb (version 8.12.0)
+
+Package: openvoxdb-termini
+Version: 8.11.0-2+debian13
+License: ASL 2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Architecture: all
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 74
+Depends: openvox-agent
+Conflicts: puppetdb-termini
+Replaces: puppetdb-termini
+Homepage: http://github.com/openvoxproject
+Priority: optional
+Section: default
+Filename: pool/openvox8/o/openvoxdb-termini/openvoxdb-termini_8.11.0-2+debian13_all.deb
+Size: 22088
+SHA512: 598553e7f2c844a2020683cfd64843e393f296d2558081d17da0d1aef0851cc5445b0c16247db1f397e153850f3f172be79aacd57bf5a20d7370cff1e4bb3718
+SHA256: 571dce43d4ef77dbad0d77b7c4de1f889dc0c8a9ab270107d9f4fdead5f18d82
+SHA1: 06e849663b98f9ef3c3d47c9b47c7508b57d80fd
+MD5sum: 55c7d183c425a3510ad3d3a74c0362d3
+Description: Termini for puppetdb
+ Contains terminus for:puppetdb (version 8.11.0)
+
+Package: openvoxdb-termini
+Version: 8.11.0-1+debian13
+License: ASL 2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Architecture: all
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 74
+Depends: openvox-agent
+Conflicts: puppetdb-termini
+Replaces: puppetdb-termini
+Homepage: http://github.com/openvoxproject
+Priority: optional
+Section: default
+Filename: pool/openvox8/o/openvoxdb-termini/openvoxdb-termini_8.11.0-1+debian13_all.deb
+Size: 22174
+SHA512: cae9b2c4d6ab1930ccbe38a3af9e3fc52d2d9512dbee4b8b3346777845e5523b05b953c08a3965b93bd3ca962a0654b8715590a3a5b7b16b89882e00185063d6
+SHA256: 79c86624528c55f7b4fba70e55ab0c45dd8a22340efae5a08ca8d448ab89bf70
+SHA1: 2201799991f2edba86d219c7adf2265fa93324d4
+MD5sum: 8449818162ed894befb59efd76f9eb0c
+Description: Termini for puppetdb
+ Contains terminus for:puppetdb (version 8.11.0)
+

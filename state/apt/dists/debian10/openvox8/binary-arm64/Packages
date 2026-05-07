@@ -1,0 +1,130 @@
+Package: openvox-server
+Version: 8.8.1-1+debian10
+License: ASL 2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Architecture: all
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 98382
+Depends: openjdk-17-jre-headless | openjdk-11-jre-headless, bash, net-tools, adduser, procps, openvox-agent (>= 8.11.0)
+Conflicts: puppetserver
+Build-Depends: cdbs, bc, mawk, lsb-release, ruby | ruby-interpreter
+Replaces: puppetserver
+Homepage: http://github.com/openvoxproject
+Priority: optional
+Section: utils
+Filename: pool/openvox8/o/openvox-server/openvox-server_8.8.1-1+debian10_all.deb
+Size: 76330776
+SHA512: d4b0eee1f962e3176e8df86bf4b188964382626101549479b31013d3e5caa46115fed4bb61ff421072570273305073c8b3a43fe70564669a2eea12ef25ad0a87
+SHA256: 40f584aa887b358f2f6e477423b367ff67831790abb8e55f804b41f05c1d7d6b
+SHA1: 0ba9b39402717b6b953bdad413ba65f2e790a1c8
+MD5sum: bb71bbfe7d5489033c9d0456f5018b47
+Description: Vox Pupuli puppetserver
+ Contains: OpenVox Server (puppetlabs/puppetserver 8.8.1,org.clojure/clojure 1.11.2,org.bouncycastle/bcpkix-jdk18on 1.78.1,puppetlabs/jruby-utils 5.2.0,puppetlabs/puppetserver 8.8.1,com.puppetlabs/trapperkeeper-webserver-jetty10 1.0.18,puppetlabs/trapperkeeper-metrics 2.0.4)
+
+Package: openvox-server
+Version: 8.8.0-1+debian10
+License: ASL 2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Architecture: all
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 98359
+Depends: openjdk-17-jre-headless | openjdk-11-jre-headless, bash, net-tools, adduser, procps, openvox-agent (>= 8.11.0)
+Build-Depends: cdbs, bc, mawk, lsb-release, ruby | ruby-interpreter
+Homepage: http://github.com/openvoxproject
+Priority: optional
+Section: utils
+Filename: pool/openvox8/o/openvox-server/openvox-server_8.8.0-1+debian10_all.deb
+Size: 76311278
+SHA512: b55233cfb8f56221dbeceafd74217874abb99f576e4d9e3a27f3e16c2b9be18a62ad9521c75ea83a48483fcb70352c7c5f497bf8b31855c2032a659768df2fea
+SHA256: 788a3baa053a84fbbd4b2e7054a23640f4a5eed2b072bf5064aed745fec34adc
+SHA1: 5760842d070f0ccb3a17e4001a04893d6056ebca
+MD5sum: 6029fa22cc2d2b49cb552bd5e1877936
+Description: Vox Pupuli puppetserver
+ Contains: OpenVox Server (puppetlabs/puppetserver 8.8.0,org.clojure/clojure 1.11.2,org.bouncycastle/bcpkix-jdk18on 1.78.1,puppetlabs/jruby-utils 5.2.0,puppetlabs/puppetserver 8.8.0,com.puppetlabs/trapperkeeper-webserver-jetty10 1.0.18,puppetlabs/trapperkeeper-metrics 2.0.4)
+
+Package: openvoxdb
+Version: 8.9.1-1+debian10
+License: ASL 2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Architecture: all
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 67588
+Depends: openjdk-17-jre-headless | openjdk-11-jre-headless, bash, net-tools, adduser, procps, openvox-agent (>= 8.11.0)
+Conflicts: puppetdb
+Build-Depends: cdbs, bc, mawk, lsb-release, ruby | ruby-interpreter
+Replaces: puppetdb
+Homepage: http://github.com/openvoxproject
+Priority: optional
+Section: utils
+Filename: pool/openvox8/o/openvoxdb/openvoxdb_8.9.1-1+debian10_all.deb
+Size: 61586432
+SHA512: e47ed37d74d87d8a640d039f9bc6afe9cc2372f388a41cd426668802cf1c7421bc8405d5780062664bf52ff1e323cb050158d829ef8ad1f763b768a4155a9ab3
+SHA256: d86f5842eb7df91b64c319f6228492e6000b3713c670de4902f242df75177622
+SHA1: e2f9a8b9f7eee1f9e386aba38cf5d175df219865
+MD5sum: 6cf7caf8824f1fb7fd3396d402df2366
+Description: Vox Pupuli puppetdb
+ Contains: OpenVox-integrated catalog and fact storage (puppetlabs/puppetdb 8.9.1,org.bouncycastle/bcpkix-jdk18on 1.78.1,org.clojure/clojure 1.11.2,puppetlabs/puppetdb 8.9.1)
+
+Package: openvoxdb
+Version: 8.9.0-1+debian10
+License: ASL 2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Architecture: all
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 67588
+Depends: openjdk-17-jre-headless | openjdk-11-jre-headless, bash, net-tools, adduser, procps, openvox-agent (>= 8.11.0)
+Build-Depends: cdbs, bc, mawk, lsb-release, ruby | ruby-interpreter
+Homepage: http://github.com/openvoxproject
+Priority: optional
+Section: utils
+Filename: pool/openvox8/o/openvoxdb/openvoxdb_8.9.0-1+debian10_all.deb
+Size: 61587664
+SHA512: ec54e0f95b7370e914256852eb6c2837a6f60ff4ba40dbc775fbd772ca961037194ae1992b6627b6b0888021d8e2f4c2148f69fa42cdf53fe8a0632d823ec10c
+SHA256: 0990b4e06773af5225c34f6cee7d99efb40b1fb2b0d0e6c3b40fd6a306af88b1
+SHA1: 5de8bc7e25eb279615c2ab0b3c808e70cd02f21c
+MD5sum: 4ccc8d4052d4102ed12d180e535a3e17
+Description: Vox Pupuli puppetdb
+ Contains: OpenVox-integrated catalog and fact storage (puppetlabs/puppetdb 8.9.0,org.bouncycastle/bcpkix-jdk18on 1.78.1,org.clojure/clojure 1.11.2,puppetlabs/puppetdb 8.9.0)
+
+Package: openvoxdb-termini
+Version: 8.9.1-1+debian10
+License: ASL 2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Architecture: all
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 74
+Depends: openvox-agent
+Conflicts: puppetdb-termini
+Replaces: puppetdb-termini
+Homepage: http://github.com/openvoxproject
+Priority: optional
+Section: default
+Filename: pool/openvox8/o/openvoxdb-termini/openvoxdb-termini_8.9.1-1+debian10_all.deb
+Size: 22086
+SHA512: 778e348ffebfa2d6e16705f1fdbcd8f35ed060b3ff39011bd4d630504f9c9b700ab87a4cf05f2aeffca61be4d1fad068dc0829c688d0a02bfd24ffdb081baa26
+SHA256: 80578822a45e87a390f378ac1bf4b6b9278e5cd08b3976ec4f2b701684bf5422
+SHA1: 196a3fa05a88135f627969210eb225cbfe7b08bd
+MD5sum: f26c03a4f3b6f74d78fae08a8bd463d3
+Description: Termini for puppetdb
+ Contains terminus for:puppetdb (version 8.9.1)
+
+Package: openvoxdb-termini
+Version: 8.9.0-1+debian10
+License: ASL 2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Architecture: all
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 74
+Depends: openvox-agent
+Homepage: http://github.com/openvoxproject
+Priority: optional
+Section: default
+Filename: pool/openvox8/o/openvoxdb-termini/openvoxdb-termini_8.9.0-1+debian10_all.deb
+Size: 22052
+SHA512: 9bf9dc375ef637007f7860a828399ae70ace1848c426d89778d59ebc422e6922a0fbd96a67c7aa0b78af17afe3af6a1e47dabecfd3b859c951dbd71efad7e48c
+SHA256: 87e756293eb5b48e5afe8c7012d3141f08b330b82040f29679d2914203a26986
+SHA1: 0ae5ef7fc2673530df25a6238ee93d8fc3424933
+MD5sum: 164a9de2207a7434490b07e5fa0d52a0
+Description: Termini for puppetdb
+ Contains terminus for:puppetdb (version 8.9.0)
+

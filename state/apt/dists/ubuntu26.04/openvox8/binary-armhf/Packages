@@ -1,0 +1,284 @@
+Package: openbolt
+Version: 5.5.0-1+ubuntu26.04
+Architecture: armhf
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 121057
+Conflicts: puppet-bolt
+Breaks: puppet-bolt (<< 6)
+Replaces: puppet-bolt (<< 6)
+Provides: puppet-bolt (= 5)
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openbolt/openbolt_5.5.0-1+ubuntu26.04_armhf.deb
+Size: 40831420
+SHA512: f5c9f36a974b72e31a0d479afe5643cedd92ed07751ca71913addd2b495fea3f00877372a85552d0e60511dabb9d952bc94950a8d41c7f98bd7f65c38f49a64a
+SHA256: efd3b1452fc6433c3bd53e23fbf7c6a9cca55a0976a2a2fd8065b8406a4e4833
+SHA1: 2aa7b0872a3fc344740bb4276ddb9a27875ca28a
+MD5sum: c45e4aa85708643c20618acb785dd77d
+Description: Tool for executing commands, tasks, and plans on remote systems
+ .
+ Contains the following components:
+ gem-prune
+ openbolt 5.5.0
+ openbolt-create-ruby-tarballs
+ openbolt-runtime 2026.04.20.1
+
+Package: openbolt
+Version: 5.4.0-1+ubuntu26.04
+Architecture: armhf
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 121654
+Conflicts: puppet-bolt
+Breaks: puppet-bolt (<< 6)
+Replaces: puppet-bolt (<< 6)
+Provides: puppet-bolt (= 5)
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openbolt/openbolt_5.4.0-1+ubuntu26.04_armhf.deb
+Size: 40968126
+SHA512: f06462591fad82fe022b840a2dec860a1df33701f314ff31e798f1f8ecc2c432717d45845b461f8ae5d4513eb951172484586db6c241244f90b7310e914e95bb
+SHA256: 9a0316f6bbbaf60725febe7a2b3d4d23be52a58b0f0030ffe3931a8ad0de2f40
+SHA1: 1c10f51f15507740df729f59b4a2157598767d19
+MD5sum: df796dcc1fa08734eb582402c13b132b
+Description: Tool for executing commands, tasks, and plans on remote systems
+ .
+ Contains the following components:
+ gem-prune
+ openbolt 5.4.0
+ openbolt-create-ruby-tarballs
+ openbolt-runtime 2026.03.04.1
+
+Package: openvox-agent
+Version: 8.26.2-1+ubuntu26.04
+Architecture: armhf
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 77584
+Depends: findutils, tar
+Conflicts: puppet-agent
+Breaks: puppet-agent (<< 9)
+Replaces: puppet-agent (<< 9)
+Provides: puppet-agent (= 8.26.2)
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openvox-agent/openvox-agent_8.26.2-1+ubuntu26.04_armhf.deb
+Size: 24641470
+SHA512: 05c236675707e457f8a8d0be40f137366d53e5cd19374266f269f86ba6ea2b8a1967c5d29b0e4ec0d61c6398995a49ce5e35cb96770d415b7468696fea602f84
+SHA256: ecad4989dea10102a3afb4c9b58fbf3a5164a130f9268cb11ac165b3a9d495b3
+SHA1: b6a1b419cfd9ef62c4f48328378e1313be27bb64
+MD5sum: 37e4fdd2b3cd86ec67dc1d09099fdf38
+Description: The OpenVox Agent package contains all of the elements needed to run the agent, including ruby and openfact.
+ .
+ Contains the following components:
+ cleanup
+ execution_wrapper
+ module-puppetlabs-augeas_core v1.5.0
+ module-puppetlabs-cron_core v1.3.0
+ module-puppetlabs-host_core v1.3.0
+ module-puppetlabs-mount_core v1.3.0
+ module-puppetlabs-scheduled_task v3.2.0
+ module-puppetlabs-selinux_core v1.4.0
+ module-puppetlabs-sshkeys_core v2.5.0
+ module-puppetlabs-yumrepo_core v2.1.0
+ module-puppetlabs-zfs_core v1.6.1
+ module-puppetlabs-zone_core v1.2.0
+ openfact 5.6.0
+ puppet 8.26.1
+ puppet-resource_api 1.9.0
+ puppet-runtime 2026.04.17.1
+ shellpath 2023-02-15
+ wrapper-script
+
+Package: openvox-agent
+Version: 8.26.1-1+ubuntu26.04
+Architecture: armhf
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 77617
+Depends: findutils, tar
+Conflicts: puppet-agent
+Breaks: puppet-agent (<< 9)
+Replaces: puppet-agent (<< 9)
+Provides: puppet-agent (= 8)
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openvox-agent/openvox-agent_8.26.1-1+ubuntu26.04_armhf.deb
+Size: 24658114
+SHA512: c6ad2cb966db49d82205d1bdace58e7207e4644a1fdf4596fb7c1fa8587d5ea0df2a2e37a710ab2c5c050f53d94e6428b3e4e2c88c0b703718c02e90cc4df197
+SHA256: 84188d9a3883aec142852771691488824570478980c34065189f1611c564c32e
+SHA1: 3410032f0fd91caa67236fc9187cc2ed6a505c5b
+MD5sum: ae40e55895f9e0aeb08d0c048a4e50a8
+Description: The OpenVox Agent package contains all of the elements needed to run the agent, including ruby and openfact.
+ .
+ Contains the following components:
+ cleanup
+ execution_wrapper
+ module-puppetlabs-augeas_core v1.5.0
+ module-puppetlabs-cron_core v1.3.0
+ module-puppetlabs-host_core v1.3.0
+ module-puppetlabs-mount_core v1.3.0
+ module-puppetlabs-scheduled_task v3.2.0
+ module-puppetlabs-selinux_core v1.4.0
+ module-puppetlabs-sshkeys_core v2.5.0
+ module-puppetlabs-yumrepo_core v2.1.0
+ module-puppetlabs-zfs_core v1.6.1
+ module-puppetlabs-zone_core v1.2.0
+ openfact 5.6.0
+ puppet 8.26.1
+ puppet-resource_api 1.9.0
+ puppet-runtime 2026.04.15.1
+ shellpath 2023-02-15
+ wrapper-script
+
+Package: openvox-agent
+Version: 8.26.0-1+ubuntu26.04
+Architecture: armhf
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 77584
+Depends: findutils, tar
+Conflicts: puppet-agent
+Breaks: puppet-agent (<< 9)
+Replaces: puppet-agent (<< 9)
+Provides: puppet-agent (= 8)
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openvox-agent/openvox-agent_8.26.0-1+ubuntu26.04_armhf.deb
+Size: 24641592
+SHA512: 75bbd2d7ede065a4998af6119ef9a870d6a1cf401a7752e155629307496eefc6df485202aca9791e0b48c7feed1e3ed1faecfdf0013d2e393a721c4017a630ca
+SHA256: f95cafbabd265a4a3d19d873824afb10dc548076b28037c887e4e21d25535730
+SHA1: 58aa196f454945ce38b136c5514173831e612af0
+MD5sum: 6671d6c15a9701e1257114e90eecd25a
+Description: The OpenVox Agent package contains all of the elements needed to run the agent, including ruby and openfact.
+ .
+ Contains the following components:
+ cleanup
+ execution_wrapper
+ module-puppetlabs-augeas_core v1.5.0
+ module-puppetlabs-cron_core v1.3.0
+ module-puppetlabs-host_core v1.3.0
+ module-puppetlabs-mount_core v1.3.0
+ module-puppetlabs-scheduled_task v3.2.0
+ module-puppetlabs-selinux_core v1.4.0
+ module-puppetlabs-sshkeys_core v2.5.0
+ module-puppetlabs-yumrepo_core v2.1.0
+ module-puppetlabs-zfs_core v1.6.1
+ module-puppetlabs-zone_core v1.2.0
+ openfact 5.6.0
+ puppet 8.26.0
+ puppet-resource_api 1.9.0
+ puppet-runtime 2026.04.09.1
+ shellpath 2023-02-15
+ wrapper-script
+
+Package: openvox-agent
+Version: 8.25.0-1+ubuntu26.04
+Architecture: armhf
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 78481
+Depends: findutils, tar
+Conflicts: puppet-agent
+Breaks: puppet-agent (<< 9)
+Replaces: puppet-agent (<< 9)
+Provides: puppet-agent (= 8)
+Homepage: https://voxpupuli.org
+Priority: optional
+Section: admin
+Filename: pool/openvox8/o/openvox-agent/openvox-agent_8.25.0-1+ubuntu26.04_armhf.deb
+Size: 24832944
+SHA512: b3f62e079fea995a2736a94a0c60366ee2dba068e55f5bb9c8fe9a6c87420770e973b0f25845981867f175acdc70c709ac54e2ce33819c313cc43c82290c04a3
+SHA256: cc36568b3637a777534a970ae12693b26b176df2acb475b4f0fde3de8a6a720d
+SHA1: 2199bfb4b750d7df7cad8cf3bc8a33da5b43a8db
+MD5sum: 06bb88788e79581bcd101a1f30953e5f
+Description: The OpenVox Agent package contains all of the elements needed to run the agent, including ruby and openfact.
+ .
+ Contains the following components:
+ cleanup
+ execution_wrapper
+ module-puppetlabs-augeas_core v1.5.0
+ module-puppetlabs-cron_core v1.3.0
+ module-puppetlabs-host_core v1.3.0
+ module-puppetlabs-mount_core v1.3.0
+ module-puppetlabs-scheduled_task v3.2.0
+ module-puppetlabs-selinux_core v1.4.0
+ module-puppetlabs-sshkeys_core v2.5.0
+ module-puppetlabs-yumrepo_core v2.1.0
+ module-puppetlabs-zfs_core v1.6.1
+ module-puppetlabs-zone_core v1.2.0
+ openfact 5.4.0
+ puppet 8.25.0
+ puppet-resource_api 1.9.0
+ puppet-runtime 2026.02.16.1
+ shellpath 2023-02-15
+ wrapper-script
+
+Package: openvox-server
+Version: 8.13.0-1+ubuntu26.04
+License: Apache-2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Architecture: all
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 81452
+Depends: openjdk-21-jre-headless, bash, net-tools, adduser, procps, openvox-agent (>= 8.26.2)
+Conflicts: puppetserver
+Build-Depends: cdbs, bc, mawk, lsb-release, ruby | ruby-interpreter
+Replaces: puppetserver
+Homepage: http://github.com/openvoxproject
+Priority: optional
+Section: utils
+Filename: pool/openvox8/o/openvox-server/openvox-server_8.13.0-1+ubuntu26.04_all.deb
+Size: 69832638
+SHA512: 7ccaf776a281eea7be3b23146425ec7aa2cd7889033d05c2762a2ecdfffd25ec7a12fff47208d04ccdcf9931977b43546f8bd329f7da9f469de694ee4111e4e7
+SHA256: d215ff2b6a944f8493001497693e6e31ba86a4c6f030f726a5b6dc57df51374e
+SHA1: f4aaae507bdb7e4e71fcf76cee4490921ca049d4
+MD5sum: de3774f0656629a76a3cfbe35838d2e5
+Description: Vox Pupuli puppetserver
+ Contains: OpenVox Server (org.openvoxproject/puppetserver 8.13.0,org.clojure/clojure 1.12.4,org.bouncycastle/bcpkix-jdk18on 1.84,org.openvoxproject/jruby-utils 5.3.8,org.openvoxproject/puppetserver 8.13.0,org.openvoxproject/trapperkeeper-webserver-jetty10 1.1.8,org.openvoxproject/trapperkeeper-metrics 2.1.11)
+
+Package: openvoxdb
+Version: 8.13.0-1+ubuntu26.04
+License: Apache-2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Architecture: all
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 69026
+Depends: openjdk-21-jre-headless, bash, net-tools, adduser, procps, openvox-agent (>= 8.26.2)
+Conflicts: puppetdb
+Build-Depends: cdbs, bc, mawk, lsb-release, ruby | ruby-interpreter
+Replaces: puppetdb
+Homepage: http://github.com/openvoxproject
+Priority: optional
+Section: utils
+Filename: pool/openvox8/o/openvoxdb/openvoxdb_8.13.0-1+ubuntu26.04_all.deb
+Size: 62928650
+SHA512: 63abacbfb9ca082304de92809e159f03e416183e389c827bd02d7d423bd2fd56c5a0b8f8c135ccec1a3eac7a89b715aa3b8fc3b2bd75c8f848868416d853826d
+SHA256: 61402310e21215adfdd82ded22a33feb92cdf74887cbc06bc4e58072a70e39f9
+SHA1: 6c109adfff816f32c1a7a2b8fc5735b9f065b04c
+MD5sum: f5b1361197683f425a5ef06290f6d7ef
+Description: Vox Pupuli puppetdb
+ Contains: OpenVox-integrated catalog and fact storage (org.openvoxproject/puppetdb 8.13.0,org.bouncycastle/bcpkix-jdk18on 1.84,org.clojure/clojure 1.12.4,org.openvoxproject/puppetdb 8.13.0)
+
+Package: openvoxdb-termini
+Version: 8.13.0-1+ubuntu26.04
+License: Apache-2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Architecture: all
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 74
+Depends: openvox-agent
+Conflicts: puppetdb-termini
+Replaces: puppetdb-termini
+Homepage: http://github.com/openvoxproject
+Priority: optional
+Section: default
+Filename: pool/openvox8/o/openvoxdb-termini/openvoxdb-termini_8.13.0-1+ubuntu26.04_all.deb
+Size: 22158
+SHA512: d71ee8544c7f3811cdd7a89a363ca15dfcba12c8be676fe95a44c498e254f56c17c5bf617ff8f4fcda25a1fabb64c1ace901964bf92b2c835cfef6f57ec5b251
+SHA256: 9ac93965bf8616fc5a9eb4de7065239672533d16efb81cecd93c831fa1654386
+SHA1: e5305da33df89a884ff938eb5a2e08d5dafe4dd4
+MD5sum: 2813bf0b45f0e5636d261cf0b4986c1d
+Description: Termini for puppetdb
+ Contains terminus for:puppetdb (version 8.13.0)
+
