@@ -44,7 +44,7 @@ def fetch_packages
   counts = types.to_h { |type| [type.to_sym, Dir.glob(File.join(Infra::PACKAGES_DIR, type, "*.#{type}")).size] }
   puts "Downloaded: #{pluralize(counts[:rpm], 'RPM')}, #{pluralize(counts[:deb], 'DEB')}, " \
        "#{pluralize(counts[:dmg], 'DMG')}, #{pluralize(counts[:msi], 'MSI')}".magenta
-  abort "No packages found at #{source} for the given platform filters.".red if counts.values.sum.zero?
+  puts "No packages found at #{source} for the given platform filters.".yellow if counts.values.sum.zero?
   counts
 end
 
@@ -61,6 +61,10 @@ task :release do
   puts "Releasing #{Infra.project} #{Infra.version} to #{Infra.component}".magenta
 
   counts = fetch_packages
+  if counts.values.sum.zero?
+    puts "Nothing to release".yellow
+    next
+  end
   sign_rpm = counts[:rpm].positive?
   sign_deb = counts[:deb].positive?
   sign_dmg = counts[:dmg].positive?
