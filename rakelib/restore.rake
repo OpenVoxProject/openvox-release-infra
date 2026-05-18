@@ -5,6 +5,7 @@ require_relative 'lib/utils/shell'
 
 def confirm_restore
   return if Infra.env('CONFIRM_RESTORE') == 'true'
+
   abort 'CONFIRM_RESTORE must be set in non-interactive mode.'.red unless $stdin.tty?
   print 'Type "restore" to confirm: '.red
   answer = $stdin.gets&.chomp

@@ -62,7 +62,7 @@ task :release do
 
   counts = fetch_packages
   if counts.values.sum.zero?
-    puts "Nothing to release".yellow
+    puts 'Nothing to release'.yellow
     next
   end
   sign_rpm = counts[:rpm].positive?

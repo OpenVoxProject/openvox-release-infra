@@ -235,7 +235,7 @@ module RepoPackages
       '--description', package_def['description'],
       '--category', 'System Environment/Base',
       '--chdir', Infra.container_path(build_dir),
-      '--package', Infra.container_path(output_file),
+      '--package', Infra.container_path(output_file)
     ]
     output_type == 'rpm' ? args.push('--rpm-digest', 'sha256') : args.push('--config-files', '/etc', '--deb-no-default-config-files')
     args << '.'

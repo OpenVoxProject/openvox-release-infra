@@ -43,5 +43,4 @@ class Windows
       FileUtils.cp(pkg, staging_dir)
     end
   end
-
 end

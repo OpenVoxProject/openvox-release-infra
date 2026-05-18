@@ -132,7 +132,6 @@ class Yum
 
   private
 
-
   # For noarch RPMs, find all existing arch directories so we can put the
   # package into all of them (yum has no shared noarch directory).
   def target_arch_dirs(plat, platver, arch)

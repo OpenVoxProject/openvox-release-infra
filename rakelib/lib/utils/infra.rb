@@ -11,12 +11,12 @@ module Infra
 
   APT_PRODUCTION_BUCKET = 's3://openvox-apt'
   YUM_PRODUCTION_BUCKET = 's3://openvox-yum'
-  DOWNLOADS_PRODUCTION_BUCKET = "s3://#{ARTIFACTS_BUCKET}/downloads"
+  DOWNLOADS_PRODUCTION_BUCKET = "s3://#{ARTIFACTS_BUCKET}/downloads".freeze
   GCS_PRODUCTION_BUCKET = 'gs://openvox-backup'
 
-  APT_TEST_BUCKET = "s3://#{ARTIFACTS_BUCKET}/repo_test/apt"
-  YUM_TEST_BUCKET = "s3://#{ARTIFACTS_BUCKET}/repo_test/yum"
-  DOWNLOADS_TEST_BUCKET = "s3://#{ARTIFACTS_BUCKET}/repo_test/downloads"
+  APT_TEST_BUCKET = "s3://#{ARTIFACTS_BUCKET}/repo_test/apt".freeze
+  YUM_TEST_BUCKET = "s3://#{ARTIFACTS_BUCKET}/repo_test/yum".freeze
+  DOWNLOADS_TEST_BUCKET = "s3://#{ARTIFACTS_BUCKET}/repo_test/downloads".freeze
   GCS_TEST_BUCKET = 'gs://openvox-backup-test'
 
   REPO_ROOT = File.expand_path('../../..', __dir__)
@@ -34,6 +34,7 @@ module Infra
 
   def validate_input(name, value)
     return nil if value.nil? || value.empty?
+
     abort "#{name} contains invalid characters: #{value.inspect}. Only alphanumeric, '.', '_', '+', '-' are allowed.".red unless value.match?(SAFE_INPUT)
     value
   end
@@ -133,7 +134,7 @@ module Infra
 
   def import_gpg_key(container)
     container.exec(
-      "echo \"$GPG_PRIVATE_KEY_B64\" | base64 -d | gpg --batch --import && " \
+      'echo "$GPG_PRIVATE_KEY_B64" | base64 -d | gpg --batch --import && ' \
       "gpg --list-secret-keys '#{GPG_KEY_ID}' >/dev/null && " \
       "printf 'trust\\n5\\ny\\n' | gpg --batch --command-fd 0 --edit-key '#{GPG_KEY_ID}' && " \
       "gpg --export --armor '#{GPG_KEY_ID}' > /tmp/gpg-pub.key && rpm --import /tmp/gpg-pub.key && rm /tmp/gpg-pub.key"
