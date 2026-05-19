@@ -12,6 +12,9 @@ task bootstrap: %w[bootstrap:metadata bootstrap:packages repo_packages:build rep
 namespace :bootstrap do
   desc 'Download production metadata, reformat, store in state/, and deploy to test buckets'
   task :metadata do
+    abort 'This task was used only during initial migration to the new repo formats and should no longer be invoked.'.red
+
+    # rubocop:disable Lint/UnreachableCode
     Infra.setup_aws
     Infra.print_target(:apt_bucket, :yum_bucket)
     Infra.env('GPG_PRIVATE_KEY_B64', required: true)
@@ -49,10 +52,14 @@ namespace :bootstrap do
     Shell.run([*Infra.s3_sync, '--delete', "#{state_dists}/", "#{Infra.apt_bucket}/dists/"]) if Dir.exist?(state_dists)
 
     puts 'Metadata bootstrap complete.'.green
+    # rubocop:enable Lint/UnreachableCode
   end
 
   desc 'Copy packages from production S3 buckets to test bucket locations'
   task :packages do
+    abort 'This task was used only during initial migration to the new repo formats and should no longer be invoked.'.red
+
+    # rubocop:disable Lint/UnreachableCode
     Infra.setup_aws
     abort 'Bootstrap targets test buckets. Do not run with PRODUCTION=true.'.red if Infra.production?
 
@@ -80,6 +87,7 @@ namespace :bootstrap do
     Shell.run([*Infra.s3_sync, '--delete', "#{Infra::DOWNLOADS_PRODUCTION_BUCKET}/", "#{Infra.downloads_bucket}/"])
 
     puts 'Package sync complete.'.green
+    # rubocop:enable Lint/UnreachableCode
   end
 end
 
