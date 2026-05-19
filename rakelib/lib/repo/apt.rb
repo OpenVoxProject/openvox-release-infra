@@ -256,9 +256,28 @@ class Apt
   end
 
   # Create the Release file using the apt-ftparchive release command, which
-  # scans the directory and computes checksums of everything it finds.
+  # scans the directory and computes checksums of everything it finds. The
+  # Components and Architectures fields are not derived by apt-ftparchive,
+  # so we compute and pass them explicitly by parsing stanza fields
+  # (Filename and Architecture) from the merged Packages files. We read
+  # stanza fields rather than directory names because a binary-<arch>
+  # directory can exist with an empty Packages file.
   def generate_release(dists_dir, dist)
     version = version_from_dist(dist)
+    components = Set.new
+    architectures = Set.new
+    Dir.glob(File.join(dists_dir, '*', 'binary-*', 'Packages')).each do |packages_file|
+      File.foreach(packages_file) do |line|
+        if (match = line.match(%r{^Filename:\s*pool/([^/]+)/}))
+          components << match[1]
+        elsif (match = line.match(/^Architecture:\s*(\S+)/))
+          architectures << match[1] unless match[1] == 'all'
+        end
+      end
+    end
+    abort "No components found for #{dist}, cannot generate Release file.".red if components.empty?
+    abort "No architectures found for #{dist}, cannot generate Release file.".red if architectures.empty?
+
     container_dists = Infra.container_path(dists_dir)
     release_file = Infra.container_path(File.join(dists_dir, 'Release'))
 
@@ -270,6 +289,8 @@ class Apt
       "-o APT::FTPArchive::Release::Codename=#{dist} " \
       "-o APT::FTPArchive::Release::Version=#{version} " \
       "-o APT::FTPArchive::Release::Description='OpenVox #{dist} Repository' " \
+      "-o APT::FTPArchive::Release::Components='#{components.to_a.sort.join(' ')}' " \
+      "-o APT::FTPArchive::Release::Architectures='#{architectures.to_a.sort.join(' ')}' " \
       '-o APT::FTPArchive::Release::NumericTimezone=false ' \
       "#{container_dists} > #{release_file}"
     )
