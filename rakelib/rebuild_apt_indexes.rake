@@ -11,15 +11,24 @@ require_relative 'lib/repo/apt'
 require_relative 'lib/utils/infra'
 require_relative 'lib/utils/shell'
 
-desc 'Regenerate apt Release/InRelease/Release.gpg for every dist in state/'
+desc 'Regenerate apt Release/InRelease/Release.gpg for every dist in state/, or a subset via the DISTS env var'
 task :rebuild_apt_indexes do
   Infra.env('GPG_PRIVATE_KEY_B64', required: true)
 
   state_dists = File.join(Infra::STATE_DIR, 'apt', 'dists')
   abort "No apt state at #{state_dists}".red unless Dir.exist?(state_dists)
 
-  dists = Dir.children(state_dists).select { |entry| File.directory?(File.join(state_dists, entry)) }.sort
-  abort "No dists found under #{state_dists}".red if dists.empty?
+  available_dists = Dir.children(state_dists).select { |entry| File.directory?(File.join(state_dists, entry)) }.sort
+  abort "No dists found under #{state_dists}".red if available_dists.empty?
+
+  requested = Infra.env('DISTS')&.split(',')&.map(&:strip)&.reject(&:empty?)
+  dists = if requested && !requested.empty?
+            unknown = requested - available_dists
+            abort "Unknown dists requested: #{unknown.join(', ')}. Available: #{available_dists.join(', ')}".red unless unknown.empty?
+            requested
+          else
+            available_dists
+          end
 
   Infra.force_remove(Infra::STAGING_DIR)
   FileUtils.mkdir_p(Infra::STAGING_DIR)

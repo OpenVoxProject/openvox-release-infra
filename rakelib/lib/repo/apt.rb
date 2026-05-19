@@ -259,9 +259,7 @@ class Apt
   # scans the directory and computes checksums of everything it finds. The
   # Components and Architectures fields are not derived by apt-ftparchive,
   # so we compute and pass them explicitly by parsing stanza fields
-  # (Filename and Architecture) from the merged Packages files. We read
-  # stanza fields rather than directory names because a binary-<arch>
-  # directory can exist with an empty Packages file.
+  # (Filename and Architecture) from the merged Packages files.
   def generate_release(dists_dir, dist)
     version = version_from_dist(dist)
     components = Set.new
@@ -278,8 +276,20 @@ class Apt
     abort "No components found for #{dist}, cannot generate Release file.".red if components.empty?
     abort "No architectures found for #{dist}, cannot generate Release file.".red if architectures.empty?
 
+    # apt-ftparchive scans the directory for files matching a fixed set of
+    # patterns (Packages, Packages.*, Sources, Release, Contents-*, etc.)
+    # and emits checksums for every match. "Release" is one of those
+    # patterns, so any Release file present in the scan directory gets
+    # included. If we redirect output directly into the scan directory,
+    # apt-ftparchive opens the destination, writes the header, scans, and
+    # matches its own partially-written output, producing a self-reference.
+    # Remove any stale top-level files and write to a path outside the
+    # scan directory, then move it in once apt-ftparchive has finished.
+    %w[Release InRelease Release.gpg].each { |name| FileUtils.rm_f(File.join(dists_dir, name)) }
+
     container_dists = Infra.container_path(dists_dir)
     release_file = Infra.container_path(File.join(dists_dir, 'Release'))
+    tmp_release = "/tmp/Release.#{dist}"
 
     @container.exec(
       'apt-ftparchive release ' \
@@ -292,7 +302,7 @@ class Apt
       "-o APT::FTPArchive::Release::Components='#{components.to_a.sort.join(' ')}' " \
       "-o APT::FTPArchive::Release::Architectures='#{architectures.to_a.sort.join(' ')}' " \
       '-o APT::FTPArchive::Release::NumericTimezone=false ' \
-      "#{container_dists} > #{release_file}"
+      "#{container_dists} > #{tmp_release} && mv #{tmp_release} #{release_file}"
     )
   end
 
