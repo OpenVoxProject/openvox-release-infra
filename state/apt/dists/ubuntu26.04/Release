@@ -1,12 +1,13 @@
+Architectures: amd64 arm64 armhf
 Codename: ubuntu26.04
-Date: Mon, 18 May 2026 18:16:26 UTC
+Components: openvox8
+Date: Tue, 19 May 2026 19:33:18 UTC
 Description: OpenVox ubuntu26.04 Repository
 Label: openvox-ubuntu26.04
 Origin: Vox Pupuli
 Suite: stable
 Version: 26.04
 MD5Sum:
- 192f18fd91d20134c3ab5fd04710cc52              177 Release
  67d0d7908cb4862d5b1a5b79b30220e5            12149 openvox8/binary-amd64/Packages
  6cc556792d7be180fc8c819332265705             3164 openvox8/binary-amd64/Packages.gz
  11df8c98dcbc9169d39637bf5b87520b            12149 openvox8/binary-arm64/Packages
@@ -14,7 +15,6 @@ MD5Sum:
  9c2727bb1951af0d2d755087e1a1112e            12150 openvox8/binary-armhf/Packages
  f39c020b86ffcded4df9589d302f496a             3170 openvox8/binary-armhf/Packages.gz
 SHA1:
- 353eac0a2ce406d1c50e656ae0387426e15a3120              177 Release
  67efb093fc32b988aca0f7788932c94e5fd8230a            12149 openvox8/binary-amd64/Packages
  98e0dad6b0daaf069dc44520e774f5cb6aeb91b0             3164 openvox8/binary-amd64/Packages.gz
  0f6b58988e4d3db1a4b02f1598b89a39a02c4c56            12149 openvox8/binary-arm64/Packages
@@ -22,7 +22,6 @@ SHA1:
  dbb47294d6115f9de5ea6f5e781869feb4beddd7            12150 openvox8/binary-armhf/Packages
  3b23003cae8c06e3b05c9ad6c27c83f37e696f70             3170 openvox8/binary-armhf/Packages.gz
 SHA256:
- 3e49435f6ac164ddcb9badbe211b1dd20e8d79d2f42f0e3e0f3ab7fea3d76f58              177 Release
  2165a04f5c4c295a80c626a397a906887e654000328948daf0441de6aa93eaee            12149 openvox8/binary-amd64/Packages
  8543429cd46e7e7882a62f24eca9906773a11f27a405299a44d437ede33de244             3164 openvox8/binary-amd64/Packages.gz
  a87b5e529c0d6162d4b7688f12126ecb5089037dfc5fe234753c758d55be3e46            12149 openvox8/binary-arm64/Packages
@@ -30,7 +29,6 @@ SHA256:
  2de4907f7a7d39232f3226da9419def141fa43d4edeff06bca9a8b475aff154a            12150 openvox8/binary-armhf/Packages
  bf0043580f6af296870ccadd3814c43b3f2d475423a95bb8992824fe735d4783             3170 openvox8/binary-armhf/Packages.gz
 SHA512:
- d7d037b01df5cf0cd141435ba17f08d9336f6a75a82c3d5a4633d74d85077ab6331e362f5560c9732d91c73e196f148cc21ad45d6257414524a9043f48f63a83              177 Release
  69462a392b38447ebacfc960069619e5ca0ed8344e92e16ff1d7b8d684becdd0470e06fd8b2037bc30ac5c21471f5920c46bc0631490dccef366dc71bdb214f3            12149 openvox8/binary-amd64/Packages
  13170a09f243c4b099b3f281cec1d3f760e599cf470d1a60e82da22f5f77f668e06ea69ca43624282f326acb86cc9cfa550022111a873261fedacdccfbae8cbd             3164 openvox8/binary-amd64/Packages.gz
  7be8d88e1b3175eadbbe8fcec4657b4367da3941990a9ff69cc9d296927e874ce1af614f36e95061be4a0e93b9d8074c203e7d73db69c14c2dce9d4a03b5b0ce            12149 openvox8/binary-arm64/Packages
