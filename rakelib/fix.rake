@@ -10,6 +10,8 @@ require_relative 'lib/utils/shell'
 
 desc 'Run one-time migration fixes, deploy, and clean up'
 task :fix do
+  abort 'This task was used only during initial migration to the new repo formats and should no longer be invoked.'.red
+  # rubocop:disable Lint/UnreachableCode
   abort 'Fix targets test buckets. Do not run with PRODUCTION=true.'.red if Infra.production?
 
   # Somehow, the release for this version missed adding the package
@@ -125,4 +127,5 @@ task :fix do
 
   ENV['CONFIRM_CLEANUP'] = 'true'
   Rake::Task[:cleanup].invoke
+  # rubocop:enable Lint/UnreachableCode
 end
