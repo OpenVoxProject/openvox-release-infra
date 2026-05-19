@@ -1,12 +1,13 @@
+Architectures: amd64 arm64 armhf
 Codename: debian13
-Date: Mon, 18 May 2026 18:16:24 UTC
+Components: openvox8
+Date: Tue, 19 May 2026 19:33:15 UTC
 Description: OpenVox debian13 Repository
 Label: openvox-debian13
 Origin: Vox Pupuli
 Suite: stable
 Version: 13.0
 MD5Sum:
- 40a566820b001c88ed2e823d66dcb1df              167 Release
  e38c3a548ff8b880f9d5a99b4f8f18e3           177386 openvox8/binary-amd64/Packages
  33e6cbac124beccbd95dbe9cd8631f37            26557 openvox8/binary-amd64/Packages.gz
  93f6b01d3a0aa0ab7bcf1070b7f95e04           177392 openvox8/binary-arm64/Packages
@@ -14,7 +15,6 @@ MD5Sum:
  6750c1826fc9173a13aa25b405b6e4bf            54082 openvox8/binary-armhf/Packages
  3892b51b99fe36e9bb5ae50b2f2fbbe6            13787 openvox8/binary-armhf/Packages.gz
 SHA1:
- 721947cc070902eeec5bba819f2fe73819f18cf7              167 Release
  b7172fd18bf5b641ca2d0f0a832a5c428458e002           177386 openvox8/binary-amd64/Packages
  e77a64762f4e82f8b8e7f13de9969feb30bf5138            26557 openvox8/binary-amd64/Packages.gz
  684d67c77dff441bd0227eee9bd3a96909bd81aa           177392 openvox8/binary-arm64/Packages
@@ -22,7 +22,6 @@ SHA1:
  10addc8131611be70c7fe7b433c425f3d200f206            54082 openvox8/binary-armhf/Packages
  ff9b738e820a33f7e73f3554f967116be01eda94            13787 openvox8/binary-armhf/Packages.gz
 SHA256:
- 5c9109ea8ab0c48b074ea0b3e1210d7878fd842d810afb5cab6a142f9479bc86              167 Release
  8f06537b60cba8f1cf5198f2dc54bf7c67bd72749c50721c2f06ebc2424810aa           177386 openvox8/binary-amd64/Packages
  94284d4d80538d70cb0a77c4e92b26b5a63fcbcbc92f8308fdb483415ad58d9a            26557 openvox8/binary-amd64/Packages.gz
  3b70d5fbcd505372f2f6ba4c7e156b3eca31e798ba982c9bedd31213a19b1648           177392 openvox8/binary-arm64/Packages
@@ -30,7 +29,6 @@ SHA256:
  09e798a2382e546a849d6d9c8813bfcd51f4905ce8da3746b084bb8c66e9f5e9            54082 openvox8/binary-armhf/Packages
  1eeaf09f1ee488de2ac111eaab3ab25ee9d111aed63f5592cc266c42e65c4158            13787 openvox8/binary-armhf/Packages.gz
 SHA512:
- c893bd319de29913cf3a766b8cd48b1772d50fe23a0cfd96a9fce9ab3424bfa613073417195a9c4207d0a77089e70f5747d194c2b8b1efa9d7bd4da943ae9036              167 Release
  54504eabe0b5331cff0a9b84d33818a3f843e3b71cc3a904d4e924b4c215f285ecac833869cea41b1e417df161c3047537d08088ce8bacde607c0989ca8ad24d           177386 openvox8/binary-amd64/Packages
  453af5f95ddb59a59dba9dec15bbc32d19fc73149f85682e36ae9ae3058b303a61ce283c8a3dd5c4bea499fd6cfc145a28e2aef01cd422e48d78186f98617b43            26557 openvox8/binary-amd64/Packages.gz
  3b8f353708e3e98607c6a182482ef07bc2cdc8c988f336842d9eb38d4cf241b499a5022c297925e2982987c6e6612839b408ed86f2177e7a4b74c00299b26283           177392 openvox8/binary-arm64/Packages

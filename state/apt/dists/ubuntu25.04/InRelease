@@ -1,15 +1,16 @@
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA512
 
+Architectures: amd64 arm64 armhf
 Codename: ubuntu25.04
-Date: Mon, 18 May 2026 18:16:26 UTC
+Components: openvox8
+Date: Tue, 19 May 2026 19:33:18 UTC
 Description: OpenVox ubuntu25.04 Repository
 Label: openvox-ubuntu25.04
 Origin: Vox Pupuli
 Suite: stable
 Version: 25.04
 MD5Sum:
- f00478b6826e0c517aa5799db59d7620              177 Release
  bda0e3e451de658d892c4257bd7a75d6            32666 openvox8/binary-amd64/Packages
  e1e75c0cfe6211927705089e2fb1b2a7             6718 openvox8/binary-amd64/Packages.gz
  39f440b09d80c97513e64ed35655ef2a            32666 openvox8/binary-arm64/Packages
@@ -17,7 +18,6 @@ MD5Sum:
  3b89ee931c5dbcf673a443a590adfa7f            12149 openvox8/binary-armhf/Packages
  13a16052f55ffe080e46e2c639ebf2d4             3161 openvox8/binary-armhf/Packages.gz
 SHA1:
- e066a51adbe53cccf8297772f291fe2e0dd61eaf              177 Release
  05cc00c8de89303615521ad6d985bfb0473d52b2            32666 openvox8/binary-amd64/Packages
  e496348fcda2f6d61b33093f5012519bf9aab553             6718 openvox8/binary-amd64/Packages.gz
  891040eab2ab1485b321c142d3e06b6aed5d2317            32666 openvox8/binary-arm64/Packages
@@ -25,7 +25,6 @@ SHA1:
  f5bd04e9e2e468eb6305bd38a0ff73265cb108b5            12149 openvox8/binary-armhf/Packages
  7dc5b718cd94c4b7f8c0788ebb805625ce1c71b6             3161 openvox8/binary-armhf/Packages.gz
 SHA256:
- d6230f8728db466116be25134296d1efd743193030248bfcacb12879b807661d              177 Release
  2200945e6e8c550ade7ba7570743a4366cba73000538e51b631a67a10989f98a            32666 openvox8/binary-amd64/Packages
  3a26f0faffb76aae75707f0d9d04177337a5e659df5dd2fb110da0a8c7388aa5             6718 openvox8/binary-amd64/Packages.gz
  cac2ed0a84b47339c6d10ad88de8484c835eb662fe736a0dc485c6a104e25319            32666 openvox8/binary-arm64/Packages
@@ -33,7 +32,6 @@ SHA256:
  87d77f3c081fa7638e6fca2d77179d598d94200c4f70368b1f02ac967844c75a            12149 openvox8/binary-armhf/Packages
  3ea0654612047b4d4208e8d675970374879fc3da7fc0d3a0ce1e000fd6871ed6             3161 openvox8/binary-armhf/Packages.gz
 SHA512:
- a8086306dc297d516d139777c7e4475734d25608baac01311e07236ccbfb8f93afa29f506f1378624614bcf7f7bc422a10e8d16e9b05608537c191c2b5788668              177 Release
  60330dd963d14c9913394be7e17d26806f38fe0ce04fde54dc0dced687a7b6e466e21989291a57738bfa0249532d7985ac29bcdc8cb3be705075835835b8aeff            32666 openvox8/binary-amd64/Packages
  727ccddd41c154235dd4228ed569415d11d3954a9d93343010c6c462d5d977f66dac98c94c626648cacb10dc310e765cc8b367fec01a074331ad67e946afad70             6718 openvox8/binary-amd64/Packages.gz
  c9f49949ba524c11ea67203a843a7e31a083a13e8228eb594a3345c7f6d2e42546b9baf363f114ad1d44edcecd5239f45537e5ab885aad61a355cefb4e60dba2            32666 openvox8/binary-arm64/Packages
@@ -42,12 +40,12 @@ SHA512:
  7237e3f8286e02c7ebbc4a69563c5445a071da2ccbefb4ecb46dd6e2ba961f98d20c43963b6a400b53d491a4d1ccf21e9e66ce6851cace289fb2357136d48295             3161 openvox8/binary-armhf/Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iQFKBAEBCgA0FiEEDiZCmYcAJBj5UT8qX7mZwtYv89kFAmoLV3oWHG9wZW52b3hA
-dm94cHVwdWxpLm9yZwAKCRBfuZnC1i/z2QtYB/0aPHuYzg3DT9G+RhVfRgoXbnp0
-jv7C4iGLv48xPWIfi5rzUBcICWYmKZfpn1BGSiuiNIu0OclKxoDGrfMQrStLns/q
-62LGULIHF485EPN7PmTNNaI5GRGV/YVnPRa8NLmXfh6DxXLGu8HCnNiVjYYK6kaa
-tWLEfNMnZGVgsWlFfa7n9a9jqbKjyk8tGl4RLbN5wEEKdSgFuTCffV6iFDMGXiW4
-5aW2JN525UZgwK27V2KME4QBWSqbV5x/6UUVDTCO5PtsLAWw9tEiZ7ammEUjjZuE
-ovWwPx39ktHFmXMnymuO2byBZBstYtfiCVx49gCvRt4uRoGfD4eES3WCyQ43
-=lc6t
+iQFKBAEBCgA0FiEEDiZCmYcAJBj5UT8qX7mZwtYv89kFAmoMuv4WHG9wZW52b3hA
+dm94cHVwdWxpLm9yZwAKCRBfuZnC1i/z2XlXCACQQnx66EPt/epR6dTTVXtW0cXf
+vwuyBsDCb2M0SCCwYWYQelt0iYJf3RGLJy9zFc/g9QPv1DFSgAt06jgBcrYtYv+0
++OcpGXUUF8zyoEpjzyu8u3XvN+heceJNL8er1qVRaA2o6MSYf2tGgQxEu5lLQZx4
+loP9x4TmSvFF1FhsFwPQyJGoxVPgIKJ8gUdObtCG9YN2kjTAQCA//v6F2y6mC2F9
+hsB4rUtvIPI/muHrX1I6OtG4hjG/ShbOGaqtZjxZvO9G1jq+yNLPFhYv3O4w/gqI
+SN/+t2F4YzKLP1l2H5CvsuUyLKZfbsXng9aJwrsAc+HVz4zFXAABr15EknKD
+=8NCA
 -----END PGP SIGNATURE-----

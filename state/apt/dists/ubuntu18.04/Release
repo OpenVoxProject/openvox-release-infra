@@ -1,12 +1,13 @@
+Architectures: amd64 arm64
 Codename: ubuntu18.04
-Date: Mon, 18 May 2026 16:44:04 UTC
+Components: openvox7 openvox8
+Date: Tue, 19 May 2026 19:33:16 UTC
 Description: OpenVox ubuntu18.04 Repository
 Label: openvox-ubuntu18.04
 Origin: Vox Pupuli
 Suite: stable
 Version: 18.04
 MD5Sum:
- 85e0d0289c64835e8374c093c60919f5              177 Release
  19a2da9a1fd5925cf924e7598aee475c            18444 openvox7/binary-amd64/Packages
  1f16151a4a3f7605691b164d004e2306             3814 openvox7/binary-amd64/Packages.gz
  98c9b112099118c0e81aca7122298725            18444 openvox7/binary-arm64/Packages
@@ -16,7 +17,6 @@ MD5Sum:
  90494670d417ef5c33d50b8e8a642f9f            24491 openvox8/binary-arm64/Packages
  a444dcbe827bde1886e3ed7a59997bc5             4894 openvox8/binary-arm64/Packages.gz
 SHA1:
- b5e1ac4b0e271181f36e1dfd0ac5305ad21e35b2              177 Release
  96354fbb91bdb87cf9592cdcb17ff4d5882c6233            18444 openvox7/binary-amd64/Packages
  656faeb3bf367b9f7e15e5349e78c81476d0149a             3814 openvox7/binary-amd64/Packages.gz
  55bad518dad87416c6a06f7efeb65ab634031f3f            18444 openvox7/binary-arm64/Packages
@@ -26,7 +26,6 @@ SHA1:
  b2a871f3032ee163968ff068cabb4ecc38efe600            24491 openvox8/binary-arm64/Packages
  2fda008b0a9191dfea5236a7501b1a7e27663688             4894 openvox8/binary-arm64/Packages.gz
 SHA256:
- 5d40b9e5b6420b877ed80aacdb8b000b051a47da1e4917890a531183d7d78c53              177 Release
  dee8e915fe3a5a01691da682b2135088516244eed3c50875cd75fe22126f5f08            18444 openvox7/binary-amd64/Packages
  c666d08dcd2cf2935a62b9621ccc2756d2d62dccacfcebe4abe1b3f663cb3364             3814 openvox7/binary-amd64/Packages.gz
  1cf4a914f360d19dde72a670e8e97d61bbfbf519dc9f9085a4021227f62e19c3            18444 openvox7/binary-arm64/Packages
@@ -36,7 +35,6 @@ SHA256:
  224e216f5e347b33b616db8db0ee0da10670dd63f21a2b16c5a812871cf480cc            24491 openvox8/binary-arm64/Packages
  24809fdcf1572f299780ce5c60dd450bf93f3907ce96b48eb22ea889ff1eec48             4894 openvox8/binary-arm64/Packages.gz
 SHA512:
- 3daef84c87a67461ebb8b77a74299925083b0f08f02cfa4576e649c25543b84ca049ad7236507ed18af495a2364e8504f27d25aca38d7133c57e558032e9b926              177 Release
  6a6cb2eebf8ad80c37b6cb15b7a924b9d549acbc36aa7de5d4a2555c76cd23fa835824241c8e765bf9354aa07b5158e45ad7a4bc5bf631a6bec0169fe6315d33            18444 openvox7/binary-amd64/Packages
  a95c37594e89d178c48f78c0c80fe49499d40b3f5d9aa06e0590007f342695c1bf72a6bd39dce6440049606f275f6b7f481fa2bcf3e379fc2ecfbaa5dfd42648             3814 openvox7/binary-amd64/Packages.gz
  fb8519f768461bfd02f8d785b4e2d5a9e17ca9e3d0c5f62616d44006a225e85416d07c08f289cce225f0c34f554a52dc2da89267e7383a7bddaa2c2f9a8c26e8            18444 openvox7/binary-arm64/Packages
