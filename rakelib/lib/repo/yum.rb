@@ -33,6 +33,7 @@ class Yum
 
     Yum.stage_metadata
     affected = Set.new
+    referenced = Yum.referenced_packages
 
     # Process arch-specific RPMs before noarch so that arch dirs exist in staging
     # when noarch RPMs look for them
@@ -44,6 +45,15 @@ class Yum
       abort "Cannot parse RPM filename: #{basename}. Expected format: <name>-<ver>.<dist><platver>.<arch>.rpm".red unless platform
 
       target_arch_dirs(platform.os, platform.version, platform.arch).each do |arch_dir|
+        if referenced.include?("#{arch_dir}/#{basename}")
+          if Infra.env('FORCE_OVERWRITE') == 'true'
+            puts "Overwriting existing entry for #{basename} in #{arch_dir}".yellow
+          else
+            abort "Package collision: #{basename} already exists in #{arch_dir}. " \
+                  'Use FORCE_OVERWRITE=true to replace.'.red
+          end
+        end
+
         staging_path = File.join(Infra::STAGING_DIR, 'yum', arch_dir)
         FileUtils.mkdir_p(staging_path)
         FileUtils.cp(rpm, staging_path)
