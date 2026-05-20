@@ -270,11 +270,13 @@ module MacOS
     end
   end
 
+  # Only the agent ships an installer plugin, so ignore if there's nothing there.
   def sign_plugin_binary(plugins, entitlements)
+    binaries = Dir.glob(File.join(plugins, '**', 'puppet-agent-installer-plugin'))
+    return if binaries.empty?
+
     puts 'Signing plugin binary...'.magenta
-    plugin = Dir.glob(File.join(plugins, '**', 'puppet-agent-installer-plugin')).first
-    abort 'Plugin binary puppet-agent-installer-plugin not found.'.red unless plugin
-    codesign_and_verify(plugin, entitlements: entitlements)
+    binaries.each { |binary| codesign_and_verify(binary, entitlements: entitlements) }
   end
 
   def sign_component_binaries(root, entitlements)
