@@ -20,10 +20,14 @@ task :verify do
 
   # arch:all debs are replicated into every binary-<arch>/Packages in the deployed repo
   # (apt has no shared binary-all index), so expand each one into one verification per
-  # arch the dist supports. Per-arch debs map to a single entry.
+  # arch the dist supports. Per-arch debs map to a single entry. When the dist has an
+  # upstream codename alias (e.g. trixie for debian13), verify both forms.
   apt_entries = staged_debs.flat_map do |deb|
     platform = Platform.from_deb(deb) or abort "Cannot parse deb filename: #{deb}".red
-    apt_verify_arches(platform).map { |arch| [platform.dist, Infra.component, arch, deb] }
+    dists = [platform.dist, Platform.codename_for(platform.dist)].compact.uniq
+    apt_verify_arches(platform).flat_map do |arch|
+      dists.map { |dist| [dist, Infra.component, arch, deb] }
+    end
   end
   apt = apt_entries.group_by { |dist, comp, arch, _| [dist, comp, arch] }
                    .map { |key, rows| [*key, rows.map { |_, _, _, deb| deb_name_version(deb) }] }

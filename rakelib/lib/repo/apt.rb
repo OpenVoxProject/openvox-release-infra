@@ -94,8 +94,25 @@ class Apt
     end
 
     packages_cache.each { |path, stanzas| write_packages_file(path, stanzas.values) }
-    affected_dists.each { |dist| rebuild_indexes(dist) }
+    affected_dists.each { |dist| rebuild_with_aliases(dist) }
     puts "apt metadata updated for #{affected_dists.size} dists.".green
+  end
+
+  # Rebuild the indexes for the given dist and, if the dist has an upstream
+  # codename (e.g. "trixie" for "debian13"), also mirror the Packages files
+  # into a parallel dists/<codename>/ tree and rebuild its indexes too. The
+  # codename tree shares pool/ content via identical Filename: paths; only
+  # the per-dist metadata is duplicated.
+  def rebuild_with_aliases(dist)
+    rebuild_indexes(dist)
+    codename = Platform.codename_for(dist)
+    if codename.nil?
+      puts "No upstream codename found for #{dist}; skipping alias.".yellow if Platform.canonical_apt_dist?(dist)
+      return
+    end
+
+    mirror_packages_for_codename(dist, codename)
+    rebuild_indexes(codename)
   end
 
   # Copy from state/apt/dists to staging/apt/dists
@@ -152,6 +169,26 @@ class Apt
   end
 
   private
+
+  # Copy the canonical dist's Packages files into the codename alias dir so
+  # rebuild_indexes(codename) has something to gzip and reference in its
+  # Release file. Packages content is byte-identical between the two trees
+  # because Filename: paths point into the shared pool/. Stale top-level
+  # Release files under the codename dir are removed to avoid apt-ftparchive
+  # picking up self-references (same reason as in generate_release).
+  def mirror_packages_for_codename(canonical, codename)
+    canonical_dir = File.join(Infra::STAGING_DIR, 'apt', 'dists', canonical)
+    codename_dir = File.join(Infra::STAGING_DIR, 'apt', 'dists', codename)
+
+    %w[Release InRelease Release.gpg].each { |name| FileUtils.rm_f(File.join(codename_dir, name)) }
+
+    Dir.glob(File.join(canonical_dir, '*', 'binary-*', 'Packages')).each do |packages_file|
+      relative = packages_file.sub("#{canonical_dir}/", '')
+      target = File.join(codename_dir, relative)
+      FileUtils.mkdir_p(File.dirname(target))
+      FileUtils.cp(packages_file, target)
+    end
+  end
 
   # Use the apt-ftparchive packages pool command to generate stanzas for the Packages file
   # for all of the packages we have in the staging directory.

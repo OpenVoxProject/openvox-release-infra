@@ -9,6 +9,7 @@
 require 'fileutils'
 require_relative 'lib/repo/apt'
 require_relative 'lib/utils/infra'
+require_relative 'lib/utils/platform'
 require_relative 'lib/utils/shell'
 
 desc 'Regenerate apt Release/InRelease/Release.gpg for every dist in state/, or a subset via the DISTS env var'
@@ -27,7 +28,10 @@ task :rebuild_apt_indexes do
             abort "Unknown dists requested: #{unknown.join(', ')}. Available: #{available_dists.join(', ')}".red unless unknown.empty?
             requested
           else
-            available_dists
+            # Without an explicit DISTS filter, iterate canonical dists only.
+            # rebuild_with_aliases regenerates the codename alias for each canonical
+            # dist, so iterating codename dirs separately would do the work twice.
+            available_dists.select { |dist| Platform.canonical_apt_dist?(dist) }
           end
 
   Infra.force_remove(Infra::STAGING_DIR)
@@ -40,7 +44,7 @@ task :rebuild_apt_indexes do
     apt = Apt.new(container)
     dists.each do |dist|
       puts "Rebuilding apt indexes: #{dist}".magenta
-      apt.rebuild_indexes(dist)
+      apt.rebuild_with_aliases(dist)
     end
     Apt.update_state
   ensure
