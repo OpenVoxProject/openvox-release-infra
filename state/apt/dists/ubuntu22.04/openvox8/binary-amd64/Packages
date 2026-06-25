@@ -1558,3 +1558,26 @@ Description: Tool for executing commands, tasks, and plans on remote systems
  openbolt 5.6.0
  openbolt-create-ruby-tarballs
  openbolt-runtime 2026.06.10.1
+
+Package: openvox-server
+Architecture: all
+Version: 8.14.1-1+ubuntu22.04
+Priority: optional
+Section: utils
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 107350
+Depends: openjdk-21-jre-headless, bash, net-tools, adduser, procps, openvox-agent (>= 8.26.2)
+Conflicts: puppetserver
+Replaces: puppetserver
+Filename: pool/openvox8/o/openvox-server/openvox-server_8.14.1-1+ubuntu22.04_all.deb
+Size: 94360090
+MD5sum: bc50c3daf5d29d9c8372e83e7bbc57d6
+SHA1: 4401c61c2de10c4e37e5e80b8fa3291429e7836c
+SHA256: 79b9f160503a8ca7283bee6be9c6cd936a7f0d1f2582a4a714712ad8cb22fafd
+SHA512: 7735ef744d8df841bd95a8fd4845a12c66a70f9b8033ebfcc962ea1943d053dc7ca9259efb000f58c06d9140ceb0bf888ad4b8b232f184bc8bdd371e214327e9
+Homepage: http://github.com/openvoxproject
+Description: Vox Pupuli puppetserver
+ Contains: OpenVox Server (org.openvoxproject/puppetserver 8.14.1,org.clojure/clojure 1.12.5,org.bouncycastle/bcpkix-jdk18on 1.84,org.openvoxproject/jruby-utils 5.4.0,org.openvoxproject/puppetserver 8.14.1,org.openvoxproject/trapperkeeper-webserver 12.0.2,org.openvoxproject/trapperkeeper-metrics 2.3.0)
+License: Apache-2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Build-Depends: cdbs, bc, mawk, lsb-release, ruby | ruby-interpreter
