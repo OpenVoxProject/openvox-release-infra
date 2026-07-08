@@ -73,7 +73,7 @@ jobs:
       WINDOWS_SM_HOST: ${{ secrets.WINDOWS_SM_HOST }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           fetch-depth: 0
           token: ${{ secrets.OPENVOXBOT_COMMIT_AND_PRS }}
@@ -83,7 +83,7 @@ jobs:
       # it avoids the buildx export/import round-trip (~20s even on cache hit).
       # Uses separate restore/save so the save runs even when the job fails.
       - id: docker-cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: /tmp/release-image.tar
           key: docker-release-${{ hashFiles('Dockerfile') }}
@@ -97,7 +97,7 @@ jobs:
             docker save release:latest -o /tmp/release-image.tar
           fi
 
-      - uses: actions/cache/save@v4
+      - uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         if: always() && steps.docker-cache.outputs.cache-hit != 'true'
         with:
           path: /tmp/release-image.tar
@@ -120,12 +120,12 @@ jobs:
           git config --global commit.gpgsign true
           git config --global tag.gpgsign true
 
-      - uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@d45b1a4e94b71acab930e56e79c6aa188764e7f9 # v1.316.0
         with:
           ruby-version: '4'
           bundler-cache: true
 
-      - uses: google-github-actions/auth@v2
+      - uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3.0.0
         with:
           workload_identity_provider: projects/353991846409/locations/global/workloadIdentityPools/github-actions/providers/github
           service_account: openvox-backup@openvox.iam.gserviceaccount.com
@@ -162,9 +162,9 @@ jobs:
       PLATFORMS: ${{ inputs.platforms == '' && 'macos-all-arm64,macos-all-x86_64' || inputs.platforms }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
-      - uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@d45b1a4e94b71acab930e56e79c6aa188764e7f9 # v1.316.0
         with:
           ruby-version: '4'
           bundler-cache: true
