@@ -28,14 +28,14 @@ module Infra
   CONTAINER_TAG = 'release:latest'
   DOCKERFILE = File.join(REPO_ROOT, 'Dockerfile')
 
-  SAFE_INPUT = /\A[a-zA-Z0-9._+-]+\z/
+  SAFE_INPUT = /\A[a-zA-Z0-9._+-~]+\z/
 
   module_function
 
   def validate_input(name, value)
     return nil if value.nil? || value.empty?
 
-    abort "#{name} contains invalid characters: #{value.inspect}. Only alphanumeric, '.', '_', '+', '-' are allowed.".red unless value.match?(SAFE_INPUT)
+    abort "#{name} contains invalid characters: #{value.inspect}. Only alphanumeric, '.', '_', '+', '-', and '~' are allowed.".red unless value.match?(SAFE_INPUT)
     value
   end
 
