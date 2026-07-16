@@ -4,9 +4,14 @@ on:
   workflow_dispatch:
     inputs:
       project:
-        description: 'Package name (e.g. openvox-agent, openvox-server, openvoxdb, openbolt)'
+        description: 'Package to release'
         required: true
-        type: string
+        type: choice
+        options:
+          - openvox-agent
+          - openvox-server
+          - openvoxdb
+          - openbolt
       version:
         description: 'Package version (e.g. 8.28.0)'
         required: true
