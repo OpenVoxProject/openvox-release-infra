@@ -17,10 +17,12 @@ on:
         required: true
         type: string
       component:
-        description: 'Repo component (e.g. openvox8)'
-        required: false
-        default: 'openvox8'
-        type: string
+        description: 'Target repository for release'
+        required: true
+        type: choice
+        options:
+          - openvox8
+          - openvox9
       platforms:
         description: 'Platform filter (e.g. el-9-x86_64,debian-13-amd64). Leave empty for all.'
         required: false
