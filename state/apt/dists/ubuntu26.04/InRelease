@@ -4,7 +4,7 @@ Hash: SHA512
 Architectures: amd64 arm64 armhf
 Codename: ubuntu26.04
 Components: openvox8 openvox9
-Date: Wed, 15 Jul 2026 19:53:02 UTC
+Date: Fri, 17 Jul 2026 18:20:07 UTC
 Description: OpenVox ubuntu26.04 Repository
 Label: openvox-ubuntu26.04
 Origin: Vox Pupuli
@@ -19,6 +19,8 @@ MD5Sum:
  945b25a23931bfde7a853549420f09e5             4531 openvox8/binary-armhf/Packages.gz
  5eb5938cb91c2f18dbdbb033085f33d7             4681 openvox9/binary-amd64/Packages
  75a2404015a747c5ef5e11a1fab8bac6             1791 openvox9/binary-amd64/Packages.gz
+ 919780170d9e77ad98871ae3b766bfaf             1461 openvox9/binary-arm64/Packages
+ b956064e91d0b2dd484b6c073828c498              778 openvox9/binary-arm64/Packages.gz
  ba4a0eb278016f8c9537517b42ae53c0             4681 openvox9/binary-armhf/Packages
  67bc06ddc41a6b8beaf93bd4dde602d8             1787 openvox9/binary-armhf/Packages.gz
 SHA1:
@@ -30,6 +32,8 @@ SHA1:
  68953fbbb18418d6ff99f19468c1f49a5bd6a504             4531 openvox8/binary-armhf/Packages.gz
  0491aeef019c69eae6c9a67dd1a82c0713fe8ace             4681 openvox9/binary-amd64/Packages
  ec6a3e1a8810ee142e403c23b8a6054b92760eca             1791 openvox9/binary-amd64/Packages.gz
+ 5e307e38279bd306a118d19c974c8adeed1cb94a             1461 openvox9/binary-arm64/Packages
+ ccf3cce75f1befa2d58f085338976eec82b71fbb              778 openvox9/binary-arm64/Packages.gz
  2515b65fd97fafdcc676b03feeaee419af9b357f             4681 openvox9/binary-armhf/Packages
  5d43bda1d037002958b8dd24d618210016954a8e             1787 openvox9/binary-armhf/Packages.gz
 SHA256:
@@ -41,6 +45,8 @@ SHA256:
  17ce536e06abc0eaa0cc2061b36bbec4d0d1264254d161ec82bf375583d0dcbf             4531 openvox8/binary-armhf/Packages.gz
  7d677b1756f75e4de34a39bdebaea3f1fd32ccbcc07ed32f967270870729882d             4681 openvox9/binary-amd64/Packages
  2a74f5e273d9e52041ee6d3e0936fb277f9f5bb2f7439c8a8c68f15e58ec2a3f             1791 openvox9/binary-amd64/Packages.gz
+ 7c7c0f510b6001cc5432987f08130c1fee08ed116da93d5ce4eea36408f1e07e             1461 openvox9/binary-arm64/Packages
+ 1793472ebb974e1607cf6f0209e4ce99d372f906a046ec84e07a56b2a2abdf11              778 openvox9/binary-arm64/Packages.gz
  c8c949937e39f7ba1cc8fe5606d2ff430388cd2ba7087ab1bd49c108147c626d             4681 openvox9/binary-armhf/Packages
  011299c46a44493ef39ec46b7bc36e5b6dd238b6a3584f3f235db6e7c4fd2c7f             1787 openvox9/binary-armhf/Packages.gz
 SHA512:
@@ -52,16 +58,18 @@ SHA512:
  cb690033e0ffec7c9ba12637e3072e6832727d3d047e7ce49c1af90986bd4208c5bf34477c6ba37162371afedb38de2d0f2d347b95df8dce9ecd242c4c250683             4531 openvox8/binary-armhf/Packages.gz
  05763c3d176ae1ea26b497092f607547e2bf8f8c71a2dff47307974d98439b6629366a216cf00362b82d6298865a74a29e09d24bc935882bcb18d9d25629cbac             4681 openvox9/binary-amd64/Packages
  55b7cafa68479a8dceccb183e52099efcc2bbe76923a3bd539e20627b78929fe5fa3f7441bdbb416fbae4b3431304087509b96ca77e65b168626de2be7573d2b             1791 openvox9/binary-amd64/Packages.gz
+ 9aed5a66d3daed06e94fe27cf2ca12cad8883ced5649fc1fbb33e048331c9ebaf6e8bd0a0fa9261f8e002fc03a7952fc4d970df18333add76f0928ee3bcbb40b             1461 openvox9/binary-arm64/Packages
+ d5c11b64dca1093a5e0ceaeaa47e67ebe1bbc4d252443fd8e7f8aae3a2659c4880f461c7b2a1e24e217fe9de161e0bcff9c6baf5027f8af7fb8724d5e5daf7e7              778 openvox9/binary-arm64/Packages.gz
  bf0ec47814414ef5ca65fc912e8d9395c7a09bd08ec205c7883aee34a356c40510d13f79aea1b09ea2a4c6bdcc35d70c96e0e42449c2cfdb4a1687ba0245093c             4681 openvox9/binary-armhf/Packages
  1c9ce6994532eb11f397877aa930659c7c1c085459204ada7f58792ab55a69aecebcd52b5285f11df4182b735e49cd956dd64693ce6ad6c24050f4ee3b28f539             1787 openvox9/binary-armhf/Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iQFKBAEBCgA0FiEEDiZCmYcAJBj5UT8qX7mZwtYv89kFAmpX5R4WHG9wZW52b3hA
-dm94cHVwdWxpLm9yZwAKCRBfuZnC1i/z2X/kB/96g/rjuhWGOQECkeThdtYmEOo9
-mPHj6njyqh+ASJprMitJq4BMknXRGvmwztuW2aiHueG0QnLgzVbDrAJ+gMFGpQOq
-qgYLh1NBh+LdEdFseFrq9r/LcWRXFc+cm0n661XmhHXGQ29/4oh5Gie8CARLQQay
-igpPTO6K5uEXdWuzuDS2ChK5JN9RCZ/SrCSjb7cKL+Z7+mBgNQu9FhXLz/8el4GL
-0DlEVdOuA2rPKehKycF8j8EbhjuGst6RG0KAk5mfcbb+3VQ/iXG2eR4FmJxkJ5OO
-LhLUBfkC786Mu+Yy67c9g+FC2kmC/cxSPCUxZO1ARjLh9dih0XboGbeEz1G3
-=l8j9
+iQFKBAEBCgA0FiEEDiZCmYcAJBj5UT8qX7mZwtYv89kFAmpaclcWHG9wZW52b3hA
+dm94cHVwdWxpLm9yZwAKCRBfuZnC1i/z2SQyB/9EZYYNZ4Yo8NKahxVEukw6/oux
+4Qu7s91TQEoamKQDBllBT0zK8FGQAYxszYZgNvwIrqnf8Q0MfAgl54KdoCh6Snm0
+YVu11hLRCs6TLNBpui1xH4mlDNgol+B9LPEdtQ46Znt0fPmwJWzwdFDgb7BHUE2W
+VegkU4p509ykVO8eko0qzfXTATfAsjwObYzgbzhMwbE17tvwEBSnxE6eVzzvTJ16
+37KKTJ9GvpldbE+G/D5JjxcbnL9mUvaWSSsYgpNa2nPxKDznbRvBe/IFrm4nxA3P
+0vWZqKq+1qGH3Iz9IYBZXi0zgqg5Yt5yf6TadVzH8gafbkAC/fj7MOEhrxHx
+=0geo
 -----END PGP SIGNATURE-----
