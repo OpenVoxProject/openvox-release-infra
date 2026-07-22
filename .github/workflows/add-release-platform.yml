@@ -50,7 +50,7 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.OPENVOXBOT_COMMIT_AND_PRS }}
       
-      - uses: ruby/setup-ruby@8e41b362d2589a22a44c1cfa214b3c83052c195b # v1.318.0
+      - uses: ruby/setup-ruby@a30dfa457ad68707b8b910ac3a244714b61c0626 # v1.320.0
         with:
           ruby-version: '4'
           bundler-cache: true
@@ -104,7 +104,7 @@ jobs:
             docker save release:latest -o /tmp/release-image.tar
           fi
 
-      - uses: ruby/setup-ruby@8e41b362d2589a22a44c1cfa214b3c83052c195b # v1.318.0
+      - uses: ruby/setup-ruby@a30dfa457ad68707b8b910ac3a244714b61c0626 # v1.320.0
         with:
           ruby-version: '4'
           bundler-cache: true
@@ -142,7 +142,7 @@ jobs:
             docker save release:latest -o /tmp/release-image.tar
           fi
 
-      - uses: ruby/setup-ruby@8e41b362d2589a22a44c1cfa214b3c83052c195b # v1.318.0
+      - uses: ruby/setup-ruby@a30dfa457ad68707b8b910ac3a244714b61c0626 # v1.320.0
         with:
           ruby-version: '4'
           bundler-cache: true
