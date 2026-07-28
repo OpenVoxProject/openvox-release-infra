@@ -4,7 +4,7 @@ RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
       createrepo-c rpm debsigs gnupg dpkg-dev gzip apt-utils \
       osslsigncode default-jre-headless curl \
-      ruby ruby-dev gcc make jq && \
+      ruby ruby-dev gcc make jq ca-certificates && \
     gem install --no-document fpm && \
     curl -sL https://github.com/ebourg/jsign/releases/download/7.5/jsign-7.5.jar \
       -o /usr/local/lib/jsign.jar && \
