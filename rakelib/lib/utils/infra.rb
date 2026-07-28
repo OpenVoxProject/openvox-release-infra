@@ -85,7 +85,7 @@ module Infra
   end
 
   def container_path(host_path) = host_path.sub(REPO_ROOT, CONTAINER_WORK)
-  def s3_cmd = ['aws', 's3', '--endpoint-url', S3_ENDPOINT]
+  def s3_cmd = ['aws', 's3', '--endpoint-url', S3_ENDPOINT, '--ca-bundle', '/etc/ssl/certs/ca-certificates.crt']
   def s3_sync = [*s3_cmd, 'sync', '--no-progress']
 
   def start_container(env_vars: ['GPG_PRIVATE_KEY_B64'])
