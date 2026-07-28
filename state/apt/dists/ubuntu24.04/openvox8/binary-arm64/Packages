@@ -1735,3 +1735,26 @@ Description: Vox Pupuli puppetdb
 License: Apache-2.0
 Vendor: Vox Pupuli <openvox@voxpupuli.org>
 Build-Depends: cdbs, bc, mawk, lsb-release, ruby | ruby-interpreter
+
+Package: openvox-server
+Architecture: all
+Version: 8.15.2-1+ubuntu24.04
+Priority: optional
+Section: utils
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 83450
+Depends: openjdk-21-jre-headless, bash, net-tools, adduser, procps, openvox-agent (>= 8.28.1), openvox-agent (<< 9.0.0~)
+Conflicts: puppetserver
+Replaces: puppetserver
+Filename: pool/openvox8/o/openvox-server/openvox-server_8.15.2-1+ubuntu24.04_all.deb
+Size: 71661548
+MD5sum: b26346299f8af6fac556e940e8829194
+SHA1: 9fe90bd7d1a9a40f19c17f3a095d38946ee2efeb
+SHA256: 8398376bfe38fdf8166ad09e431bd5f556b67ad53143e667b4a700a67af1814d
+SHA512: 3dc39a6e1ff922e6761af5219bd1b92526a103879eabd088496130f7c9924ec2c6a8d4d7337b9a339f03a5e9c7dd11c586801fb1d3a975dc528fd92be18369bd
+Homepage: http://github.com/openvoxproject
+Description: Vox Pupuli puppetserver
+ Contains: OpenVox Server (org.openvoxproject/puppetserver 8.15.2,org.clojure/clojure 1.12.5,org.bouncycastle/bcpkix-jdk18on 1.85,org.openvoxproject/jruby-utils 5.5.0,org.openvoxproject/puppetserver 8.15.2,org.openvoxproject/trapperkeeper-webserver 12.1.0,org.openvoxproject/trapperkeeper-metrics 2.3.0)
+License: Apache-2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Build-Depends: cdbs, bc, mawk, lsb-release, ruby | ruby-interpreter
