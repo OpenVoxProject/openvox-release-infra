@@ -23,6 +23,7 @@ on:
         options:
           - openvox8
           - openvox9
+          - tools
       platforms:
         description: 'Platform filter (e.g. el-9-x86_64,debian-13-amd64). Leave empty for all.'
         required: false
