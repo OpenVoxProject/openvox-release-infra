@@ -4,9 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       component:
-        description: 'Repo component (e.g. openvox7, openvox8)'
+        description: 'Repo component (e.g. openvox8, openvox9)'
         required: true
-        type: string
+        type: choice
+        options:
+          - openvox8
+          - openvox9
+          - tools
       platform:
         description: 'Comma-separated platform(s) (e.g. el-9,debian13,sles-15). Arch suffix is stripped if provided.'
         required: true
@@ -49,7 +53,7 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.OPENVOXBOT_COMMIT_AND_PRS }}
-      
+
       - uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1.321.0
         with:
           ruby-version: '4'
