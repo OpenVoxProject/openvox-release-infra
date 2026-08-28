@@ -179,6 +179,9 @@ jobs:
           ruby-version: '4'
           bundler-cache: true
 
+      - name: Configure OSUOSL CA Certificate for S3
+        uses: OpenVoxProject/shared-actions/.github/actions/setup-osuosl-ca@8f615b0ccd136787e5b5116aae97a3e0f2935272
+
       - name: Release
         run: bundle exec rake release
 
