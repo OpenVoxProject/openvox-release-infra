@@ -2407,3 +2407,25 @@ Description: The OpenVox Agent package contains all of the elements needed to ru
  puppet-runtime 2026.09.02.1
  shellpath 2023-02-15
  wrapper-script
+
+Package: openvoxdb-termini
+Architecture: all
+Version: 8.16.0-1+debian11
+Priority: optional
+Section: default
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 74
+Depends: openvox-agent
+Conflicts: puppetdb-termini
+Replaces: puppetdb-termini
+Filename: pool/openvox8/o/openvoxdb-termini/openvoxdb-termini_8.16.0-1+debian11_all.deb
+Size: 22212
+MD5sum: a0ef98eb99b4a2e3e4943efecfbdb63e
+SHA1: 5e3b24a103234fc13605f9c7490de4b67b285df5
+SHA256: 1e355008cc78c255754fd7a08830d0c2ee11148da481896c2ea1017dd00f392c
+SHA512: 5eb3b96daea5d622be361f209414cbd10a6daeb246bf7fe7f4934e6b53032bc2b030170dc8957ee7d5604775a5b68180a05ca970108c7090867e816b64944d42
+Homepage: http://github.com/openvoxproject
+Description: Termini for puppetdb
+ Contains terminus for:puppetdb (version 8.16.0)
+License: Apache-2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
