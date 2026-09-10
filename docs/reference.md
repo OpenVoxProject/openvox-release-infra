@@ -110,12 +110,14 @@ macOS signing additionally requires a macOS host with Xcode command line tools.
 The `PLATFORMS` variable uses `<os>-<version>-<arch>` triples:
 
 ```
-el-9-x86_64        -> matches .el9.x86_64.rpm
-debian-13-amd64    -> matches +debian13_amd64.deb
-ubuntu-24.04-arm64 -> matches +ubuntu24.04_arm64.deb
-fedora-42-x86_64   -> matches .fc42.x86_64.rpm
-macos-all-arm64    -> matches arm64 DMGs
-windows-all-x64    -> matches all MSIs
+el-9-x86_64         -> matches .el9.x86_64.rpm
+redhatfips-9-x86_64 -> matches .redhatfips9.noarch.rpm
+debian-13-amd64     -> matches +debian13_amd64.deb
+ubuntu-24.04-arm64  -> matches +ubuntu24.04_arm64.deb
+fedora-42-x86_64    -> matches .fc42.x86_64.rpm
+macos-all-arm64     -> matches arm64 DMGs
+windows-all-x64     -> matches all openvox 8.x MSIs
+windows-msys2-x64   -> matches all openvox 9.x MSIs
 ```
 
 Each entry must be a full triple. When set, only matching platforms are processed.
