@@ -1,8 +1,11 @@
-plugins: rubocop-rake
+---
+inherit_from: .rubocop_todo.yml
+
+inherit_gem:
+  voxpupuli-rubocop: rubocop.yml
 
 AllCops:
   TargetRubyVersion: 4.0
-  NewCops: enable
 
 Layout/ArgumentAlignment:
   EnforcedStyle: with_fixed_indentation
@@ -15,9 +18,6 @@ Layout/LineContinuationLeadingSpace:
 
 Layout/LineLength:
   Max: 160
-
-Metrics:
-  Enabled: false
 
 Naming/PredicateMethod:
   Enabled: false
@@ -46,9 +46,3 @@ Style/SpecialGlobalVars:
 
 Style/StringConcatenation:
   Enabled: false
-
-Style/TrailingCommaInArrayLiteral:
-  EnforcedStyleForMultiline: comma
-
-Style/TrailingCommaInHashLiteral:
-  EnforcedStyleForMultiline: comma

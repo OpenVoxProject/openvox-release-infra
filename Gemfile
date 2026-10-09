@@ -6,6 +6,5 @@ gem 'rake'
 gem 'rexml'
 
 group :development do
-  gem 'rubocop'
-  gem 'rubocop-rake'
+  gem 'voxpupuli-rubocop', '~> 5.3.0'
 end
