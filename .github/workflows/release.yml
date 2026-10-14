@@ -144,12 +144,12 @@ jobs:
       - name: Release
         run: bundle exec rake release
 
-      - name: Deploy
-        run: bundle exec rake deploy
-
       - name: Push state
         if: inputs.production
         run: git push
+
+      - name: Deploy
+        run: bundle exec rake deploy
 
       - name: Verify
         run: bundle exec rake verify
