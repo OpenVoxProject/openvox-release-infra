@@ -1,0 +1,9 @@
+# OpenVox <%= major %> <%= dist %> Repository
+Types: deb
+URIs: <%= apt_base %>
+Suites: <%= dist %>
+Components: <%= component %>
+Signed-By:
+<% key.each_line do |line| -%>
+ <%= line.strip.empty? ? '.' : line.strip %>
+<% end -%>

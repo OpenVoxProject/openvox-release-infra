@@ -1,0 +1,6 @@
+#!/bin/sh
+set -e
+<%# The packages up to 1-1 shipped these files, so 1-2~ is the first version without them -%>
+<% obsolete.each do |path| -%>
+dpkg-maintscript-helper rm_conffile <%= path %> 1-2~ -- "$@"
+<% end -%>
