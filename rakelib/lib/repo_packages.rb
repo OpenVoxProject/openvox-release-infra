@@ -20,6 +20,9 @@ module RepoPackages
   LIST_FILES_OUT = File.join(Infra::STAGING_DIR, 'apt', 'list_files')
   BUILD_DIR      = File.join(Infra::STAGING_DIR, 'repo_packages_build')
 
+  # apt older than 2.3.10 cannot read a signing key embedded in a deb822 sources file
+  LEGACY_APT_PLATFORMS = %w[debian10 debian11 ubuntu18.04 ubuntu20.04].freeze
+
   module_function
 
   # Detect if the given platform is an rpm or deb type. If we start
@@ -82,7 +85,7 @@ module RepoPackages
       [Dir.glob(File.join(RPM_OUT, '*.rpm')), Infra.yum_bucket],
       [Dir.glob(File.join(DEB_OUT, '{*.deb,*-keyring.gpg}')), Infra.apt_bucket],
       [Dir.glob(File.join(REPO_FILES_OUT, '{*.repo,*.repo.asc}')), "#{Infra.yum_bucket}/repo_files"],
-      [Dir.glob(File.join(LIST_FILES_OUT, '{*.list,*.list.asc,*.pref,*.pref.asc}')), "#{Infra.apt_bucket}/list_files"],
+      [Dir.glob(File.join(LIST_FILES_OUT, '{*.sources,*.sources.asc,*.list,*.list.asc,*.pref,*.pref.asc}')), "#{Infra.apt_bucket}/list_files"],
     ].each do |files, destination|
       files.each do |local|
         remote = "#{destination}/#{File.basename(local)}"
@@ -153,38 +156,53 @@ module RepoPackages
     pkg_name = package_def['package']
     flat_platform = platform.tr('-', '')
 
-    build_dir, config_file = stage_build_dir(package_def, kind, platform)
+    build_dir, config_file, maintscript = stage_build_dir(package_def, kind, platform)
 
     output_dir = deb ? DEB_OUT : RPM_OUT
     output_ext = deb ? '.deb' : '.noarch.rpm'
     output_file = File.join(output_dir, "#{pkg_name}-#{platform}#{output_ext}")
 
     iteration = "#{package_def['release']}#{'.' unless deb}#{flat_platform}"
-    run_fpm(container, package_def, build_dir, output_file, kind, iteration)
+    run_fpm(container, package_def, build_dir, output_file, kind, iteration, maintscript: maintscript)
 
     if deb
-      FileUtils.cp(config_file, File.join(LIST_FILES_OUT, "#{pkg_name}-#{flat_platform}.list"))
+      FileUtils.cp(config_file, File.join(LIST_FILES_OUT, "#{pkg_name}-#{flat_platform}#{File.extname(config_file)}"))
       install_file(File.join(TEMPLATES_DIR, 'apt.pref'), File.join(LIST_FILES_OUT, "#{pkg_name}.pref"))
-      install_file(File.join(KEYS_DIR, 'openvox-keyring.gpg'), File.join(DEB_OUT, "#{pkg_name}-keyring.gpg"))
+      install_file(File.join(KEYS_DIR, 'openvox-keyring.gpg'), File.join(DEB_OUT, 'openvox-keyring.gpg'))
     else
       FileUtils.cp(config_file, File.join(REPO_FILES_OUT, "#{pkg_name}-#{flat_platform}.repo"))
     end
   end
 
+  # Returns the directory fpm packs, the repo config file inside it and, for debs, the maintainer script.
   def stage_build_dir(package_def, kind, platform)
     pkg_name = package_def['package']
+    component = package_def['component']
     build_dir = File.join(BUILD_DIR, "#{pkg_name}-#{platform}")
     FileUtils.rm_rf(build_dir)
+    maintscript = nil
 
     if kind == 'deb'
-      keyring = "/etc/apt/keyrings/#{pkg_name}-keyring.gpg"
-      install_file(File.join(KEYS_DIR, 'openvox-keyring.gpg'), File.join(build_dir, keyring))
-      list_path = File.join(build_dir, 'etc', 'apt', 'sources.list.d', "#{pkg_name}.list")
-      config_file = install_template('apt.list.erb', list_path, component: package_def['component'], dist: platform, keyring: keyring)
+      # Every release package carries the same key, and apt insists on one Signed-By value per
+      # repo, so the key goes where all of them can share it without owning the same file.
+      sources_dir = File.join(build_dir, 'etc', 'apt', 'sources.list.d')
+      legacy = LEGACY_APT_PLATFORMS.include?(platform)
+      if legacy
+        install_file(File.join(KEYS_DIR, 'openvox-keyring.gpg'), File.join(build_dir, 'etc', 'apt', 'trusted.gpg.d', "#{pkg_name}.gpg"))
+        config_file = install_template('apt.list.erb', File.join(sources_dir, "#{pkg_name}.list"), component: component, dist: platform)
+      else
+        config_file = install_template('apt.sources.erb', File.join(sources_dir, "#{pkg_name}.sources"),
+          component: component, dist: platform, key: File.read(File.join(KEYS_DIR, 'GPG-KEY-openvox.pub')))
+      end
       install_file(File.join(TEMPLATES_DIR, 'apt.pref'),
         File.join(build_dir, 'etc', 'apt', 'preferences.d', "#{pkg_name}.pref"))
+
+      # Release packages before 1-2 installed these files, so an upgrade from them cleans up
+      obsolete = ['/etc/apt/keyrings/openvox-keyring.gpg', "/etc/apt/keyrings/#{pkg_name}-keyring.gpg",
+                  '/etc/apt/preferences.d/openvox-release.pref']
+      obsolete << "/etc/apt/sources.list.d/#{pkg_name}.list" unless legacy
+      maintscript = install_template('deb.maintscript.erb', "#{build_dir}.maintscript", component: component, obsolete: obsolete)
     else
-      component = package_def['component']
       install_file(File.join(KEYS_DIR, 'GPG-KEY-openvox.pub'),
         File.join(build_dir, 'etc', 'pki', 'rpm-gpg', "GPG-KEY-openvox-#{component}-release"))
       os_name, os_version = platform.split('-', 2)
@@ -194,7 +212,7 @@ module RepoPackages
         component: component, os_name: os_name, os_version: os_version)
     end
 
-    [build_dir, config_file]
+    [build_dir, config_file, maintscript]
   end
 
   def install_file(source, dest)
@@ -202,7 +220,7 @@ module RepoPackages
     FileUtils.cp(source, dest)
   end
 
-  def install_template(template_name, dest, component:, os_name: nil, os_version: nil, dist: nil, keyring: nil)
+  def install_template(template_name, dest, component:, **vars)
     @template_cache ||= {}
     @template_cache[template_name] ||= ERB.new(File.read(File.join(TEMPLATES_DIR, template_name)), trim_mode: '-')
 
@@ -211,10 +229,7 @@ module RepoPackages
       major: component.gsub(/\D/, ''),
       yum_base: Infra.yum_release_package_base,
       apt_base: Infra.apt_release_package_base,
-      os_name: os_name,
-      os_version: os_version,
-      dist: dist,
-      keyring: keyring
+      **vars
     )
 
     FileUtils.mkdir_p(File.dirname(dest))
@@ -222,7 +237,7 @@ module RepoPackages
     dest
   end
 
-  def run_fpm(container, package_def, build_dir, output_file, output_type, iteration)
+  def run_fpm(container, package_def, build_dir, output_file, output_type, iteration, maintscript: nil)
     args = [
       'fpm',
       '--input-type', 'dir',
@@ -240,7 +255,13 @@ module RepoPackages
       '--chdir', Infra.container_path(build_dir),
       '--package', Infra.container_path(output_file)
     ]
-    output_type == 'rpm' ? args.push('--rpm-digest', 'sha256') : args.push('--config-files', '/etc', '--deb-no-default-config-files')
+    if output_type == 'rpm'
+      args.push('--rpm-digest', 'sha256')
+    else
+      script = Infra.container_path(maintscript)
+      args.push('--config-files', '/etc', '--deb-no-default-config-files',
+        '--before-install', script, '--after-install', script, '--after-remove', script)
+    end
     args << '.'
 
     container.exec(Shellwords.shelljoin(args))

@@ -35,7 +35,9 @@ When doing the very first release of packages into a new component that doesn't 
 
 ## Repo package management
 
-The small noarch `openvox*-release` RPM/DEB packages register the OpenVox Apt/Yum repos on end-user systems. They drop `.repo` files, `.list` files, GPG public keys, and Apt pin preferences into the correct locations. Platform definitions live in `files/repo_packages/*.json`, with a file for each repo component (e.g. `openvox8`).
+The small noarch `openvox*-release` RPM/DEB packages register the OpenVox Apt/Yum repos on end-user systems. They drop `.repo` files, `.sources` or `.list` files, GPG public keys, and Apt pin preferences into the correct locations. Platform definitions live in `files/repo_packages/*.json`, with a file for each repo component (e.g. `openvox8`).
+
+Apt accepts only one `Signed-By` value per repository, so release packages that share a repository must agree on it. On Debian 12, Ubuntu 22.04 and newer the signing key is embedded in the package's `.sources` file, which lets any number of release packages (`openvox8-release`, `openvox9-release`, `tools-release`) coexist. Older platforms whose apt cannot read embedded keys get a `.list` file and the key in `/etc/apt/trusted.gpg.d/` instead. Packages built before release 2 kept the key in `/etc/apt/keyrings/` and upgrading one of those removes its old files. A machine that still has one of those installed must upgrade it to the current build before another release package is added, because apt refuses to read the two layouts side by side.
 
 ### Add a new platform
 
