@@ -23,10 +23,23 @@ jobs:
       - name: Run Rubocop
         run: bundle exec rake rubocop
 
+  rspec:
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install Ruby
+        uses: ruby/setup-ruby@bec3f19a76460dbe12f60def7d1a77585f07516c # v1.322.0
+        with:
+          ruby-version: '4.0'
+          bundler-cache: true
+      - name: Run rspec
+        run: bundle exec rake spec
+
   tests:
     if: always()
     needs:
       - rubocop
+      - rspec
     runs-on: ubuntu-26.04
     name: Test suite
     steps:
