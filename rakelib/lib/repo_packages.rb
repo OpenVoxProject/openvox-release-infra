@@ -55,9 +55,8 @@ module RepoPackages
 
     rpms = Dir.glob(File.join(RPM_OUT, '*.rpm'))
     debs = Dir.glob(File.join(DEB_OUT, '*.deb'))
-    keyrings = Dir.glob(File.join(DEB_OUT, '*-keyring.gpg'))
     config_files = Dir.glob(File.join(REPO_FILES_OUT, '*')) + Dir.glob(File.join(LIST_FILES_OUT, '*'))
-    puts "Built #{pluralize(rpms.size, 'RPM')}, #{pluralize(debs.size, 'DEB')}, #{pluralize(keyrings.size, 'keyring')}, " \
+    puts "Built #{pluralize(rpms.size, 'RPM')}, #{pluralize(debs.size, 'DEB')}, " \
          "#{pluralize(config_files.size, 'repo/list file')}".magenta
     abort 'No packages were built. Check the package JSON files.'.red if rpms.empty? && debs.empty?
 
@@ -80,7 +79,7 @@ module RepoPackages
 
     [
       [Dir.glob(File.join(RPM_OUT, '*.rpm')), Infra.yum_bucket],
-      [Dir.glob(File.join(DEB_OUT, '{*.deb,*-keyring.gpg}')), Infra.apt_bucket],
+      [Dir.glob(File.join(DEB_OUT, '*.deb')), Infra.apt_bucket],
       [Dir.glob(File.join(REPO_FILES_OUT, '{*.repo,*.repo.asc}')), "#{Infra.yum_bucket}/repo_files"],
       [Dir.glob(File.join(LIST_FILES_OUT, '{*.list,*.list.asc,*.pref,*.pref.asc}')), "#{Infra.apt_bucket}/list_files"],
     ].each do |files, destination|
@@ -164,8 +163,7 @@ module RepoPackages
 
     if deb
       FileUtils.cp(config_file, File.join(LIST_FILES_OUT, "#{pkg_name}-#{flat_platform}.list"))
-      install_file(File.join(TEMPLATES_DIR, 'apt.pref'), File.join(LIST_FILES_OUT, "#{pkg_name}.pref"))
-      install_file(File.join(KEYS_DIR, 'openvox-keyring.gpg'), File.join(DEB_OUT, "#{pkg_name}-keyring.gpg"))
+      install_file(File.join(TEMPLATES_DIR, 'apt.pref'), File.join(LIST_FILES_OUT, 'openvox-release.pref'))
     else
       FileUtils.cp(config_file, File.join(REPO_FILES_OUT, "#{pkg_name}-#{flat_platform}.repo"))
     end
@@ -177,12 +175,12 @@ module RepoPackages
     FileUtils.rm_rf(build_dir)
 
     if kind == 'deb'
-      keyring = "/etc/apt/keyrings/#{pkg_name}-keyring.gpg"
-      install_file(File.join(KEYS_DIR, 'openvox-keyring.gpg'), File.join(build_dir, keyring))
+      install_file(File.join(KEYS_DIR, 'openvox-keyring.gpg'),
+        File.join(build_dir, 'etc', 'apt', 'keyrings', 'openvox-keyring.gpg'))
       list_path = File.join(build_dir, 'etc', 'apt', 'sources.list.d', "#{pkg_name}.list")
-      config_file = install_template('apt.list.erb', list_path, component: package_def['component'], dist: platform, keyring: keyring)
+      config_file = install_template('apt.list.erb', list_path, component: package_def['component'], dist: platform)
       install_file(File.join(TEMPLATES_DIR, 'apt.pref'),
-        File.join(build_dir, 'etc', 'apt', 'preferences.d', "#{pkg_name}.pref"))
+        File.join(build_dir, 'etc', 'apt', 'preferences.d', 'openvox-release.pref'))
     else
       component = package_def['component']
       install_file(File.join(KEYS_DIR, 'GPG-KEY-openvox.pub'),
@@ -202,7 +200,7 @@ module RepoPackages
     FileUtils.cp(source, dest)
   end
 
-  def install_template(template_name, dest, component:, os_name: nil, os_version: nil, dist: nil, keyring: nil)
+  def install_template(template_name, dest, component:, os_name: nil, os_version: nil, dist: nil)
     @template_cache ||= {}
     @template_cache[template_name] ||= ERB.new(File.read(File.join(TEMPLATES_DIR, template_name)), trim_mode: '-')
 
@@ -213,8 +211,7 @@ module RepoPackages
       apt_base: Infra.apt_release_package_base,
       os_name: os_name,
       os_version: os_version,
-      dist: dist,
-      keyring: keyring
+      dist: dist
     )
 
     FileUtils.mkdir_p(File.dirname(dest))
