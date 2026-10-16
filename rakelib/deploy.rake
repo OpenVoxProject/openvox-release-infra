@@ -19,7 +19,7 @@ end
 def check_for_existing_packages(local_files, staging_prefix, bucket)
   return if local_files.empty?
 
-  existing = local_files.select do |local_path|
+  existing = local_files.reject { |path| File.basename(path).start_with?('VERSION-') }.select do |local_path|
     rel = local_path.sub("#{staging_prefix}/", '')
     remote = "#{bucket}/#{rel}"
     result = Shell.capture([*Infra.s3_cmd, 'ls', remote], allowed_exit_codes: [0, 1], print_command: false)

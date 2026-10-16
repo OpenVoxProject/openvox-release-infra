@@ -6,7 +6,11 @@ require_relative '../utils/infra'
 require_relative '../utils/platform'
 
 class Apt
+  # Staging dirs updated by #prepare
+  attr_reader :affected_dirs
+
   def initialize(container)
+    @affected_dirs = []
     @container = container
   end
 
@@ -95,6 +99,7 @@ class Apt
 
     packages_cache.each { |path, stanzas| write_packages_file(path, stanzas.values) }
     affected_dists.each { |dist| rebuild_indexes(dist) }
+    @affected_dirs = affected_dists.map { |dist| File.join(Infra::STAGING_DIR, 'apt', 'dists', dist, Infra.component) }
     puts "apt metadata updated for #{affected_dists.size} dists.".green
   end
 
