@@ -48,6 +48,17 @@ def fetch_packages
   counts
 end
 
+# Windows and macOS packages are staged under downloads/<os>/<component>/
+def downloads_version_dirs
+  Dir.glob(File.join(Infra::STAGING_DIR, 'downloads', '*', Infra.component)).select { |dir| File.directory?(dir) }
+end
+
+def write_version_files(dirs)
+  (dirs + downloads_version_dirs).uniq.each do |dir|
+    File.write(File.join(dir, "VERSION-#{Infra.project}"), "#{Infra.version}\n")
+  end
+end
+
 desc 'Download, sign, and prepare repo metadata'
 task :release do
   Infra.setup_aws
@@ -79,6 +90,7 @@ task :release do
 
   # Sign packages, prepare packages and repo metadata in staging/, then
   # move updated metadata to state/ for commit.
+  version_dirs = []
   container_env_vars = []
   container_env_vars << 'GPG_PRIVATE_KEY_B64' if sign_rpm || sign_deb
   container_env_vars.concat(Windows::ENV_VARS) if sign_msi
@@ -91,6 +103,7 @@ task :release do
       yum.sign
       yum.prepare
       Yum.update_state
+      version_dirs.concat(yum.affected_dirs)
     end
 
     if sign_deb
@@ -98,6 +111,7 @@ task :release do
       apt.sign
       apt.prepare
       Apt.update_state
+      version_dirs.concat(apt.affected_dirs)
     end
 
     if sign_msi
@@ -119,6 +133,8 @@ task :release do
       MacOS.teardown_signing
     end
   end
+
+  write_version_files(version_dirs) if Infra.create_version_file?
 
   Infra.commit_state("Release: #{Infra.project} #{Infra.version} (#{Infra.component})") if Infra.production?
   puts 'Release complete. Run `bundle exec rake deploy` to push to S3.'.green
