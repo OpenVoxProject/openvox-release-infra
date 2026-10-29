@@ -676,3 +676,48 @@ Description: The OpenVox Agent package contains all of the elements needed to ru
  puppet-runtime 2026.10.23.1
  shellpath 2023-02-15
  wrapper-script
+
+Package: openvoxdb-termini
+Architecture: all
+Version: 9.1.1-1+ubuntu24.04
+Priority: optional
+Section: default
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 78
+Depends: openvox-agent
+Conflicts: puppetdb-termini
+Replaces: puppetdb-termini
+Filename: pool/openvox9/o/openvoxdb-termini/openvoxdb-termini_9.1.1-1+ubuntu24.04_all.deb
+Size: 23450
+MD5sum: cd0c7721fbe41ba897cb90461be3e774
+SHA1: 85b78d33fe5ed64f6e4992e753210d42fdb30929
+SHA256: 5fc6270a0de988cdb06d64fb8f4efd707690696d0d4a2eb6aa159b37316f4db5
+SHA512: 2094bd146910c8276b3a3bfa62f31139df3ecefa8ff6a6eb76321c7e283896adafd1d4433c37e609124e3d10eeb50f04ed90abc7047797cdaa78b020a6f4d4a8
+Homepage: http://github.com/openvoxproject
+Description: Termini for puppetdb
+ Contains terminus for:puppetdb (version 9.1.1)
+License: Apache-2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+
+Package: openvoxdb
+Architecture: all
+Version: 9.1.1-1+ubuntu24.04
+Priority: optional
+Section: utils
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 69327
+Depends: openjdk-25-jre-headless | openjdk-21-jre-headless, bash, adduser, procps, openvox-agent (>= 9.2.1)
+Conflicts: puppetdb
+Replaces: puppetdb
+Filename: pool/openvox9/o/openvoxdb/openvoxdb_9.1.1-1+ubuntu24.04_all.deb
+Size: 63121818
+MD5sum: 6ca351d1196f39e509a8e426a98a1688
+SHA1: 113fff5081b2ce6bb03693501ee09f7c824f4139
+SHA256: a487629f6c2b3965e6532d7e2bd733c8421c3ed5418f7e5551ee46cb8ca3923f
+SHA512: 2c6880db9f20c99b35eac74bdd195158bd85e8c6c99c3025c50df968880eaa4a0a07f1031db2b01a50cf408510539200de964b57df76c831e1354e16da62043f
+Homepage: http://github.com/openvoxproject
+Description: Vox Pupuli puppetdb
+ Contains: OpenVox-integrated catalog and fact storage (org.openvoxproject/puppetdb 9.1.1,org.bouncycastle/bcpkix-jdk18on 1.86,org.clojure/clojure 1.12.6,org.openvoxproject/puppetdb 9.1.1)
+License: Apache-2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Build-Depends: cdbs, bc, mawk, lsb-release, ruby | ruby-interpreter
