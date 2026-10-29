@@ -2058,3 +2058,44 @@ Description: The OpenVox Agent package contains all of the elements needed to ru
  puppet-runtime 2026.10.21.1
  shellpath 2023-02-15
  wrapper-script
+
+Package: openvox-agent
+Architecture: arm64
+Version: 8.31.2-1+ubuntu22.04
+Priority: optional
+Section: admin
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 87095
+Provides: puppet-agent (= 8.31.2)
+Depends: findutils, tar
+Conflicts: puppet-agent
+Breaks: puppet-agent (<< 9)
+Replaces: puppet-agent (<< 9)
+Filename: pool/openvox8/o/openvox-agent/openvox-agent_8.31.2-1+ubuntu22.04_arm64.deb
+Size: 27193582
+MD5sum: 4e22bcf05d0a3237cf46c9ebdcc849b2
+SHA1: a00a28788a45757b1222d23851a53ff292ee6f2b
+SHA256: 1be4f00326fd88e27039f6b79725b7350967412a2cfa0d7faa29e7ed755f3a28
+SHA512: 72b0c0f329e0e296251f92062c9db151a5e4cd681ffd457129a241cf8eb2a7472bd9140a439032b57b47ee11d3eee632abb6c6c7203f8cd8b8c8b9958374ba84
+Homepage: https://voxpupuli.org
+Description: The OpenVox Agent package contains all of the elements needed to run the agent, including ruby and openfact.
+ .
+ Contains the following components:
+ cleanup
+ execution_wrapper
+ module-puppetlabs-augeas_core v1.5.0
+ module-puppetlabs-cron_core v1.3.0
+ module-puppetlabs-host_core v1.3.0
+ module-puppetlabs-mount_core v1.3.0
+ module-puppetlabs-scheduled_task v3.2.0
+ module-puppetlabs-selinux_core v1.4.0
+ module-puppetlabs-sshkeys_core v2.5.0
+ module-puppetlabs-yumrepo_core v2.1.0
+ module-puppetlabs-zfs_core v1.6.1
+ module-puppetlabs-zone_core v1.2.0
+ openfact 5.7.2
+ puppet 8.31.2
+ puppet-resource_api 1.9.2
+ puppet-runtime 2026.10.28.1
+ shellpath 2023-02-15
+ wrapper-script
