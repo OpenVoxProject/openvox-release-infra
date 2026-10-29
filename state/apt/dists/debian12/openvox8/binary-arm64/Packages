@@ -2783,3 +2783,26 @@ Description: The OpenVox Agent package contains all of the elements needed to ru
  puppet-runtime 2026.10.28.1
  shellpath 2023-02-15
  wrapper-script
+
+Package: openvox-server
+Architecture: all
+Version: 8.17.1-1+debian12
+Priority: optional
+Section: utils
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 81112
+Depends: openjdk-17-jre-headless, bash, net-tools, adduser, procps, openvox-agent (>= 8.31.2), openvox-agent (<< 9.0.0~)
+Conflicts: puppetserver
+Replaces: puppetserver
+Filename: pool/openvox8/o/openvox-server/openvox-server_8.17.1-1+debian12_all.deb
+Size: 69554516
+MD5sum: cbd67c7d3a6eb60a9e102a3a9c8796b6
+SHA1: daab2fe9b50453beaa8b8fabdaa272cc76ad49f3
+SHA256: 6403aa0e9496cdcbc7c3830ae08c1a06db33ffce6d7a152d87782a30c9c250e1
+SHA512: 050370ba0764bba59ac37ff3db55ca9a5c33be4dab089efad83c107de1ab1398f5981d63f2c84bbb48aafe58f5f37a7b93dafab8bbe1711cec324d815fd9fd84
+Homepage: http://github.com/openvoxproject
+Description: Vox Pupuli puppetserver
+ Contains: OpenVox Server (org.openvoxproject/puppetserver 8.17.1,org.clojure/clojure 1.12.6,org.bouncycastle/bcpkix-jdk18on 1.86,org.openvoxproject/jruby-utils 5.5.1,org.openvoxproject/puppetserver 8.17.1,org.openvoxproject/trapperkeeper-webserver 12.1.2,org.openvoxproject/trapperkeeper-metrics 2.3.3)
+License: Apache-2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Build-Depends: cdbs, bc, mawk, lsb-release, ruby | ruby-interpreter
