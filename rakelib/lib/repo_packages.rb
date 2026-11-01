@@ -3,6 +3,8 @@
 require 'erb'
 require 'fileutils'
 require 'json'
+require 'rubygems/version'
+require 'rubygems/requirement'
 require 'shellwords'
 require_relative 'repo/apt'
 require_relative 'repo/yum'
@@ -183,13 +185,35 @@ module RepoPackages
         File.join(build_dir, 'etc', 'apt', 'preferences.d', 'openvox-release.pref'))
     else
       component = package_def['component']
-      install_file(File.join(KEYS_DIR, 'GPG-KEY-openvox.pub'),
-        File.join(build_dir, 'etc', 'pki', 'rpm-gpg', "GPG-KEY-openvox-#{component}-release"))
       os_name, os_version = platform.split('-', 2)
-      repo_subdir = os_name == 'sles' ? 'etc/zypp/repos.d' : 'etc/yum.repos.d'
-      repo_path = File.join(build_dir, repo_subdir, "#{pkg_name}.repo")
-      config_file = install_template('rpm.repo.erb', repo_path,
-        component: component, os_name: os_name, os_version: os_version)
+
+      gpg_file = case [os_name, Gem::Version.new(os_version)]
+                 in ['fedora', ^(Gem::Requirement.new('>= 45'))]
+                   # Fedora 45 moved the location for packaged repo GPG keys
+                   # from /etc/pki/rpm-gpg/ to /usr/share/pki/rpm-gpg/
+                   #
+                   # See: https://fedoraproject.org/wiki/Changes/RelocateRpmRepoConfigsToUsr
+                   "usr/share/pki/rpm-gpg/RPM-GPG-KEY-openvox-#{component}-release"
+                 else
+                   "etc/pki/rpm-gpg/GPG-KEY-openvox-#{component}-release"
+                 end
+
+      repo_file = case [os_name, Gem::Version.new(os_version)]
+                  in ['fedora', ^(Gem::Requirement.new('>= 45'))]
+                    # Fedora 45 also moved the location for packaged repo config
+                    # files. See wiki page referenced above.
+                    "usr/share/dnf5/repos.d/#{pkg_name}.repo"
+                  in ['sles', _]
+                    "etc/zypp/repos.d/#{pkg_name}.repo"
+                  else
+                    "etc/yum.repos.d/#{pkg_name}.repo"
+                  end
+
+      install_file(File.join(KEYS_DIR, 'GPG-KEY-openvox.pub'),
+        File.join(build_dir, gpg_file))
+      config_file = install_template('rpm.repo.erb',
+        File.join(build_dir, repo_file),
+        component: component, os_name: os_name, os_version: os_version, gpg_file: gpg_file)
     end
 
     [build_dir, config_file]
@@ -200,7 +224,7 @@ module RepoPackages
     FileUtils.cp(source, dest)
   end
 
-  def install_template(template_name, dest, component:, os_name: nil, os_version: nil, dist: nil)
+  def install_template(template_name, dest, component:, os_name: nil, os_version: nil, dist: nil, gpg_file: nil)
     @template_cache ||= {}
     @template_cache[template_name] ||= ERB.new(File.read(File.join(TEMPLATES_DIR, template_name)), trim_mode: '-')
 
@@ -211,7 +235,8 @@ module RepoPackages
       apt_base: Infra.apt_release_package_base,
       os_name: os_name,
       os_version: os_version,
-      dist: dist
+      dist: dist,
+      gpg_file: gpg_file
     )
 
     FileUtils.mkdir_p(File.dirname(dest))
