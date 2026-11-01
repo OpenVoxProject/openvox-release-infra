@@ -7,7 +7,11 @@ require_relative '../utils/infra'
 require_relative '../utils/platform'
 
 class Yum
+  # Staging dirs updated by #prepare
+  attr_reader :affected_dirs
+
   def initialize(container)
+    @affected_dirs = []
     @container = container
   end
 
@@ -96,6 +100,7 @@ class Yum
       Infra.gpg_detach_sign(@container, repomd)
     end
 
+    @affected_dirs = affected.map { |rel_path| File.join(Infra::STAGING_DIR, 'yum', rel_path) }
     puts "yum metadata updated for #{affected.size} arch dirs.".green
   end
 

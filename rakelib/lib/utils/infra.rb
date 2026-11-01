@@ -68,6 +68,7 @@ module Infra
   def version = validate_input('VERSION', env('VERSION', required: true))
   def component = validate_input('COMPONENT', env('COMPONENT', required: true, default: 'openvox8'))
   def production? = env('PRODUCTION') == 'true'
+  def create_version_file? = env('CREATE_VERSION_FILE', default: 'true') != 'false'
 
   def apt_bucket = env('APT_BUCKET', default: production? ? APT_PRODUCTION_BUCKET : APT_TEST_BUCKET)
   def yum_bucket = env('YUM_BUCKET', default: production? ? YUM_PRODUCTION_BUCKET : YUM_TEST_BUCKET)
