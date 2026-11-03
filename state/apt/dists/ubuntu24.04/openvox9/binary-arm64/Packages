@@ -797,10 +797,10 @@ Conflicts: puppetserver
 Replaces: puppetserver
 Filename: pool/openvox9/o/openvox-server/openvox-server_9.2.0-1+ubuntu24.04_all.deb
 Size: 98014506
-MD5sum: 1e0e36f008b2dd04e878997fc09972e5
-SHA1: 176d95be4eec6193b9f34be38f50168b20850b1f
-SHA256: 0f5076d077dbd94c09b501e78ffbf7b83581ec00b1c786df123eeaad782692f8
-SHA512: 93c5e88edbdeb8f44698106a29b791199bc03b2459fc987cfb44256ddca09ba58cd40840eb48f6808102919a8aba1ce1b8853a8ce3bf3531a44f88ba473c618c
+MD5sum: 031c79b709d92ad44fad427f8f27ecf2
+SHA1: 9f3323c1de502eda9cd0915751e3767b96ef38e7
+SHA256: 01727fe8c6146a8250ced99e0fe342c21eb97079b5215e40d7cd5e46e2293c0a
+SHA512: e92d60d4f242ab6fa08bb88487250dbc13b4ffd4b76b74e4b5f49752e136d7dfcac23e76595b5386d002249e5f02e9dcfb5fd8f035a7bb6899488d4133449bb7
 Homepage: http://github.com/openvoxproject
 Description: Vox Pupuli puppetserver
  Contains: OpenVox Server (org.openvoxproject/puppetserver 9.2.0,org.clojure/clojure 1.12.6,org.bouncycastle/bcpkix-jdk18on 1.86,org.openvoxproject/jruby-utils 7.0.4,org.openvoxproject/puppetserver 9.2.0,org.openvoxproject/trapperkeeper-webserver 12.2.0,org.openvoxproject/trapperkeeper-metrics 2.3.3)
