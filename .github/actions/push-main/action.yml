@@ -1,0 +1,17 @@
+name: Push to main
+description: Push the checked out branch, rebasing onto commits that landed on main meanwhile and retrying on failure
+
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        for attempt in 1 2 3 4 5; do
+          if (( attempt > 1 )); then
+            echo "Retrying in 30 seconds (attempt $attempt of 5)"
+            sleep 30
+          fi
+          git pull --rebase && git push && exit 0
+        done
+        echo "::error::Giving up after 5 push attempts"
+        exit 1

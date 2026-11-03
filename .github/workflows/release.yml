@@ -146,7 +146,7 @@ jobs:
 
       - name: Push state
         if: inputs.production
-        run: git push
+        uses: ./.github/actions/push-main
 
       - name: Deploy
         run: bundle exec rake deploy

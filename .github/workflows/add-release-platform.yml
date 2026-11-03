@@ -79,7 +79,7 @@ jobs:
         run: bundle exec rake repo_packages:add_platform
 
       - name: Push to main
-        run: git push
+        uses: ./.github/actions/push-main
 
   build-test:
     name: Build and upload to test
