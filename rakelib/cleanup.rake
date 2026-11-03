@@ -30,7 +30,8 @@ def list_s3_objects(bucket_path, prefix)
 
   result = Shell.capture(
     ['aws', 's3api', 'list-objects-v2', '--endpoint-url', Infra::S3_ENDPOINT,
-     '--bucket', bucket_name, '--prefix', full_prefix, '--query', 'Contents[].Key']
+     '--bucket', bucket_name, '--prefix', full_prefix, '--query', 'Contents[].Key'],
+    attempts: Infra::TRANSFER_ATTEMPTS
   )
 
   return [] if result.output.strip == 'null' || result.output.strip.empty?
@@ -90,7 +91,7 @@ task :cleanup do
   end
 
   orphaned.each do |obj|
-    Shell.run([*Infra.s3_cmd, 'rm', "#{obj[:bucket]}/#{obj[:key]}"])
+    Shell.run([*Infra.s3_cmd, 'rm', "#{obj[:bucket]}/#{obj[:key]}"], attempts: Infra::TRANSFER_ATTEMPTS)
   end
   puts "Deleted #{orphaned.size} orphaned packages. You will need to clean up 'downloads' manually if any packages should be removed.".green
 end

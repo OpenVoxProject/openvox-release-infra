@@ -21,9 +21,7 @@ def check_for_existing_packages(local_files, staging_prefix, bucket)
 
   existing = local_files.select do |local_path|
     rel = local_path.sub("#{staging_prefix}/", '')
-    remote = "#{bucket}/#{rel}"
-    result = Shell.capture([*Infra.s3_cmd, 'ls', remote], allowed_exit_codes: [0, 1], print_command: false)
-    result.exitcode.zero? && !result.output.strip.empty?
+    Infra.s3_exists?("#{bucket}/#{rel}")
   end
 
   return if existing.empty?
@@ -74,16 +72,16 @@ task :deploy do
   end
 
   deploy_phase('Uploading packages') do
-    Shell.run([*Infra.s3_sync, '--exact-timestamps', "#{pool_dir}/", "#{Infra.apt_bucket}/pool/"]) if Dir.exist?(pool_dir)
-    Shell.run([*Infra.s3_sync, '--exact-timestamps', "#{yum_dir}/", "#{Infra.yum_bucket}/", '--exclude', '*', '--include', '*.rpm']) if Dir.exist?(yum_dir)
-    Shell.run([*Infra.s3_sync, '--exact-timestamps', "#{downloads_dir}/", "#{Infra.downloads_bucket}/"]) if Dir.exist?(downloads_dir)
+    Infra.s3_sync("#{pool_dir}/", "#{Infra.apt_bucket}/pool/") if Dir.exist?(pool_dir)
+    Infra.s3_sync("#{yum_dir}/", "#{Infra.yum_bucket}/", '--exclude', '*', '--include', '*.rpm') if Dir.exist?(yum_dir)
+    Infra.s3_sync("#{downloads_dir}/", "#{Infra.downloads_bucket}/") if Dir.exist?(downloads_dir)
   end
 
   deploy_phase('Uploading metadata') do
-    Shell.run([*Infra.s3_sync, '--exact-timestamps', "#{yum_dir}/", "#{Infra.yum_bucket}/", '--exclude', '*.rpm']) if Dir.exist?(yum_dir)
+    Infra.s3_sync("#{yum_dir}/", "#{Infra.yum_bucket}/", '--exclude', '*.rpm') if Dir.exist?(yum_dir)
 
     dists_dir = File.join(Infra::STAGING_DIR, 'apt', 'dists')
-    Shell.run([*Infra.s3_sync, '--exact-timestamps', "#{dists_dir}/", "#{Infra.apt_bucket}/dists/"]) if Dir.exist?(dists_dir)
+    Infra.s3_sync("#{dists_dir}/", "#{Infra.apt_bucket}/dists/") if Dir.exist?(dists_dir)
   end
 
   puts 'Deploy complete.'.green

@@ -80,7 +80,7 @@ task :fix do
     staging_src = File.join(yum_staging, rel_path)
     FileUtils.mkdir_p(staging_src)
     s3_path = "#{Infra.yum_bucket}/#{rel_path}/"
-    Shell.run([*Infra.s3_sync, s3_path, "#{staging_src}/", '--exclude', '*', '--include', '*.src.rpm'])
+    Infra.s3_sync(s3_path, "#{staging_src}/", '--exclude', '*', '--include', '*.src.rpm')
     downloaded = Dir.glob(File.join(staging_src, '*.src.rpm'))
     abort "No .src.rpm files downloaded from #{s3_path} when repo metadata shows that they should exist.".red if downloaded.empty?
   end
