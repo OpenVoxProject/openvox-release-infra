@@ -5,6 +5,7 @@ require 'shellwords'
 require 'zlib'
 require_relative '../utils/infra'
 require_relative '../utils/platform'
+require_relative 'advisory'
 
 class Yum
   def initialize(container)
@@ -27,7 +28,9 @@ class Yum
     sign_rpms(rpms)
   end
 
-  def prepare
+  # advisory is the security advisory of this release from Advisory.from_env,
+  # or nil for a release that is not a security release.
+  def prepare(advisory:)
     rpms = Dir.glob(File.join(Infra::PACKAGES_DIR, 'rpm', '*.rpm'))
     return if rpms.empty?
 
@@ -61,6 +64,7 @@ class Yum
       end
     end
 
+    advised = []
     affected.each do |rel_path|
       puts "Updating yum metadata: #{rel_path}".magenta
       staging_path = File.join(Infra::STAGING_DIR, 'yum', rel_path)
@@ -91,12 +95,41 @@ class Yum
         @container.exec("rm -rf #{container_staging}/repodata && mv #{container_merge}/repodata #{container_staging} && rm -rf #{container_merge}")
       end
 
-      repomd = File.join(staging_path, 'repodata', 'repomd.xml')
-      @container.exec("rm -f #{Infra.container_path(repomd)}.asc")
-      Infra.gpg_detach_sign(@container, repomd)
+      # The merge dropped the advisories recorded in state/, so put them back,
+      # with this release's advisory added when it is a security release
+      advised << rel_path if Advisory.update_repodata(@container, rel_path, advisory)
+
+      sign_repomd(staging_path)
+    end
+    if advisory && advised.empty?
+      abort "No packages of #{Infra.project} #{Infra.version} found in the staged yum repos, so its advisory could not be written.".red
     end
 
     puts "yum metadata updated for #{affected.size} arch dirs.".green
+  end
+
+  # Write the advisory of an already released version into every staged arch
+  # dir that contains its packages, and drop the other arch dirs from staging
+  # so that only the changed metadata gets deployed. Returns the arch dirs
+  # written.
+  def apply_advisory(entry)
+    Yum.staged_arch_dirs.filter_map do |rel_path|
+      arch_dir = File.join(Infra::STAGING_DIR, 'yum', rel_path)
+      unless Advisory.update_repodata(@container, rel_path, entry)
+        FileUtils.rm_rf(arch_dir)
+        next
+      end
+
+      puts "Advisory written to #{rel_path}".cyan
+      sign_repomd(arch_dir)
+      rel_path
+    end
+  end
+
+  # The arch dirs with repodata in staging/yum, relative to it (e.g. openvox8/el/9/x86_64)
+  def self.staged_arch_dirs
+    staging_yum = File.join(Infra::STAGING_DIR, 'yum')
+    Dir.glob(File.join(staging_yum, '**', 'repodata')).map { |repodata| File.dirname(repodata).sub("#{staging_yum}/", '') }
   end
 
   # Copy repodata from staging/ back to state/ so we can commit the
@@ -141,6 +174,12 @@ class Yum
   end
 
   private
+
+  def sign_repomd(staging_path)
+    repomd = File.join(staging_path, 'repodata', 'repomd.xml')
+    @container.exec("rm -f #{Infra.container_path(repomd)}.asc")
+    Infra.gpg_detach_sign(@container, repomd)
+  end
 
   # For noarch RPMs, find all existing arch directories so we can put the
   # package into all of them (yum has no shared noarch directory).

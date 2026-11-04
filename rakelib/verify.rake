@@ -2,6 +2,8 @@
 
 require 'shellwords'
 require 'zlib'
+require_relative 'lib/repo/advisory'
+require_relative 'lib/repo/yum'
 require_relative 'lib/utils/infra'
 require_relative 'lib/utils/platform'
 require_relative 'lib/utils/shell'
@@ -58,6 +60,33 @@ task :verify_all do
 
   failures = run_verification(apt: apt, rpm: rpm)
   report_summary(failures, total: total_expected(apt, rpm))
+end
+
+desc 'Verify the security advisory of the release in staging/ is visible in the deployed yum repos'
+task :verify_advisory do
+  Infra.print_target(:yum_bucket)
+
+  # A security release without RPMs, such as one with a deb-only platform
+  # filter, stages no yum metadata and writes no advisory
+  staged = Yum.staged_arch_dirs
+  if staged.empty?
+    puts 'No yum metadata in staging/, so there is no advisory to verify.'.yellow
+    next
+  end
+
+  # A release stages the metadata of every arch dir, so verify the dirs whose
+  # staged updateinfo carries the advisory, each against the packages it lists
+  rpm = staged.filter_map do |rel_path|
+    packages = Advisory.listed_packages(rel_path)
+    [rel_path, packages] unless packages.empty?
+  end.sort
+  abort "Nothing to verify (no advisory #{Advisory.id} in staging/).".red if rpm.empty?
+
+  failures = with_verify_container(
+    name: 'verify-yum', image: 'almalinux:9',
+    setup: ["rpm --import #{GPG_KEY_PATH_IN_CONTAINER}"]
+  ) { |container| verify_yum_repos(container, rpm, advisory: Advisory.id) }
+  report_summary(failures, total: total_expected([], rpm))
 end
 
 # Dispatch each non-empty repo type to its verifier inside the appropriate
@@ -241,7 +270,9 @@ def verify_apt_repos(container, repos)
   end
 end
 
-def verify_yum_repos(container, repos)
+# With advisory, only the packages that advisory covers are listed, so a
+# package the deployed advisory does not cover shows as NOT found.
+def verify_yum_repos(container, repos, advisory: nil)
   puts "Verifying #{repos.length} yum repos...".magenta
   repos.flat_map do |rel_path, packages|
     # The container runs x86_64, so --forcearch is required for dnf to query metadata
@@ -257,8 +288,9 @@ def verify_yum_repos(container, repos)
     # repoquery returns every version by default; --queryformat sidesteps the
     # column-wrap that breaks dnf list when stdout is piped.
     query_format = '%{name} %{evr}\n' # rubocop:disable Style/FormatStringToken
+    filter = advisory ? "--advisory=#{Shellwords.shellescape(advisory)} " : ''
     result = container.capture(
-      "#{dnf} --quiet --disablerepo='*' --enablerepo=openvox-verify repoquery " \
+      "#{dnf} --quiet --disablerepo='*' --enablerepo=openvox-verify repoquery #{filter}" \
       "--queryformat=#{Shellwords.shellescape(query_format)} #{names}",
       allowed_exit_codes: [0, 1]
     )

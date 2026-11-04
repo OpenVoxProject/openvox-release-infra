@@ -33,6 +33,15 @@ Example: release openvox-agent 8.26.0.
 
 When doing the very first release of packages into a new component that doesn't yet exist in the repo (e.g. `openvox9`, `openvox8-nightlies`), this automation will work to create the relevant paths in the repo, but you should not make a noarch package (e.g. `openvox-server` or `openvoxdb`) the first released package. Because we fan out noarch packages into each architecture-specific location, you should release a package like `openvox-agent` first to populate all of these relevant architecture paths.
 
+## Security releases
+
+Check **Security release** on the Release workflow and fill in `advisories` and `severity`. The release then writes an advisory into the yum repo metadata, so `dnf update --security`, `yum update --security` and `zypper patch --category security` pick the packages up and `dnf updateinfo info` shows the references. apt has no equivalent, so Debian and Ubuntu users see nothing special.
+
+- **advisories:** CVE IDs and GitHub advisory links, separated by spaces or commas, and nothing else. CVE IDs become references that `dnf update --cve` matches, a GitHub advisory link becomes a reference with its GHSA ID, and the advisory's description names them all. Leave it empty while nothing is assigned yet.
+- **severity:** the severity of the worst item: Critical, Important, Moderate or Low. GitHub's critical, high, medium and low map to those in that order, as do CVSS scores of 9.0 and up, 7.0 to 8.9, 4.0 to 6.9, and lower.
+
+To mark a release after the fact, or to add a CVE ID that was assigned later, go to Actions > **Mark Security Release** > Run workflow with the project, the version, the full list of references and the severity. It replaces the advisory of that release in every yum repo that contains its packages and deploys only the changed metadata, which clients pick up at their next metadata refresh. No package changes. Leave `production` unchecked to try it against the test repos first, then re-run with `production` checked.
+
 ## Repo package management
 
 The small noarch `openvox*-release` RPM/DEB packages register the OpenVox Apt/Yum repos on end-user systems. They drop `.repo` files, `.list` files, GPG public keys, and Apt pin preferences into the correct locations. Platform definitions live in `files/repo_packages/*.json`, with a file for each repo component (e.g. `openvox8`).
