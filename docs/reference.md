@@ -32,6 +32,8 @@ macOS signing additionally requires a macOS host with Xcode command line tools.
 
 `state/` is the source of truth for what metadata is currently live in production. `git log state/` shows every change. Each release and rollback creates a signed commit.
 
+The release, deploy, verify, backup, restore, reset and cleanup tasks attempt every S3 and GCS transfer up to 5 times, 10 seconds apart. Syncs only carry what is still missing, so a retry after a partial upload is cheap. The AWS CLI's own per-request retries are raised through `AWS_MAX_ATTEMPTS` (10 unless already set).
+
 `rake rollback` only changes the `state/` directory to match what it looked like at the given commit. It does not roll back other files in the repo, push to GitHub, or deploy to S3. Those are separate steps. Because rollback only changes metadata, orphaned packages may exist in the repos afterward. This is harmless (package managers won't see them since the metadata no longer references them), but cleaning them up with `rake cleanup` is recommended.
 
 ## Environment variables

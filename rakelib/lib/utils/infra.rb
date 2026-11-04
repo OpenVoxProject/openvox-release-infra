@@ -30,6 +30,9 @@ module Infra
 
   SAFE_INPUT = /\A[a-zA-Z0-9._+-~]+\z/
 
+  # How many times an S3 or GCS transfer is attempted before the task gives up
+  TRANSFER_ATTEMPTS = 5
+
   module_function
 
   def validate_input(name, value)
@@ -90,7 +93,18 @@ module Infra
     ['aws', 's3', '--endpoint-url', S3_ENDPOINT, '--ca-bundle', ca_bundle]
   end
 
-  def s3_sync = [*s3_cmd, 'sync', '--no-progress']
+  # The transfers below get TRANSFER_ATTEMPTS tries. They are safe to repeat,
+  # and a retried sync only carries what is still missing.
+  def s3_sync(*args) = Shell.run([*s3_cmd, 'sync', '--no-progress', *args], attempts: TRANSFER_ATTEMPTS)
+
+  def s3_exists?(remote)
+    result = Shell.capture([*s3_cmd, 'ls', remote], allowed_exit_codes: [0, 1], print_command: false, attempts: TRANSFER_ATTEMPTS)
+    result.exitcode.zero? && !result.output.strip.empty?
+  end
+
+  def gcs_rsync(source, destination)
+    Shell.run(['gcloud', 'storage', 'rsync', '--recursive', '--delete-unmatched-destination-objects', source, destination], attempts: TRANSFER_ATTEMPTS)
+  end
 
   def start_container(env_vars: ['GPG_PRIVATE_KEY_B64'])
     Container.build_image(dockerfile: DOCKERFILE, tag: CONTAINER_TAG) unless Container.image_exists?(CONTAINER_TAG)
@@ -159,6 +173,9 @@ module Infra
     %w[AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY].each { |name| env(name, required: true) }
     ENV['AWS_REQUEST_CHECKSUM_CALCULATION'] ||= 'WHEN_REQUIRED'
     ENV['AWS_RESPONSE_CHECKSUM_VALIDATION'] ||= 'WHEN_REQUIRED'
+    # The CLI gives up on a request after 3 tries by default, which lets one
+    # slow response from the S3 endpoint fail a whole sync
+    ENV['AWS_MAX_ATTEMPTS'] ||= '10'
   end
 
   def setup_gcloud

@@ -40,7 +40,7 @@ task :restore do
   targets.each do |name|
     result = Shell.capture(
       ['gcloud', 'storage', 'ls', "#{source_bucket}/#{name}/"],
-      allowed_exit_codes: [0, 1], silent: true
+      allowed_exit_codes: [0, 1], silent: true, attempts: Infra::TRANSFER_ATTEMPTS
     )
     if result.exitcode != 0 || result.output.strip.empty?
       abort "GCS source #{source_bucket}/#{name}/ appears empty or inaccessible. Refusing to restore.".red
@@ -49,20 +49,17 @@ task :restore do
 
   if targets.include?('apt')
     puts 'Restoring apt repo from GCS...'.magenta
-    Shell.run(['gcloud', 'storage', 'rsync', '--recursive', '--delete-unmatched-destination-objects',
-               "#{source_bucket}/apt/", "#{Infra.apt_bucket}/"])
+    Infra.gcs_rsync("#{source_bucket}/apt/", "#{Infra.apt_bucket}/")
   end
 
   if targets.include?('yum')
     puts 'Restoring yum repo from GCS...'.magenta
-    Shell.run(['gcloud', 'storage', 'rsync', '--recursive', '--delete-unmatched-destination-objects',
-               "#{source_bucket}/yum/", "#{Infra.yum_bucket}/"])
+    Infra.gcs_rsync("#{source_bucket}/yum/", "#{Infra.yum_bucket}/")
   end
 
   if targets.include?('downloads')
     puts 'Restoring downloads from GCS...'.magenta
-    Shell.run(['gcloud', 'storage', 'rsync', '--recursive', '--delete-unmatched-destination-objects',
-               "#{source_bucket}/downloads/", "#{Infra.downloads_bucket}/"])
+    Infra.gcs_rsync("#{source_bucket}/downloads/", "#{Infra.downloads_bucket}/")
   end
 
   puts 'Restore complete.'.green
@@ -95,7 +92,7 @@ namespace :restore do
     loop do
       status = Shell.capture(
         ['gcloud', 'storage', 'operations', 'describe', operation, '--format=value(done,error.code,error.message)'],
-        print_command: false
+        print_command: false, attempts: Infra::TRANSFER_ATTEMPTS
       )
       fields = status.output.strip.split("\t")
       done = fields[0]

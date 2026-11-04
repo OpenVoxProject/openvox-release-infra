@@ -21,11 +21,16 @@ end
 module Shell
   Result = Struct.new(:output, :exitcode)
 
+  # Seconds between attempts of a command run with attempts above 1
+  RETRY_WAIT = 10
+
   module_function
 
   # Run a command with full terminal passthrough (colors, progress bars).
   # Aborts if exit code is not in allowed_exit_codes. Returns the exit code.
-  def run(cmd, print_command: true, allowed_exit_codes: [0])
+  # With attempts above 1 a failed command is retried every RETRY_WAIT seconds,
+  # so only pass it for commands that are safe to repeat, such as S3 syncs.
+  def run(cmd, print_command: true, allowed_exit_codes: [0], attempts: 1)
     display = if cmd.is_a?(Array)
                 cmd.map { |arg| arg.match?(%r{[^a-zA-Z0-9_./:\-=]}) ? "'#{arg}'" : arg }.join(' ')
               else
@@ -35,7 +40,14 @@ module Shell
     system(*Array(cmd))
     abort "Command not found: #{display}".red unless $?
     exitcode = $?.exitstatus
-    abort "Command failed! Command: #{display}, Exit code: #{exitcode}".red unless allowed_exit_codes.include?(exitcode)
+    unless allowed_exit_codes.include?(exitcode)
+      err = "Command failed! Command: #{display}, Exit code: #{exitcode}"
+      abort err.red if attempts == 1
+
+      puts "#{err}\nRetrying in #{RETRY_WAIT} seconds".yellow
+      sleep RETRY_WAIT
+      return run(cmd, print_command: print_command, allowed_exit_codes: allowed_exit_codes, attempts: attempts - 1)
+    end
     exitcode
   end
 
@@ -44,8 +56,8 @@ module Shell
   # Returns a Result with .output (String) and .exitcode (Integer).
   # When silent (default), output is not printed to the terminal.
   # When not silent, each line is printed as it arrives in addition to
-  # being captured.
-  def capture(cmd, silent: true, print_command: true, allowed_exit_codes: [0])
+  # being captured. attempts works as in run.
+  def capture(cmd, silent: true, print_command: true, allowed_exit_codes: [0], attempts: 1)
     display = if cmd.is_a?(Array)
                 cmd.map { |arg| arg.match?(%r{[^a-zA-Z0-9_./:\-=]}) ? "'#{arg}'" : arg }.join(' ')
               else
@@ -68,7 +80,11 @@ module Shell
     unless allowed_exit_codes.include?(exitcode)
       err = "Command failed! Command: #{display}, Exit code: #{exitcode}"
       err += "\nOutput:\n#{output}" if silent
-      abort err.red
+      abort err.red if attempts == 1
+
+      puts "#{err}\nRetrying in #{RETRY_WAIT} seconds".yellow
+      sleep RETRY_WAIT
+      return capture(cmd, silent: silent, print_command: print_command, allowed_exit_codes: allowed_exit_codes, attempts: attempts - 1)
     end
     Result.new(output.chomp, exitcode)
   end

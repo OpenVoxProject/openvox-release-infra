@@ -10,7 +10,7 @@ task :backup do
   Infra.print_target(:apt_bucket, :yum_bucket, :downloads_bucket, :gcs_bucket)
 
   [Infra.apt_bucket, Infra.yum_bucket, Infra.downloads_bucket].each do |bucket|
-    result = Shell.capture([*Infra.s3_cmd, 'ls', "#{bucket}/"], allowed_exit_codes: [0, 1], silent: true)
+    result = Shell.capture([*Infra.s3_cmd, 'ls', "#{bucket}/"], allowed_exit_codes: [0, 1], silent: true, attempts: Infra::TRANSFER_ATTEMPTS)
     next if result.exitcode.zero? && !result.output.strip.empty?
 
     warn result.output unless result.output.strip.empty?
@@ -18,16 +18,13 @@ task :backup do
   end
 
   puts 'Backing up apt repo to GCS...'.magenta
-  Shell.run(['gcloud', 'storage', 'rsync', '--recursive', '--delete-unmatched-destination-objects',
-             "#{Infra.apt_bucket}/", "#{Infra.gcs_bucket}/apt/"])
+  Infra.gcs_rsync("#{Infra.apt_bucket}/", "#{Infra.gcs_bucket}/apt/")
 
   puts 'Backing up yum repo to GCS...'.magenta
-  Shell.run(['gcloud', 'storage', 'rsync', '--recursive', '--delete-unmatched-destination-objects',
-             "#{Infra.yum_bucket}/", "#{Infra.gcs_bucket}/yum/"])
+  Infra.gcs_rsync("#{Infra.yum_bucket}/", "#{Infra.gcs_bucket}/yum/")
 
   puts 'Backing up downloads to GCS...'.magenta
-  Shell.run(['gcloud', 'storage', 'rsync', '--recursive', '--delete-unmatched-destination-objects',
-             "#{Infra.downloads_bucket}/", "#{Infra.gcs_bucket}/downloads/"])
+  Infra.gcs_rsync("#{Infra.downloads_bucket}/", "#{Infra.gcs_bucket}/downloads/")
 
   puts 'Backup complete.'.green
 end

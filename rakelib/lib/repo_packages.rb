@@ -244,17 +244,11 @@ module RepoPackages
   end
 
   def upload_artifact(local, remote)
-    unless Infra.env('FORCE_OVERWRITE') == 'true'
-      result = Shell.capture(
-        [*Infra.s3_cmd, 'ls', remote],
-        allowed_exit_codes: [0, 1], print_command: false
-      )
-      if result.exitcode.zero? && !result.output.strip.empty?
-        puts "  Skipping #{File.basename(local)} (already exists)".yellow
-        return false
-      end
+    if Infra.env('FORCE_OVERWRITE') != 'true' && Infra.s3_exists?(remote)
+      puts "  Skipping #{File.basename(local)} (already exists)".yellow
+      return false
     end
-    Shell.run([*Infra.s3_cmd, 'cp', local, remote, '--no-progress'])
+    Shell.run([*Infra.s3_cmd, 'cp', local, remote, '--no-progress'], attempts: Infra::TRANSFER_ATTEMPTS)
     true
   end
 end

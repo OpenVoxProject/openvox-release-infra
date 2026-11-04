@@ -109,7 +109,7 @@ def verify_downloads(downloads)
   downloads.filter_map do |pkg|
     rel_path = pkg.sub("#{Infra::STAGING_DIR}/downloads/", '')
     s3_path = "#{Infra.downloads_bucket}/#{rel_path}"
-    result = Shell.capture([*Infra.s3_cmd, 'ls', s3_path], allowed_exit_codes: [0, 1])
+    result = Shell.capture([*Infra.s3_cmd, 'ls', s3_path], allowed_exit_codes: [0, 1], attempts: Infra::TRANSFER_ATTEMPTS)
     if result.exitcode.zero?
       puts "  downloads: #{rel_path} found on S3".green
       next
