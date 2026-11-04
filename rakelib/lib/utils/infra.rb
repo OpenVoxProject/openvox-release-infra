@@ -121,6 +121,16 @@ module Infra
     container
   end
 
+  # Start the release container with the GPG key imported, yield it, and tear
+  # it down. Returns what the block returns.
+  def with_signing_container
+    container = start_container
+    import_gpg_key(container)
+    yield container
+  ensure
+    teardown_with_chown(container)
+  end
+
   def require_command(*names)
     names.each do |name|
       result = Shell.capture(['which', name], allowed_exit_codes: [0, 1], print_command: false)

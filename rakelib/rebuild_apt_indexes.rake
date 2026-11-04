@@ -34,17 +34,13 @@ task :rebuild_apt_indexes do
   FileUtils.mkdir_p(Infra::STAGING_DIR)
   Apt.stage_metadata
 
-  container = Infra.start_container(env_vars: ['GPG_PRIVATE_KEY_B64'])
-  begin
-    Infra.import_gpg_key(container)
+  Infra.with_signing_container do |container|
     apt = Apt.new(container)
     dists.each do |dist|
       puts "Rebuilding apt indexes: #{dist}".magenta
       apt.rebuild_indexes(dist)
     end
     Apt.update_state
-  ensure
-    Infra.teardown_with_chown(container)
   end
 
   Infra.commit_state('Rebuild_apt_indexes: Regenerate apt repo metadata')

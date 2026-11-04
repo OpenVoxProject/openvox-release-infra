@@ -11,13 +11,7 @@ namespace :repo_packages do
     Infra.env('GPG_PRIVATE_KEY_B64', required: true)
 
     puts 'Building and signing repo packages...'.magenta
-    container = Infra.start_container
-    begin
-      Infra.import_gpg_key(container)
-      RepoPackages.build_and_sign(container)
-    ensure
-      Infra.teardown_with_chown(container)
-    end
+    Infra.with_signing_container { |container| RepoPackages.build_and_sign(container) }
   end
 
   desc 'Upload repo package artifacts to S3'
