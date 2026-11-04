@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'fileutils'
+require_relative 'lib/repo/advisory'
 require_relative 'lib/repo/apt'
 require_relative 'lib/repo/macos'
 require_relative 'lib/repo/windows'
@@ -60,6 +61,9 @@ task :release do
 
   puts "Releasing #{Infra.project} #{Infra.version} to #{Infra.component}".magenta
 
+  # Read the advisory first so bad input fails before anything is downloaded
+  advisory = Advisory.from_env if Infra.env('SECURITY') == 'true'
+
   counts = fetch_packages
   if counts.values.sum.zero?
     puts 'Nothing to release'.yellow
@@ -76,6 +80,7 @@ task :release do
     sign_dmg = false
   end
   Infra.env('GPG_PRIVATE_KEY_B64', required: true) if sign_rpm || sign_deb
+  puts 'SECURITY is set but no RPMs were released, so no advisory is written.'.yellow if advisory && !sign_rpm
 
   # Sign packages, prepare packages and repo metadata in staging/, then
   # move updated metadata to state/ for commit.
@@ -89,7 +94,7 @@ task :release do
     if sign_rpm
       yum = Yum.new(container)
       yum.sign
-      yum.prepare
+      yum.prepare(advisory: advisory)
       Yum.update_state
     end
 

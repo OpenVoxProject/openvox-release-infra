@@ -40,6 +40,24 @@ To release only specific platforms, add a `PLATFORMS` filter (comma-separated `<
 PROJECT=openvox-agent VERSION=8.26.0 PLATFORMS=el-9-x86_64,el-9-aarch64 bundle exec rake release
 ```
 
+## Security advisories
+
+A security release is a release with `SECURITY=true` and `SEVERITY` set, plus the CVE IDs and GitHub advisory links in `ADVISORIES` when any are assigned:
+
+```bash
+PRODUCTION=true PROJECT=openvox-agent VERSION=8.32.1 SECURITY=true \
+  ADVISORIES='https://github.com/OpenVoxProject/openvox/security/advisories/GHSA-xxxx-xxxx-xxxx CVE-2026-1234' \
+  SEVERITY=Critical bundle exec rake release
+```
+
+To mark a release after the fact, or to add a CVE ID assigned later, write the advisory into the metadata in state/, deploy it, and check it. Run it against the test repos first, then again with `PRODUCTION=true` on each command and a `git push` after the advisory task:
+
+```bash
+PROJECT=openvox-agent VERSION=8.32.0 ADVISORIES='https://github.com/... CVE-2026-1234' SEVERITY=Critical bundle exec rake advisory
+bundle exec rake deploy
+PROJECT=openvox-agent VERSION=8.32.0 bundle exec rake verify_advisory
+```
+
 ## Rollback
 
 ```bash

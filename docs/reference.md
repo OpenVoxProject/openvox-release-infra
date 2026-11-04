@@ -15,6 +15,8 @@ macOS signing additionally requires a macOS host with Xcode command line tools.
 | `bundle exec rake release` | Download, sign, and build repo metadata |
 | `bundle exec rake deploy` | Push staged packages and metadata to S3 |
 | `bundle exec rake verify` | Verify released packages are accessible in the deployed repos |
+| `bundle exec rake advisory` | Add or update the security advisory of a released version in the yum metadata |
+| `bundle exec rake verify_advisory` | Verify the staged security advisory is visible in the deployed yum repos |
 | `bundle exec rake rollback` | Restore repo state from a prior git commit |
 | `bundle exec rake cleanup` | Remove orphaned packages from S3 |
 | `bundle exec rake backup` | Sync S3 repos to GCS backup bucket |
@@ -58,6 +60,9 @@ The release, deploy, verify, backup, restore, reset and cleanup tasks attempt ev
 | `PLATFORMS` | all | Comma-separated platform filter (e.g. `el-9-x86_64,debian-13-amd64`) |
 | `PRODUCTION` | `false` | Deploy to production S3 buckets and commit state/ |
 | `FORCE_OVERWRITE` | `false` | Allow overwriting existing packages in metadata |
+| `SECURITY` | `false` | Write a security advisory for the release into the yum metadata; needs `SEVERITY` |
+| `ADVISORIES` | | CVE IDs and GitHub advisory links, space or comma separated; anything else aborts. May be empty |
+| `SEVERITY` | | `Critical`, `Important`, `Moderate` or `Low`. Required by `rake advisory` |
 | `ARTIFACTS_BUCKET` | `openvox-artifacts` | S3 bucket for build artifacts |
 | `APT_BUCKET` | production: `s3://openvox-apt`, test: `s3://openvox-artifacts/repo_test/apt` | S3 Apt bucket |
 | `YUM_BUCKET` | production: `s3://openvox-yum`, test: `s3://openvox-artifacts/repo_test/yum` | S3 Yum bucket |

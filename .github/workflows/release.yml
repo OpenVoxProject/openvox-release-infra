@@ -38,6 +38,25 @@ on:
         required: false
         default: false
         type: boolean
+      security:
+        description: 'Security release. Writes an advisory into the yum repo metadata so that dnf and yum update --security pick the packages up.'
+        required: false
+        default: false
+        type: boolean
+      advisories:
+        description: 'CVE IDs and GitHub advisory links, separated by spaces or commas, e.g. CVE-2026-1234 https://github.com/OpenVoxProject/openvox/security/advisories/GHSA-xxxx-xxxx-xxxx. Nothing else is accepted. Leave empty while none is assigned yet. Ignored unless security is checked.'
+        required: false
+        type: string
+      severity:
+        description: 'Severity of the worst item in advisories. Ignored unless security is checked.'
+        required: false
+        default: Moderate
+        type: choice
+        options:
+          - Low
+          - Moderate
+          - Important
+          - Critical
 
 concurrency:
   group: release-${{ inputs.production && 'production' || 'test' }}
@@ -47,6 +66,7 @@ permissions:
   contents: read
 
 env:
+  ADVISORIES: ${{ inputs.advisories }}
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   COMPONENT: ${{ inputs.component }}
@@ -58,6 +78,8 @@ env:
   FORCE_OVERWRITE: ${{ inputs.force_overwrite && 'true' || '' }}
   PRODUCTION: ${{ inputs.production && 'true' || '' }}
   PROJECT: ${{ inputs.project }}
+  SECURITY: ${{ inputs.security && 'true' || '' }}
+  SEVERITY: ${{ inputs.severity }}
   SSH_AUTH_SOCK: /tmp/ssh_agent.sock
   VERSION: ${{ inputs.version }}
 
@@ -152,6 +174,10 @@ jobs:
 
       - name: Verify
         run: bundle exec rake verify
+
+      - name: Verify advisory
+        if: inputs.security
+        run: bundle exec rake verify_advisory
 
   macos:
     name: Sign and release (DMG)
