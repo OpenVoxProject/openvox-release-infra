@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'shellwords'
+require 'tmpdir'
 require 'zlib'
 require_relative 'lib/repo/advisory'
 require_relative 'lib/repo/yum'
@@ -129,25 +130,35 @@ def total_expected(apt, rpm)
   apt.sum { |row| row.last.length } + rpm.sum { |row| row.last.length }
 end
 
-# Per-package S3 ls check for dmg/msi downloads is verify only.
+# Download each staged dmg/msi and its checksum file from the downloads bucket
+# and check the package against the checksum, as a user would after downloading.
 # Returns [String] failures.
 def verify_downloads(downloads)
   return [] if downloads.empty?
 
   puts 'Verifying downloads...'.magenta
-  downloads.filter_map do |pkg|
-    rel_path = pkg.sub("#{Infra::STAGING_DIR}/downloads/", '')
-    s3_path = "#{Infra.downloads_bucket}/#{rel_path}"
-    result = Shell.capture([*Infra.s3_cmd, 'ls', s3_path], allowed_exit_codes: [0, 1], attempts: Infra::TRANSFER_ATTEMPTS)
-    if result.exitcode.zero?
-      puts "  downloads: #{rel_path} found on S3".green
-      next
-    end
+  rel_paths = downloads.map { |pkg| pkg.sub("#{Infra::STAGING_DIR}/downloads/", '') }
+  Dir.mktmpdir('downloads') do |dir|
+    includes = rel_paths.flat_map { |rel_path| ['--include', rel_path, '--include', "checksums/#{rel_path}.sha256"] }
+    Infra.s3_sync("#{Infra.downloads_bucket}/", "#{dir}/", '--exclude', '*', *includes)
 
-    failure = "downloads #{rel_path}: NOT FOUND at #{s3_path}"
-    puts "  #{failure}".red
-    failure
+    rel_paths.filter_map do |rel_path|
+      failure = check_download(dir, rel_path)
+      puts failure ? "  #{failure}".red : "  downloads: #{rel_path} matches its checksum file on S3".green
+      failure
+    end
   end
+end
+
+# Check a package downloaded into dir against its checksum file. Returns the
+# failure as a String, or nil when the check passes.
+def check_download(dir, rel_path)
+  checksum_path = "checksums/#{rel_path}.sha256"
+  missing = [rel_path, checksum_path].find { |path| !File.exist?(File.join(dir, path)) }
+  return "downloads #{missing}: NOT FOUND at #{Infra.downloads_bucket}/#{missing}" if missing
+  return if File.read(File.join(dir, checksum_path)) == "#{Infra.sha256_line(File.join(dir, rel_path))}\n"
+
+  "downloads #{rel_path}: does not match #{checksum_path}"
 end
 
 def report_summary(failures, total:)
