@@ -46,3 +46,17 @@ Style/SpecialGlobalVars:
 
 Style/StringConcatenation:
   Enabled: false
+
+# The specs exercise whole rake tasks, so they need more setup and assertions than unit specs.
+RSpec/DescribeClass:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Max: 15
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+RSpec/InstanceVariable:
+  Exclude:
+    - spec/support/**/*

@@ -7,3 +7,10 @@ begin
 rescue LoadError
   # the voxpupuli-rubocop gem is optional
 end
+
+begin
+  require 'rspec/core/rake_task'
+  RSpec::Core::RakeTask.new(:spec)
+rescue LoadError
+  # the rspec gem is optional
+end
