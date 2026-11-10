@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'digest'
+require 'fileutils'
 require 'shellwords'
 require_relative 'container'
 require_relative 'shell'
@@ -176,6 +178,41 @@ module Infra
       "--detach-sign --armor --output #{escaped}.asc #{escaped}"
     )
     container.exec("gpg --verify #{escaped}.asc #{escaped}")
+  end
+
+  # The checksum line of a file, in the format that sha256sum -c and
+  # shasum -a 256 -c read
+  def sha256_line(path) = "#{Digest::SHA256.file(path).hexdigest}  #{File.basename(path)}"
+
+  # Write the checksum line of a file into dir
+  def write_sha256(path, dir)
+    checksum = sha256_line(path)
+    FileUtils.mkdir_p(dir)
+    File.write(File.join(dir, "#{File.basename(path)}.sha256"), "#{checksum}\n")
+    puts "SHA256 #{checksum}".cyan
+  end
+
+  # Copy the checksums folder of a downloads dir into state/downloads. It is
+  # committed with the rest of state/, so git records what each package hashed
+  # to when it was uploaded. Like a package in the bucket, a recorded checksum
+  # is only replaced with FORCE_OVERWRITE.
+  def record_checksums(downloads_dir)
+    Dir.glob('checksums/**/*.sha256', base: downloads_dir).each do |rel_path|
+      checksum_file = File.join(downloads_dir, rel_path)
+      state_path = File.join(STATE_DIR, 'downloads', rel_path)
+      if File.exist?(state_path) && !FileUtils.identical?(checksum_file, state_path)
+        if env('FORCE_OVERWRITE') == 'true'
+          puts "Overwriting the recorded #{rel_path}".yellow
+        else
+          abort "Checksum collision: #{rel_path} differs from the checksum already recorded in state/. " \
+                'Use FORCE_OVERWRITE=true to replace.'.red
+        end
+      end
+
+      FileUtils.mkdir_p(File.dirname(state_path))
+      FileUtils.cp(checksum_file, state_path)
+      puts "Recorded #{state_path}".cyan
+    end
   end
 
   def setup_aws

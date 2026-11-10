@@ -125,6 +125,10 @@ task :release do
     end
   end
 
-  Infra.commit_state("Release: #{Infra.project} #{Infra.version} (#{Infra.component})") if Infra.production?
+  if Infra.production?
+    # Only production uploads are recorded, so a test run leaves state/downloads alone
+    Infra.record_checksums(File.join(Infra::STAGING_DIR, 'downloads'))
+    Infra.commit_state("Release: #{Infra.project} #{Infra.version} (#{Infra.component})")
+  end
   puts 'Release complete. Run `bundle exec rake deploy` to push to S3.'.green
 end

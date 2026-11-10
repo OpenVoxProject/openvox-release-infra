@@ -18,7 +18,9 @@ task :rollback do
     check = Shell.capture(['git', 'ls-tree', '--name-only', commit, 'state/'])
     abort "Commit #{commit} has no state/ directory.".red if check.output.strip.empty?
     puts "Rolling back state/ to #{commit}...".magenta
-    Shell.run(['git', 'checkout', commit, '--', 'state/'])
+    # state/downloads is left alone, because packages in the downloads bucket
+    # are never rolled back
+    Shell.run(['git', 'checkout', commit, '--', 'state/apt', 'state/yum'])
   end
 
   Infra.commit_state("Rollback: Restore state from #{commit}")

@@ -86,12 +86,14 @@ module MacOS
   end
 
   # Since there is no metadata, all we have to do is copy packages into the
-  # staging dir in the right place.
+  # staging dir in the right place. Their checksum files go into the checksums
+  # folder, which repeats the layout of the downloads.
   def prepare
     Dir.glob(File.join(Infra::PACKAGES_DIR, 'dmg', '*.dmg')).each do |pkg|
       staging_dir = File.join(Infra::STAGING_DIR, 'downloads', 'mac', Infra.component)
       FileUtils.mkdir_p(staging_dir)
       FileUtils.cp(pkg, staging_dir)
+      Infra.write_sha256(pkg, File.join(Infra::STAGING_DIR, 'downloads', 'checksums', 'mac', Infra.component))
     end
   end
 
