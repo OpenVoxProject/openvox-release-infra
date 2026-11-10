@@ -132,22 +132,10 @@ jobs:
           path: /tmp/release-image.tar
           key: docker-release-${{ hashFiles('Dockerfile') }}
 
-      - name: Add SSH key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.OPENVOXBOT_SSH_PRIVATE_KEY }}" > ~/.ssh/github_actions
-          chmod 600 ~/.ssh/github_actions
-          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-          ssh-add ~/.ssh/github_actions
-
-      - name: Setup git
-        run: |
-          git config --global user.email "$GIT_AUTHOR_EMAIL"
-          git config --global user.name "$GIT_AUTHOR_NAME"
-          git config --global gpg.format ssh
-          git config --global user.signingkey ~/.ssh/github_actions
-          git config --global commit.gpgsign true
-          git config --global tag.gpgsign true
+      - name: Setup git and SSH signing
+        uses: OpenVoxProject/shared-actions/.github/actions/setup-git-ssh-signing@3e1128b7ad72a5922c1b89418daec164707d73b2
+        with:
+          ssh_private_key: ${{ secrets.OPENVOXBOT_SSH_PRIVATE_KEY }}
 
       - uses: ruby/setup-ruby@de492cf36cbab201753d720ce4f4e336cd688c94 # v1.336.0
         with:
@@ -203,22 +191,10 @@ jobs:
         with:
           token: ${{ secrets.OPENVOXBOT_COMMIT_AND_PRS }}
 
-      - name: Add SSH key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.OPENVOXBOT_SSH_PRIVATE_KEY }}" > ~/.ssh/github_actions
-          chmod 600 ~/.ssh/github_actions
-          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-          ssh-add ~/.ssh/github_actions
-
-      - name: Setup git
-        run: |
-          git config --global user.email "$GIT_AUTHOR_EMAIL"
-          git config --global user.name "$GIT_AUTHOR_NAME"
-          git config --global gpg.format ssh
-          git config --global user.signingkey ~/.ssh/github_actions
-          git config --global commit.gpgsign true
-          git config --global tag.gpgsign true
+      - name: Setup git and SSH signing
+        uses: OpenVoxProject/shared-actions/.github/actions/setup-git-ssh-signing@3e1128b7ad72a5922c1b89418daec164707d73b2
+        with:
+          ssh_private_key: ${{ secrets.OPENVOXBOT_SSH_PRIVATE_KEY }}
 
       - uses: ruby/setup-ruby@de492cf36cbab201753d720ce4f4e336cd688c94 # v1.336.0
         with:
