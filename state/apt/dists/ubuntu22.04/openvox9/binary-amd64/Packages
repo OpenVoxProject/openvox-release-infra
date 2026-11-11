@@ -920,3 +920,29 @@ Description: Vox Pupuli puppetdb
 License: Apache-2.0
 Vendor: Vox Pupuli <openvox@voxpupuli.org>
 Build-Depends: cdbs, bc, mawk, lsb-release, ruby | ruby-interpreter
+
+Package: openbolt
+Architecture: amd64
+Version: 9.0.0-1+ubuntu22.04
+Priority: optional
+Section: admin
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 138059
+Provides: puppet-bolt (= 9)
+Conflicts: puppet-bolt
+Breaks: puppet-bolt (<< 10)
+Replaces: puppet-bolt (<< 10)
+Filename: pool/openvox9/o/openbolt/openbolt_9.0.0-1+ubuntu22.04_amd64.deb
+Size: 45410716
+MD5sum: 81a27f1f8ab826d55d8541974ed555a7
+SHA1: 1aaa50617499a3979ca06fa3ebaacb8c2fecb1c7
+SHA256: fd2b17e6289b9e84455bbd154aff1df91796199c3e162bc45bf4012a67d5ee1a
+SHA512: 9221037de9017383d08409e0618c780e216374d0e0db7e9ac3bb1a2cafb21b7c2ec9520f074ce29656f08a14497789dca581f33adabff6ae9fef0ca79b4fc058
+Homepage: https://voxpupuli.org
+Description: Tool for executing commands, tasks, and plans on remote systems
+ .
+ Contains the following components:
+ gem-prune
+ openbolt 9.0.0
+ openbolt-create-ruby-tarballs
+ openbolt-runtime 2026.11.06.1
