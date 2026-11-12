@@ -171,6 +171,28 @@ module RepoPackages
     end
   end
 
+  # Architectures the repo currently publishes for a dist/component, read from
+  # state/apt/dists/<dist>/<component>/binary-<arch>. Returns an empty list when
+  # no state exists yet for that dist.
+  def apt_arches(component, dist)
+    component_dir = File.join(Infra::STATE_DIR, 'apt', 'dists', dist, component)
+    return [] unless Dir.exist?(component_dir)
+
+    Dir.children(component_dir).filter_map { |entry| entry[/\Abinary-(.+)\z/, 1] }
+       .reject { |arch| arch == 'all' }
+       .sort
+  end
+
+  # Restrict the apt source to the architectures the repo actually serves for
+  # that dist. Without this, hosts with foreign architectures enabled (for
+  # example i386 for Steam or Wine) ask for Packages files that do not exist.
+  def apt_arch_option(component, dist)
+    arches = apt_arches(component, dist)
+    return '' if arches.empty?
+
+    "arch=#{arches.join(',')} "
+  end
+
   def stage_build_dir(package_def, kind, platform)
     pkg_name = package_def['package']
     build_dir = File.join(BUILD_DIR, "#{pkg_name}-#{platform}")
@@ -180,7 +202,9 @@ module RepoPackages
       install_file(File.join(KEYS_DIR, 'openvox-keyring.gpg'),
         File.join(build_dir, 'etc', 'apt', 'keyrings', 'openvox-keyring.gpg'))
       list_path = File.join(build_dir, 'etc', 'apt', 'sources.list.d', "#{pkg_name}.list")
-      config_file = install_template('apt.list.erb', list_path, component: package_def['component'], dist: platform)
+      config_file = install_template('apt.list.erb', list_path,
+        component: package_def['component'], dist: platform,
+        arch_option: apt_arch_option(package_def['component'], platform))
       install_file(File.join(TEMPLATES_DIR, 'apt.pref'),
         File.join(build_dir, 'etc', 'apt', 'preferences.d', 'openvox-release.pref'))
     else
@@ -224,7 +248,7 @@ module RepoPackages
     FileUtils.cp(source, dest)
   end
 
-  def install_template(template_name, dest, component:, os_name: nil, os_version: nil, dist: nil, gpg_file: nil)
+  def install_template(template_name, dest, component:, os_name: nil, os_version: nil, dist: nil, gpg_file: nil, arch_option: '')
     @template_cache ||= {}
     @template_cache[template_name] ||= ERB.new(File.read(File.join(TEMPLATES_DIR, template_name)), trim_mode: '-')
 
@@ -236,7 +260,8 @@ module RepoPackages
       os_name: os_name,
       os_version: os_version,
       dist: dist,
-      gpg_file: gpg_file
+      gpg_file: gpg_file,
+      arch_option: arch_option
     )
 
     FileUtils.mkdir_p(File.dirname(dest))
