@@ -23,10 +23,23 @@ jobs:
       - name: Run Rubocop
         run: bundle exec rake rubocop
 
+  minitest:
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install Ruby 4.0
+        uses: ruby/setup-ruby@b3aaceaef7e0ee231b499e7b5f49c03fc1d32199 # v1.338.0
+        with:
+          ruby-version: '4.0'
+          bundler-cache: true
+      - name: Run tests
+        run: bundle exec rake test
+
   tests:
     if: always()
     needs:
       - rubocop
+      - minitest
     runs-on: ubuntu-26.04
     name: Test suite
     steps:

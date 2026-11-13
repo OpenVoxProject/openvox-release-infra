@@ -12,6 +12,15 @@ For tasks that touch GCS (`backup`, `restore`, `restore:gcs`), authenticate with
 
 macOS package signing requires running on a macOS host with the appropriate secrets and Xcode command line tools.
 
+## Tests
+
+Run the unit tests and the linter before pushing:
+
+```bash
+bundle exec rake test
+bundle exec rake rubocop
+```
+
 ## Release
 
 ```bash

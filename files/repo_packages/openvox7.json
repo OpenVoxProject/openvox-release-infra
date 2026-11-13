@@ -7,6 +7,10 @@
   "vendor": "Vox Pupuli <openvox@voxpupuli.org>",
   "homepage": "https://voxpupuli.org",
   "component": "openvox7",
+  "conflicts": [
+    "openvox8-release",
+    "openvox9-release"
+  ],
   "platforms": [
     "amazon-2",
     "amazon-2023",
