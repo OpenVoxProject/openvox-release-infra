@@ -1069,3 +1069,29 @@ Description: The OpenVox Agent package contains all of the elements needed to ru
  puppet-runtime 2026.11.19.1
  shellpath 2023-02-15
  wrapper-script
+
+Package: openbolt
+Architecture: armhf
+Version: 9.1.0-1+ubuntu24.04
+Priority: optional
+Section: admin
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 123677
+Provides: puppet-bolt (= 9)
+Conflicts: puppet-bolt
+Breaks: puppet-bolt (<< 10)
+Replaces: puppet-bolt (<< 10)
+Filename: pool/openvox9/o/openbolt/openbolt_9.1.0-1+ubuntu24.04_armhf.deb
+Size: 43479144
+MD5sum: a269a9146c2ecc98ef1f6c06d9199858
+SHA1: 957d1b2cb131bb530699e899dba6edfa00171c87
+SHA256: ebcec9a23635866384aceac0535b1e9dadc140dc8cc4091f3874301d504725f0
+SHA512: ff41c6a987052c395e5d05e2cc760846ee31edb50f832858084dd0bc7d07e1d6c706a05c256de115b019082a239558eddd22a74b72c8a91307175d17ecce5345
+Homepage: https://voxpupuli.org
+Description: Tool for executing commands, tasks, and plans on remote systems
+ .
+ Contains the following components:
+ gem-prune
+ openbolt 9.1.0
+ openbolt-create-ruby-tarballs
+ openbolt-runtime 2026.11.19.1
