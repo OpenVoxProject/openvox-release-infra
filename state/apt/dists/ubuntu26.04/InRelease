@@ -4,19 +4,19 @@ Hash: SHA512
 Architectures: amd64 arm64 armhf
 Codename: ubuntu26.04
 Components: openvox8 openvox9
-Date: Fri, 20 Nov 2026 02:25:03 UTC
+Date: Fri, 20 Nov 2026 02:35:19 UTC
 Description: OpenVox ubuntu26.04 Repository
 Label: openvox-ubuntu26.04
 Origin: Vox Pupuli
 Suite: stable
 Version: 26.04
 MD5Sum:
- 234cdd7200563ec990e0f3308827690e            49434 openvox8/binary-amd64/Packages
- 7b2f29947e60d89206af62366436aacb             9612 openvox8/binary-amd64/Packages.gz
- fcdf7f592297dd3f81818b99c67caa6a            49434 openvox8/binary-arm64/Packages
- ad9cec63ea4e509d5e4fd3920d5078f2             9618 openvox8/binary-arm64/Packages.gz
- f6e8da6122d5fc95bb37498a4fcb7f9a            49435 openvox8/binary-armhf/Packages
- ff5613ed69ac27edb0af96d4415b186e             9613 openvox8/binary-armhf/Packages.gz
+ 274e797f857c3f3b53e90c851ec3bba3            51398 openvox8/binary-amd64/Packages
+ e32e694fc8d4b12ddd4df42e1685b6f1             9993 openvox8/binary-amd64/Packages.gz
+ 67b81ef9d862cf9b0c882a0870a1bef9            51398 openvox8/binary-arm64/Packages
+ 0905160ae2d6c7918c45d0b04c02ed36            10000 openvox8/binary-arm64/Packages.gz
+ 1b2b0834dfccb6af56a6482ffcacd04a            51398 openvox8/binary-armhf/Packages
+ 1a861b6d150cd0a796520b0aca8edb40             9996 openvox8/binary-armhf/Packages.gz
  642abd4b8b9a5215da0b7dc1af0a4a63            47020 openvox9/binary-amd64/Packages
  d96c88d41ec0cd0d27936e96070f0be4             9334 openvox9/binary-amd64/Packages.gz
  67809f2f4976b52aa37f385f1ebe1ef1            43812 openvox9/binary-arm64/Packages
@@ -24,12 +24,12 @@ MD5Sum:
  415b3e31c321feb85790277872d7540d            47020 openvox9/binary-armhf/Packages
  852e20c7de3180c946ef9e03ed71ec42             9329 openvox9/binary-armhf/Packages.gz
 SHA1:
- af3447687aaaff7ec88624ff84be214f87cee96f            49434 openvox8/binary-amd64/Packages
- 7374f36f26de7d810d72cd1f63238d3584ab985b             9612 openvox8/binary-amd64/Packages.gz
- b1ce2cbeb2c56d13dbd7e989c72d2230b266d4f7            49434 openvox8/binary-arm64/Packages
- 0649fc1188581a3aab4ca632983743407d0eead6             9618 openvox8/binary-arm64/Packages.gz
- 55f09bade1abf02f07f3826f1270d6388e861561            49435 openvox8/binary-armhf/Packages
- bc787943e23298e8e903ac1fdc986060cc3e843b             9613 openvox8/binary-armhf/Packages.gz
+ 10d5778b52aa28a49eb19a1a8c297a13f9902f75            51398 openvox8/binary-amd64/Packages
+ 099572b1d0d5fb4f13e4da19eedd16e72b0bc413             9993 openvox8/binary-amd64/Packages.gz
+ 8992c9f57da09195f9e13318917c9757e9c5f6a0            51398 openvox8/binary-arm64/Packages
+ e4545e7c5213aff0eb4ceeb759cc51fbc6b5d7e7            10000 openvox8/binary-arm64/Packages.gz
+ ef018829418732d10c7b2eb4da9c398c78b1b519            51398 openvox8/binary-armhf/Packages
+ 9fd7967d3fbbcd86104d8f2bf5ba3e055b40241c             9996 openvox8/binary-armhf/Packages.gz
  c6fd1b9daf6b22630ae2f10f4a6f363fecfaea47            47020 openvox9/binary-amd64/Packages
  cf9f783ec14ffe5f781b8ca339c078b31229766f             9334 openvox9/binary-amd64/Packages.gz
  5faf415dcd786e921f83e18080eeeace7b3918a0            43812 openvox9/binary-arm64/Packages
@@ -37,12 +37,12 @@ SHA1:
  17f1446d72c7b0ef533261e5265b1152a62ab3ef            47020 openvox9/binary-armhf/Packages
  e5229aa08aaef1932ea8961e798685069d0c7a84             9329 openvox9/binary-armhf/Packages.gz
 SHA256:
- 5e62961d20e3477498738094b311c675c5f88983ba430a10a5bb64c3d05cba65            49434 openvox8/binary-amd64/Packages
- a36802064bd5f6154ad0fa26a860eabebc2986a45828d1cfa2b6dd749109826e             9612 openvox8/binary-amd64/Packages.gz
- b5d9633a1f6665037da714ad1d43bf80b87220c370f1ec3866bf226d4d2fffcb            49434 openvox8/binary-arm64/Packages
- 9b3fec0981a54ef1927bb7fb60caf5886e0241aa0f41658de8b94923220678af             9618 openvox8/binary-arm64/Packages.gz
- 6360b3e30b57822e8b871be797e3cc983b1cb39739cfd6d7b759e0a3e59ad96a            49435 openvox8/binary-armhf/Packages
- f4b8bf8166361f6d80d909d5418fc4a0e9b373a06dd6365b5747925a0f1d5df9             9613 openvox8/binary-armhf/Packages.gz
+ 78ce1f356377588225d31074ba08ff635edb8a62a0975640f66b8daf38d563a0            51398 openvox8/binary-amd64/Packages
+ 2cecdcf7522f1ec0798ca78f8d874fa59618a3c40ce8e279cec020e81e348487             9993 openvox8/binary-amd64/Packages.gz
+ 64803e965c1ae580eb9bed8e38ddde01fdcb83c9111444b27bea58648bef6120            51398 openvox8/binary-arm64/Packages
+ 93adf8b9d966b14a70a28c0018624cbe87b566702598cbe1248fd5486d190d99            10000 openvox8/binary-arm64/Packages.gz
+ 27994d671df8eb5288e19db58742a3efcdc7c6d872efa995796bf83b260f69a4            51398 openvox8/binary-armhf/Packages
+ 06c20f89bb63dd6c94daae26c237400f40e65c9e13ed779cce66ef9d1fea83ff             9996 openvox8/binary-armhf/Packages.gz
  404b253e28f5ee48c13ef069455aab78d8d632529fa38e0c48b1e201453483f0            47020 openvox9/binary-amd64/Packages
  6f05d567b9777014d6b5cfcf3bf85da7b259deda3d8085a947d6d18e2b3dad36             9334 openvox9/binary-amd64/Packages.gz
  2bc5f335e15bd35797f24d82ed564a3c6a5e39b59639fcd4906440de0106247e            43812 openvox9/binary-arm64/Packages
@@ -50,12 +50,12 @@ SHA256:
  e1cdebbd6be21847122fd154d94a5e08edbe3be20fb051f5e4c3209935aa673b            47020 openvox9/binary-armhf/Packages
  e8a345b7c60f1de4de96c65c55fe41c9a941c4976fb9da7026cec47dc9a017ca             9329 openvox9/binary-armhf/Packages.gz
 SHA512:
- 7802a47f02136de71c19e00ab96fe10b9095c25a85ebd7390a86653159d8ef4797eafe3d4db567089e4ec1269425c783fa22444c0a628aa73e36215df5254cfa            49434 openvox8/binary-amd64/Packages
- 7530ed36bc372404750150521e4993200ea090c888770bb0eaabad17551d7bdab3679b431b09911ca6710c8a3060fcbe9c3716892e5d60e9961fccafa1149160             9612 openvox8/binary-amd64/Packages.gz
- 9a56be743cb5c6008fb98747ce09067b20664bfe4d580be5dac6d47d51c64f6e57ef0c7b3d0bc4b6f11705f78ab8d09a045752d41f19cddec135d2b8df5113c1            49434 openvox8/binary-arm64/Packages
- 0799ba6d26a2e6f919295db7d3f79d4283f96aaac097a7121d01e97e7b0470b0230212c3caf592e283526e6ceb7ebb33098d0ecc3f4383e7a01368fdaf81e7b7             9618 openvox8/binary-arm64/Packages.gz
- ae468411dd1f7c7338adfdc23e001796c3eb10d8b11b0b3f64dcab98f0de42d88f63129085a454326f902032eb4cfe7b45682aeb9034c6c5af2c62d022760070            49435 openvox8/binary-armhf/Packages
- 27a40a218b8bc106b901f6e730a1fcd5322e642574ab1783f3860bb650a50f8fc127d58f017d686e579842100016432dc96479ed4c28886f63ff22fe86e9ca17             9613 openvox8/binary-armhf/Packages.gz
+ 744c74f734133c692bab8dd28de729e010ecf48d97a62cf11e706b5561a107441ef954274973e77f06b2190250a4c19b7383cef066f4a25fbda6c60d9a19565a            51398 openvox8/binary-amd64/Packages
+ 23566861940ca7297b94d8177e3992220573f8d11ac87ba0a6589affb3dc48fd124cf0f8d98ca590cd4acb5dc22b4d3a5a4498923e6ad9bf136f67d29f861e36             9993 openvox8/binary-amd64/Packages.gz
+ ce08c7fea9fae9f295a85ce47994a9ee4a1ed8d02487be35d237ec6135731daee1b113491975e8381a56877272146dc6bdc06425b2cedd1cbde2e7c5403642ef            51398 openvox8/binary-arm64/Packages
+ 7f77fe861643fa2f5e047fb3e216cf10d1211c29eafa39471e6af05701f0b722d2fcbdb2f168eadfbc33186c0fc1a20e11157c9331bda5c0a5cfc4ec288dfb9d            10000 openvox8/binary-arm64/Packages.gz
+ d79f95b01a1983c251b7c35fced505f2e9c8de4fd34cd06a36b858b08c0dac52a4a9a1176bbadc87a2b75a5a02f16fec68fc9b923daaf4d9e9bc851e8a6791e0            51398 openvox8/binary-armhf/Packages
+ 211a1d386d44ffd9e0ff753f642fb920ff5332568214e57b7898b39fd4762ab28b88208094e113d3ced0711c627c32fbacd324bb1005a22d1265c236f51802e1             9996 openvox8/binary-armhf/Packages.gz
  c55c30540e08ccb0c9f0b4f4622e0ca102a472bc0480cff076efb35b169d2a86870eb293e0b0bd9e60dab275961618f364cd8abcbc61047eda6694cdb56c69cf            47020 openvox9/binary-amd64/Packages
  db52ffa3a56abfe91d60ba2b4824add967f0a9966b6e9b1db5f9b32334bd2c701880dc295a5876f237fcefb05a6f785fc0a436587fe3856e26a6c41dfc08d05e             9334 openvox9/binary-amd64/Packages.gz
  e13d31228e70b91451d6b19384bfdb75f8cb188ad924ad5924299b619ae1d7a39bdb1eea5866985c8532b142ea09eff90d5c7a3dac50b233f9e67a75f12cff39            43812 openvox9/binary-arm64/Packages
@@ -64,12 +64,12 @@ SHA512:
  0cde1e74971aecee02270ccb5203e9f064444296d51a567ef2ad06b3782d5bdac52b970a21c9965e1821ebfb215324b9ba29ec06efbba1af09f8b35ace9d1143             9329 openvox9/binary-armhf/Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iQFKBAEBCgA0FiEEDiZCmYcAJBj5UT8qX7mZwtYv89kFAmr/r38WHG9wZW52b3hA
-dm94cHVwdWxpLm9yZwAKCRBfuZnC1i/z2dpGCADa208op7eMe5IDaIPrH8DSzeRE
-O5RZnBPRHx//1nt0L8xOU5fnxVxTnNrhM1lrPLczvYP+N8b4n4uuNigM7tf03w+/
-cctuZYzg6dNlmvEmYvFAuqrOcNkBBMKT5n5gEPR07ZV8YjTntJKrOVCCpia3zotL
-7GDCSKx9JaGrlGAtwvSeoIm0km30jzK9NGx3gMq8iXTd4VSWiWU0S/G2e3NlZdpw
-PDlRilY/pBcVMqKpuqQP1A/wOfIjjo8JKPb1U00Yh+cDUZrmbxXVK2anjNxanUFQ
-0AkKMeyMncDWTfLM7Cvd6+HU3//k0uflVcf8/Fs/KRSUQhQN62KE2rDXqijn
-=5rnA
+iQFKBAEBCgA0FiEEDiZCmYcAJBj5UT8qX7mZwtYv89kFAmr/secWHG9wZW52b3hA
+dm94cHVwdWxpLm9yZwAKCRBfuZnC1i/z2WtJB/9N+hgENYJqaoJIBNh+8FWI5ejA
+jJYL2Rn+DKHzLq9TBS+Ei7QbU5TLuhYqv7JTquj9qrsAXGFNvO27GmJbqCZT6z+t
+EZlKAaSaRLIoSvO8HZoKrXrxdpLIGDlVLOHEDm/R/0y/wDhMFxtcVoQWc8MDjk0D
+BGaM7y5AOSlFex0Cuao846sWnAl4xoG6eU+Q1QANv6JB3W7usQqnNK6tENiQrD8C
+H+Iz/m7OeRNORTDPZPYIoFEvMJo9TNJ9kI8MFZds3CxUdwaewuUOgjudSntqU49l
+pNrnnQa1qYj9uBSljXVayIajDYgvZNqLa4TZg0pgjv2ihxlCAOvUQ4v3+Nu7
+=Fg+E
 -----END PGP SIGNATURE-----
