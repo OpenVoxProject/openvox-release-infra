@@ -27,6 +27,7 @@ macOS signing additionally requires a macOS host with Xcode command line tools.
 | `bundle exec rake repo_packages:build` | Build and sign repo RPM/DEB packages and repo/list files |
 | `bundle exec rake repo_packages:upload` | Upload repo package artifacts to S3 |
 | `bundle exec rake repo_packages:add_platform` | Add a platform to a repo package definition |
+| `bundle exec rake test` | Run the unit test suite |
 
 ## How it works
 

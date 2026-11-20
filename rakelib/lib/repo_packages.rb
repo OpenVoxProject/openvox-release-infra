@@ -263,6 +263,7 @@ module RepoPackages
       '--package', Infra.container_path(output_file)
     ]
     output_type == 'rpm' ? args.push('--rpm-digest', 'sha256') : args.push('--config-files', '/etc', '--deb-no-default-config-files')
+    package_def.fetch('conflicts', []).each { |conflict| args.push('--conflicts', conflict) }
     args << '.'
 
     container.exec(Shellwords.shelljoin(args))

@@ -58,6 +58,22 @@ Example: add Fedora 44 and Ubuntu 26.04 to the openvox8 repos.
 
 Architecture suffixes are ignored (these are noarch packages). Hyphens are optional (`el9` and `el-9` both work). The task infers the package kind (RPM or DEB) from the OS name, normalizes the format, sorts the platforms list, and commits the change.
 
+### Package conflicts
+
+A repo package definition can list packages that must not be installed alongside it:
+
+```json
+  "component": "openvox9",
+  "conflicts": [
+    "openvox7-release",
+    "openvox8-release"
+  ],
+```
+
+The build passes each entry to fpm as `--conflicts`. fpm writes a `Conflicts:` field in the Deb control file and a `Conflicts:` tag in the RPM header. dpkg/apt, rpm/dnf and zypper then refuse to install the package while a conflicting package is present. The key is optional.
+
+The OpenVox 7, 8 and 9 release packages conflict with each other. Keep every pair symmetric: if `openvox9-release` conflicts with `openvox8-release`, `openvox8-release` must also conflict with `openvox9-release`.
+
 ### Rebuild repo packages
 
 Rebuild and upload repo packages for all or specific platforms. Generally only needed when something fundamental changes (e.g. a new GPG key or repository URL).
