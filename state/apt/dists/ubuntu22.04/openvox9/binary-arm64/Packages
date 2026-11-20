@@ -1027,3 +1027,48 @@ Description: Tool for executing commands, tasks, and plans on remote systems
  openbolt 9.1.0
  openbolt-create-ruby-tarballs
  openbolt-runtime 2026.11.19.1
+
+Package: openvoxdb-termini
+Architecture: all
+Version: 9.2.1-1+ubuntu22.04
+Priority: optional
+Section: default
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 80
+Depends: openvox-agent
+Conflicts: puppetdb-termini
+Replaces: puppetdb-termini
+Filename: pool/openvox9/o/openvoxdb-termini/openvoxdb-termini_9.2.1-1+ubuntu22.04_all.deb
+Size: 23728
+MD5sum: e7f4c5130743ce9e6bcfb0e8634d2ee5
+SHA1: 24c1b0091e96523d9e1523d96dacb8cc6ceec072
+SHA256: 836afd063b11e8d5f375402bcb9e3848c0518ea899873260a84b1c3fb0fe5251
+SHA512: e2ac323c4973eadb5e990229fc898ee17dce1f4902436b8d181d78ef0ae8731984a66d7c2ac284abaa1ab9b9cc668594b237eaf1b478d8595b4c151c655ecb9a
+Homepage: http://github.com/openvoxproject
+Description: Termini for puppetdb
+ Contains terminus for:puppetdb (version 9.2.1)
+License: Apache-2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+
+Package: openvoxdb
+Architecture: all
+Version: 9.2.1-1+ubuntu22.04
+Priority: optional
+Section: utils
+Maintainer: Vox Pupuli <openvox@voxpupuli.org>
+Installed-Size: 69359
+Depends: openjdk-25-jre-headless | openjdk-21-jre-headless, bash, adduser, procps, openvox-agent (>= 9.4.0)
+Conflicts: puppetdb
+Replaces: puppetdb
+Filename: pool/openvox9/o/openvoxdb/openvoxdb_9.2.1-1+ubuntu22.04_all.deb
+Size: 63156610
+MD5sum: 17d993099e794232685db575299c1b13
+SHA1: 9a75e3fc240a87c7e28a830e9c10b6199ab50d23
+SHA256: a2e8eeb739c117045f3c9020da5212d6cd5cb2ed9a52e2b0bbb1f0d0b1d91453
+SHA512: c6c2a05c668a370970e314c17afd23516b0999c1710c306172f374dd1522ec23cc8c31f1e257940a3b8abc253b3dd0c0056d7c83ac564482519ee6aef67205af
+Homepage: http://github.com/openvoxproject
+Description: Vox Pupuli puppetdb
+ Contains: OpenVox-integrated catalog and fact storage (org.openvoxproject/puppetdb 9.2.1,org.bouncycastle/bcpkix-jdk18on 1.86,org.clojure/clojure 1.12.6,org.openvoxproject/puppetdb 9.2.1)
+License: Apache-2.0
+Vendor: Vox Pupuli <openvox@voxpupuli.org>
+Build-Depends: cdbs, bc, mawk, lsb-release, ruby | ruby-interpreter
